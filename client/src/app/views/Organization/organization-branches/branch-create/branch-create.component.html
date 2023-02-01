@@ -1,0 +1,51 @@
+<form cForm [formGroup]="uploadForm" novalidate (ngSubmit)="submit()" class="needs-validation">
+
+    <c-modal-body>
+
+
+        <c-card class="mb-4">
+            <c-card-body>
+
+                <c-row>
+
+
+                    <c-row>
+                        <c-col lg="12">
+
+
+                            <div class="mb-3" lg="4">
+                                <label for="name" class="form-label">Name</label>
+                                <input class="form-control" formControlName="Name" type="text" id="name">
+                            </div>
+
+                            <div class="mb-3" lg="4">
+                                <label for="phoneNumber" class="form-label">Phone Number</label>
+                                <input class="form-control" formControlName="PhoneNumber" type="text"
+                                    id="phoneNumber">
+                            </div>
+                            <div class="mb-3" lg="4">
+                                <label for="address" class="form-label">Address</label>
+                                <input class="form-control" formControlName="Address" type="text" id="address">
+                            </div>
+                            <div class="mb-3" lg="4">
+                                <label for="remark" class="form-label">Remark</label>
+                                <input class="form-control" formControlName="Remark" type="text" id="remark">
+                            </div>
+                        </c-col>
+                    </c-row>
+
+                </c-row>
+            </c-card-body>
+        </c-card>
+
+
+    </c-modal-body>
+    <c-modal-footer>
+        <button 
+        (click)="onModalClose()" 
+        cButton color="secondary">
+            Close
+        </button>
+        <button cButton type="submit" class="text-white" color="success">Save changes</button>
+    </c-modal-footer>
+</form>

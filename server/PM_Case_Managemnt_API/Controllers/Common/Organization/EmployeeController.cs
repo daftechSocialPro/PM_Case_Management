@@ -1,0 +1,92 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using PM_Case_Managemnt_API.DTOS.Common;
+using PM_Case_Managemnt_API.Services.Common;
+
+using System.Net.Http.Headers;
+
+namespace PM_Case_Managemnt_API.Controllers.Common.Organization
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EmployeeController : ControllerBase
+    {
+        private readonly IEmployeeService _employeeService;
+
+        public EmployeeController(IEmployeeService employeeService)
+        {
+            _employeeService = employeeService;
+        }
+
+
+
+
+
+        [HttpPost, DisableRequestSizeLimit]
+
+        public IActionResult Profile()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var folderName = Path.Combine("Assets", "EmployeePhoto");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+
+
+                if (file.Length > 0)
+                {
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
+
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+
+                    }
+                    var employee = new EmployeeDto
+                    {
+                      
+                        Photo = dbPath,
+                        Title = Request.Form["Title"],
+                        FullName = Request.Form["FullName"],
+                        Gender =   Request.Form["Gender"],
+                        PhoneNumber = Request.Form["PhoneNumber"],
+                        Remark = Request.Form["remark"],
+                        Position = Request.Form["Position"],
+                        StructureId = Request.Form["StructureId"],
+
+
+                    };
+
+                   
+
+                    var response = _employeeService.CreateEmployee(employee);
+
+
+                    return Ok(new { response });
+
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error : {ex}");
+            }
+        }
+        [HttpGet]
+
+        public async Task<List<EmployeeDto>> getEmployess()
+        {
+
+
+
+            return await _employeeService.GetEmployees();
+        }
+    }
+}

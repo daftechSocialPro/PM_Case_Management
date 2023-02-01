@@ -1,0 +1,32 @@
+<c-row>
+    <c-col xs="12">
+
+    </c-col>
+    <c-col lg="12">
+        <c-card class="mb-4">
+            <c-card-header ngPreserveWhitespaces>
+                <strong>Organizational Branches</strong>
+                <button (click)="toggleCreateBranch()" class="position-absolute top-0 end-0 " style="color: white;"
+                    color="success" cButton>Add Branch</button>
+            </c-card-header>
+            <c-card-body>
+                <p class="text-medium-emphasis small">
+                    List Branches
+                </p>
+                <table [responsive]="true" [dtOptions]="dtOptions" datatable [striped]="true" cTable>
+
+                </table>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
+
+
+
+<c-modal id="createBranchModal" [visible]="createVisible" (visibleChange)="handleCreateBranchChange($event)">
+    <c-modal-header>
+        <h5 cModalTitle>Add Branch</h5>
+        <button (click)="toggleCreateBranch()" cButtonClose></button>
+    </c-modal-header>
+    <app-branch-create [(createVisible)]="createVisible"  (branchList)="branchList()" ></app-branch-create>
+</c-modal>

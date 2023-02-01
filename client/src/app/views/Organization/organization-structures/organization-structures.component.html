@@ -1,0 +1,32 @@
+<c-row>
+    <c-col xs="12">
+
+    </c-col>
+    <c-col lg="12">
+        <c-card class="mb-4">
+            <c-card-header ngPreserveWhitespaces>
+                <strong>Organizational Structures</strong>
+                <button (click)="toggleCreateStructure()" class="position-absolute top-0 end-0 " style="color: white;"
+                    color="success" cButton>Add Structure</button>
+            </c-card-header>
+            <c-card-body>
+                <p class="text-medium-emphasis small">
+                    List Structures
+                </p>
+                <table [responsive]="true" [dtOptions]="dtOptions" datatable [striped]="true" cTable>
+
+                </table>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
+
+
+
+<c-modal id="createBranchModal" [visible]="createVisible" (visibleChange)="handleCreateStructureChange($event)" size="lg">
+    <c-modal-header>
+        <h5 cModalTitle>Add Organization</h5>
+        <button (click)="toggleCreateStructure()" cButtonClose></button>
+    </c-modal-header>
+    <app-structure-create [(createVisible)]="createVisible"  ></app-structure-create>
+</c-modal>

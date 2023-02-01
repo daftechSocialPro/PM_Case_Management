@@ -1,0 +1,16 @@
+﻿using PM_Case_Managemnt_API.DTOS.Common;
+using PM_Case_Managemnt_API.Models.Common;
+
+namespace PM_Case_Managemnt_API.Services.Common
+{
+    public interface IOrgBranchService
+    {
+
+        public Task<int> CreateOrganizationalBranch(OrgBranchDto organizationBranch);
+
+        //public Task<int> UpdateOrganizationalProfile(OrganizationProfile organizationProfile);
+        public Task<List<OrganizationBranch>> GetOrganizationBranches();
+
+        public Task<List<SelectListDto>> getBranchSelectList();
+    }
+}
