@@ -1,32 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-
-import { IconSetService } from '@coreui/icons-angular';
-import { iconSubset } from './icons/icon-subset';
-import { Title } from '@angular/platform-browser';
-
+import { Component ,ElementRef} from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet> <app-spinner></app-spinner>',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'PM & Case Managment';
+export class AppComponent {
+  title = 'admindashboard';
+  constructor(private elementRef: ElementRef,  public  _router: Router) { }
 
-  constructor(
-    private router: Router,
-    private titleService: Title,
-    private iconSetService: IconSetService
-  ) {
-    titleService.setTitle(this.title);
-    // iconSet singleton
-    iconSetService.icons = { ...iconSubset };
-  }
+  ngOnInit() {
 
-  ngOnInit(): void {
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-    });
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = "../assets/js/main.js";
+    this.elementRef.nativeElement.appendChild(s);
   }
 }

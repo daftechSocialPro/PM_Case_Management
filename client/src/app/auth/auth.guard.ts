@@ -1,4 +1,4 @@
-import { UserService } from './../shared/user.service';
+import { UserService } from '../pages/pages-login/user.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -19,14 +19,14 @@ export class AuthGuard implements CanActivate {
       if(roles){
         if(this.service.roleMatch(roles)) return true;
         else{
-          this.router.navigate(['/forbidden']);
+          this.router.navigate(['pages-login']);
           return false;
         }
       }
       return true;
     }
     else {
-      this.router.navigate(['login']);
+      this.router.navigate(['pages-login']);
       return false;
     }
 

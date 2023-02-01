@@ -1,150 +1,159 @@
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { BrowserModule, Title } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { UserService } from './shared/user.service';
-
-import { ToastrModule } from 'ngx-toastr';
-
-import {MatTableModule} from '@angular/material/table'
-
-import {
-  PERFECT_SCROLLBAR_CONFIG,
-  PerfectScrollbarConfigInterface,
-  PerfectScrollbarModule,
-} from 'ngx-perfect-scrollbar';
-
-// Import routing module
 import { AppRoutingModule } from './app-routing.module';
-
-// Import app component
 import { AppComponent } from './app.component';
-
-// Import containers
-import {
-  DefaultFooterComponent,
-  DefaultHeaderComponent,
-  DefaultLayoutComponent,
-} from './containers';
-
-import {
-  AvatarModule,
-  BadgeModule,
-  BreadcrumbModule,
-  ButtonGroupModule,
-  ButtonModule,
-  TableModule,
-  CardModule,
-  DropdownModule,
-  FooterModule,
-  FormModule,
-  GridModule,
-  HeaderModule,
-  ListGroupModule,
-  NavModule,
-  ProgressModule,
-  SharedModule,
-  SidebarModule,
-  TabsModule,
-  UtilitiesModule,
-  ModalModule,
-  
-  
-
-
-
-} from '@coreui/angular';
-
-import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { HeaderComponent } from './layouts/header/header.component';
+import { FooterComponent } from './layouts/footer/footer.component';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AlertsComponent } from './components/alerts/alerts.component';
+import { AccordionComponent } from './components/accordion/accordion.component';
+import { BadgesComponent } from './components/badges/badges.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { ButtonsComponent } from './components/buttons/buttons.component';
+import { CardsComponent } from './components/cards/cards.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { ListGroupComponent } from './components/list-group/list-group.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { ProgressComponent } from './components/progress/progress.component';
+import { SpinnersComponent } from './components/spinners/spinners.component';
+import { TooltipsComponent } from './components/tooltips/tooltips.component';
+import { FormsElementsComponent } from './components/forms-elements/forms-elements.component';
+import { FormsLayoutsComponent } from './components/forms-layouts/forms-layouts.component';
+import { FormsEditorsComponent } from './components/forms-editors/forms-editors.component';
+import { TablesGeneralComponent } from './components/tables-general/tables-general.component';
+import { TablesDataComponent } from './components/tables-data/tables-data.component';
+import { ChartsChartjsComponent } from './components/charts-chartjs/charts-chartjs.component';
+import { ChartsApexchartsComponent } from './components/charts-apexcharts/charts-apexcharts.component';
+import { IconsBootstrapComponent } from './components/icons-bootstrap/icons-bootstrap.component';
+import { IconsRemixComponent } from './components/icons-remix/icons-remix.component';
+import { IconsBoxiconsComponent } from './components/icons-boxicons/icons-boxicons.component';
+import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
+import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
+import { PagesContactComponent } from './pages/pages-contact/pages-contact.component';
+import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
+import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
+import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
+import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHeaderIneterceptor } from './http-interceptors/auth-header-interceptor';
-import { SpinnerComponent } from './views/spinner/spinner.component';
-import { BudgetYearComponent } from './views/budget-year/budget-year.component';
-import { ProgramBudgetYearComponent } from './views/budget-year/program-budget-year/program-budget-year.component';
-import {  MatPaginatorModule } from '@angular/material/paginator';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true,
-};
 
-const APP_CONTAINERS = [
-  DefaultFooterComponent,
-  DefaultHeaderComponent,
-  DefaultLayoutComponent,
-];
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { OrgProfileComponent } from './pages/common/organization/org-profile/org-profile.component';
+import { OrgBranchComponent } from './pages/common/organization/org-branch/org-branch.component';
+import { OrgStructureComponent } from './pages/common/organization/org-structure/org-structure.component';
+import { BudgetYearComponent } from './pages/common/budget-year/budget-year.component';
+import { AddBranchComponent } from './pages/common/organization/org-branch/add-branch/add-branch.component';
+import { AddStructureComponent } from './pages/common/organization/org-structure/add-structure/add-structure.component';
+import { AddProgrambudgetyearComponent } from './pages/common/budget-year/add-programbudgetyear/add-programbudgetyear.component';
+import { AddBudgetyearComponent } from './pages/common/budget-year/add-budgetyear/add-budgetyear.component';
+import { EmployeeComponent } from './pages/common/organization/employee/employee.component';
+import { EmployeeDetailsComponent } from './pages/common/organization/employee/employee-details/employee-details.component';
+import { AddEmployeesComponent } from './pages/common/organization/employee/add-employees/add-employees.component';
+import { UpdateEmployeeComponent } from './pages/common/organization/employee/update-employee/update-employee.component';
+import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UnitMeasurementComponent } from './pages/common/unit-measurement/unit-measurement.component';
+import { AddUpdateMeasurementComponent } from './pages/common/unit-measurement/add-update-measurement/add-update-measurement.component';
+import { ProgramByDetailsComponent } from './pages/common/budget-year/program-by-details/program-by-details.component';
+import { ArchiveManagementComponent } from './pages/common/archive-management/archive-management.component';
+import { AddShelfComponent } from './pages/common/archive-management/add-shelf/add-shelf.component';
+import { UpdateBranchComponent } from './pages/common/organization/org-branch/update-branch/update-branch.component';
+
+
+
+
+
 
 @NgModule({
-  declarations: [AppComponent, SpinnerComponent, BudgetYearComponent, ProgramBudgetYearComponent, ...APP_CONTAINERS],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    AvatarModule,
-    BreadcrumbModule,
-    FooterModule,
-    DropdownModule,
-    GridModule,
-    HeaderModule,
-    SidebarModule,
-    IconModule,
-    PerfectScrollbarModule,
-    NavModule,
-    ButtonModule,
-    FormModule,
-    UtilitiesModule,
-    ButtonGroupModule,
-    ReactiveFormsModule,
-    SidebarModule,
-    SharedModule,
-    TabsModule,
-    ListGroupModule,
-    ProgressModule,
-    BadgeModule,
-    ListGroupModule,
-    CardModule,
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent,
+    DashboardComponent,
+    AlertsComponent,
+    AccordionComponent,
+    BadgesComponent,
+    BreadcrumbsComponent,
+    ButtonsComponent,
+    CardsComponent,
+    CarouselComponent,
+    ListGroupComponent,
+    ModalComponent,
+    TabsComponent,
+    PaginationComponent,
+    ProgressComponent,
+    SpinnersComponent,
+    TooltipsComponent,
+    FormsElementsComponent,
+    FormsLayoutsComponent,
+    FormsEditorsComponent,
+    TablesGeneralComponent,
+    TablesDataComponent,
+    ChartsChartjsComponent,
+    ChartsApexchartsComponent,
+    IconsBootstrapComponent,
+    IconsRemixComponent,
+    IconsBoxiconsComponent,
+    UsersProfileComponent,
+    PagesFaqComponent,
+    PagesContactComponent,
+    PagesRegisterComponent,
+    PagesLoginComponent,
+    PagesError404Component,
+    PagesBlankComponent,
+    SpinnerComponent,
+    OrgProfileComponent,
+    OrgBranchComponent,
+    OrgStructureComponent,
+    BudgetYearComponent,
+    AddBranchComponent,
+    AddStructureComponent,
+    AddProgrambudgetyearComponent,
+    AddBudgetyearComponent,
+    EmployeeComponent,
+    EmployeeDetailsComponent,
+    AddEmployeesComponent,
+    UpdateEmployeeComponent,
+    UnitMeasurementComponent,
+    AddUpdateMeasurementComponent,
+    ProgramByDetailsComponent,
+    ArchiveManagementComponent,
+    AddShelfComponent,
+    UpdateBranchComponent,
 
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
     
-    ModalModule,
-
-    
-    ToastrModule.forRoot(),
-
   ],
-  providers: [
-    UserService,
+  imports: [
+    BrowserModule,
+    
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,    
+    BrowserAnimationsModule,
+    NgbModalModule,
+  
+    ToastrModule.forRoot({
+      preventDuplicates: true,
 
+    }),
+            NgbModule,
+  ],
+  providers: [  
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderIneterceptor,
       multi: true
     },
-
-    {
-      provide: LocationStrategy,
-      useClass: HashLocationStrategy,
-    },
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },
-    IconSetService,
-    Title
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
