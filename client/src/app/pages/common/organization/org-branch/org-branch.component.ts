@@ -51,7 +51,10 @@ export class OrgBranchComponent implements OnInit {
 
   addBranch(){
 
-    this.modalService.open(AddBranchComponent)
+    this.modalService.open(AddBranchComponent,{
+      size:'lg',
+      backdrop:'static'
+    })
 
   }
 
