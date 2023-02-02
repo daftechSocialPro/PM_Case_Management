@@ -33,6 +33,9 @@ export class OrganizationService {
   OrgBranchCreate(orgBranch: OrganizationBranch) {
     return this.http.post(this.BaseURI + "/OrgBranch", orgBranch)
   }
+  orgBranchUpdate(orgBranch: OrganizationBranch) {
+    return this.http.put(this.BaseURI + "/OrgBranch", orgBranch)
+  }
 
   getOrgBranches() {
     return this.http.get<OrganizationBranch[]>(this.BaseURI + "/OrgBranch")
@@ -59,17 +62,17 @@ export class OrganizationService {
 
   // employee
 
-  employeeCreate (employee: FormData){
+  employeeCreate(employee: FormData) {
 
-    return this.http.post(this.BaseURI+"/Employee",employee);
+    return this.http.post(this.BaseURI + "/Employee", employee);
 
   }
   employeeUpdate(formData: FormData) {
     return this.http.put(this.BaseURI + "/Employee", formData)
 
   }
-  getEmployees (){
-    return this.http.get<Employee[]>(this.BaseURI+"/Employee");
+  getEmployees() {
+    return this.http.get<Employee[]>(this.BaseURI + "/Employee");
   }
 
   //unit of measurment 

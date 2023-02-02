@@ -65,6 +65,7 @@ import { ProgramByDetailsComponent } from './pages/common/budget-year/program-by
 import { ArchiveManagementComponent } from './pages/common/archive-management/archive-management.component';
 import { AddShelfComponent } from './pages/common/archive-management/add-shelf/add-shelf.component';
 import { UpdateBranchComponent } from './pages/common/organization/org-branch/update-branch/update-branch.component';
+import { UpdateStructureComponent } from './pages/common/organization/org-structure/update-structure/update-structure.component';
 
 
 
@@ -128,6 +129,7 @@ import { UpdateBranchComponent } from './pages/common/organization/org-branch/up
     ArchiveManagementComponent,
     AddShelfComponent,
     UpdateBranchComponent,
+    UpdateStructureComponent,
 
     
   ],

@@ -1,8 +1,11 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IndividualConfig } from 'ngx-toastr';
 import { CommonService, toastPayload } from 'src/app/common/common.service';
 import { OrganizationService } from '../organization.service';
+import { AddStructureComponent } from './add-structure/add-structure.component';
 import { OrganizationalStructure } from './org-structure';
+import { UpdateStructureComponent } from './update-structure/update-structure.component';
 
 @Component({
   selector: 'app-org-structure',
@@ -14,8 +17,8 @@ export class OrgStructureComponent implements OnInit {
   structures: OrganizationalStructure[] = [];
   toast!: toastPayload;
   structure!: OrganizationalStructure;
-  
-  constructor(private elementRef:ElementRef, private orgService : OrganizationService, private commonService:CommonService) { 
+
+  constructor(private elementRef: ElementRef, private orgService: OrganizationService, private commonService: CommonService, private modalService: NgbModal) {
     this.structureList()
   }
 
@@ -26,7 +29,7 @@ export class OrgStructureComponent implements OnInit {
     s.src = "../assets/js/main.js";
     this.elementRef.nativeElement.appendChild(s);
     this.structureList()
-   
+
   }
   structureList() {
 
@@ -46,7 +49,27 @@ export class OrgStructureComponent implements OnInit {
         this.commonService.showToast(this.toast);
       }
     })
-    
+
+  }
+
+  addStructure() {
+
+    let modalRef = this.modalService.open(AddStructureComponent, { size: 'lg', backdrop: 'static' })
+    modalRef.result.then(() => {
+      this.structureList();
+    })
+
+  }
+  updateStructure(value: OrganizationalStructure) {
+
+    let modalRef = this.modalService.open(UpdateStructureComponent, { size: 'lg', backdrop: 'static' })
+
+    modalRef.componentInstance.structure = value
+
+    modalRef.result.then(() => {
+      this.structureList()
+    })
+
   }
 
 }

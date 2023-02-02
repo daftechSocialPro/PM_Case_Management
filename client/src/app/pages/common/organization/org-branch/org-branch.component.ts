@@ -5,6 +5,7 @@ import { CommonService, toastPayload } from 'src/app/common/common.service';
 import { OrganizationService } from '../organization.service';
 import { AddBranchComponent } from './add-branch/add-branch.component';
 import { OrganizationBranch } from './org-branch';
+import { UpdateBranchComponent } from './update-branch/update-branch.component';
 
 @Component({
   selector: 'app-org-branch',
@@ -17,7 +18,7 @@ export class OrgBranchComponent implements OnInit {
   toast!: toastPayload;
   branch!: OrganizationBranch;
 
-  constructor(private elementRef: ElementRef, private orgService: OrganizationService, private commonService: CommonService,private modalService : NgbModal) {
+  constructor(private elementRef: ElementRef, private orgService: OrganizationService, private commonService: CommonService, private modalService: NgbModal) {
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = "../assets/js/main.js";
@@ -25,8 +26,6 @@ export class OrgBranchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
- 
     this.branchList()
   }
 
@@ -34,6 +33,8 @@ export class OrgBranchComponent implements OnInit {
     this.orgService.getOrgBranches().subscribe({
       next: (res) => {
         this.branches = res
+
+
       }, error: (err) => {
         this.toast = {
           message: 'Something went wrong',
@@ -49,17 +50,38 @@ export class OrgBranchComponent implements OnInit {
     })
   }
 
-  addBranch(){
+  addBranch() {
 
-    this.modalService.open(AddBranchComponent,{
-      size:'lg',
-      backdrop:'static'
+    let modalRef = this.modalService.open(AddBranchComponent, {
+      size: 'lg',
+      backdrop: 'static'
     })
+
+    modalRef.result.then((result)=>{
+   
+        this.branchList;
+      
+      
+    })
+
+
 
   }
 
-  Update(){
-    
+  Update(vlaue: any) {
+
+    let modalref = this.modalService.open(UpdateBranchComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    })
+    modalref.componentInstance.branch = vlaue
+    modalref.result.then((isresult) => {
+
+      this.branchList()
+
+    })
+
+
   }
 
 }

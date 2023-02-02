@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IndividualConfig } from 'ngx-toastr';
 import { CommonService, toastPayload } from 'src/app/common/common.service';
 import { OrganizationService } from '../../organization.service';
@@ -12,21 +12,22 @@ import { OrganizationService } from '../../organization.service';
 })
 export class AddBranchComponent implements OnInit {
 
+  
+  @Output() result = new EventEmitter<boolean>(); 
+
   toast !: toastPayload;
-  branchForm !: FormGroup;
+  branchForm!:FormGroup
 
-  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService, private commonService: CommonService) {
+  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService, private commonService: CommonService, private activeModal: NgbActiveModal) { }
 
+  ngOnInit(): void {
 
     this.branchForm = this.formBuilder.group({
       Name: ['', Validators.required],
       PhoneNumber: ['', Validators.required],
       Address: ['', Validators.required],
-      Remark: ['', Validators.required]
-    })
-  }
-
-  ngOnInit(): void {
+      Remark: ['']
+    });
   }
 
   submit() {
@@ -46,8 +47,7 @@ export class AddBranchComponent implements OnInit {
             } as IndividualConfig,
           };
           this.commonService.showToast(this.toast);
-
-          document.getElementById("ModalClose")?.click();
+          this.closeModal();
           this.branchForm = this.formBuilder.group({
 
             Name: [''],
@@ -55,6 +55,8 @@ export class AddBranchComponent implements OnInit {
             Address: [''],
             Remark: ['']
           })
+
+          this.result.emit(true)
 
         }, error: (err) => {
           this.toast = {
@@ -67,13 +69,17 @@ export class AddBranchComponent implements OnInit {
             } as IndividualConfig,
           };
           this.commonService.showToast(this.toast);
-          document.getElementById("ModalClose")?.click();
+          
 
         }
       }
       );
     }
 
+  }
+  closeModal() {
+
+    this.activeModal.close()
   }
 
 

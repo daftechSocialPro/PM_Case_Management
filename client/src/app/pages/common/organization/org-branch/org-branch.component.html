@@ -27,35 +27,35 @@
                                 <th scope="col">Address</th>
                                 <th scope="col">PhoneNumber</th>
                                 <th scope="col">Remark</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Action</th>
 
                             </tr>
                         </thead>
                         <tbody>
 
-                            <tr *ngFor="let branchParamter of branches ; let i= index" >
+                            <tr *ngFor="let branchParamter of branches ; let i= index">
 
                                 <th scope="row">{{i+1}}</th>
                                 <td>{{branchParamter.Name}}</td>
                                 <td>{{branchParamter.Address}}</td>
                                 <td>{{branchParamter.PhoneNumber}}</td>
                                 <td>{{branchParamter.Remark}}</td>
-                                <td >
-                               
-                                    <a  (click)="Update(branchParamter)" class="btn btn-primary"><i class="pen"></i></a>
+                                <td>{{branchParamter.RowStatus==0?"Active":"Inactive"}}</td>
+                                <td>
+
+                                    <a (click)="Update(branchParamter)" class="btn btn-outline-warning"><i
+                                            class=" bi bi-pen"></i> Update</a>
                                 </td>
 
                             </tr>
                         </tbody>
-                      
-                      
+
+
                     </table>
-           
+
                 </div>
             </div>
         </div>
     </section>
 </main>
-
-
-

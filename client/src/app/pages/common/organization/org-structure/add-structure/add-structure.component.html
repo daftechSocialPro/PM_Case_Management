@@ -1,10 +1,8 @@
-<div class="modal fade" id="addStructure" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Add Structure</h5>
-                <button type="button" class="btn-close" id="ModalClose" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
+                <button type="button" class="btn-close" id="ModalClose" (click)="closeModal()"></button>
             </div>
 
             <div class="card">
@@ -43,23 +41,23 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating"> <input type="text" class="form-control"
-                                            id="floatingName" placeholder="Structure Name" required
+                                            id="floatingName" placeholder="Structure Name" 
                                             formControlName="StructureName">
                                         <label for="floatingName">Structure Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating"> <input type="number" class="form-control" id="Order"
-                                            placeholder="Order" required formControlName="Order"> <label
+                                            placeholder="Order"  formControlName="Order"> <label
                                             for="Order">Order</label></div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating"> <input type="number" class="form-control" id="Weight"
-                                            placeholder="Weight" required formControlName="Weight"> <label
+                                            placeholder="Weight"  formControlName="Weight"> <label
                                             for="Weight">Weight</label></div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-floating"><textarea required class="form-control"
+                                    <div class="form-floating"><textarea  class="form-control"
                                             formControlName="Remark" placeholder="Address" id="Remark"
                                             style="height: 100px;"></textarea><label for="Remark">Remark</label></div>
                                 </div>
@@ -68,8 +66,8 @@
 
                         </div>
                         <div class="modal-footer"> <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Close</button> <button type="button" type="submit"
-                                class="btn btn-primary">Save
+                               (click)="closeModal()">Close</button> <button [disabled]="!structureForm.valid" type="button" type="submit"
+                                class="btn btn-success">Save
                                 changes</button></div>
                     </form>
 
@@ -77,5 +75,3 @@
             </div>
 
         </div>
-    </div>
-</div>

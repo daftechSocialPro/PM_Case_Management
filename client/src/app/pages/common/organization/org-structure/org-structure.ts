@@ -1,5 +1,6 @@
 export interface OrganizationalStructure {
 
+    Id:string,
     OrganizationBranchId: string;
     BranchName: string;
     ParentStructureId: string;
@@ -8,5 +9,6 @@ export interface OrganizationalStructure {
     Order: Number;
     Weight: Number;
     Remark: string;
+    RowStatus:Number;
 
 }

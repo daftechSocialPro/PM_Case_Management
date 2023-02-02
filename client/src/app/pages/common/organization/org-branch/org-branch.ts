@@ -1,12 +1,16 @@
-export class OrganizationBranch {
-    Id: string = "";
+export interface OrganizationBranch {
 
-    Name : String ="";
+    Id: string;
 
-    PhoneNumber: string = "";
+    Name: String;
 
-    Address: string = "";
+    PhoneNumber: string;
 
-    Remark : String ="";
-  
+    Address: string;
+
+    Remark: String;
+
+    RowStatus: Number;
+
+
 }
