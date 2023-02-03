@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { IndividualConfig } from 'ngx-toastr';
 //import { IndividualConfig } from 'ngx-toastr';
 import { CommonService, toastPayload } from 'src/app/common/common.service';
 import { SelectList } from '../../../common';
@@ -24,7 +25,7 @@ export class AddEmployeesComponent implements OnInit {
   imageURL: string = "";
 
 
-  constructor(private orgService: OrganizationService, private formBuilder: FormBuilder, private commonService: CommonService ,private activeModal : NgbActiveModal) {
+  constructor(private orgService: OrganizationService, private formBuilder: FormBuilder, private commonService: CommonService, private activeModal: NgbActiveModal) {
 
     this.EmployeeForm = this.formBuilder.group({
       avatar: [null],
@@ -82,7 +83,20 @@ export class AddEmployeesComponent implements OnInit {
   submit() {
 
 
+    if (this.imageURL == "") {
+      this.toast = {
+        message: 'Image File not Selected',
+        title: 'Upload Error .',
+        type: 'error',
+        ic: {
+          timeOut: 2500,
+          closeButton: true,
+        } as IndividualConfig,
+      };
+      this.commonService.showToast(this.toast);
+      return ;
 
+    }
 
     if (this.EmployeeForm.valid) {
 
@@ -108,29 +122,30 @@ export class AddEmployeesComponent implements OnInit {
 
       this.orgService.employeeCreate(formData).subscribe({
         next: (res) => {
-          // this.toast = {
-          //   message: 'Employee Successfully Created',
-          //   title: 'Successfully Created.',
-          //   type: 'success',
-          //   ic: {
-          //     timeOut: 2500,
-          //     closeButton: true,
-          //   } as IndividualConfig,
-          // };
-          // this.commonService.showToast(this.toast);
+          this.toast = {
+            message: 'Employee Successfully Created',
+            title: 'Successfully Created.',
+            type: 'success',
+            ic: {
+              timeOut: 2500,
+              closeButton: true,
+            } as IndividualConfig,
+          };
+          this.commonService.showToast(this.toast);
+          this.closeModal()
 
         }, error: (err) => {
 
-          // this.toast = {
-          //   message: 'Something went wrong',
-          //   title: 'Network error.',
-          //   type: 'error',
-          //   ic: {
-          //     timeOut: 2500,
-          //     closeButton: true,
-          //   } as IndividualConfig,
-          // };
-          // this.commonService.showToast(this.toast);
+          this.toast = {
+            message: 'Something went wrong',
+            title: 'Network error.',
+            type: 'error',
+            ic: {
+              timeOut: 2500,
+              closeButton: true,
+            } as IndividualConfig,
+          };
+          this.commonService.showToast(this.toast);
 
           console.error(err)
         }
@@ -138,7 +153,7 @@ export class AddEmployeesComponent implements OnInit {
     }
   }
 
-  closeModal (){
+  closeModal() {
     this.activeModal.close()
   }
 }

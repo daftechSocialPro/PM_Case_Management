@@ -52,7 +52,7 @@ export class UpdateStructureComponent {
 
   onBranchChange() {
 
-    this.orgService.getOrgStructureSelectList(this.structureForm.value.OrganizationBranchId).subscribe(
+    this.orgService.getOrgStructureSelectList(this.structure.OrganizationBranchId).subscribe(
       {
         next: (res) => this.parentStructureList = res.filter(x=>x.Id!==this.structure.Id),
         error: (err) => console.error(err)

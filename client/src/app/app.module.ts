@@ -60,12 +60,16 @@ import { AddEmployeesComponent } from './pages/common/organization/employee/add-
 import { UpdateEmployeeComponent } from './pages/common/organization/employee/update-employee/update-employee.component';
 import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UnitMeasurementComponent } from './pages/common/unit-measurement/unit-measurement.component';
-import { AddUpdateMeasurementComponent } from './pages/common/unit-measurement/add-update-measurement/add-update-measurement.component';
+
 import { ProgramByDetailsComponent } from './pages/common/budget-year/program-by-details/program-by-details.component';
 import { ArchiveManagementComponent } from './pages/common/archive-management/archive-management.component';
 import { AddShelfComponent } from './pages/common/archive-management/add-shelf/add-shelf.component';
 import { UpdateBranchComponent } from './pages/common/organization/org-branch/update-branch/update-branch.component';
 import { UpdateStructureComponent } from './pages/common/organization/org-structure/update-structure/update-structure.component';
+import { AddMeasurementComponent } from './pages/common/unit-measurement/add-measurement/add-measurement.component';
+import { UpdateMeasurmentComponent } from './pages/common/unit-measurement/update-measurment/update-measurment.component';
+import { UserManagementComponent } from './pages/common/user-management/user-management.component';
+import { AddUsersComponent } from './pages/common/user-management/add-users/add-users.component';
 
 
 
@@ -122,14 +126,19 @@ import { UpdateStructureComponent } from './pages/common/organization/org-struct
     EmployeeComponent,
     EmployeeDetailsComponent,
     AddEmployeesComponent,
+
     UpdateEmployeeComponent,
-    UnitMeasurementComponent,
-    AddUpdateMeasurementComponent,
+
+    UnitMeasurementComponent,    
     ProgramByDetailsComponent,
     ArchiveManagementComponent,
     AddShelfComponent,
     UpdateBranchComponent,
     UpdateStructureComponent,
+    AddMeasurementComponent,
+    UpdateMeasurmentComponent,
+    UserManagementComponent,
+    AddUsersComponent,
 
     
   ],

@@ -40,6 +40,7 @@ import { BudgetYearComponent } from './pages/common/budget-year/budget-year.comp
 import { EmployeeComponent } from './pages/common/organization/employee/employee.component';
 import { UnitMeasurementComponent } from './pages/common/unit-measurement/unit-measurement.component';
 import { ArchiveManagementComponent } from './pages/common/archive-management/archive-management.component';
+import { UserManagementComponent } from './pages/common/user-management/user-management.component';
 
 const routes: Routes = [
 
@@ -52,8 +53,8 @@ const routes: Routes = [
   { path: 'budgetyear', canActivate: [AuthGuard], component: BudgetYearComponent },
   { path: 'employee', canActivate: [AuthGuard], component: EmployeeComponent },
   { path: 'unitmeasurment', canActivate: [AuthGuard], component: UnitMeasurementComponent },
-  {path:'archive',canActivate:[AuthGuard],component:ArchiveManagementComponent},
-
+  { path: 'archive', canActivate: [AuthGuard], component: ArchiveManagementComponent },
+  { path: 'usermanagement', canActivate: [AuthGuard], component: UserManagementComponent },
 
 
   { path: 'alerts', component: AlertsComponent },

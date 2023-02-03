@@ -42,7 +42,7 @@ export class BudgetYearComponent implements OnInit {
 
   addProgramBudgetYear() {
 
-    let modalref = this.modalService.open(AddProgrambudgetyearComponent)
+    let modalref = this.modalService.open(AddProgrambudgetyearComponent,{size:'lg',backdrop:'static'})
 
     modalref.result.then((isConfirmed) => {
 

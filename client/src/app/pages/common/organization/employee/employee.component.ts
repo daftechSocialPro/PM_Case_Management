@@ -24,14 +24,16 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.listEmployees()
 
+  }
+
+  listEmployees() {
+    
     this.orgService.getEmployees().subscribe({
       next: (res) => {
-
         this.employees = res
-
         console.log("employees", this.employees)
-
       }, error: (err) => {
         console.error(err)
       }
@@ -45,16 +47,21 @@ export class EmployeeComponent implements OnInit {
     return this.commonServcie.createImgPath(photo)
   }
 
-  updateEmp(emp: Employee) {
+  updateEmp(emp: any) {
 
-    let modalref = this.modalService.open(UpdateEmployeeComponent, { size: "lg", backdrop: 'static' })
-    modalref.componentInstance.emp = emp
+    let modalRef = this.modalService.open(UpdateEmployeeComponent, { size: "xl", backdrop: 'static' })
+    modalRef.componentInstance.emp = emp;   
+    modalRef.result.then(() => {
+      this.listEmployees()
+    })
 
   }
 
   addModal() {
-    this.modalService.open(AddEmployeesComponent, { size: 'lg', backdrop: 'static' })
-
+    let modalRef = this.modalService.open(AddEmployeesComponent, { size: 'xl', backdrop: 'static' })
+    modalRef.result.then(() => {
+      this.listEmployees()
+    })
   }
 
 

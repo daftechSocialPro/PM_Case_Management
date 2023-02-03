@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,ElementRef,ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IndividualConfig } from 'ngx-toastr';
@@ -18,45 +18,52 @@ export class UpdateEmployeeComponent implements OnInit {
   toast!: toastPayload;
   branchList: SelectList[] = [];
   parentStructureList: SelectList[] = [];
-  
-  emp !: Employee;
+
+  @Input() emp !: Employee;
 
 
   EmployeeForm !: FormGroup;
   imageURL: string = "";
 
 
-  constructor(private orgService: OrganizationService, private formBuilder: FormBuilder, private commonService: CommonService,private actvieModal:NgbActiveModal) {
-
-  
-
+  constructor(private orgService: OrganizationService, private formBuilder: FormBuilder, private commonService: CommonService, private actvieModal: NgbActiveModal) {
 
 
   }
 
   ngOnInit(): void {
 
-   this.imageURL = this.commonService.createImgPath(this.emp!.Photo)
-    this.EmployeeForm = this.formBuilder.group({
-      avatar: [null],
-      // Photo: [null, Validators.required],
-      Title: [this.emp!.Title, Validators.required],
-      FullName: [this.emp!.FullName, Validators.required],    
-      Gender: [this.emp!.Gender, Validators.required],
-      PhoneNumber: [this.emp!.PhoneNumber, Validators.required],
-      Position: [this.emp!.Position, Validators.required],
-      StructureId: [this.emp!.StructureId, Validators.required],
-      Remark: [this.emp!.Remark]
-
-    })
-    this.onBranchChange(this.emp!.BranchId);
-    
-   
+    console.log("employee",this.emp)
     this.orgService.getOrgBranchSelectList().subscribe(
       {
-        next: (res) => this.branchList = res,
+        next: (res) => {
+          this.branchList = res
+         
+        },
         error: (err) => console.error(err)
       })
+
+    this.imageURL = this.commonService.createImgPath(this.emp!.Photo)
+    this.EmployeeForm = this.formBuilder.group({
+      avatar: [null],
+      // Photo: [this.emp?.Photo, Validators.required],
+      Title: [this.emp?.Title, Validators.required],
+      psid : [this.emp?.BranchId,Validators.required],
+      FullName: [this.emp?.FullName, Validators.required],
+      Gender: [this.emp?.Gender, Validators.required],
+      PhoneNumber: [this.emp?.PhoneNumber, Validators.required],
+      Position: [this.emp?.Position, Validators.required],
+      StructureId: [this.emp?.StructureId, Validators.required],
+      RowStatus: [this.emp?.RowStatus, Validators.required],
+      Remark: [this.emp?.Remark]
+
+    })
+    
+
+    this.onBranchChange(this.emp?.BranchId);
+
+
+
 
 
   }
@@ -80,7 +87,11 @@ export class UpdateEmployeeComponent implements OnInit {
 
     this.orgService.getOrgStructureSelectList(value).subscribe(
       {
-        next: (res) => this.parentStructureList = res,
+        next: (res) => {this.parentStructureList = res
+        
+        console.log(this.parentStructureList)
+        
+        },
         error: (err) => console.error(err)
 
       })
@@ -104,6 +115,8 @@ export class UpdateEmployeeComponent implements OnInit {
       const formData = new FormData();
       file ? formData.append('file', file, file.name) : "";
 
+      formData.set('Id', this.emp.Id)
+      formData.set('Photo',this.emp.Photo)
       formData.set('Title', value.Title);
       formData.set('FullName', value.FullName);
       formData.set('Gender', value.Gender);
@@ -111,13 +124,13 @@ export class UpdateEmployeeComponent implements OnInit {
       formData.set('Position', value.Position);
       formData.set('StructureId', value.StructureId);
       formData.set('Remark', value.Remark);
+      formData.set('RowStatus', value.RowStatus)
 
-
-      this.orgService.employeeCreate(formData).subscribe({
+      this.orgService.employeeUpdate(formData).subscribe({
         next: (res) => {
           this.toast = {
-            message: 'Employee Successfully Created',
-            title: 'Successfully Created.',
+            message: 'Employee Successfully Updated',
+            title: 'Successfully Updated.',
             type: 'success',
             ic: {
               timeOut: 2500,
@@ -125,6 +138,7 @@ export class UpdateEmployeeComponent implements OnInit {
             } as IndividualConfig,
           };
           this.commonService.showToast(this.toast);
+          this.closeModal();
 
         }, error: (err) => {
 
@@ -145,7 +159,7 @@ export class UpdateEmployeeComponent implements OnInit {
     }
   }
 
-  close(){
+  closeModal() {
     this.actvieModal.close()
   }
 

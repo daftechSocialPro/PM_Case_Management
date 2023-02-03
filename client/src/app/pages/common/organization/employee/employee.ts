@@ -1,5 +1,6 @@
 export interface Employee {
 
+    Id: string;
     Photo: string;
     Title: string;
     FullName: string;
@@ -8,8 +9,9 @@ export interface Employee {
     Position: string;
     StructureId: string;
     StructureName: string;
-    BranchId :string;
+    BranchId: string;
     Remark: string
+    RowStatus: Number;
 
 
 

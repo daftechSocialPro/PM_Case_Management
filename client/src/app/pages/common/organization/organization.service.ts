@@ -78,8 +78,15 @@ export class OrganizationService {
   //unit of measurment 
 
   unitOfMeasurmentCreate(unitmeasurment: UnitMeasurment) {
+  
     return this.http.post(this.BaseURI + "/UnitOfMeasurment", unitmeasurment)
   }
+  unitOfMeasurmentUpdate(unitmeasurment: UnitMeasurment) {
+  
+    return this.http.put(this.BaseURI + "/UnitOfMeasurment", unitmeasurment)
+  }
+
+
 
   getUnitOfMeasurment() {
     return this.http.get<UnitMeasurment[]>(this.BaseURI + "/UnitOfMeasurment")
