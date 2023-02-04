@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { Token, User } from './user';
+import { SelectList } from '../common/common';
+import { UserManagment } from '../common/user-management/user-managment';
 @Injectable({
   providedIn: 'root'
 })
@@ -52,5 +54,15 @@ export class UserService {
       }
     });
     return isMatch;
+  }
+
+  getRoles (){
+
+    return this.http.get<SelectList[]>(this.BaseURI+'/ApplicationUser/getroles')
+  }
+
+  createUser (body:UserManagment){
+
+    return this.http.post(this.BaseURI+"/ApplicationUser/RegisterUser",body)
   }
 }

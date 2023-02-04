@@ -75,6 +75,10 @@ export class OrganizationService {
     return this.http.get<Employee[]>(this.BaseURI + "/Employee");
   }
 
+  getEmployeesSelectList (){
+    return this.http.get<SelectList[]>(this.BaseURI+"/Employee/selectlist")
+  }
+
   //unit of measurment 
 
   unitOfMeasurmentCreate(unitmeasurment: UnitMeasurment) {

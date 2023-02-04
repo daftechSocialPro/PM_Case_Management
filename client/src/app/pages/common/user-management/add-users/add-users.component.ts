@@ -3,7 +3,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IndividualConfig } from 'ngx-toastr';
 import { toastPayload, CommonService } from 'src/app/common/common.service';
+import { UserService } from 'src/app/pages/pages-login/user.service';
+import { SelectList } from '../../common';
+import { Employee } from '../../organization/employee/employee';
 import { OrganizationService } from '../../organization/organization.service';
+import { UserManagment } from '../user-managment';
 
 @Component({
   selector: 'app-add-users',
@@ -12,74 +16,125 @@ import { OrganizationService } from '../../organization/organization.service';
 })
 export class AddUsersComponent {
 
-  
-  @Output() result = new EventEmitter<boolean>(); 
+
+  @Output() result = new EventEmitter<boolean>();
 
   toast !: toastPayload;
-  branchForm!:FormGroup
+  userForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService, private commonService: CommonService, private activeModal: NgbActiveModal) { }
+  employeeList: SelectList[] = [];
+  RoleList: SelectList[] = [];
+  employee !: SelectList;
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private orgService: OrganizationService, private commonService: CommonService, private activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
 
-    this. = this.formBuilder.group({
-      Name: ['', Validators.required],
-      PhoneNumber: ['', Validators.required],
-      Address: ['', Validators.required],
-      Remark: ['']
+    this.userForm = this.formBuilder.group({
+      UserName: ['', Validators.required],
+      Password: ['', Validators.required],
+      ConfirmPassword: ['', Validators.required],
+
+      Roles: [[], Validators.required]
     });
+
+    this.getRoles();
+    this.getEmployees();
+  }
+
+
+  getRoles() {
+
+    this.userService.getRoles().subscribe({
+      next: (res) => {
+
+        this.RoleList = res
+
+
+      },
+      error: (err) => {
+        console.error(err)
+      }
+    })
+
+  }
+  getEmployees() {
+
+    this.orgService.getEmployeesSelectList().subscribe({
+      next: (res) => {
+
+        this.employeeList = res
+        console.log("employee", this.employeeList)
+      }
+      , error: (err) => {
+        console.error(err)
+      }
+    })
+
   }
 
   submit() {
 
-    if (this.branchForm.valid) {
-      this.orgService.OrgBranchCreate(this.branchForm.value).subscribe({
+    console.log(this.userForm.value)
 
-        next: (res) => {
 
-          this.toast = {
-            message: 'Organizational Branch Successfully Created',
-            title: 'Successfully Created.',
-            type: 'success',
-            ic: {
-              timeOut: 2500,
-              closeButton: true,
-            } as IndividualConfig,
-          };
-          this.commonService.showToast(this.toast);
-          this.closeModal();
-          this.branchForm = this.formBuilder.group({
+    if (this.userForm.valid && this.employee != null) {
 
-            Name: [''],
-            PhoneNumber: [''],
-            Address: [''],
-            Remark: ['']
-          })
+      if (this.userForm.value.Password === this.userForm.value.ConfirmPassword) {
 
-          this.result.emit(true)
-
-        }, error: (err) => {
-          this.toast = {
-            message: err,
-            title: 'Network error.',
-            type: 'error',
-            ic: {
-              timeOut: 2500,
-              closeButton: true,
-            } as IndividualConfig,
-          };
-          this.commonService.showToast(this.toast);
-          
-
+        let user: UserManagment = {
+          EmployeeFullName: this.employee.Name,
+          EmployeeId: this.employee.Id,
+          Password: this.userForm.value.Password,
+          UserName: this.userForm.value.UserName,
+          Roles: this.userForm.value.Roles
         }
+        this.userService.createUser(user).subscribe({
+          next: (res) => {
+
+          }
+          , error: (err) => console.error(err)
+        })
+
+
       }
-      );
+      else {
+
+        this.toast = {
+          message: 'Password an Confirm Password doesnt match',
+          title: 'Password Error.',
+          type: 'error',
+          ic: {
+            timeOut: 2500,
+            closeButton: true,
+          } as IndividualConfig,
+        };
+        this.commonService.showToast(this.toast);
+      }
+
+    }
+    else {
+
+      this.toast = {
+        message: 'Please chek your form',
+        title: 'Form Error.',
+        type: 'Error',
+        ic: {
+          timeOut: 2500,
+          closeButton: true,
+        } as IndividualConfig,
+      };
+      this.commonService.showToast(this.toast);
     }
 
   }
   closeModal() {
 
     this.activeModal.close()
+  }
+
+  selectEmployee(event: SelectList) {
+
+    this.employee = event
   }
 
 

@@ -70,6 +70,8 @@ import { AddMeasurementComponent } from './pages/common/unit-measurement/add-mea
 import { UpdateMeasurmentComponent } from './pages/common/unit-measurement/update-measurment/update-measurment.component';
 import { UserManagementComponent } from './pages/common/user-management/user-management.component';
 import { AddUsersComponent } from './pages/common/user-management/add-users/add-users.component';
+import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 
 
@@ -78,6 +80,7 @@ import { AddUsersComponent } from './pages/common/user-management/add-users/add-
 
 @NgModule({
   declarations: [
+
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -126,9 +129,7 @@ import { AddUsersComponent } from './pages/common/user-management/add-users/add-
     EmployeeComponent,
     EmployeeDetailsComponent,
     AddEmployeesComponent,
-
     UpdateEmployeeComponent,
-
     UnitMeasurementComponent,    
     ProgramByDetailsComponent,
     ArchiveManagementComponent,
@@ -139,19 +140,19 @@ import { AddUsersComponent } from './pages/common/user-management/add-users/add-
     UpdateMeasurmentComponent,
     UserManagementComponent,
     AddUsersComponent,
-
+    AutocompleteComponent,
+    
     
   ],
   imports: [
-    BrowserModule,
-    
+    BrowserModule,    
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,    
     BrowserAnimationsModule,
     NgbModalModule,
-  
+    AutocompleteLibModule,
     ToastrModule.forRoot({
       preventDuplicates: true,
 

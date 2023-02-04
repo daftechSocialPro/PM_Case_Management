@@ -1,7 +1,8 @@
 export interface UserManagment {
 
-    Id:string ; 
+    EmployeeFullName:string;
     UserName : string ;
+    Password:string;
     EmployeeId : string ; 
-    role : string []; 
+    Roles : string []; 
 }
