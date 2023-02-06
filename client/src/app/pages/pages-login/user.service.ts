@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Token, User } from './user';
 import { SelectList } from '../common/common';
 import { UserManagment } from '../common/user-management/user-managment';
+import { Employee } from '../common/organization/employee/employee';
 @Injectable({
   providedIn: 'root'
 })
@@ -63,6 +64,10 @@ export class UserService {
 
   createUser (body:UserManagment){
 
-    return this.http.post(this.BaseURI+"/ApplicationUser/RegisterUser",body)
+    return this.http.post(this.BaseURI+"/ApplicationUser/Register",body)
+  }
+
+  getSystemUsers(){
+    return this.http.get<Employee[]>(this.BaseURI+"/ApplicationUser/users")
   }
 }

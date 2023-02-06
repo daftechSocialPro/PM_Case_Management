@@ -41,6 +41,7 @@ import { EmployeeComponent } from './pages/common/organization/employee/employee
 import { UnitMeasurementComponent } from './pages/common/unit-measurement/unit-measurement.component';
 import { ArchiveManagementComponent } from './pages/common/archive-management/archive-management.component';
 import { UserManagementComponent } from './pages/common/user-management/user-management.component';
+import { ProgramsComponent } from './pages/PM/programs/programs.component';
 
 const routes: Routes = [
 
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'unitmeasurment', canActivate: [AuthGuard], component: UnitMeasurementComponent },
   { path: 'archive', canActivate: [AuthGuard], component: ArchiveManagementComponent },
   { path: 'usermanagement', canActivate: [AuthGuard], component: UserManagementComponent },
+  { path: 'program',canActivate:[AuthGuard],component:ProgramsComponent},
 
 
   { path: 'alerts', component: AlertsComponent },

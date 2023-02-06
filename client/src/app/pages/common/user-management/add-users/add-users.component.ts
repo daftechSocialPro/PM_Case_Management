@@ -33,8 +33,8 @@ export class AddUsersComponent {
       UserName: ['', Validators.required],
       Password: ['', Validators.required],
       ConfirmPassword: ['', Validators.required],
-
       Roles: [[], Validators.required]
+
     });
 
     this.getRoles();
@@ -46,10 +46,7 @@ export class AddUsersComponent {
 
     this.userService.getRoles().subscribe({
       next: (res) => {
-
         this.RoleList = res
-
-
       },
       error: (err) => {
         console.error(err)
@@ -61,9 +58,7 @@ export class AddUsersComponent {
 
     this.orgService.getEmployeesSelectList().subscribe({
       next: (res) => {
-
         this.employeeList = res
-        console.log("employee", this.employeeList)
       }
       , error: (err) => {
         console.error(err)
@@ -74,15 +69,10 @@ export class AddUsersComponent {
 
   submit() {
 
-    console.log(this.userForm.value)
-
-
     if (this.userForm.valid && this.employee != null) {
-
       if (this.userForm.value.Password === this.userForm.value.ConfirmPassword) {
-
         let user: UserManagment = {
-          EmployeeFullName: this.employee.Name,
+          FullName: this.employee.Name,
           EmployeeId: this.employee.Id,
           Password: this.userForm.value.Password,
           UserName: this.userForm.value.UserName,
@@ -90,7 +80,17 @@ export class AddUsersComponent {
         }
         this.userService.createUser(user).subscribe({
           next: (res) => {
-
+            this.toast = {
+              message: 'User Created Successfully',
+              title: 'Successfully Created.',
+              type: 'success',
+              ic: {
+                timeOut: 2500,
+                closeButton: true,
+              } as IndividualConfig,
+            };
+            this.commonService.showToast(this.toast);
+            this.closeModal();
           }
           , error: (err) => console.error(err)
         })
@@ -98,7 +98,6 @@ export class AddUsersComponent {
 
       }
       else {
-
         this.toast = {
           message: 'Password an Confirm Password doesnt match',
           title: 'Password Error.',
@@ -110,10 +109,8 @@ export class AddUsersComponent {
         };
         this.commonService.showToast(this.toast);
       }
-
     }
     else {
-
       this.toast = {
         message: 'Please chek your form',
         title: 'Form Error.',
@@ -128,12 +125,10 @@ export class AddUsersComponent {
 
   }
   closeModal() {
-
     this.activeModal.close()
   }
 
   selectEmployee(event: SelectList) {
-
     this.employee = event
   }
 

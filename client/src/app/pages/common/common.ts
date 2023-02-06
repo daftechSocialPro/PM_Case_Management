@@ -2,6 +2,7 @@ export interface SelectList {
 
     Id: string;
     Name: string;
+    
 }
 
 export interface ProgramBudgetYear {
@@ -22,15 +23,18 @@ export interface BudgetYear {
     FromDate: Date;
     ToDate: Date;
     Remark: String;
+
 }
 
 
 export interface BudgetYearwithoutId {
-       ProgramBudgetYearId: string;
+
+    ProgramBudgetYearId: string;
     Year: Number;
     FromDate: Date;
     ToDate: Date;
     Remark: String; 
+
 }
 
 

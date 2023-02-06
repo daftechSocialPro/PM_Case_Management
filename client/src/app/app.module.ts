@@ -72,6 +72,8 @@ import { UserManagementComponent } from './pages/common/user-management/user-man
 import { AddUsersComponent } from './pages/common/user-management/add-users/add-users.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { ProgramsComponent } from './pages/PM/programs/programs.component';
+import { AddProgramsComponent } from './pages/PM/programs/add-programs/add-programs.component';
 
 
 
@@ -141,6 +143,8 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     UserManagementComponent,
     AddUsersComponent,
     AutocompleteComponent,
+    ProgramsComponent,
+    AddProgramsComponent,
     
     
   ],

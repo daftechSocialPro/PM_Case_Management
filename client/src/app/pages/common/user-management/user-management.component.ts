@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonService } from 'src/app/common/common.service';
+import { UserService } from '../../pages-login/user.service';
+import { Employee } from '../organization/employee/employee';
 import { AddUsersComponent } from './add-users/add-users.component';
 
 @Component({
@@ -7,17 +10,30 @@ import { AddUsersComponent } from './add-users/add-users.component';
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']
 })
-export class UserManagementComponent {
+export class UserManagementComponent implements OnInit {
 
-  constructor(private modalService: NgbModal){}
+  employees: Employee[] = []
+  constructor(private modalService: NgbModal, private userService: UserService, private commonService : CommonService) { }
 
-  addModal(){
-
-    let modalRef = this.modalService.open(AddUsersComponent,{size:'lg',backdrop:'static'})
-    modalRef.result.then((res)=>{
-      
+  ngOnInit(): void {
+    this.userService.getSystemUsers().subscribe({
+      next: (res) => {
+        this.employees = res
+      }, error: (err) => {
+        console.error(err)
+      }
     })
+  }
 
+
+  addModal() {
+    let modalRef = this.modalService.open(AddUsersComponent, { size: 'lg', backdrop: 'static' })
+    modalRef.result.then((res) => {})
+
+  }
+
+  getPath(value:string){
+    return this.commonService.createImgPath(value)
   }
 
 }
