@@ -42,6 +42,10 @@ import { UnitMeasurementComponent } from './pages/common/unit-measurement/unit-m
 import { ArchiveManagementComponent } from './pages/common/archive-management/archive-management.component';
 import { UserManagementComponent } from './pages/common/user-management/user-management.component';
 import { ProgramsComponent } from './pages/PM/programs/programs.component';
+import { PlansComponent } from './pages/PM/plans/plans.component';
+
+
+
 
 const routes: Routes = [
 
@@ -57,6 +61,7 @@ const routes: Routes = [
   { path: 'archive', canActivate: [AuthGuard], component: ArchiveManagementComponent },
   { path: 'usermanagement', canActivate: [AuthGuard], component: UserManagementComponent },
   { path: 'program',canActivate:[AuthGuard],component:ProgramsComponent},
+  { path: 'plan',canActivate:[AuthGuard],component:PlansComponent},
 
 
   { path: 'alerts', component: AlertsComponent },

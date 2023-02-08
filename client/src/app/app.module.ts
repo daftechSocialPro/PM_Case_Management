@@ -74,6 +74,9 @@ import { AutocompleteComponent } from './components/autocomplete/autocomplete.co
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { ProgramsComponent } from './pages/PM/programs/programs.component';
 import { AddProgramsComponent } from './pages/PM/programs/add-programs/add-programs.component';
+import { PlansComponent } from './pages/PM/plans/plans.component';
+import { AddPlansComponent } from './pages/PM/plans/add-plans/add-plans.component';
+
 
 
 
@@ -145,6 +148,8 @@ import { AddProgramsComponent } from './pages/PM/programs/add-programs/add-progr
     AutocompleteComponent,
     ProgramsComponent,
     AddProgramsComponent,
+    PlansComponent,
+    AddPlansComponent
     
     
   ],

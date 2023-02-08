@@ -42,5 +42,11 @@ export class BudgetYearService {
   }
 
 
+  getBudgetYearByProgramId (value:string){
+
+    return this.http.get<SelectList[]>(this.BaseURI+"/budgetyearbyprogramid?programId="+value)
+
+  }
+
 
 }

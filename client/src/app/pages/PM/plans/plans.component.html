@@ -1,20 +1,20 @@
 <main id="main" class="main">
     <div class="pagetitle">
-       <h1>Program</h1>
+       <h1>Plans</h1>
        <nav>
           <ol class="breadcrumb">
              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-             <li class="breadcrumb-item">Programs</li>
+             <li class="breadcrumb-item">Plans</li>
              <li class="breadcrumb-item active">List</li>
           </ol>
        </nav>
     </div>
     <div class="text-end col-lg-12">
-       <button class="btn btn-primary text-end mb-3" (click)="addProgram()"> Add Programs </button>
+       <button class="btn btn-primary text-end mb-3" (click)="addPlan()"> Add Plans </button>
     </div>
     <section class="section profile">
        <div class="row">
-
+<!-- 
          <div class="col-lg-6"*ngFor="let program of Programs" >
         
             <div class="card"  >
@@ -41,17 +41,28 @@
                            <td>Designer</td>
                         
                         </tr>
-                     
+                        <tr>
+                           <th scope="row">2</th>
+                           <td>Bridie Kessler</td>
+                           <td>Developer</td>
+                        
+                        </tr>
+                        <tr>
+                           <th scope="row">3</th>
+                           <td>Ashleigh Langosh</td>
+                           <td>Finance</td>
+                        
+                        </tr>
                         
                      </tbody>
                   </table>
-                  Planned Budegt : {{program.ProgramPlannedBudget}} <br/>
+                  Planned Budegt: {{program.ProgramPlannedBudget}} <br/>
                  {{program.Remark}}
                </div>
                <div class="card-footer"> Projects: {{program.NumberOfProjects}}</div>
             </div>
        
-         </div>
+         </div> -->
  
        </div>
     </section>

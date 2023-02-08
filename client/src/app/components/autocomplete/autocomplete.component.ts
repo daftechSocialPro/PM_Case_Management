@@ -10,6 +10,7 @@ export class AutocompleteComponent {
 
   @Input() data: SelectList[] = [];
   @Input() selectedId!: string;
+  @Input() placeHolder!:string;
 
   placeholder!: String;
   selectedValue: any

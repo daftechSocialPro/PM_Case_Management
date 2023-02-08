@@ -56,7 +56,7 @@ export class AddUsersComponent {
   }
   getEmployees() {
 
-    this.orgService.getEmployeesSelectList().subscribe({
+    this.orgService.getEmployeeNoUserSelectList().subscribe({
       next: (res) => {
         this.employeeList = res
       }
