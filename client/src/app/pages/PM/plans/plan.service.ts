@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Plan, PlanView } from './plans';
 
 
 @Injectable({
@@ -13,13 +14,13 @@ export class PlanService {
 
     //Plan 
 
-    // createProgram(program: Program) {
-    //     return this.http.post(this.BaseURI, program)
-    // }
+    createPlan(plan: Plan) {
+        return this.http.post(this.BaseURI, plan)
+    }
 
-    // getPrograms (){
-    //     return this.http.get<Program[]>(this.BaseURI)
-    // }
+    getPlans (){
+        return this.http.get<PlanView[]>(this.BaseURI)
+    }
 
 
 

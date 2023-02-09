@@ -1,13 +1,13 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title">Add Programs</h5>
+        <h5 class="modal-title">Add Projects</h5>
         <button type="button" class="btn-close" id="ModalClose" (click)="closeModal()" aria-label="Close"></button>
     </div>
 
     <div class="card">
 
         <div class="card-body">
-            <h5 class="card-title">Program Detail</h5>
+            <h5 class="card-title">Project Detail</h5>
 
             <div class="row">
                 <div class="col-lg-9">
@@ -40,7 +40,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" id="BudgetYearId" formControlName="BudgetYearId"
+                                        <select class="form-select" id="BudgetYearId"  formControlName="BudgetYearId"
                                             aria-label="State">
 
                                             <option></option>
@@ -86,8 +86,8 @@
                                             aria-label="State">
 
                                             <option></option>
-                                            <option>Capital</option>
-                                            <option>Regular</option>
+                                            <option value="0">Capital</option>
+                                            <option value="1">Regular</option>
 
                                         </select>
                                         <label for="ProjectType">Project Type </label>
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="PlandBudget"
+                                        <input type="number" class="form-control" [min]="0"   #budget (change)="CheckBudget(budget.value)" id="PlandBudget"
                                             placeholder="PlannedBudget" formControlName="PlandBudget">
                                         <label for="PlandBudget">Planned Budget</label>
                                     </div>
@@ -113,9 +113,8 @@
                                 <div class="col-md-4">
                                     <div class="form-floating">
                                         <app-autocomplete *ngIf="employeeList.length>0" [data]="employeeList"
-                                            placeHolder="Project Manager" (selectedItem)="selectEmployee($event)">
+                                            placeHolder="Project Manager" (selectedItem)="selectEmployeePM($event)">
                                         </app-autocomplete>
-
                                     </div>
                                 </div>
 
@@ -123,9 +122,8 @@
                                 <div class="col-md-4">
                                     <div class="form-floating">
                                         <app-autocomplete *ngIf="employeeList.length>0" [data]="employeeList"
-                                            placeHolder="Finacne" (selectedItem)="selectEmployee($event)">
+                                            placeHolder="Finacne" (selectedItem)="selectEmployeeF($event)">
                                         </app-autocomplete>
-
                                     </div>
                                 </div>
 
@@ -161,11 +159,14 @@
 
                         </div>
 
-                        <div class="modal-body">
+                        <div class="modal-body" *ngIf="program">
                              
-{{program?.ProgramName}}
-                            Planned Budget : 
-                            Remaining Budget : 
+                           <div class="card-title text-center">{{program?.ProgramName}}</div>
+                           <div class="text-center">{{program?.ProgramBudgetYear}}</div> 
+                           <span> Planned Budget : {{program?.ProgramPlannedBudget}}</span> <br/>
+                           <span> Remaining Budget : {{program?.ProgramPlannedBudget}}</span> 
+                            
+                          
                         </div>
                     </div>
 

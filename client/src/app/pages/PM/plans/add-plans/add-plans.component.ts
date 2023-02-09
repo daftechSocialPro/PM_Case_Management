@@ -8,6 +8,8 @@ import { SelectList } from 'src/app/pages/common/common';
 import { OrganizationService } from 'src/app/pages/common/organization/organization.service';
 import { Program } from '../../programs/Program';
 import { ProgramService } from '../../programs/programs.services';
+import { PlanService } from '../plan.service';
+import { Plan } from '../plans';
 
 @Component({
   selector: 'app-add-plans',
@@ -25,7 +27,9 @@ export class AddPlansComponent implements OnInit {
   BudgetYears: SelectList[] = [];
   Branchs: SelectList[] = [];
   employeeList: SelectList[] = [];
-program! : Program
+  program!: Program;
+  ProjectManagerId!: String;
+  FinanceId!: string;
 
 
   constructor(
@@ -33,19 +37,11 @@ program! : Program
     private formBuilder: FormBuilder,
     private budgetYearService: BudgetYearService,
     private programService: ProgramService,
+    private planService : PlanService,
     private commonService: CommonService,
     private orgService: OrganizationService) { }
 
   ngOnInit(): void {
-
-    // this.budgetYearService.getProgramBudgetYearSelectList().subscribe({
-    //   next: (res) => {
-    //     console.log("res", res)
-    //     this.programBudgetYears = res
-    //   }, error: (err) => {
-
-    //   }
-    // })
 
     this.listEmployees();
     this.listPorgrams();
@@ -55,9 +51,6 @@ program! : Program
       PlanName: ['', Validators.required],
       BudgetYearId: ['', Validators.required],
       StructureId: ['', Validators.required],
-      ProjectManagerId: ['', Validators.required],
-
-      FinanceId: ['', Validators.required],
       ProgramId: ['', Validators.required],
       PlanWeight: [0, Validators.required],
       HasTask: [false, Validators.required],
@@ -127,64 +120,121 @@ program! : Program
     })
 
     this.programService.getProgramById(value).subscribe({
-      next:(res)=>{
+      next: (res) => {
         this.program = res
       },
-      error:(err)=>{
+      error: (err) => {
         console.error(err)
       }
     })
 
   }
 
-  selectEmployee(event: SelectList) {
-    this.employee = event
+  selectEmployeePM(event: SelectList) {
+
+    this.employee = event;
+    this.ProjectManagerId = event.Id
+
+  }
+  selectEmployeeF(event: SelectList) {
+
+    this.employee = event;
+    this.FinanceId = event.Id
+
   }
 
 
   submit() {
 
     console.log("form", this.planForm.value)
+    console.log("finance", this.FinanceId)
+    console.log("pm", this.ProjectManagerId)
 
-    // if (this.planForm.valid) {
+    if (!this.ProjectManagerId){
 
-    //   this.programService.createProgram(this.programForm.value).subscribe({
-    //     next: (res) => {
-    //       this.toast = {
-    //         message: "Program Successfully Creted",
-    //         title: 'Successfully Created.',
-    //         type: 'success',
-    //         ic: {
-    //           timeOut: 2500,
-    //           closeButton: true,
-    //         } as IndividualConfig,
-    //       };
-    //       this.commonService.showToast(this.toast);
-    //       this.closeModal()
+      this.toast = {
+        message: "Project manager Not selected",
+        title: 'Network error.',
+        type: 'error',
+        ic: {
+          timeOut: 2500,
+          closeButton: true,
+        } as IndividualConfig,
+      };
+      this.commonService.showToast(this.toast);
 
-    //     }, error: (err) => {
+      return
+    }
 
-    //       this.toast = {
-    //         message: err,
-    //         title: 'Network error.',
-    //         type: 'error',
-    //         ic: {
-    //           timeOut: 2500,
-    //           closeButton: true,
-    //         } as IndividualConfig,
-    //       };
-    //       this.commonService.showToast(this.toast);
+    if (!this.FinanceId){
+      this.toast = {
+        message: "Finance Not selected",
+        title: 'Network error.',
+        type: 'error',
+        ic: {
+          timeOut: 2500,
+          closeButton: true,
+        } as IndividualConfig,
+      };
+      this.commonService.showToast(this.toast);
 
-    //       console.log(err)
-    //     }
-    //   })
-    // }
+      return
+    }
+
+    if (this.planForm.valid) {
+
+      let planValue: Plan = {
+        BudgetYearId: this.planForm.value.BudgetYearId,
+        HasTask: this.planForm.value.HasTask,
+        PlanName: this.planForm.value.PlanName,
+        PlanWeight: this.planForm.value.PlanWeight,
+        PlandBudget: this.planForm.value.ProgramPlannedBudget,
+        ProgramId: this.planForm.value.ProgramId,
+        ProjectType: this.planForm.value.ProjectType,
+        Remark: this.planForm.value.Remark,
+        StructureId: this.planForm.value.StructureId,
+        ProjectManagerId: this.ProjectManagerId,
+        FinanceId: this.FinanceId
+
+      }
+
+      this.planService.createPlan(planValue).subscribe({
+        next: (res) => {
+          this.toast = {
+            message: "Plan Successfully Creted",
+            title: 'Successfully Created.',
+            type: 'success',
+            ic: {
+              timeOut: 2500,
+              closeButton: true,
+            } as IndividualConfig,
+          };
+          this.commonService.showToast(this.toast);
+          this.closeModal()
+
+        }, error: (err) => {
+
+          this.toast = {
+            message: err,
+            title: 'Network error.',
+            type: 'error',
+            ic: {
+              timeOut: 2500,
+              closeButton: true,
+            } as IndividualConfig,
+          };
+          this.commonService.showToast(this.toast);
+
+          console.log(err)
+        }
+      })
+    }
 
   }
 
   onBranchChange(branchId: string) {
 
-     this.orgService.getOrgStructureSelectList(branchId).subscribe({
+    this.orgService.getOrgStructureSelectList(branchId).subscribe({
       next: (res) => {
         this.Structures = res
       }, error: (err) => {
@@ -195,6 +245,26 @@ program! : Program
     })
   }
 
+  CheckBudget(budget: string) {
+
+    if (Number(budget) > this.program?.ProgramPlannedBudget) {
+
+      this.toast = {
+        message: "Plan budget greater than Remaining Budget  ",
+        title: 'Budget Error.',
+        type: 'error',
+        ic: {
+          timeOut: 2500,
+          closeButton: true,
+        } as IndividualConfig,
+      };
+      this.commonService.showToast(this.toast);
+    }
+
+    this.planForm.value.PlandBudget = this.program?.ProgramPlannedBudget
+
+
+  }
   closeModal() {
     this.activeModal.close();
   }

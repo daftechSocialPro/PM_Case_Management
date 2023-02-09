@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProgramService } from '../programs/programs.services';
 import { AddPlansComponent } from './add-plans/add-plans.component';
 import { PlanService } from './plan.service';
+import { PlanView } from './plans';
 
 @Component({
   selector: 'app-plans',
@@ -12,7 +13,7 @@ import { PlanService } from './plan.service';
 })
 export class PlansComponent implements OnInit {
 
-  // Programs: Program[] = []
+  Plans: PlanView[] = []
   constructor(private modalService: NgbModal, private planService: PlanService) { }
   ngOnInit(): void {
 
@@ -21,14 +22,14 @@ export class PlansComponent implements OnInit {
 
   listPlans() {
 
-    // this.programService.getPrograms().subscribe({
-    //   next: (res) => {
-    //     this.Programs = res
-    //   },
-    //   error: (err) => {
-    //     console.error(err)
-    //   }
-    // })
+    this.planService.getPlans().subscribe({
+      next: (res) => {
+        this.Plans = res
+      },
+      error: (err) => {
+        console.error(err)
+      }
+    })
 
   }
 
