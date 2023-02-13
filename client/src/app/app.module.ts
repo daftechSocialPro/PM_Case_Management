@@ -76,6 +76,8 @@ import { ProgramsComponent } from './pages/PM/programs/programs.component';
 import { AddProgramsComponent } from './pages/PM/programs/add-programs/add-programs.component';
 import { PlansComponent } from './pages/PM/plans/plans.component';
 import { AddPlansComponent } from './pages/PM/plans/add-plans/add-plans.component';
+import { TasksComponent } from './pages/PM/tasks/tasks.component';
+import { AddTasksComponent } from './pages/PM/tasks/add-tasks/add-tasks.component';
 
 
 
@@ -149,7 +151,10 @@ import { AddPlansComponent } from './pages/PM/plans/add-plans/add-plans.componen
     ProgramsComponent,
     AddProgramsComponent,
     PlansComponent,
-    AddPlansComponent
+    AddPlansComponent,
+    TasksComponent,
+    AddTasksComponent
+
     
     
   ],

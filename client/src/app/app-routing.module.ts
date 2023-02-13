@@ -43,7 +43,7 @@ import { ArchiveManagementComponent } from './pages/common/archive-management/ar
 import { UserManagementComponent } from './pages/common/user-management/user-management.component';
 import { ProgramsComponent } from './pages/PM/programs/programs.component';
 import { PlansComponent } from './pages/PM/plans/plans.component';
-
+import { TasksComponent } from './pages/PM/tasks/tasks.component';
 
 
 
@@ -60,10 +60,13 @@ const routes: Routes = [
   { path: 'unitmeasurment', canActivate: [AuthGuard], component: UnitMeasurementComponent },
   { path: 'archive', canActivate: [AuthGuard], component: ArchiveManagementComponent },
   { path: 'usermanagement', canActivate: [AuthGuard], component: UserManagementComponent },
-  { path: 'program',canActivate:[AuthGuard],component:ProgramsComponent},
-  { path: 'plan',canActivate:[AuthGuard],component:PlansComponent},
+  { path: 'program', canActivate:[AuthGuard],component:ProgramsComponent},
+  { path: 'plan', canActivate:[AuthGuard],component:PlansComponent},
+  { path: 'task',canActivate:[AuthGuard],component:TasksComponent},  
+  
 
 
+  
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
   { path: 'badges', component: BadgesComponent },

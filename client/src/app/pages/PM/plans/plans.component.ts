@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProgramService } from '../programs/programs.services';
@@ -14,7 +15,10 @@ import { PlanView } from './plans';
 export class PlansComponent implements OnInit {
 
   Plans: PlanView[] = []
-  constructor(private modalService: NgbModal, private planService: PlanService) { }
+  constructor(
+    private modalService: NgbModal,
+    private planService: PlanService,
+    private router: Router) { }
   ngOnInit(): void {
 
     this.listPlans()
@@ -24,6 +28,7 @@ export class PlansComponent implements OnInit {
 
     this.planService.getPlans().subscribe({
       next: (res) => {
+        console.log("projects", res)
         this.Plans = res
       },
       error: (err) => {
@@ -36,12 +41,19 @@ export class PlansComponent implements OnInit {
 
 
   addPlan() {
-    
+
     let modalRef = this.modalService.open(AddPlansComponent, { size: 'xl', backdrop: 'static' });
     modalRef.result.then((res) => {
       this.listPlans()
     })
 
+  }
+
+  tasks(plan: PlanView) {
+
+    const planId = plan ? plan.Id : null
+    this.router.navigate(['task',{planId:planId}])
+  
   }
 
 }

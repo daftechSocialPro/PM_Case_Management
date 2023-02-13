@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Plan, PlanView } from './plans';
+import { Plan, PlanView,PlanSingleview } from './plans';
 
 
 @Injectable({
@@ -20,6 +20,11 @@ export class PlanService {
 
     getPlans (){
         return this.http.get<PlanView[]>(this.BaseURI)
+    }
+
+    getSinglePlans(planId:String){
+
+        return this.http.get<PlanSingleview>(this.BaseURI+"/getbyplanid?planId="+planId)
     }
 
 
