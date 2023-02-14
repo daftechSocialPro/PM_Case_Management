@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PlanService } from '../plans/plan.service';
 import { PlanSingleview } from '../plans/plans';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
+import { TaskView } from './task';
 
 @Component({
   selector: 'app-tasks',
@@ -16,7 +17,12 @@ export class TasksComponent implements OnInit {
   plan!: PlanSingleview
   planId: String = ""
 
-  constructor(private planService: PlanService, private route: ActivatedRoute, private modalService: NgbModal) { }
+  constructor(
+    private planService: PlanService, 
+    private route: ActivatedRoute,
+    private modalService: NgbModal,
+    private router: Router 
+     ) { }
   ngOnInit(): void {
   
 
@@ -42,5 +48,11 @@ export class TasksComponent implements OnInit {
       this.ListTask();
     })
 
+  }
+
+  TaskDetail(task : TaskView ){
+    
+    const taskId = task ? task.Id :null
+    this.router.navigate(['activityparent',{taskId}])
   }
 }

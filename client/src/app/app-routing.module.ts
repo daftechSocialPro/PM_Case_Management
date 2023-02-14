@@ -44,6 +44,8 @@ import { UserManagementComponent } from './pages/common/user-management/user-man
 import { ProgramsComponent } from './pages/PM/programs/programs.component';
 import { PlansComponent } from './pages/PM/plans/plans.component';
 import { TasksComponent } from './pages/PM/tasks/tasks.component';
+import { ActivityParentComponent } from './pages/pm/activity-parent/activity-parent.component';
+
 
 
 
@@ -63,10 +65,9 @@ const routes: Routes = [
   { path: 'program', canActivate:[AuthGuard],component:ProgramsComponent},
   { path: 'plan', canActivate:[AuthGuard],component:PlansComponent},
   { path: 'task',canActivate:[AuthGuard],component:TasksComponent},  
-  
+  { path : 'activityparent', canActivate:[AuthGuard],component:ActivityParentComponent},
+ 
 
-
-  
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
   { path: 'badges', component: BadgesComponent },

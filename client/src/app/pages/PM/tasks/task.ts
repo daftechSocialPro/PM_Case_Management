@@ -1,7 +1,7 @@
 export interface Task {
   
    TaskDescription:String ,
-   HasActivity : Boolean,
+   HasActvity : Boolean,
    PlannedBudget:Number ,
    PlanId : String,   
 

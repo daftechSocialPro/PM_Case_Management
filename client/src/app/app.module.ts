@@ -78,6 +78,7 @@ import { PlansComponent } from './pages/PM/plans/plans.component';
 import { AddPlansComponent } from './pages/PM/plans/add-plans/add-plans.component';
 import { TasksComponent } from './pages/PM/tasks/tasks.component';
 import { AddTasksComponent } from './pages/PM/tasks/add-tasks/add-tasks.component';
+import { ActivityParentComponent } from './pages/pm/activity-parent/activity-parent.component';
 
 
 
@@ -153,7 +154,8 @@ import { AddTasksComponent } from './pages/PM/tasks/add-tasks/add-tasks.componen
     PlansComponent,
     AddPlansComponent,
     TasksComponent,
-    AddTasksComponent
+    AddTasksComponent,
+    ActivityParentComponent
 
     
     

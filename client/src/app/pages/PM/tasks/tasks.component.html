@@ -18,7 +18,7 @@
 
             <div class="col-lg-8 listtask" style="height: 70vh; overflow-y: auto;">
 
-               <div class="card"  *ngFor="let task of plan?.Tasks">
+               <div class="card"  *ngFor="let task of plan?.Tasks" style="cursor:pointer"  (click)="TaskDetail(task)">
 
 
            
@@ -81,7 +81,7 @@
                      <h5 class="modal-title">Tips</h5>
                   </div>
 
-                  <div class="modal-body" *ngIf="plan">
+                  <div class="modal-body" *ngIf="plan" style="background-color: #f6f9ff;">
                      <div class="card-title text-center">{{plan?.PlanName}}</div>
                      <!-- <div class="text-center">{{plan?.ProgramBudgetYear}}</div>  -->
                      <div class="text-center">

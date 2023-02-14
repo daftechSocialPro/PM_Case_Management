@@ -33,7 +33,7 @@ export class AddTasksComponent {
 
     this.taskForm = this.formBuilder.group({
       TaskDescription:['',Validators.required],
-      HasActvity: [null, Validators.required],
+      HasActvity: [false, Validators.required],
       PlannedBudget:[0,Validators.required]
 
     })
@@ -48,11 +48,12 @@ export class AddTasksComponent {
       const taskValue :Task ={
       
         TaskDescription: this.taskForm.value.TaskDescription,
-        HasActivity : this.taskForm.value.HasActivity,
+        HasActvity : this.taskForm.value.HasActvity,
         PlannedBudget:this.taskForm.value.PlannedBudget,
         PlanId : this.plan.Id
       } 
-  
+
+
       this.taskService.createTask(taskValue).subscribe({
         next: (res) => {
           this.toast = {
