@@ -24,7 +24,7 @@ export class CommonService {
     );
   }
 
-  createImgPath= (dbPath:string) =>{
+  createImgPath= (dbPath:String) =>{
 
     return `${environment.assetUrl}/${dbPath}`;
   }

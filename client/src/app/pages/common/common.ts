@@ -2,6 +2,8 @@ export interface SelectList {
 
     Id: string;
     Name: string;
+    Photo?:string;
+    EmployeeId ?: string; 
     
 }
 

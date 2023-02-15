@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
-import { Token, User } from './user';
+import { Token, User, UserView } from './user';
 import { SelectList } from '../common/common';
 import { UserManagment } from '../common/user-management/user-managment';
 import { Employee } from '../common/organization/employee/employee';
@@ -60,6 +60,18 @@ export class UserService {
   getRoles (){
 
     return this.http.get<SelectList[]>(this.BaseURI+'/ApplicationUser/getroles')
+  }
+
+  getCurrentUser(){
+    var payLoad = JSON.parse(window.atob(sessionStorage.getItem('token')!.split('.')[1]));
+    console.log(payLoad)
+    let user : UserView={
+      UserID : payLoad.UserID,
+      FullName: payLoad.FullName,
+      role : payLoad.role,
+      EmployeeId:payLoad.EmployeeId
+    }
+    return user ; 
   }
 
   createUser (body:UserManagment){

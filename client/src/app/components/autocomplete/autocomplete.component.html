@@ -1,6 +1,7 @@
 <ng-autocomplete 
 [data]="data"      
 searchKeyword="Name"
+multiple
 
 (selected)='selectEvent($event)'
 (inputChanged)='onChangeSearch($event)'
@@ -8,6 +9,7 @@ searchKeyword="Name"
 [itemTemplate]="itemTemplate"
 [notFoundTemplate]="notFoundTemplate" 
 [placeholder]="placeHolder"
+
 required
 #newItem
 >                                 

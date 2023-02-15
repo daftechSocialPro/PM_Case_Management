@@ -34,7 +34,7 @@ export class TasksComponent implements OnInit {
 
     this.planService.getSinglePlans(this.planId).subscribe({
       next: (res) => {
-        console.log("task",res)
+
         this.plan = res
       }
     })

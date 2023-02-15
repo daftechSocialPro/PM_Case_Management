@@ -55,12 +55,12 @@
                         </div>
 
                         <div class="modal-body" *ngIf="plan" style="background-color: #f6f9ff;">
-                            <div class="card-title text-center">{{plan?.PlanName}}</div>
+                            <div class="card-title text-center">{{plan.PlanName!}}</div>
                             <!-- <div class="text-center">{{plan?.ProgramBudgetYear}}</div>  -->
                             <div class="text-center">
-                               <span > Planned Budget : {{plan?.PlannedBudget}}</span> <br />
-                               <span > Remaining Budget : {{plan?.RemainingBudget}}</span> <br />
-                               <span > Remaining Weight : {{plan?.RemainingBudget}}</span>
+                               <span > Planned Budget : {{plan.PlannedBudget!}}</span> <br />
+                               <span > Remaining Budget : {{plan.RemainingBudget!}}</span> <br />
+                               <span > Remaining Weight : {{plan.RemainingBudget!}}</span>
                             </div>
                          </div>
                     </div>

@@ -8,7 +8,7 @@ import { SelectList } from 'src/app/pages/common/common';
 import { PlanSingleview } from '../../plans/plans';
 import { ProgramService } from '../../programs/programs.services';
 import { Task } from '../task';
-import { TaskService } from '../task.services';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-add-tasks',
