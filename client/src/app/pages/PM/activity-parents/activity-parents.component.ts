@@ -18,9 +18,9 @@ import { UserService } from '../../pages-login/user.service';
 })
 export class ActivityParentsComponent implements OnInit {
 
-  task!: TaskView;
+  task: TaskView ={};
   taskId: String = "";
-  Employees !: SelectList[];
+  Employees : SelectList[]= [];
   selectedEmployee: SelectList[] = [];
   user!: UserView;
   isUserTaskMember: boolean = false;
@@ -40,17 +40,11 @@ export class ActivityParentsComponent implements OnInit {
     this.getSingleTask();
     this.ListofEmployees();
     this.user = this.userService.getCurrentUser();
-    this.checkUserTaskMember();
+  
 
   }
 
-  checkUserTaskMember() {
 
-    if (this.task.TaskMembers.filter(x => x.EmployeeId == this.user.EmployeeId).length > 0) {
-      this.isUserTaskMember = true;
-    }
-
-  }
   ListofEmployees() {
 
     this.taskService.getEmployeeNoTaskMembers(this.taskId).subscribe({
@@ -72,6 +66,12 @@ export class ActivityParentsComponent implements OnInit {
       next: (res) => {
         this.task = res
         this.selectedEmployee = []
+
+                         
+
+        if (this.task.TaskMembers!.find(x => x.EmployeeId?.toLowerCase() == this.user.EmployeeId.toLowerCase())) {
+          this.isUserTaskMember = true;
+        }
       }, error: (err) => {
         console.error(err)
       }
@@ -133,6 +133,11 @@ export class ActivityParentsComponent implements OnInit {
   }
   getImage(value: string) {
     return this.commonService.createImgPath(value)
+  }
+
+  taskMemo(value: string ){
+
+    alert (value)
   }
 
 }

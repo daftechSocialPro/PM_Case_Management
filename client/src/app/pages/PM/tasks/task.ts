@@ -11,18 +11,18 @@ export interface Task {
 
 export interface TaskView {
 
-    Id: String
-    TaskName: String
-    TaskWeight: Number
-    NumberofActivities: Number
-    FinishedActivitiesNo: Number
-    TerminatedActivitiesNo: Number
-    StartDate: Date
-    EndDate: Date
-    NumberOfMembers: Number
-    HasActivity: Boolean
-    PlannedBudget: Number
-    TaskMembers: SelectList[]
+    Id?: String
+    TaskName?: String
+    TaskWeight?: Number
+    NumberofActivities?: Number
+    FinishedActivitiesNo?: Number
+    TerminatedActivitiesNo?: Number
+    StartDate?: Date
+    EndDate?: Date
+    NumberOfMembers?: Number
+    HasActivity?: Boolean
+    PlannedBudget?: Number
+    TaskMembers?: SelectList[]
 
 }
 export interface TaskMembers {
