@@ -23,6 +23,7 @@ export interface TaskView {
     HasActivity?: Boolean
     PlannedBudget?: Number
     TaskMembers?: SelectList[]
+    TaskMemos?:TaskMemoView[]
 
 }
 export interface TaskMembers {
@@ -31,4 +32,16 @@ export interface TaskMembers {
     Employee: SelectList[]
     TaskId: String
 
+}
+
+
+export interface TaskMemoView{
+    Employee : SelectList
+    Description: String 
+    DateTime:String
+}
+export interface TaskMemo{
+    EmployeeId:String,
+    Description:String,
+    TaskId :String
 }

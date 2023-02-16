@@ -137,7 +137,44 @@ export class ActivityParentsComponent implements OnInit {
 
   taskMemo(value: string ){
 
-    alert (value)
+
+    let taskMemo :any ={
+      EmployeeId:this.user.EmployeeId,
+      Description:value,
+      TaskId :this.taskId
+
+    }
+
+    return this.taskService.addTaskMemos(taskMemo).subscribe({
+      next:(res)=>{
+        this.toast = {
+          message: "Task Memo added Successfully",
+          title: 'Successfully Added.',
+          type: 'success',
+          ic: {
+            timeOut: 2500,
+            closeButton: true,
+          } as IndividualConfig,
+        };
+        this.commonService.showToast(this.toast);
+
+        this.getSingleTask()
+      }
+      ,error:(err)=>{
+        this.toast = {
+          message: err.message,
+          title: 'Network Error.',
+          type: 'error',
+          ic: {
+            timeOut: 2500,
+            closeButton: true,
+          } as IndividualConfig,
+        };
+        this.commonService.showToast(this.toast);
+      }
+    })
+
+    
   }
 
 }

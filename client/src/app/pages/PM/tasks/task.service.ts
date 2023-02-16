@@ -9,33 +9,36 @@ import { TaskView, TaskMembers, Task } from './task';
 })
 export class TaskService {
 
+  constructor(private http: HttpClient) { }
+  BaseURI: string = environment.baseUrl + "/PM/Task"
 
-    constructor(private http: HttpClient) { }
-    BaseURI: string = environment.baseUrl + "/PM/Task"
 
+  //task 
 
-    //task 
+  createTask(task: Task) {
+    return this.http.post(this.BaseURI, task)
+  }
 
-    createTask(task: Task) {
-        return this.http.post(this.BaseURI, task)
-    }
+  getSingleTask(taskId: String) {
 
-    getSingleTask(taskId : String ){
+    return this.http.get<TaskView>(this.BaseURI + "/ById?taskId=" + taskId)
+  }
 
-        return this.http.get<TaskView>(this.BaseURI+"/ById?taskId="+taskId)
-    }
+  addTaskMembers(taskMemebers: TaskMembers) {
 
-    addTaskMembers(taskMemebers:TaskMembers){
+    return this.http.post(this.BaseURI + "/TaskMembers", taskMemebers)
+  }
 
-        return this.http.post(this.BaseURI+"/TaskMembers",taskMemebers)
-    }
+  getEmployeeNoTaskMembers(taskId: String) {
 
-    getEmployeeNoTaskMembers (taskId : String ){
+    return this.http.get<SelectList[]>(this.BaseURI + "/selectlsitNoTask?taskId=" + taskId)
+  }
+
+  addTaskMemos(taskMemo: any) {
 
     
+    return this.http.post(this.BaseURI + "/TaskMemo", taskMemo)
+  }
 
-      return this.http.get<SelectList[]>(this.BaseURI+"/selectlsitNoTask?taskId="+taskId)
-    }
-   
 
 }
