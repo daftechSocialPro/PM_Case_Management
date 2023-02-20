@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SelectList } from '../../common/common';
 import { TaskMembers, TaskView } from '../tasks/task';
@@ -7,6 +7,8 @@ import { IndividualConfig } from 'ngx-toastr';
 import { TaskService } from '../tasks/task.service';
 import { UserView } from '../../pages-login/user';
 import { UserService } from '../../pages-login/user.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddActivitiesComponent } from './add-activities/add-activities.component';
 
 
 
@@ -18,9 +20,10 @@ import { UserService } from '../../pages-login/user.service';
 })
 export class ActivityParentsComponent implements OnInit {
 
-  task: TaskView ={};
+  @ViewChild('taskMemoDesc') taskMemoDesc! : ElementRef
+  task: TaskView = {};
   taskId: String = "";
-  Employees : SelectList[]= [];
+  Employees: SelectList[] = [];
   selectedEmployee: SelectList[] = [];
   user!: UserView;
   isUserTaskMember: boolean = false;
@@ -31,6 +34,7 @@ export class ActivityParentsComponent implements OnInit {
     private taskService: TaskService,
     private userService: UserService,
     private commonService: CommonService,
+    private modalService : NgbModal,
 
   ) { }
 
@@ -40,7 +44,15 @@ export class ActivityParentsComponent implements OnInit {
     this.getSingleTask();
     this.ListofEmployees();
     this.user = this.userService.getCurrentUser();
-  
+
+
+  }
+
+  getDateDiff(startDate: string) {
+
+
+    var date = this.commonService.getDataDiff(startDate, new Date().toString())
+    return date.day + " days " + date.hour + " hours " + date.minute + " minutes a go "
 
   }
 
@@ -67,7 +79,7 @@ export class ActivityParentsComponent implements OnInit {
         this.task = res
         this.selectedEmployee = []
 
-                         
+
 
         if (this.task.TaskMembers!.find(x => x.EmployeeId?.toLowerCase() == this.user.EmployeeId.toLowerCase())) {
           this.isUserTaskMember = true;
@@ -135,18 +147,18 @@ export class ActivityParentsComponent implements OnInit {
     return this.commonService.createImgPath(value)
   }
 
-  taskMemo(value: string ){
+  taskMemo(value: string) {
 
 
-    let taskMemo :any ={
-      EmployeeId:this.user.EmployeeId,
-      Description:value,
-      TaskId :this.taskId
+    let taskMemo: any = {
+      EmployeeId: this.user.EmployeeId,
+      Description: value,
+      TaskId: this.taskId
 
     }
 
     return this.taskService.addTaskMemos(taskMemo).subscribe({
-      next:(res)=>{
+      next: (res) => {
         this.toast = {
           message: "Task Memo added Successfully",
           title: 'Successfully Added.',
@@ -157,10 +169,10 @@ export class ActivityParentsComponent implements OnInit {
           } as IndividualConfig,
         };
         this.commonService.showToast(this.toast);
-
+this.taskMemoDesc.nativeElement.value = '';
         this.getSingleTask()
       }
-      ,error:(err)=>{
+      , error: (err) => {
         this.toast = {
           message: err.message,
           title: 'Network Error.',
@@ -174,7 +186,14 @@ export class ActivityParentsComponent implements OnInit {
       }
     })
 
-    
+
+  }
+
+  addActivity(){
+
+    let modalRef = this.modalService.open(AddActivitiesComponent,{size:"xl",backdrop:'static'})
+    modalRef.componentInstance.task  = this.task
+
   }
 
 }

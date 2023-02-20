@@ -13,8 +13,14 @@
     <section class="section profile">
         <div class="card">
             <div class="card-header">
-                <div class="card-title">
+                <div class="card-title d-flex justify-content-between">
                     {{this.task.TaskName}}
+
+                    
+                    
+                        <button class="btn btn-primary text-end" (click)="addActivity()" > Add Activity </button>
+                   
+                    
                 </div>
             </div>
             <div class="card-body">
@@ -29,30 +35,52 @@
                         <textarea class="form-control" rows="3" #taskMemoDesc (change)="taskMemo(taskMemoDesc.value)"
                             [disabled]="!isUserTaskMember">{{!isUserTaskMember? "You are not a member to this task":"" }}</textarea>
                         <div style="text-align: right !important;">
-                            <button  type="button" *ngIf="isUserTaskMember" type="submit" 
-                            class="btn btn-success mt-2 text-right"
-                           >Save</button>
+                            <button type="button" *ngIf="isUserTaskMember" type="submit"
+                                class="btn btn-success mt-2 text-right">Save</button>
                         </div>
-                       
+
 
 
                         <div class="accordion mt-2">
                             <div class="accordion-item">
                                 <h2 class="accordion-header"> <button class="accordion-button collapsed" type="button"
                                         data-bs-toggle="collapse" data-bs-target="#collapseMemos" aria-expanded="false"
-                                        aria-controls="collapseMemos"> View TaskMemos</button></h2>
-                                <div id="collapseMemos" class="accordion-collapse collapse "
+                                        aria-controls="collapseMemos"> View Task Memos</button></h2>
+                                <div id="collapseMemos" *ngIf="task.TaskMemos" class="accordion-collapse collapse show"
                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
+                                    <div class="accordion-body" style="height: 40vh; overflow-y: auto;">
+                                        <div *ngFor="let taskmemos of task.TaskMemos">
 
-                                        <span *ngFor="let taskmemos of task.TaskMemos"> {{taskmemos.Description}}
-                                            </span>
+                                            <li class="message-item d-flex justify-content-start p-4 "
+                                                style="list-style: none; background-color: #f6f9ff;border-radius: 15px;">
 
+                                                <img [src]="getImage(taskmemos.Employee.Photo!)" height="50"
+                                                    style="margin-right: 10px;" alt="" class="rounded-circle">
+                                                <div>
+                                                    <h5 style="font-weight: bold;">{{taskmemos.Employee.Name}}</h5>
+                                                    <p style="font-size: 13px;"> {{taskmemos.Description}}</p>
+                                                    <p style="font-size: 15px; font-weight:bold ;">{{
+                                                        getDateDiff(taskmemos.DateTime)}}</p>
+                                                </div>
+                                            </li>
+                                            <hr class="dropdown-divider">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-
+                        </div>
+                        <div class="accordion mt-2">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header"> <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapseAddActivity" aria-expanded="false"
+                                        aria-controls="collapseMemos"> View Activities</button></h2>
+                                <div id="collapseAddActivity"  class="accordion-collapse collapse"
+                                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body" >
+                                    
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
 
@@ -64,7 +92,7 @@
                                 <h2 class="accordion-header" id="headingOne"> <button class="accordion-button "
                                         type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                         aria-expanded="true" aria-controls="collapseOne"> Add Members</button></h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                <div id="collapseOne" *ngIf="Employees" class="accordion-collapse collapse show"
                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
 
@@ -92,7 +120,6 @@
                                                 class="btn btn-success" (click)="AddMembers()">Add</button>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="accordion-item">
@@ -101,9 +128,7 @@
                                         aria-expanded="false" aria-controls="collapseTwo">Attachments </button></h2>
                                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                                     data-bs-parent="#accordionExample">
-
                                     <div class="accordion-body">
-
                                     </div>
                                 </div>
                             </div>

@@ -38,7 +38,7 @@ export interface TaskMembers {
 export interface TaskMemoView{
     Employee : SelectList
     Description: String 
-    DateTime:String
+    DateTime:string
 }
 export interface TaskMemo{
     EmployeeId:String,

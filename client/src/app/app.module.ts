@@ -79,6 +79,7 @@ import { AddPlansComponent } from './pages/PM/plans/add-plans/add-plans.componen
 import { TasksComponent } from './pages/PM/tasks/tasks.component';
 import { AddTasksComponent } from './pages/PM/tasks/add-tasks/add-tasks.component';
 import { ActivityParentsComponent } from './pages/pm/activity-parents/activity-parents.component';
+import { AddActivitiesComponent } from './pages/pm/activity-parents/add-activities/add-activities.component';
 
 
 @NgModule({
@@ -150,7 +151,8 @@ import { ActivityParentsComponent } from './pages/pm/activity-parents/activity-p
     AddPlansComponent,
     TasksComponent,
     AddTasksComponent,
-    ActivityParentsComponent
+    ActivityParentsComponent,
+    AddActivitiesComponent
     
     
   ],
