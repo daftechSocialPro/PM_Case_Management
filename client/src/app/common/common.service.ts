@@ -30,7 +30,7 @@ export class CommonService {
   }
 
   getDataDiff(startDat :string,endDat:string) {
-    debugger
+   
     var startDate = new Date(startDat)
     var endDate = new Date(endDat)
     var diff = endDate.getTime() - startDate.getTime();

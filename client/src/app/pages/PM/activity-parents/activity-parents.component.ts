@@ -169,7 +169,7 @@ export class ActivityParentsComponent implements OnInit {
           } as IndividualConfig,
         };
         this.commonService.showToast(this.toast);
-this.taskMemoDesc.nativeElement.value = '';
+        this.taskMemoDesc.nativeElement.value = '';
         this.getSingleTask()
       }
       , error: (err) => {

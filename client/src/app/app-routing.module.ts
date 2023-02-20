@@ -45,6 +45,7 @@ import { ProgramsComponent } from './pages/PM/programs/programs.component';
 import { PlansComponent } from './pages/PM/plans/plans.component';
 import { TasksComponent } from './pages/PM/tasks/tasks.component';
 import { ActivityParentsComponent } from './pages/pm/activity-parents/activity-parents.component';
+import { EncodeCaseComponent } from './pages/case/encode-case/encode-case.component';
 
 
 
@@ -66,6 +67,7 @@ const routes: Routes = [
   { path: 'plan', canActivate:[AuthGuard],component:PlansComponent},
   { path: 'task',canActivate:[AuthGuard],component:TasksComponent},  
   { path: 'activityparent', canActivate:[AuthGuard],component:ActivityParentsComponent},
+  { path: 'encodecase' ,canActivate:[AuthGuard],component : EncodeCaseComponent},
 
 
   { path: 'alerts', component: AlertsComponent },

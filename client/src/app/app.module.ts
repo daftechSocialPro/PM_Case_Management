@@ -80,6 +80,8 @@ import { TasksComponent } from './pages/PM/tasks/tasks.component';
 import { AddTasksComponent } from './pages/PM/tasks/add-tasks/add-tasks.component';
 import { ActivityParentsComponent } from './pages/pm/activity-parents/activity-parents.component';
 import { AddActivitiesComponent } from './pages/pm/activity-parents/add-activities/add-activities.component';
+import { EncodeCaseComponent } from './pages/case/encode-case/encode-case.component';
+import { AddCaseComponent } from './pages/case/encode-case/add-case/add-case.component';
 
 
 @NgModule({
@@ -152,7 +154,9 @@ import { AddActivitiesComponent } from './pages/pm/activity-parents/add-activiti
     TasksComponent,
     AddTasksComponent,
     ActivityParentsComponent,
-    AddActivitiesComponent
+    AddActivitiesComponent,
+    EncodeCaseComponent,
+    AddCaseComponent
     
     
   ],
