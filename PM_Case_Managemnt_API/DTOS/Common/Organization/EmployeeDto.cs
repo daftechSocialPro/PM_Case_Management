@@ -4,8 +4,11 @@ namespace PM_Case_Managemnt_API.DTOS.Common
     public class EmployeeDto
     {
 
+        public Guid? Id { get; set; }
         public string Photo { get; set; }
 
+        public string? UserName { get; set; }
+        public string?[] Roles { get; set; }
         public string Title { get; set; }
 
         public string FullName { get; set; }
@@ -22,6 +25,7 @@ namespace PM_Case_Managemnt_API.DTOS.Common
         public string? StructureName { get; set; }
 
         public string? Remark { get; set; }
+        public int RowStatus { get; set; }
 
 
     }

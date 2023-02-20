@@ -16,14 +16,20 @@ namespace PM_Case_Managemnt_API.Services.Common
             _dBContext = context;
         }
 
-        public async Task<int> CreateUnitOfMeasurment(PM_Case_Managemnt_API.Models.Common.UnitOfMeasurment unitOfMeasurment)
+        public async Task<int> CreateUnitOfMeasurment(UnitOfMeasurmentDto UnitOfMeasurment)
         {
 
-            unitOfMeasurment.Id = Guid.NewGuid();
-            unitOfMeasurment.Name = unitOfMeasurment.Name;
-            unitOfMeasurment.LocalName = unitOfMeasurment.LocalName;
-            unitOfMeasurment.CreatedAt = DateTime.Now;
 
+            var unitOfMeasurment = new UnitOfMeasurment
+            {
+                Id = Guid.NewGuid(),
+                Name = UnitOfMeasurment.Name,
+                LocalName = UnitOfMeasurment.LocalName,
+                Type = UnitOfMeasurment.Type == 0 ? MeasurmentType.percent : MeasurmentType.number,
+                CreatedAt = DateTime.Now,
+                Remark= UnitOfMeasurment.Remark,
+            };
+            
 
             await _dBContext.AddAsync(unitOfMeasurment);
             await _dBContext.SaveChangesAsync();
@@ -33,6 +39,10 @@ namespace PM_Case_Managemnt_API.Services.Common
         }
         public async Task<List<PM_Case_Managemnt_API.Models.Common.UnitOfMeasurment>> GetUnitOfMeasurment()
         {
+
+
+
+            var k = await _dBContext.UnitOfMeasurment.ToListAsync();
             return await _dBContext.UnitOfMeasurment.ToListAsync();
         }
 
@@ -51,10 +61,18 @@ namespace PM_Case_Managemnt_API.Services.Common
             return list;
         }
 
-        public async Task<int> UpdateUnitOfMeasurment(PM_Case_Managemnt_API.Models.Common.UnitOfMeasurment unitOfMeasurment)
+        public async Task<int> UpdateUnitOfMeasurment(UnitOfMeasurmentDto unitOfMeasurmentDto)
         {
 
-            _dBContext.Entry(unitOfMeasurment).State = EntityState.Modified;
+            var unitMeasurment = _dBContext.UnitOfMeasurment.Find(unitOfMeasurmentDto.Id);
+
+            unitMeasurment.Name = unitOfMeasurmentDto.Name;
+            unitMeasurment.LocalName= unitOfMeasurmentDto.LocalName;
+            unitMeasurment.Type = unitOfMeasurmentDto.Type == 0 ? MeasurmentType.percent : MeasurmentType.number;
+            unitMeasurment.Remark = unitOfMeasurmentDto.Remark;
+            unitMeasurment.RowStatus= unitOfMeasurmentDto.RowStatus== 0?RowStatus.Active:RowStatus.InActive;
+
+            _dBContext.Entry(unitMeasurment).State = EntityState.Modified;
             await _dBContext.SaveChangesAsync();
             return 1;
 

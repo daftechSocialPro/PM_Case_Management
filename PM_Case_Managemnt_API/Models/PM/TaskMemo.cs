@@ -24,7 +24,7 @@ namespace PM_Case_Managemnt_API.Models.PM
 
 
         public Guid EmployeeId { get; set; }
-   //     public virtual Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
 
         public string Description { get; set; }
         // public virtual ICollection<TaskMemoReply> Replies { get; set; }

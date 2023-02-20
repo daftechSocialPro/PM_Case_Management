@@ -7,7 +7,7 @@ namespace PM_Case_Managemnt_API.Services.Common
 
         public Task<int> CreateOrganizationalStructure(OrgStructureDto orgStructure);
 
-        //public Task<int> UpdateOrganizationalProfile(OrganizationProfile organizationProfile);
+        public Task<int> UpdateOrganizationalStructure(OrgStructureDto organizationProfile);
         public Task<List<OrgStructureDto>> GetOrganizationStructures();
 
         public Task<List<SelectListDto>> getParentStrucctureSelectList(Guid branchId);

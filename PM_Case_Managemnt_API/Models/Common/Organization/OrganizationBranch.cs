@@ -8,6 +8,10 @@ namespace PM_Case_Managemnt_API.Models.Common
 {
     public class OrganizationBranch :CommonModel
     {
+        public OrganizationBranch()
+        {
+            structures = new HashSet<OrganizationalStructure>();
+        }
         public virtual OrganizationProfile  OrganizationProfile { get; set; }
 
         public Guid OrganizationProfileId { get; set; }
@@ -21,6 +25,8 @@ namespace PM_Case_Managemnt_API.Models.Common
 
         [DefaultValue(false)]
         public bool IsHeadOffice { get; set; }
+
+        public ICollection<OrganizationalStructure> structures { get; set; }
 
     }
 }

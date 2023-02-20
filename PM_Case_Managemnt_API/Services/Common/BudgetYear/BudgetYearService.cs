@@ -17,8 +17,8 @@ namespace PM_Case_Managemnt_API.Services.Common
         public async Task<int> CreateProgramBudgetYear(ProgramBudgetYear programBudgetYear)
         {
 
-            programBudgetYear.Id= Guid.NewGuid();
-            
+            programBudgetYear.Id = Guid.NewGuid();
+
 
             await _dBContext.AddAsync(programBudgetYear);
             await _dBContext.SaveChangesAsync();
@@ -28,7 +28,7 @@ namespace PM_Case_Managemnt_API.Services.Common
         }
         public async Task<List<ProgramBudgetYear>> GetProgramBudgetYears()
         {
-            return await _dBContext.ProgramBudgetYears.Include(x=>x.BudgetYears).ToListAsync();
+            return await _dBContext.ProgramBudgetYears.Include(x => x.BudgetYears).ToListAsync();
         }
 
         public async Task<List<SelectListDto>> getProgramBudgetSelectList()
@@ -38,7 +38,7 @@ namespace PM_Case_Managemnt_API.Services.Common
                                               select new SelectListDto
                                               {
                                                   Id = x.Id,
-                                                  Name = x.Name
+                                                  Name = x.Name + " ( " + x.FromYear + " - " + x.ToYear + " )"
 
                                               }).ToListAsync();
 
@@ -63,7 +63,7 @@ namespace PM_Case_Managemnt_API.Services.Common
 
         public async Task<List<PM_Case_Managemnt_API.Models.Common.BudgetYear>> GetBudgetYears(Guid programBudgetYearId)
         {
-            return await _dBContext.BudgetYears.Where(x=>x.ProgramBudgetYearId==programBudgetYearId).ToListAsync();
+            return await _dBContext.BudgetYears.Where(x => x.ProgramBudgetYearId == programBudgetYearId).ToListAsync();
         }
 
         public async Task<List<SelectListDto>> getBudgetSelectList()
@@ -73,7 +73,7 @@ namespace PM_Case_Managemnt_API.Services.Common
                                               select new SelectListDto
                                               {
                                                   Id = x.Id,
-                                                  Name = x.Year.ToString() + " ("  + " ) ( " +x.RowStatus + ")"
+                                                  Name = x.Year.ToString() + " (" + " ) ( " + x.RowStatus + ")"
 
                                               }).ToListAsync();
 
@@ -81,6 +81,27 @@ namespace PM_Case_Managemnt_API.Services.Common
             return list;
         }
 
+        public async Task<List<SelectListDto>> GetBudgetYearsFromProgramId(Guid ProgramId)
+        {
+
+
+            var program = _dBContext.Programs.Find(ProgramId);
+
+            return await (from x in _dBContext.BudgetYears.Where(x=>x.ProgramBudgetYearId==program.ProgramBudgetYearId)
+                          select new SelectListDto
+                          {
+                              Id = x.Id,
+                              Name = x.Year.ToString()
+
+                          }).ToListAsync();
+
+
+         }
+
+
+
+
+            
 
 
     }

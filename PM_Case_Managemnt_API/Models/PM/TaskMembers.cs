@@ -18,13 +18,10 @@ namespace PM_Case_Managemnt_API.Models.PM
         public virtual ActivityParent ActivityParent { get; set; }
 
 
-
-
         public Guid EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
 
-        [NotMapped]
-        public string[] Employeelist { get; set; }
+    
 
 
 

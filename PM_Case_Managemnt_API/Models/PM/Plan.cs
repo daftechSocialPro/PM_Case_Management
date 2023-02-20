@@ -29,10 +29,14 @@ namespace PM_Case_Managemnt_API.Models.PM
         public DateTime? PeriodEndAt { get; set; }
 
         public Guid ProjectManagerId { get; set; }
+        public virtual Employee ProjectManager { get; set; }
+
+        
      
-        public Guid ProjectCordinatorId { get; set; }
+     //   public Guid ProjectCordinatorId { get; set; }
       
         public Guid FinanceId { get; set; }
+        public virtual Employee Finance { get; set; }
        
         public Guid? ProgramId { get; set; }
         public virtual Programs Program { get; set; }

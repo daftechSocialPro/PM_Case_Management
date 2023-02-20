@@ -4324,11 +4324,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\git\\pm_case_management\\server\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
+      "projectUniqueName": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
       "projectName": "PM_Case_Managemnt_API",
-      "projectPath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\git\\pm_case_management\\server\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
+      "projectPath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
       "packagesPath": "C:\\Users\\Naol\\.nuget\\packages\\",
-      "outputPath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\git\\pm_case_management\\server\\PM_Case_Managemnt_API\\obj\\",
+      "outputPath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -4416,7 +4416,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BwuYLuGR5/kmWMXN9AB8k/RzrpVzajiGoJduIKZFvw4k9PMVzJAskWyGe7HNKcLbUu9Do1j91UK/VxpPalAJ5A==",
+  "dgSpecHash": "5r9i+QGhJB++FRwfmBOAXMnMMOfp0zOAFpdul5cwR9txLNbQ+8IWnUmnms3DAzC6H0zKiaMXxLau6rBKj919Rw==",
   "success": true,
-  "projectFilePath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\git\\pm_case_management\\server\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
+  "projectFilePath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Naol\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Naol\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

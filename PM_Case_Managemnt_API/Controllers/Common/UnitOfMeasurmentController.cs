@@ -24,7 +24,7 @@ namespace PM_Case_Managemnt_API.Controllers.Common
 
         [HttpPost]
 
-        public IActionResult Create([FromBody] UnitOfMeasurment unitOfMeasurment)
+        public IActionResult Create([FromBody] UnitOfMeasurmentDto unitOfMeasurment)
         {
             try
             {
@@ -61,6 +61,30 @@ namespace PM_Case_Managemnt_API.Controllers.Common
 
 
             return await _unitOfMeasurmentService.getUnitOfMeasurmentSelectList();
+        }
+
+        [HttpPut]
+
+        
+
+        public IActionResult Update([FromBody] UnitOfMeasurmentDto unitOfMeasurment)
+        {
+            try
+            {
+
+
+                var response = _unitOfMeasurmentService.UpdateUnitOfMeasurment(unitOfMeasurment);
+
+
+                return Ok(new { response });
+
+
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error : {ex}");
+            }
         }
     }
 }

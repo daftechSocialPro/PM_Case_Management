@@ -40,13 +40,13 @@ namespace PM_Case_Managemnt_API.Services.Common
         }
         public async Task<List<OrganizationBranch>> GetOrganizationBranches()
         {
-            return await _dBContext.OrganizationBranches.Where(x => !x.IsHeadOffice).Include(x => x.OrganizationProfile).ToListAsync();
+            return await _dBContext.OrganizationBranches.Where(x => !x.IsHeadOffice ).Include(x => x.OrganizationProfile).ToListAsync();
         }
 
         public async Task<List<SelectListDto>> getBranchSelectList()
         {
 
-            List<SelectListDto> list = await (from x in _dBContext.OrganizationBranches
+            List<SelectListDto> list = await (from x in _dBContext.OrganizationBranches.Where(x=>x.RowStatus == RowStatus.Active)
                                               select new SelectListDto
                                               {
                                                   Id = x.Id,
@@ -58,13 +58,21 @@ namespace PM_Case_Managemnt_API.Services.Common
             return list;
         }
 
-        //public async Task<int> UpdateOrganizationalProfile(OrganizationProfile organizationProfile)
-        //{
+        public async Task<int> UpdateOrganizationBranch(OrgBranchDto organizationBranch)
+        {
 
-        //    _dBContext.Entry(organizationProfile).State = EntityState.Modified;
-        //    await _dBContext.SaveChangesAsync();
-        //    return 1;
+            var orgBranch = _dBContext.OrganizationBranches.Find(organizationBranch.Id);
 
-        //}
+            orgBranch.Name = organizationBranch.Name;
+            orgBranch.Address = organizationBranch.Address;
+            orgBranch.Remark = organizationBranch.Remark;
+            orgBranch.PhoneNumber = organizationBranch.PhoneNumber;
+            orgBranch.RowStatus = organizationBranch.RowStatus==0?RowStatus.Active:RowStatus.InActive;
+
+            _dBContext.Entry(orgBranch).State = EntityState.Modified;
+            await _dBContext.SaveChangesAsync();
+            return 1;
+
+        }
     }
 }

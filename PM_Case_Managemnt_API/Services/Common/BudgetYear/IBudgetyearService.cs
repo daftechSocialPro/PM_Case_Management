@@ -20,6 +20,7 @@ namespace PM_Case_Managemnt_API.Services.Common
         //public Task<int> UpdateOrganizationalProfile(OrganizationProfile organizationProfile);
         public Task<List<PM_Case_Managemnt_API.Models.Common.BudgetYear>> GetBudgetYears(Guid programBudgetYearId);
 
+        public Task<List<SelectListDto>> GetBudgetYearsFromProgramId(Guid ProgramId);
         public Task<List<SelectListDto>> getBudgetSelectList();
     }
 }

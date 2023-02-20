@@ -63,6 +63,28 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
         }
 
 
+        [HttpPut]
+
+        public IActionResult Update([FromBody] OrgBranchDto organizationBranch)
+        {
+            try
+            {
+
+
+                var response = _branchService.UpdateOrganizationBranch(organizationBranch);
+
+
+                return Ok(new { response });
+
+
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error : {ex}");
+            }
+        }
+
 
 
 

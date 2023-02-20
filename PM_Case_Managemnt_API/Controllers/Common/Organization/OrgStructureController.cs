@@ -52,5 +52,24 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
             return await _orgStructureService.getParentStrucctureSelectList(Guid.Parse(branchid));
 
         }
+
+
+        [HttpPut]
+
+        public IActionResult Update([FromBody] OrgStructureDto orgStructure)
+        {
+            try
+            {
+                var response = _orgStructureService.UpdateOrganizationalStructure(orgStructure);
+
+                return Ok(new { response });
+
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error : {ex}");
+            }
+        }
     }
 }

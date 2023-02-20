@@ -19,10 +19,6 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
             _organizationProfileService = organzationProfileService;
         }
 
-
-
-
-
         [HttpPost, DisableRequestSizeLimit]
 
         public IActionResult Profile()
@@ -88,9 +84,6 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
 
         public async Task<OrganizationProfile> getProfile()
         {
-
-
-
             return await _organizationProfileService.GetOrganizationProfile();
         }
         [HttpPut, DisableRequestSizeLimit]

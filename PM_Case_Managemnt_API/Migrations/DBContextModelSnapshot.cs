@@ -1397,9 +1397,6 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Property<Guid?>("ProgramId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ProjectCordinatorId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("ProjectManagerId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1419,7 +1416,11 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("BudgetYearId");
 
+                    b.HasIndex("FinanceId");
+
                     b.HasIndex("ProgramId");
+
+                    b.HasIndex("ProjectManagerId");
 
                     b.HasIndex("StructureId");
 
@@ -1895,7 +1896,7 @@ namespace PMCaseManagemntAPI.Migrations
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.OrganizationalStructure", b =>
                 {
                     b.HasOne("PM_Case_Managemnt_API.Models.Common.OrganizationBranch", "OrganizationBranch")
-                        .WithMany()
+                        .WithMany("structures")
                         .HasForeignKey("OrganizationBranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1971,9 +1972,21 @@ namespace PMCaseManagemntAPI.Migrations
                         .WithMany()
                         .HasForeignKey("BudgetYearId");
 
+                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "Finance")
+                        .WithMany()
+                        .HasForeignKey("FinanceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PM_Case_Managemnt_API.Models.PM.Programs", "Program")
                         .WithMany()
                         .HasForeignKey("ProgramId");
+
+                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "ProjectManager")
+                        .WithMany()
+                        .HasForeignKey("ProjectManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PM_Case_Managemnt_API.Models.Common.OrganizationalStructure", "Structure")
                         .WithMany()
@@ -1983,7 +1996,11 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Navigation("BudgetYear");
 
+                    b.Navigation("Finance");
+
                     b.Navigation("Program");
+
+                    b.Navigation("ProjectManager");
 
                     b.Navigation("Structure");
                 });
@@ -2063,6 +2080,11 @@ namespace PMCaseManagemntAPI.Migrations
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseType", b =>
                 {
                     b.Navigation("Childrens");
+                });
+
+            modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.OrganizationBranch", b =>
+                {
+                    b.Navigation("structures");
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.ProgramBudgetYear", b =>

@@ -1,5 +1,6 @@
 ﻿
 using PM_Case_Managemnt_API.Models.Common;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -31,6 +32,7 @@ namespace PM_Case_Managemnt_API.Models.PM
         public float? Weight { get; set; }
         public float ActualWorked { get; set; }
         public Status Status { get; set; }
+        [DefaultValue(true)]
         public bool HasActivityParent { get; set; }
 
 

@@ -9,6 +9,9 @@ namespace PM_Case_Managemnt_API.Services.Common
         public Task<int> CreateEmployee(EmployeeDto employee);
         public Task<int> UpdateEmployee(EmployeeDto employee);
         public Task<List<EmployeeDto>> GetEmployees();
+        public Task<List<SelectListDto>> GetEmployeesNoUserSelectList();
+      
+        public Task<List<SelectListDto>> GetEmployeesSelectList();
 
 
     }

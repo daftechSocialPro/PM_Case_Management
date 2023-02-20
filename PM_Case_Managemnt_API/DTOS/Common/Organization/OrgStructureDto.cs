@@ -3,7 +3,7 @@ namespace PM_Case_Managemnt_API.DTOS.Common
 {
     public class OrgStructureDto
     {
-
+        public Guid? Id { get; set; }
         public Guid OrganizationBranchId { get; set; }
         public string? BranchName { get; set; }
 
@@ -16,5 +16,7 @@ namespace PM_Case_Managemnt_API.DTOS.Common
         public float Weight { get; set; }
 
         public string Remark { get; set; }
+
+        public int RowStatus { get; set; }
     }
 }
