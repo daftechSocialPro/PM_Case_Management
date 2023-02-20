@@ -42,16 +42,19 @@ export class AddActivitiesComponent implements OnInit{
   }
   ngOnInit(): void {
 
-    $('.stdate').calendarsPicker({
-      calendar: $.calendars.instance('ethiopian', 'am'),
+    var calendar = $.calendars.instance('ethiopian','am');
+    $('#StartDate').calendarsPicker({calendar: calendar});
+
+    // $('.stdate').calendarsPicker({
+    //   calendar: $.calendars.instance('ethiopian', 'am'),
       
-      // onSelect: function (dates) {
-      //   this.dateee = dates;
-      //   if (this.dateee[0]) {
-      //     self.driver.appointmentGivenDate = ${this.dateee[0]._day}-${this.dateee[0]._month}-${this.dateee[0]._year};
-      //   }
-      // },
-    })
+    //   // onSelect: function (dates) {
+    //   //   this.dateee = dates;
+    //   //   if (this.dateee[0]) {
+    //   //     self.driver.appointmentGivenDate = ${this.dateee[0]._day}-${this.dateee[0]._month}-${this.dateee[0]._year};
+    //   //   }
+    //   // },
+    // })
    
   }
 
