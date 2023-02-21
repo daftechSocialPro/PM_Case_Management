@@ -78,6 +78,7 @@ namespace PM_Case_Managemnt_API.Data
         public DbSet<ActivityTargetDivision> ActivityTargetDivisions { get; set; }
         public DbSet<ActivityTerminationHistories> ActivityTerminationHistories { get; set; }
         public DbSet<Commitees> Commitees { get; set; }
+        public DbSet<CommitesEmployees> CommiteEmployees { get; set; }
         public DbSet<EmployeesAssignedForActivities> EmployeesAssignedForActivities { get; set; }
         public DbSet<ProgressAttachment> ProgressAttachments { get; set; }
         public DbSet<Task> Tasks { get; set; }

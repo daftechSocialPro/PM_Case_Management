@@ -68,13 +68,14 @@ namespace PM_Case_Managemnt_API.Services.Common
         {
             var emp = _authentication.ApplicationUsers.Select(x => x.EmployeesId).ToList();
 
-           var EmployeeSelectList = await (from e in _dBContext.Employees where !(emp.Contains(e.Id))
-                          select new SelectListDto
-                          {
-                              Id= e.Id,
-                              Name = e.FullName
+            var EmployeeSelectList = await (from e in _dBContext.Employees
+                                            where !(emp.Contains(e.Id))
+                                            select new SelectListDto
+                                            {
+                                                Id = e.Id,
+                                                Name = e.FullName
 
-                          }).ToListAsync();
+                                            }).ToListAsync();
 
             return EmployeeSelectList;
 
@@ -84,12 +85,6 @@ namespace PM_Case_Managemnt_API.Services.Common
      
         public async Task<List<EmployeeDto>> GetEmployees()
         {
-
-
-
-           
-
-
 
             var k=  await (from e in _dBContext.Employees
                           join es in _dBContext.EmployeesStructures.Include(x => x.OrganizationalStructure) on e.Id equals es.EmployeeId

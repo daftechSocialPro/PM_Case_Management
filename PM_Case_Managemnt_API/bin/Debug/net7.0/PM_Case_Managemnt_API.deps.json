@@ -15,7 +15,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.1",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.1",
           "Swashbuckle.AspNetCore": "6.4.0",
-          "Swashbuckle.AspNetCore.Swagger": "6.4.0"
+          "Swashbuckle.AspNetCore.Swagger": "6.4.0",
+          "XAPI": "1.0.0"
         },
         "runtime": {
           "PM_Case_Managemnt_API.dll": {}
@@ -760,6 +761,11 @@
             "fileVersion": "5.0.20.51904"
           }
         }
+      },
+      "XAPI/1.0.0": {
+        "runtime": {
+          "XAPI.dll": {}
+        }
       }
     }
   },
@@ -1342,6 +1348,11 @@
       "sha512": "sha512-c1ho9WU9ZxMZawML+ssPKZfdnrg/OjR3pe0m9v8230z3acqphwvPJqzAkH54xRYm5ntZHGG1EPP3sux9H3qSPg==",
       "path": "system.windows.extensions/5.0.0",
       "hashPath": "system.windows.extensions.5.0.0.nupkg.sha512"
+    },
+    "XAPI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }
