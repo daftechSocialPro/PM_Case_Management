@@ -27,6 +27,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">ComiteeName </th>
                                 <th scope="col">No Of Employee</th>
+                                <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
 
                             </tr>
@@ -37,7 +38,9 @@
 
                                 <th scope="row">{{i+1}}</th>
                                 <td>{{committee.Name }}</td>
+                               
                                 <td>{{committee.NoOfEmployees}}</td>
+                                <td>{{committee.Remark }}</td>
                               
                                 <td>
                                     <a  (click)="update(committee)"

@@ -26,15 +26,15 @@ namespace PMCaseManagemntAPI.Migrations.DB
                 name: "CommitesEmployees",
                 newName: "CommiteEmployees");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_CommitesEmployees_EmployeeId",
-                table: "CommiteEmployees",
-                newName: "IX_CommiteEmployees_EmployeeId");
+            //migrationBuilder.RenameIndex(
+            //    name: "IX_CommitesEmployees_EmployeeId",
+            //    table: "CommiteEmployees",
+            //    newName: "IX_CommiteEmployees_EmployeeId");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_CommitesEmployees_CommiteeId",
-                table: "CommiteEmployees",
-                newName: "IX_CommiteEmployees_CommiteeId");
+            //migrationBuilder.RenameIndex(
+            //    name: "IX_CommitesEmployees_CommiteeId",
+            //    table: "CommiteEmployees",
+            //    newName: "IX_CommiteEmployees_CommiteeId");
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_CommiteEmployees",
@@ -46,29 +46,29 @@ namespace PMCaseManagemntAPI.Migrations.DB
                 table: "TaskMemos",
                 column: "EmployeeId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_CommiteEmployees_Commitees_CommiteeId",
-                table: "CommiteEmployees",
-                column: "CommiteeId",
-                principalTable: "Commitees",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_CommiteEmployees_Commitees_CommiteeId",
+            //    table: "CommiteEmployees",
+            //    column: "CommiteeId",
+            //    principalTable: "Commitees",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Cascade);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_CommiteEmployees_Employees_EmployeeId",
-                table: "CommiteEmployees",
-                column: "EmployeeId",
-                principalTable: "Employees",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_CommiteEmployees_Employees_EmployeeId",
+            //    table: "CommiteEmployees",
+            //    column: "EmployeeId",
+            //    principalTable: "Employees",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Cascade);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_TaskMemos_Employees_EmployeeId",
-                table: "TaskMemos",
-                column: "EmployeeId",
-                principalTable: "Employees",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_TaskMemos_Employees_EmployeeId",
+            //    table: "TaskMemos",
+            //    column: "EmployeeId",
+            //    principalTable: "Employees",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
