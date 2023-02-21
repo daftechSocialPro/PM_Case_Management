@@ -62,5 +62,36 @@ namespace PM_Case_Managemnt_API.Controllers.PM
 
             return response;
         }
+
+        [HttpPost("addEmployesInCommitee")]
+
+        public IActionResult addEmployee([FromBody] CommiteEmployeesdto commite)
+        {
+            try
+            {
+                var response = _commiteService.AddEmployeestoCommitte(commite);
+                return Ok(new { response });
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error : {ex}");
+            }
+        }
+        [HttpPost("removeEmployesInCommitee")]
+
+        public IActionResult removeEmployee([FromBody] CommiteEmployeesdto commite)
+        {
+            try
+            {
+                var response = _commiteService.RemoveEmployeestoCommitte(commite);
+                return Ok(new { response });
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error : {ex}");
+            }
+        }
     }
 }

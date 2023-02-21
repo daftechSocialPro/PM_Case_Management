@@ -28,5 +28,13 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public List<SelectListDto> EmployeeList { get; set; } = null!;
     }
 
+    public class CommiteEmployeesdto
+    {
+        public Guid CommiteeId { get; set; }
+        public Guid[] EmployeeList { get; set; }
+
+        public Guid CreatedBy { get; set; }
+    }
+
    
 }

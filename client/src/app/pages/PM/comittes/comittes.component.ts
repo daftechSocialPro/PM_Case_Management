@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PMService } from '../pm.services';
 import { AddComiteeComponent } from './add-comitee/add-comitee.component';
 import { CommitteeView } from './committee';
 import { CommitteeEmployeeComponent } from './committee-employee/committee-employee.component';
@@ -12,30 +13,45 @@ import { UpdateCpmmitteeComponent } from './update-cpmmittee/update-cpmmittee.co
 })
 export class ComittesComponent implements OnInit {
   
-  committees : CommitteeView[]=[
-    {
-      Id:'1',
-      CommitteeName:'comittee 1 ',
-      NoOfEmployee:8,
-      Employees:[]
-    }
-  ]
+  committees : CommitteeView[]=[]
   constructor (
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private pmService  : PMService
+    
   ){}
   ngOnInit(): void {
-   
+
+
+   this.listCommittee()
+  }
+
+  listCommittee (){
+
+    this.pmService.getComittee().subscribe({
+      next:(res)=>{
+        this.committees = res 
+
+        console.log("comittes", res )
+      }
+    })
   }
 
   addCommitte(){
 
     let modalRef= this.modalService.open(AddComiteeComponent,{size:'md',backdrop:'static'})
+    modalRef.result.then(()=>{
+
+      this.listCommittee()
+    })
   }
 
   employees(value : CommitteeView){
 
     let modalRef = this.modalService.open(CommitteeEmployeeComponent,{size:'xl',backdrop:'static'})
     modalRef.componentInstance.committee = value 
+    modalRef.result.then(()=>{
+      this.listCommittee()
+    })
 
 
   }

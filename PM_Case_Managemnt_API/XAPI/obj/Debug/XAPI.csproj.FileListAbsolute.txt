@@ -170,3 +170,40 @@ C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\
 C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CopyComplete
 C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.dll
 C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.pdb
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.pdb
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\BouncyCastle.Crypto.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.barcodes.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.forms.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.io.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.kernel.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.layout.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.pdfa.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.sign.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.styledxmlparser.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.svg.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.Common.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.SqlServer.Types.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\BouncyCastle.Crypto.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.pdb
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.pdb
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.barcodes.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.forms.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.io.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.kernel.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.layout.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.pdfa.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.sign.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.styledxmlparser.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.svg.xml
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.AssemblyReference.cache
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CoreCompileInputs.cache
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CopyComplete
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.dll
+E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.pdb

@@ -1,4 +1,6 @@
-﻿namespace PM_Case_Managemnt_API.DTOS.Common
+﻿using PM_Case_Managemnt_API.Models.PM;
+
+namespace PM_Case_Managemnt_API.DTOS.Common
 {
     public class SelectListDto
     {
@@ -9,6 +11,8 @@
         public string? Photo { get; set; }
 
         public string? EmployeeId { get; set; }
+
+        public ComiteeEmployeeStatus ? CommiteeStatus { get; set; }
     }
 
 

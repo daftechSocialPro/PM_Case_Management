@@ -1,20 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj": {}
+    "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj": {
+    "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
+        "projectUniqueName": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
         "projectName": "PM_Case_Managemnt_API",
-        "projectPath": "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
-        "packagesPath": "C:\\Users\\Hermi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\obj\\",
+        "projectPath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
+        "packagesPath": "C:\\Users\\Naol\\.nuget\\packages\\",
+        "outputPath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Hermi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Naol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,15 +27,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/NGDevelopment/a226e2c0-a0e2-44b7-9585-284d14e9df54/_packaging/nglibrepo/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj": {
-                "projectPath": "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj"
+              "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj": {
+                "projectPath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj"
               }
             }
           }
@@ -99,15 +103,15 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj": {
+    "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj",
+        "projectUniqueName": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj",
         "projectName": "XAPI",
-        "projectPath": "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj",
+        "projectPath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj",
         "frameworks": {
           "net48": {
             "projectReferences": {}

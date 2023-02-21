@@ -36,8 +36,8 @@
                         <tr *ngFor="let committee of committees ; let i= index">
 
                                 <th scope="row">{{i+1}}</th>
-                                <td>{{committee.CommitteeName }}</td>
-                                <td>{{committee.NoOfEmployee}}</td>
+                                <td>{{committee.Name }}</td>
+                                <td>{{committee.NoOfEmployees}}</td>
                               
                                 <td>
                                     <a  (click)="update(committee)"
