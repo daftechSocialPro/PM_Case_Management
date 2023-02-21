@@ -43,7 +43,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Commite
                              {
                                  Name = e.Employee.FullName,
                                  CommiteeStatus = e.CommiteeEmployeeStatus,
-                                 Id = e.Id,
+                                 Id = e.Employee.Id,
                              }).ToList()
                          }).ToListAsync();
 
