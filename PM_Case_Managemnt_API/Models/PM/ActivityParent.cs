@@ -18,8 +18,8 @@ namespace PM_Case_Managemnt_API.Models.PM
         //}
 
         public Guid? TaskId { get; set; }
-    //  public virtual Task Task { get; set; }
-        public string ActivityParentDescription { get; set; }
+        //  public virtual Task Task { get; set; }
+        public string ActivityParentDescription { get; set; } = null!;
         public DateTime? ShouldStartPeriod { get; set; }
         public DateTime? ActuallStart { get; set; }
         public DateTime? ShouldEnd { get; set; }

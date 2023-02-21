@@ -10,15 +10,19 @@
     <Compile Remove="Models\Case\**" />
     <Compile Remove="Models\Common\Message\**" />
     <Compile Remove="Models\PM\**" />
+    <Compile Remove="XAPI\**" />
     <Content Remove="Models\Case\**" />
     <Content Remove="Models\Common\Message\**" />
     <Content Remove="Models\PM\**" />
+    <Content Remove="XAPI\**" />
     <EmbeddedResource Remove="Models\Case\**" />
     <EmbeddedResource Remove="Models\Common\Message\**" />
     <EmbeddedResource Remove="Models\PM\**" />
+    <EmbeddedResource Remove="XAPI\**" />
     <None Remove="Models\Case\**" />
     <None Remove="Models\Common\Message\**" />
     <None Remove="Models\PM\**" />
+    <None Remove="XAPI\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,6 +72,10 @@
     <Folder Include="Assets\EmployeePhoto\" />
     <Folder Include="Assets\Organization\" />
     <Folder Include="Models\Auth\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="XAPI\XAPI.csproj" />
   </ItemGroup>
 
 </Project>

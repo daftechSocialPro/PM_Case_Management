@@ -1388,6 +1388,15 @@
             "rid": "win"
           }
         }
+      },
+      "XAPI/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/XAPI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/XAPI.dll": {}
+        }
       }
     }
   },
@@ -2755,6 +2764,7 @@
       "path": "microsoft.netcore.targets/1.1.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -3136,6 +3146,7 @@
       "path": "system.globalization/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3224,6 +3235,7 @@
       "path": "system.io/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3392,6 +3404,7 @@
       "path": "system.reflection/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3472,6 +3485,7 @@
       "path": "system.reflection.primitives/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3528,6 +3542,7 @@
       "path": "system.resources.resourcemanager/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3584,6 +3599,7 @@
       "path": "system.runtime/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3973,6 +3989,7 @@
       "path": "system.text.encoding/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -4183,6 +4200,7 @@
       "path": "system.threading.tasks/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -4302,6 +4320,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "XAPI/1.0.0": {
+      "type": "project",
+      "path": "XAPI/XAPI.csproj",
+      "msbuildProject": "XAPI/XAPI.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4313,30 +4336,24 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.1",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.1",
       "Swashbuckle.AspNetCore >= 6.4.0",
-      "Swashbuckle.AspNetCore.Swagger >= 6.4.0"
+      "Swashbuckle.AspNetCore.Swagger >= 6.4.0",
+      "XAPI >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Naol\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Hermi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
+      "projectUniqueName": "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
       "projectName": "PM_Case_Managemnt_API",
-      "projectPath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
-      "packagesPath": "C:\\Users\\Naol\\.nuget\\packages\\",
-      "outputPath": "E:\\kirubel\\Office Projects\\DAFTech Socail\\Diredwa Pm & Case\\pm_case_management\\PM_Case_Managemnt_API\\obj\\",
+      "projectPath": "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
+      "packagesPath": "C:\\Users\\Hermi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Naol\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Hermi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4344,12 +4361,17 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://pkgs.dev.azure.com/NGDevelopment/a226e2c0-a0e2-44b7-9585-284d14e9df54/_packaging/nglibrepo/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj": {
+              "projectPath": "C:\\Users\\Hermi\\Desktop\\office\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -4416,7 +4438,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

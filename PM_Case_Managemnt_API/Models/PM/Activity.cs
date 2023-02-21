@@ -21,7 +21,7 @@ namespace PM_Case_Managemnt_API.Models.PM
 
 
 
-        public string ActivityDescription { get; set; }
+        public string ActivityDescription { get; set; } = null!;
 
         public DateTime ShouldStat { get; set; }
 

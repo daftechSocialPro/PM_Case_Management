@@ -1,0 +1,172 @@
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\XAPI.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\XAPI.pdb
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\Common.Logging.Core.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\Common.Logging.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.barcodes.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.forms.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.io.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.kernel.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.layout.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.pdfa.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.sign.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.styledxmlparser.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.svg.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\BouncyCastle.Crypto.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\Common.Logging.pdb
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\Common.Logging.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\Common.Logging.Core.pdb
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\Common.Logging.Core.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.barcodes.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.forms.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.io.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.kernel.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.layout.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.pdfa.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.sign.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.styledxmlparser.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\bin\Debug\itext.svg.xml
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\obj\Debug\XAPI.csprojResolveAssemblyReference.cache
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\obj\Debug\XAPI.dll
+C:\Users\simye\OneDrive\桌面\Desktop\Projects\BSC Full Project Web\daftech-bsc-full\BSC\XAPI\obj\Debug\XAPI.pdb
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\XAPI.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\XAPI.pdb
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.Core.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.barcodes.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.forms.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.io.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.kernel.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.layout.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.pdfa.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.sign.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.styledxmlparser.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.svg.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\BouncyCastle.Crypto.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.pdb
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.Core.pdb
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.Core.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.barcodes.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.forms.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.io.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.kernel.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.layout.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.pdfa.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.sign.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.styledxmlparser.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.svg.xml
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.csprojResolveAssemblyReference.cache
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.dll
+C:\Users\user\Desktop\bsc full\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.pdb
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\XAPI.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\XAPI.pdb
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\BouncyCastle.Crypto.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.Core.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.barcodes.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.forms.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.io.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.kernel.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.layout.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.pdfa.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.sign.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.styledxmlparser.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.svg.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Microsoft.ReportViewer.Common.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Microsoft.SqlServer.Types.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\BouncyCastle.Crypto.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.pdb
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.Core.pdb
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.Core.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.barcodes.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.forms.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.io.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.kernel.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.layout.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.pdfa.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.sign.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.styledxmlparser.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.svg.xml
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.csprojResolveAssemblyReference.cache
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.csproj.CoreCompileInputs.cache
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.dll
+E:\New Projects\daftechsocial-bsc-full-wc\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.pdb
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\XAPI.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\XAPI.pdb
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.Core.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.barcodes.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.forms.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.io.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.kernel.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.layout.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.pdfa.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.sign.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.styledxmlparser.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.svg.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Microsoft.SqlServer.Types.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\BouncyCastle.Crypto.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.pdb
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.Core.pdb
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\Common.Logging.Core.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.barcodes.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.forms.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.io.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.kernel.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.layout.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.pdfa.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.sign.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.styledxmlparser.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\bin\Debug\itext.svg.xml
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.csprojAssemblyReference.cache
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.csproj.CoreCompileInputs.cache
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.csproj.CopyComplete
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.dll
+C:\Users\Naol\Desktop\New folder (11)\daftechsocial-bsc-full-wc\BSC\XAPI\obj\Debug\XAPI.pdb
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.pdb
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.barcodes.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.forms.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.io.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.kernel.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.layout.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.pdfa.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.sign.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.styledxmlparser.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.svg.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\BouncyCastle.Crypto.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.pdb
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.pdb
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.barcodes.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.forms.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.io.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.kernel.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.layout.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.pdfa.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.sign.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.styledxmlparser.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.svg.xml
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.AssemblyReference.cache
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CoreCompileInputs.cache
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CopyComplete
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.dll
+C:\Users\Hermi\Desktop\office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.pdb
