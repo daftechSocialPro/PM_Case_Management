@@ -1,0 +1,76 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Committee Employees </h5>
+        <button type="button" class="btn-close" id="ModalClose" (click)="closeModal()" aria-label="Close"></button>
+    </div>
+
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title">Comittee Employees Detail</h5>
+            <hr class="divider" />
+
+            <div class="row">
+
+
+                <div class="d-flex  justify-content-around p-2  col-9">
+
+                    <span class="card-title"> {{committee.CommitteeName}}</span>
+
+
+
+                    <!-- <label for="assignactivityto">Assign Activity to</label> -->
+
+                    <div class="form-floating mb-3">
+
+                        <select class="form-select" multiple style="height: 230px;width: 300px;">
+
+                            <!-- <option>--- Select Whom to Assign ---</option> -->
+                            <option value="0"> To Comittee </option>
+                            <option value="1"> To Employees </option>
+                            <option value="2"> To Team Leader </option>
+                        </select>
+
+                    </div>
+
+                    <div class="text-center">
+
+                        <button class="btn btn-outline-success mt-3"> <i class="bi bi-arrow-right-short"
+                                style="font-size: 25px;"></i></button><br> <br>
+
+                        <button class="btn btn-outline-danger"> <i class="bi bi-arrow-left-short"
+                                style="font-size: 25px;"></i> </button>
+
+
+                    </div>
+                    <div class="form-floating mb-3">
+
+                        <select class="form-select" multiple style="height: 230px;width:300px">
+
+                            <!-- <option>--- Select Whom to Assign ---</option> -->
+                            <option value="0"> To Comittee </option>
+                            <option value="1"> To Employees </option>
+                            <option value="2"> To Team Leader </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+                <div style="text-align: left!important;" class="col-3 p-2">
+                    <input type="color" disabled="" value="#dee2e6" style="width:10%;"> &nbsp; <label
+                        class="control-label mb-1">Nominated </label> <br>
+                    <input type="color" disabled="" value="#73e2cc" style="width:10%;"> &nbsp; <label
+                        class="control-label mb-1">Approved </label> <br>
+                    <input type="color" disabled="" value="#f3b2bc" style="width:10%;"> &nbsp; <label
+                        class="control-label">Rejected </label>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -46,6 +46,8 @@ import { PlansComponent } from './pages/PM/plans/plans.component';
 import { TasksComponent } from './pages/PM/tasks/tasks.component';
 import { ActivityParentsComponent } from './pages/pm/activity-parents/activity-parents.component';
 import { EncodeCaseComponent } from './pages/case/encode-case/encode-case.component';
+import { ComittesComponent } from './pages/pm/comittes/comittes.component';
+import { AssignedActivitiesComponent } from './pages/pm/assigned-activities/assigned-activities.component';
 
 
 
@@ -68,8 +70,9 @@ const routes: Routes = [
   { path: 'task',canActivate:[AuthGuard],component:TasksComponent},  
   { path: 'activityparent', canActivate:[AuthGuard],component:ActivityParentsComponent},
   { path: 'encodecase' ,canActivate:[AuthGuard],component : EncodeCaseComponent},
-
-
+  { path: 'comittee' ,canActivate : [AuthGuard],component: ComittesComponent},
+  { path: 'assignedactivities' , canActivate:[AuthGuard], component: AssignedActivitiesComponent },
+  
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
   { path: 'badges', component: BadgesComponent },

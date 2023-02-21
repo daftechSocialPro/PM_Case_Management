@@ -1,3 +1,4 @@
 client/node_modules/
-server/PM_Case_Managemnt_API/bin/
-server/PM_Case_Managemnt_API/.vs
+PM_Case_Managemnt_API/bin/
+PM_Case_Managemnt_API/.vs/
+PM_Case_Managemnt_API/obj/

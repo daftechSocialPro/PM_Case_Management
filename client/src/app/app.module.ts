@@ -82,6 +82,11 @@ import { ActivityParentsComponent } from './pages/pm/activity-parents/activity-p
 import { AddActivitiesComponent } from './pages/pm/activity-parents/add-activities/add-activities.component';
 import { EncodeCaseComponent } from './pages/case/encode-case/encode-case.component';
 import { AddCaseComponent } from './pages/case/encode-case/add-case/add-case.component';
+import { ComittesComponent } from './pages/pm/comittes/comittes.component';
+import { AddComiteeComponent } from './pages/pm/comittes/add-comitee/add-comitee.component';
+import { CommitteeEmployeeComponent } from './pages/pm/comittes/committee-employee/committee-employee.component';
+import { UpdateCpmmitteeComponent } from './pages/pm/comittes/update-cpmmittee/update-cpmmittee.component';
+import { AssignedActivitiesComponent } from './pages/pm/assigned-activities/assigned-activities.component';
 
 
 @NgModule({
@@ -156,7 +161,12 @@ import { AddCaseComponent } from './pages/case/encode-case/add-case/add-case.com
     ActivityParentsComponent,
     AddActivitiesComponent,
     EncodeCaseComponent,
-    AddCaseComponent
+    AddCaseComponent,
+    ComittesComponent,
+    AddComiteeComponent,
+    CommitteeEmployeeComponent,
+    UpdateCpmmitteeComponent,
+    AssignedActivitiesComponent
     
     
   ],
