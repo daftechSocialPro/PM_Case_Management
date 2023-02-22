@@ -1,0 +1,97 @@
+<aside id="sidebar" class="sidebar">
+   <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item"> <a [ngClass]="getUrl()=='/dashboard'?'nav-link ':'nav-link collapsed'"
+            routerLink="/dashboard"> <i class="bi bi-grid"></i>
+            <span>Dashboard</span> </a></li>
+      <li class="nav-item">
+         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#"> <i
+               class="bi bi-menu-button-wide"></i><span>Project Managment</span><i
+               class="bi bi-chevron-down ms-auto"></i> </a>
+         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li> <a routerLink="/program"> <i class="bi bi-circle"></i><span>Programs</span> </a></li>
+            <li> <a routerLink="/plan"> <i class="bi bi-circle"></i><span>Projects</span> </a></li>
+            <li> <a routerLink="/assignedactivities"> <i class="bi bi-circle"></i><span>Assigned Activities</span> </a> </li>
+            <li> <a routerLink="/comittee"> <i class="bi bi-circle"></i><span>Committees</span> </a></li>
+        
+         </ul>
+      </li>
+      <li class="nav-item">
+         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#"> <i
+               class="bi bi-journal-text"></i><span>Case Managment</span><i class="bi bi-chevron-down ms-auto"></i> </a>
+         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+            <li> <a routerLink="/encodecase"> <i class="bi bi-circle"></i><span>Encoded Cases</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Back Logs</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Appointments</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Cases</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Appointments</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>My Cases List</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Archived Cases</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>List of Unsent Messages</span> </a></li>
+
+
+         </ul>
+      </li>
+
+      <li class="nav-item">
+         <a class="nav-link collapsed" data-bs-target="#reports-nav" data-bs-toggle="collapse" href="#"> <i
+               class="bi bi-file-earmark-bar-graph"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
+         </a>
+         <ul id="reports-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+            <li class="nav-heading">Pm Reports</li>
+
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Director level performance</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Program Budget Report</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Plan Report Detail</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Planned Report (GANT)</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Progress Report</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Progress Report By Structure</span></a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Performance Report</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Estimated Coast </span> </a></li>
+
+            <li class="nav-heading">Case Reports</li>
+
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Case Report</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Case Detail Report</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Performance Report</span> </a></li>
+            <li> <a routerLink="/alerts"> <i class="bi bi-circle"></i><span>Case Report</span> </a></li>
+
+         </ul>
+      </li>
+
+      <li class="nav-heading">Common</li>
+
+      <li class="nav-item">
+         <a class="nav-link collapsed" data-bs-target="#Organization" data-bs-toggle="collapse" href="#"> <i
+               class="bi bi-building"></i><span>Organization</span><i class="bi bi-chevron-down ms-auto"></i> </a>
+         <ul id="Organization" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+            <li> <a routerLink="/orgprofile"> <i class="bi bi-circle"></i><span>Profile</span> </a></li>
+            <li> <a routerLink="/orgbranch"> <i class="bi bi-circle"></i><span>Branches</span> </a></li>
+            <li> <a routerLink="/orgstructure"> <i class="bi bi-circle"></i><span>Structures</span> </a></li>
+            <li> <a routerLink="/employee"> <i class="bi bi-circle"></i><span>Employees</span> </a></li>
+
+         </ul>
+      </li>
+      <li class="nav-item"> <a [ngClass]="getUrl()=='/budgetyear'?'nav-link ':'nav-link collapsed'"
+            routerLink="/budgetyear"> <i class="bi bi-calendar-date"></i>
+            <span>Budget Year</span> </a></li>
+
+      <li class="nav-item"> <a class="nav-link collapsed" routerLink="/budgetyear"> <i class="bi bi-journal-text"></i>
+            <span>Standardized Form</span> </a></li>
+
+      <li class="nav-item"> <a [ngClass]="getUrl()=='/archive'?'nav-link ':'nav-link collapsed'" routerLink="/archive">
+            <i class="bi bi-archive"></i>
+            <span>Archive Configuration </span> </a></li>
+
+      <li class="nav-item"> <a class="nav-link collapsed" routerLink="/unitmeasurment"> <i
+               class="bi bi-speedometer2"></i>
+            <span>Unit of Measurment</span> </a></li>
+      <li class="nav-item"> <a class="nav-link collapsed" routerLink="/usermanagement"><i class="bi bi-people"></i>
+            <span>User Management</span> </a></li>
+      <li class="nav-item"> <a class="nav-link collapsed" routerLink="/budgetyear"> <i class="bi bi-phone"></i>
+            <span>Mobile Users</span> </a></li>
+
+   </ul>
+</aside>

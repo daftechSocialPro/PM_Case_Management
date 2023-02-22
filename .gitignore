@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
@@ -40,3 +41,13 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+=======
+client/node_modules/
+client/package-lock.json
+client/package.json
+PM_Case_Managemnt_API/bin/
+PM_Case_Managemnt_API/.vs/
+PM_Case_Managemnt_API/obj/
+PM_Case_Managemnt_API/packages/
+
+>>>>>>> cfb8e89d9d5ec0ac998d7850bffe037f9dcdef16
