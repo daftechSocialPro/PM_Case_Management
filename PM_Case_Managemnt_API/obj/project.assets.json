@@ -4341,19 +4341,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\KIRUB\\.nuget\\packages\\": {}
+    "C:\\Users\\lilis\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\KIRUB\\Desktop\\Desktop\\Projects\\Office Projects\\Diredwa Pm and Case Tracking\\pm_case_management\\PM_Case_Management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
+      "projectUniqueName": "C:\\Users\\lilis\\OneDrive\\Desktop\\Office\\PM_Case_Management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
       "projectName": "PM_Case_Managemnt_API",
-      "projectPath": "C:\\Users\\KIRUB\\Desktop\\Desktop\\Projects\\Office Projects\\Diredwa Pm and Case Tracking\\pm_case_management\\PM_Case_Management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
-      "packagesPath": "C:\\Users\\KIRUB\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\KIRUB\\Desktop\\Desktop\\Projects\\Office Projects\\Diredwa Pm and Case Tracking\\pm_case_management\\PM_Case_Management\\PM_Case_Managemnt_API\\obj\\",
+      "projectPath": "C:\\Users\\lilis\\OneDrive\\Desktop\\Office\\PM_Case_Management\\PM_Case_Managemnt_API\\PM_Case_Managemnt_API.csproj",
+      "packagesPath": "C:\\Users\\lilis\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lilis\\OneDrive\\Desktop\\Office\\PM_Case_Management\\PM_Case_Managemnt_API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\KIRUB\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lilis\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4367,8 +4367,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\KIRUB\\Desktop\\Desktop\\Projects\\Office Projects\\Diredwa Pm and Case Tracking\\pm_case_management\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj": {
-              "projectPath": "C:\\Users\\KIRUB\\Desktop\\Desktop\\Projects\\Office Projects\\Diredwa Pm and Case Tracking\\pm_case_management\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj"
+            "C:\\Users\\lilis\\OneDrive\\Desktop\\Office\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj": {
+              "projectPath": "C:\\Users\\lilis\\OneDrive\\Desktop\\Office\\PM_Case_Management\\PM_Case_Managemnt_API\\XAPI\\XAPI.csproj"
             }
           }
         }
@@ -4437,7 +4437,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }
