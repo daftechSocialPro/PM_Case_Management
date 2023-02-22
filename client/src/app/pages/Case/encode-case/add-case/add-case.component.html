@@ -4,130 +4,50 @@
         <button type="button" class="btn-close" id="ModalClose" (click)="closeModal()" aria-label="Close"></button>
     </div>
 
-    <div class="card">
+    <div class="card" >
 
         <div class="card-body">
             <h5 class="card-title">Case Detail</h5>
 
+      
+
+                <form class="" [formGroup]="caseForm" (ngSubmit)="submit()">
+                    <div class="modal-body">
+                        <div class="row g-3">
 
 
-            <form class="" [formGroup]="caseForm" (ngSubmit)="submit()">
-                <div class="modal-body">
-                    <div class="row g-3">
-
-
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="CaseNumber" placeholder="CaseNumber"
-                                    formControlName="CaseNumber">
-                                <label for="CaseNumber">Case Number</label>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="CaseNumber" placeholder="CaseNumber"
+                                        formControlName="CaseNumber">
+                                    <label for="CaseNumber">Case Number</label>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="LetterNumber" placeholder="LetterNumber"
-                                    formControlName="LetterNumber">
-                                <label for="LetterNumber">Letter Number</label>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="LetterNumber"  placeholder="LetterNumber"
+                                        formControlName="LetterNumber">
+                                    <label for="LetterNumber">Letter Number</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating mb-3">
-                                <select class="form-select" id="ProjectType" formControlName="Applicant"
-                                    aria-label="State">
 
-                                    <option></option>
-                                    <option value="0">Capital</option>
-                                    <option value="1">Regular</option>
-
-                                </select>
-                                <label for="Applicant">Applicant </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <span style="font-size:20px;align-self: center;" class="badge bg-success"><i
-                                    class="bi bi-plus"></i></span>
+                       
+                      
 
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="LetterNumber" placeholder="LetterNumber"
-                                    formControlName="LetterNumber">
-                                <label for="LetterNumber">Subject</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating mb-3">
-                                <select class="form-select" id="ProjectType" formControlName="ProjectType"
-                                    aria-label="State">
-
-                                    <option></option>
-                                    <option value="0">Capital</option>
-                                    <option value="1">Regular</option>
-
-                                </select>
-                                <label for="ProjectType">OutSide Case Type </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="LetterNumber" placeholder="LetterNumber"
-                                    formControlName="LetterNumber">
-                                <label for="LetterNumber">Phone Number 2 </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="LetterNumber" placeholder="LetterNumber"
-                                    formControlName="LetterNumber">
-                                <label for="LetterNumber">Representative</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 ">
-                            <label for="inputNumber" class="col-sm-12 col-form-label">Document</label>
-                            <div class="col-sm-12"> <input class="form-control" type="file" id="formFile"></div>
-                        </div>
-
-                        <div class="col-md-8">
-                            <label for="inputNumber" class="col-sm-12 col-form-label">Additional Files</label>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">File Name</th>
-                                        <th scope="col">Files /Statments</th>
-                                        <th scope="col">Document Checked</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-
-
-
-                        </div>
-
-
-
 
                     </div>
-
-                </div>
-                <div class="modal-footer"> <button type="button" class="btn btn-secondary"
-                        (click)="closeModal()">Close</button>
-                    <button type="button" type="submit" [disabled]="!caseForm.valid"
-                        class="btn btn-success">Create</button>
-                </div>
-            </form>
+                    <div class="modal-footer"> <button type="button" class="btn btn-secondary"
+                            (click)="closeModal()">Close</button>
+                        <button type="button" type="submit" [disabled]="!caseForm.valid"
+                            class="btn btn-success">Create</button>
+                    </div>
+                </form>
 
 
-
-
+              
+            
 
 
         </div>

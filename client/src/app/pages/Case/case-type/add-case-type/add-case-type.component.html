@@ -1,0 +1,94 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Add Case Type</h5>
+        <button type="button" class="btn-close" id="ModalClose" (click)="closeModal()" aria-label="Close"></button>
+    </div>
+
+    <div class="card" >
+
+        <div class="card-body">
+                <form class=""  (ngSubmit)="submit()">
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    
+                                    <input type="text" class="form-control" id="CaseTypeTittle" 
+                                        formControlName="CaseTypeTittle">
+                                        <label for="CaseTypeTittle">Case Type Tittle</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="TotalPayment"  placeholder="Enter only numbers"
+                                        formControlName="TotalPayment">
+                                    <label for="TotalPayment">Total Payment</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="TotaLength" placeholder="Enter only numbers"
+                                        formControlName="TotaLength">
+                                    <label for="TotaLength">Total Length</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select" id="MesurementUnit" 
+                                        formControlName="MesurementUnit">
+                                        <option value="0">Minutes</option>
+                                        <option value="1">Hours</option>
+                                        <option value="2">Days</option>
+
+                                    </select>
+                                    <label for="MesurementUnit">Mesurement Unit</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="SMSCode"  formControlName="SMSCode">
+                                    <label for="SMSCode">SMS Code</label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select" id="casetype" #activity
+                                        formControlName="casetype">
+                                        <option value="0">Inside Case</option>
+                                        <option value="1">Outside Case</option>
+                                    </select>
+                                    <label for="casetype">Case Type</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating"><textarea class="form-control" formControlName="Remark"
+                                        placeholder="Address" id="Remark" style="height: 100px;"></textarea><label
+                                        for="Remark">Remark</label>
+                                </div>
+                            </div>
+
+                       
+                      
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer"> <button type="button" class="btn btn-secondary"
+                            (click)="closeModal()">Close</button>
+                        <button type="button" type="submit" [disabled]="!caseForm.valid"
+                            class="btn btn-success">Create</button>
+                    </div>
+                </form>
+
+
+              
+            
+
+
+        </div>
+    </div>
+
+</div>

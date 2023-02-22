@@ -48,7 +48,8 @@ import { ActivityParentsComponent } from './pages/pm/activity-parents/activity-p
 import { EncodeCaseComponent } from './pages/case/encode-case/encode-case.component';
 import { ComittesComponent } from './pages/pm/comittes/comittes.component';
 import { AssignedActivitiesComponent } from './pages/pm/assigned-activities/assigned-activities.component';
-
+import { CaseTypeComponent } from './pages/case/case-type/case-type.component';
+import { FileSettingComponent } from './pages/case/file-setting/file-setting.component';
 
 
 
@@ -72,6 +73,8 @@ const routes: Routes = [
   { path: 'encodecase' ,canActivate:[AuthGuard],component : EncodeCaseComponent},
   { path: 'comittee' ,canActivate : [AuthGuard],component: ComittesComponent},
   { path: 'assignedactivities' , canActivate:[AuthGuard], component: AssignedActivitiesComponent },
+  { path: 'casetype' ,canActivate:[AuthGuard],component : CaseTypeComponent},
+  { path: 'filesetting' ,canActivate:[AuthGuard],component : FileSettingComponent},
   
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
