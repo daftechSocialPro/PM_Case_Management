@@ -1,0 +1,56 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Add Case</h5>
+        <button type="button" class="btn-close" id="ModalClose" (click)="closeModal()" aria-label="Close"></button>
+    </div>
+
+    <div class="card" >
+
+        <div class="card-body">
+            <h5 class="card-title">Case Detail</h5>
+
+      
+
+                <form class="" [formGroup]="caseForm" (ngSubmit)="submit()">
+                    <div class="modal-body">
+                        <div class="row g-3">
+
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="CaseNumber" placeholder="CaseNumber"
+                                        formControlName="CaseNumber">
+                                    <label for="CaseNumber">Case Number</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="LetterNumber"  placeholder="LetterNumber"
+                                        formControlName="LetterNumber">
+                                    <label for="LetterNumber">Letter Number</label>
+                                </div>
+                            </div>
+
+                       
+                      
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer"> <button type="button" class="btn btn-secondary"
+                            (click)="closeModal()">Close</button>
+                        <button type="button" type="submit" [disabled]="!caseForm.valid"
+                            class="btn btn-success">Create</button>
+                    </div>
+                </form>
+
+
+              
+            
+
+
+        </div>
+    </div>
+
+</div>

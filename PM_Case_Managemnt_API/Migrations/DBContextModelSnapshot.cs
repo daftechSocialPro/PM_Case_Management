@@ -1321,7 +1321,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("CommitesEmployees");
+                    b.ToTable("CommiteEmployees");
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.EmployeesAssignedForActivities", b =>
@@ -1637,6 +1637,8 @@ namespace PMCaseManagemntAPI.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("TaskMemos");
                 });
@@ -2063,6 +2065,17 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Navigation("Plan");
 
                     b.Navigation("Task");
+                });
+
+            modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.TaskMemo", b =>
+                {
+                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.Case", b =>

@@ -3,6 +3,7 @@ using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.DTOS.PM;
 using PM_Case_Managemnt_API.Models.PM;
+using System.Collections.Immutable;
 
 namespace PM_Case_Managemnt_API.Services.PM.Commite
 {
@@ -32,7 +33,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Commite
 
         public async Task<List<CommiteListDto>> GetCommiteLists()
         {
-            var commites = await (from t in _dBContext.Commitees.AsNoTracking()
+            return  await (from t in _dBContext.Commitees.Include(x=>x.employee).AsNoTracking()
                          select new CommiteListDto
                          {
                              Id = t.Id,
@@ -41,21 +42,24 @@ namespace PM_Case_Managemnt_API.Services.PM.Commite
                              EmployeeList = t.Employees.Select(e => new SelectListDto
                              {
                                  Name = e.Employee.FullName,
-                                 Id= e.Id,
-                             }).ToList()
+                                 CommiteeStatus = e.CommiteeEmployeeStatus,
+                                 Id = e.Employee.Id,
+                             }).ToList(),
+                             Remark = t.Remark
                          }).ToListAsync();
 
-            return commites;
+            
         }
 
         public async Task<List<SelectListDto>> GetNotIncludedEmployees(Guid CommiteId)
         {
             var EmployeeSelectList = await (from e in _dBContext.Employees
+                                            join es in _dBContext.EmployeesStructures.Include(x=>x.OrganizationalStructure) on e.Id equals es.EmployeeId
                                             where !(_dBContext.CommiteEmployees.Where(x => x.CommiteeId.Equals(CommiteId)).Select(x => x.EmployeeId).Contains(e.Id))
                                             select new SelectListDto
                                             {
                                                 Id = e.Id,
-                                                Name = e.FullName
+                                                Name = e.FullName +" ( "+ es.OrganizationalStructure.StructureName +" ) "
 
                                             }).ToListAsync();
 
@@ -75,6 +79,47 @@ namespace PM_Case_Managemnt_API.Services.PM.Commite
                 return 1;
             }
             return 0;
+        }
+
+        public async Task<int> AddEmployeestoCommitte(CommiteEmployeesdto commiteEmployeesdto)
+        {
+
+            foreach (var c in commiteEmployeesdto.EmployeeList)
+            {
+
+                var committeeemployee = new CommitesEmployees
+                {
+                    Id = Guid.NewGuid(),
+                    CommiteeId = commiteEmployeesdto.CommiteeId,
+                    EmployeeId = c,
+                    CreatedAt=DateTime.Now,
+                    CreatedBy = commiteEmployeesdto.CreatedBy
+
+                };
+
+              await  _dBContext.AddAsync(committeeemployee);
+              await  _dBContext.SaveChangesAsync();
+
+             }
+
+            return 1;
+
+        }
+        public async Task<int> RemoveEmployeestoCommitte(CommiteEmployeesdto commiteEmployeesdto)
+        {
+
+            foreach (var c in commiteEmployeesdto.EmployeeList)
+            {
+
+                var emp = _dBContext.CommiteEmployees.Where(x => x.CommiteeId == commiteEmployeesdto.CommiteeId && x.EmployeeId == c);
+
+                _dBContext.RemoveRange(emp);
+             await   _dBContext.SaveChangesAsync();
+
+            }
+
+            return 1;
+
         }
     }
 }
