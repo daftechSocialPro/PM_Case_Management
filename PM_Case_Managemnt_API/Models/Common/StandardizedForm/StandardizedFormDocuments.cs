@@ -2,7 +2,7 @@
 {
     public class StandardizedFormDocuments:CommonModel
     {
-        public string DocName { get; set; }
-        public string DocPath { get; set; }
+        public string DocName { get; set; } = null!;
+        public string DocPath { get; set; } = null!;
     }
 }

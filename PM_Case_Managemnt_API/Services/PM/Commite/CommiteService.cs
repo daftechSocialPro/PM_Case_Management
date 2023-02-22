@@ -37,8 +37,8 @@ namespace PM_Case_Managemnt_API.Services.PM.Commite
                          {
                              Id = t.Id,
                              Name= t.CommiteeName,
-                             NoOfEmployees = t.employee.Count(),
-                             EmployeeList = t.employee.Select(e => new SelectListDto
+                             NoOfEmployees = t.Employees.Count(),
+                             EmployeeList = t.Employees.Select(e => new SelectListDto
                              {
                                  Name = e.Employee.FullName,
                                  Id= e.Id,

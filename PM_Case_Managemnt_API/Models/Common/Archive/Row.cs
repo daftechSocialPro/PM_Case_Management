@@ -2,6 +2,6 @@
 {
     public class Row : CommonModel
     {
-        public string RowNumber { get; set; }
+        public string RowNumber { get; set; } = null!;
     }
 }

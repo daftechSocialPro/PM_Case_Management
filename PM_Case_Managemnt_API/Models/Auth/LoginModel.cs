@@ -7,7 +7,7 @@ namespace PM_Case_Managemnt_API.Models.Auth
 {
     public class LoginModel
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public string UserName { get; set; } = null!;
+        public string Password { get; set; } = null!;
     }
 }

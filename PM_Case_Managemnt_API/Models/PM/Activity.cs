@@ -4,22 +4,19 @@ using System.ComponentModel.DataAnnotations;
 
 using System.Collections.Generic;
 using PM_Case_Managemnt_API.Models.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PM_Case_Managemnt_API.Models.PM
 {
     public class Activity : CommonModel
     {
 
-        //public Activity()
-        //{
-        //    Progress = new HashSet<ActivityProgress>();
-        //    itemActivity = new HashSet<ItemActivity>();
-        //    assignedEmploye = new HashSet<EmployeesAssignedForActivities>();
-        //    targetdivison = new HashSet<ActivityTargetDivision>();
-        //}
-
-
-
+        public Activity()
+        {
+            ActProgress = new HashSet<ActivityProgress>();
+            AssignedEmploye = new HashSet<EmployeesAssignedForActivities>();
+            ActivityTargetDivisions = new HashSet<ActivityTargetDivision>();
+        }
 
         public string ActivityDescription { get; set; } = null!;
 
@@ -38,11 +35,11 @@ namespace PM_Case_Managemnt_API.Models.PM
         public Status Status { get; set; }
 
         public Guid? CommiteeId { get; set; }
-        //   public virtual Commitees Commitee { get; set; }
+        public virtual Commitees Commitee { get; set; } = null!;
 
 
         public Guid UnitOfMeasurementId { get; set; }
-        // public virtual UnitOfMeasurment UnitOfMeasurement { get; set; }
+        public virtual UnitOfMeasurment UnitOfMeasurement { get; set; } = null!;
 
         public float Weight { get; set; }
 
@@ -64,15 +61,24 @@ namespace PM_Case_Managemnt_API.Models.PM
         public Boolean PostToCase { get; set; }
 
         public Guid? EmployeeId { get; set; }
-        // public virtual Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; } = null!; 
 
         public Guid? PlanId { get; set; }
-        //public virtual Plan Plan { get; set; }
+        public virtual Plan Plan { get; set; } = null!;
         public Guid? TaskId { get; set; }
-        // public virtual Task Task { get; set; }
+        public virtual Task Task { get; set; } = null!;
         public Guid? ActivityParentId { get; set; }
-        // public virtual ActivityParent ActivityParent { get; set; }
+        public virtual ActivityParent ActivityParent { get; set; } = null!;
 
+
+        [NotMapped]
+        public ICollection<ActivityProgress> ActProgress { get; set; }
+
+        [NotMapped]
+        public ICollection<EmployeesAssignedForActivities> AssignedEmploye { get; set; }
+
+        [NotMapped]
+        public ICollection<ActivityTargetDivision> ActivityTargetDivisions { get; set; }
 
     }
 

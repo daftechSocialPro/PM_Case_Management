@@ -2,15 +2,15 @@
 {
     public class OrganizationalStructure :CommonModel
     {
-        public virtual OrganizationBranch OrganizationBranch { get; set; }
+        public virtual OrganizationBranch OrganizationBranch { get; set; } = null!;
 
         public Guid OrganizationBranchId { get; set; }
 
 
         public Guid? ParentStructureId { get; set; }
-        public virtual OrganizationalStructure ParentStructure { get; set; }
+        public virtual OrganizationalStructure ParentStructure { get; set; } = null!;
 
-        public string StructureName { get; set; }
+        public string StructureName { get; set; } = null!;
 
         public int Order { get; set; }
 

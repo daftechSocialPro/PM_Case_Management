@@ -8,7 +8,7 @@ namespace PM_Case_Managemnt_API.Models.PM
     {
 
         public Guid ActivityProgressId { get; set; }
-        public virtual ActivityProgress ActivityProgress { get; set; }
-        public string FilePath { get; set; }
+        public virtual ActivityProgress ActivityProgress { get; set; } = null!;
+        public string FilePath { get; set; } = null!;
     }
 }

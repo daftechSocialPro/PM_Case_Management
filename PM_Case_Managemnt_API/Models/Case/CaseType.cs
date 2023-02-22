@@ -1,7 +1,7 @@
 ﻿
 using PM_Case_Managemnt_API.Models.Common;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PM_Case_Managemnt_API.Models.CaseModel
 {
@@ -12,24 +12,24 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         {
             Childrens = new HashSet<CaseType>();
         }
-     
-        public string CaseTypeTitle { get; set; }
-    
 
-        public string Code { get; set; }
+        public string CaseTypeTitle { get; set; } = null!;
+
+
+        public string Code { get; set; } = null!;
        
 
         public float TotlaPayment { get; set; }
      
         public float Counter { get; set; }
         public Guid? ParentCaseTypeId { get; set; }
-        public virtual CaseType ParentCaseType { get; set; }
+        public virtual CaseType ParentCaseType { get; set; } = null!;
         public int? OrderNumber { get; set; }
-
-        public virtual ICollection<CaseType> Childrens { get; set; }
         public TimeMeasurement MeasurementUnit { get; set; }
         public CaseForm CaseForm { get; set; }
 
+        [NotMapped]
+        public virtual ICollection<CaseType> Childrens { get; set; }
 
     }
 

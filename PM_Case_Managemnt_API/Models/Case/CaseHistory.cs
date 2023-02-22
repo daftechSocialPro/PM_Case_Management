@@ -2,17 +2,17 @@
 
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PM_Case_Managemnt_API.Models.CaseModel
 {
     public class CaseHistory : CommonModel
     {
-        
         public CaseHistory()
         {
             Attachments = new HashSet<CaseHistoryAttachment>();
         }
 
-  
         public Guid CaseId { get; set; }
         public virtual Case Case { get; set; }
         public Guid? CaseTypeId { get; set; }
@@ -44,7 +44,6 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         public DateTime? RevertedAt { get; set; }
       
         public ReciverType ReciverType { get; set; }    
- 
      
         public string Document { get; set; }
         public bool IsSmsSent { get; set; }
@@ -56,7 +55,8 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         public DateTime? ForwardedDateTime { get; set; }
         public Guid? ForwardedById { get; set; }
         public virtual Employee ForwardedBy { get; set; }
-     
+
+        [NotMapped]
         public virtual ICollection<CaseHistoryAttachment> Attachments { get; set; }
     }
 

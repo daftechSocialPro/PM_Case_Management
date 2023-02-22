@@ -7,10 +7,10 @@ namespace PM_Case_Managemnt_API.Models.PM
     {
 
         public Guid EmployeeId { get; set; }
-        public virtual Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; } = null!;
 
         public Guid ActivityId { get; set; }
-        public virtual Activity Activity { get; set; }
+        public virtual Activity Activity { get; set; } = null!;
 
 
     }

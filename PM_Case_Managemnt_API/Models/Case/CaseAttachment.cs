@@ -7,8 +7,8 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
     {
 
         public Guid CaseId { get; set; }
-        public virtual Case Case { get; set; }
-        public string FilePath { get; set; }
+        public virtual Case Case { get; set; } = null!;
+        public string FilePath { get; set; } = null!;
 
 
     }

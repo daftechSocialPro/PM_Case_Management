@@ -1,5 +1,5 @@
 ﻿using PM_Case_Managemnt_API.Models.Common;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PM_Case_Managemnt_API.Models.CaseModel
 { 
@@ -37,9 +37,11 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         public bool IsArchived { get; set; }
 
         public bool SMSStatus { get; set; }
-      
+
+        [NotMapped]
         public virtual ICollection<CaseHistory> CaseHistories { get; set; }
-  
+
+        [NotMapped]
         public virtual ICollection<CaseHistoryAttachment> CaseAttachments { get; set; }
     }
 

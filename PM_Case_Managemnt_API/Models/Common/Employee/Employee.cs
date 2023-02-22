@@ -4,20 +4,15 @@ namespace PM_Case_Managemnt_API.Models.Common
 {
     public class Employee : CommonModel
     {
+        public string Photo { get; set; } = null!;
 
-    
-        public string Photo { get; set; }
+        public string Title { get; set; } = null!;
 
-        public string Title { get; set; }
-
-        public string FullName { get; set; }
+        public string FullName { get; set; } = null!;
 
         public Gender Gender { get; set; }
 
-        public string PhoneNumber { get; set; }
-
-
-
+        public string PhoneNumber { get; set; } = null!;
     }
 
     public enum Gender
