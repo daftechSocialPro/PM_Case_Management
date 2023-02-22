@@ -13,7 +13,7 @@ namespace PM_Case_Managemnt_API.Models.PM
         }
         public string CommiteeName { get; set; } = null!;
 
-        [NotMapped]
+        
         public virtual ICollection<CommitesEmployees> Employees { get; set; }
 
     }

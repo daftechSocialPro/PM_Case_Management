@@ -81,6 +81,8 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public List<SelectListDto> TaskMembers { get; set; }
         public List<TaskMemoDto> TaskMemos { get; set; }
 
+        public List<ActivityViewDto> ActivityViewDtos { get; set; }
+
         public bool HasActivity { get; set; }
 
         public float PlannedBudget { get; set; }

@@ -10,6 +10,7 @@ using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.Models.Auth;
 using PM_Case_Managemnt_API.Services.Common;
 using PM_Case_Managemnt_API.Services.PM;
+using PM_Case_Managemnt_API.Services.PM.Activity;
 using PM_Case_Managemnt_API.Services.PM.Commite;
 using PM_Case_Managemnt_API.Services.PM.Plan;
 using PM_Case_Managemnt_API.Services.PM.Program;
@@ -67,6 +68,7 @@ builder.Services.AddScoped<IProgramService, ProgramService>();
 builder.Services.AddScoped<IPlanService, PlanService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<ICommiteService, CommiteService>();
+builder.Services.AddScoped<IActivityService, ActivityService>();
 
 
 //Jwt Authentication

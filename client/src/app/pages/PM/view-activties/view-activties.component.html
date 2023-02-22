@@ -4,15 +4,92 @@
 
         <div class="card-title">
 
+            {{actView.Name}}
+
+            
+
         </div>
     </div>
     <div class="card-body">
 
+        <div class="d-flex justify-content-between col-6 p-2 m-2"  >
+
+            <div>
+                <span> Planned Budget : </span> {{actView.PlannedBudget}} ETB <br/>
+
+                <span> Activity Type : </span> {{actView.ActivityType}} <br/>
+         
+                <span> Weight :</span> {{actView.Weight}} % <br/>
+
+            </div>
+            <div>
+                  
+        
+        <span>Begining :</span>  {{actView.Beginning}} <br/>
+        
+        <span>Target :</span> {{actView.Target}} <br/>
+        
+        <span>Unit Measurment: </span> {{actView.UnitMeasurment}} 
+
+
+
+            </div>
+
+        </div>
+
+   
+
+        <table class="table table-bordered">
+            <thead>
+               <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Position</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Start Date</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <th scope="row">1</th>
+                  <td>Brandon Jacob</td>
+                  <td>Designer</td>
+                  <td>28</td>
+                  <td>2016-05-25</td>
+               </tr>
+               <tr>
+                  <th scope="row">2</th>
+                  <td>Bridie Kessler</td>
+                  <td>Developer</td>
+                  <td>35</td>
+                  <td>2014-12-05</td>
+               </tr>
+               <tr>
+                  <th scope="row">3</th>
+                  <td>Ashleigh Langosh</td>
+                  <td>Finance</td>
+                  <td>45</td>
+                  <td>2011-08-12</td>
+               </tr>
+          
+            </tbody>
+         </table>
+
+       
         
 
     </div>
 
     <div class="card-footer">
+
+        <span>
+            Activity Overall Performance
+        </span>
+        : 25 % 
+        <div class="progress mt-3">
+            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
+               style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+         </div>
 
     </div>
 

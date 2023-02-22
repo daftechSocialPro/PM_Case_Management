@@ -53,7 +53,7 @@ namespace PM_Case_Managemnt_API.Services.Common
                                               select new SelectListDto
                                               {
                                                   Id = x.Id,
-                                                  Name = x.Name + (x.LocalName)
+                                                  Name = x.Name + " ( "+x.LocalName+" ) "
 
                                               }).ToListAsync();
 

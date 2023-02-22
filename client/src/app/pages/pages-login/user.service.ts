@@ -64,7 +64,7 @@ export class UserService {
 
   getCurrentUser(){
     var payLoad = JSON.parse(window.atob(sessionStorage.getItem('token')!.split('.')[1]));
-    console.log(payLoad)
+
     let user : UserView={
       UserID : payLoad.UserID,
       FullName: payLoad.FullName,

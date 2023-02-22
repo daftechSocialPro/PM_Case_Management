@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
+import { ActivityDetailDto } from './activity-parents/add-activities/add-activities';
 import { ComiteeAdd, CommiteeAddEmployeeView, CommitteeView } from './comittes/committee';
 
 
@@ -28,6 +29,11 @@ export class PMService {
         return this.http.get<CommitteeView[]>(this.BaseURI + "/Commite")
     }
 
+    getComitteeSelectList (){
+
+        return this.http.get<SelectList[]>(this.BaseURI+"/Commite/getSelectListCommittee")
+    }
+
     getNotIncludedEmployees(CommiteId:string) {
 
         return this.http.get<SelectList[]>(this.BaseURI + "/Commite/getNotIncludedEmployees?CommiteId="+CommiteId)
@@ -39,6 +45,13 @@ export class PMService {
     removeEmployesInCommitee(value: CommiteeAddEmployeeView) {
         return this.http.post(this.BaseURI + "/Commite/removeEmployesInCommitee", value)
     }
+
+    /// Activity Parent 
+
+    addActivityParent(activity: ActivityDetailDto) {
+        return this.http.post (this.BaseURI+"/Activity",activity)
+    }
+
 
 
 }

@@ -19,9 +19,9 @@ export class AddCaseComponent implements OnInit {
     private activeModal : NgbActiveModal,
     private formBuilder :FormBuilder,
     private commonService : CommonService,
-    private caseService : CaseService
-    
-    ){
+    private caseService : CaseService    
+    )
+    {
 
 this.caseForm = this.formBuilder.group({
   CaseNumber : ['',Validators.required],

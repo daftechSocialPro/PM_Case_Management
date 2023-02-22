@@ -24,7 +24,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
             activityParent.HasActivity = activityDetail.HasActivity;
             activityParent.TaskId = activityDetail.TaskId;
             await _dBContext.AddAsync(activityParent);
-            await _dBContext.SaveChangesAsync();
+          
 
             foreach (var item in activityDetail.ActivityDetails)
             {
@@ -36,7 +36,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                 activity.CreatedBy = activityParent.CreatedBy;
                 activity.ActivityParentId = activityParent.Id;
                 activity.ActivityDescription = item.SubActivityDesctiption;
-                activity.ActivityType = item.ActivityType;
+                activity.ActivityType =  item.ActivityType==0 ?ActivityType.Office_Work:ActivityType.Fild_Work;
                 activity.Begining = item.PreviousPerformance;
                 if (item.CommiteeId != null)
                 {
@@ -63,7 +63,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                     activity.ShouldEnd = ShouldEnd;
                 }
                await _dBContext.Activities.AddAsync(activity);
-               await  _dBContext.SaveChangesAsync();
+               await _dBContext.SaveChangesAsync();
                 if (item.Employees != null)
                 {
                     foreach (var employee in item.Employees)
@@ -88,6 +88,8 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
 
             }
 
+           
+
             var Task = await _dBContext.Tasks.FirstOrDefaultAsync(x => x.Id.Equals(activityDetail.TaskId));
             if (Task != null)
             {
@@ -95,22 +97,25 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                 if (plan != null)
                 {
                     var ActParent = _dBContext.ActivityParents.Find(activityParent.Id);
-                    if(ActParent != null)
+                    var Activities = _dBContext.Activities.Where(x => x.ActivityParentId == activityParent.Id);
+                    if(ActParent != null && Activities!=null)
                     {
-                        ActParent.ShouldStartPeriod = ActParent.Activities.Min(x => x.ShouldStat);
-                        ActParent.ShouldEnd = ActParent.Activities.Max(x => x.ShouldEnd);
-                        ActParent.Weight = ActParent.Activities.Sum(x => x.Weight);
+                        ActParent.ShouldStartPeriod = Activities.Min(x => x.ShouldStat);
+                        ActParent.ShouldEnd = Activities.Max(x => x.ShouldEnd);
+                        ActParent.Weight = Activities.Sum(x => x.Weight);
                         _dBContext.SaveChanges();
                     }
-                    if (Task != null)
+                    var ActParents = _dBContext.ActivityParents.Where(x => x.TaskId == Task.Id).ToList();
+                    if (Task != null && ActParents != null)
                     {
-                        Task.ShouldStartPeriod = Task.ActivitiesParents.Min(x => x.ShouldStartPeriod);
-                        Task.ShouldEnd = Task.ActivitiesParents.Max(x => x.ShouldEnd);
-                        Task.Weight = Task.ActivitiesParents.Sum(x => x.Weight);
+                        Task.ShouldStartPeriod = ActParents.Min(x => x.ShouldStartPeriod);
+                        Task.ShouldEnd = ActParents.Max(x => x.ShouldEnd);
+                        Task.Weight = ActParents.Sum(x => x.Weight);
                         _dBContext.SaveChanges();
                     }
-                    plan.PeriodStartAt = plan.Tasks.Min(x => x.ShouldStartPeriod);
-                    plan.PeriodEndAt = plan.Tasks.Max(x => x.ShouldEnd);
+                    var tasks = _dBContext.Tasks.Where(x => x.PlanId == plan.Id).ToList();
+                    plan.PeriodStartAt = tasks.Min(x => x.ShouldStartPeriod);
+                    plan.PeriodEndAt = tasks.Max(x => x.ShouldEnd);
                     _dBContext.SaveChanges();
                 }
             }

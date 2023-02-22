@@ -14,7 +14,7 @@ export interface ActivityView {
     StartDate : string ,
     EndDate : string,
     Members : SelectList[]
-    MonthPerformance : MonthPerformanceView[]
+    MonthPerformance ?: MonthPerformanceView[]
 
 
 }

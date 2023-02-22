@@ -33,7 +33,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Commite
 
         public async Task<List<CommiteListDto>> GetCommiteLists()
         {
-            return  await (from t in _dBContext.Commitees.Include(x=>x.employee).AsNoTracking()
+            return  await (from t in _dBContext.Commitees.Include(x=>x.Employees).AsNoTracking()
                          select new CommiteListDto
                          {
                              Id = t.Id,
@@ -121,5 +121,19 @@ namespace PM_Case_Managemnt_API.Services.PM.Commite
             return 1;
 
         }
+
+        public async Task<List<SelectListDto>> GetSelectListCommittee()
+        {
+
+            return await (from c in _dBContext.Commitees
+                          select new SelectListDto
+                          {
+                              Id = c.Id,
+                              Name= c.CommiteeName
+                          }).ToListAsync();
+        }
+
+
+
     }
 }

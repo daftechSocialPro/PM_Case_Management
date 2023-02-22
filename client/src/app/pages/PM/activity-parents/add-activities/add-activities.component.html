@@ -25,21 +25,21 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text"  class="form-control stdate" id="StartDate" placeholder="StartDate"
-                                            formControlName="StartDate">
+                                        <input type="text" class="form-control stdate" id="StartDate"
+                                            placeholder="StartDate" >
                                         <label for="StartDate">Start Date</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="EndDate" placeholder="EndDate"
-                                            formControlName="EndDate">
+                                            >
                                         <label for="EndDate">End Date</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="EndDate" placeholder="EndDate"
+                                        <input type="number" class="form-control" id="PlannedBudget" placeholder="EndDate"
                                             formControlName="PlannedBudget">
                                         <label for="PlannedBudget">Planned Budget</label>
                                     </div>
@@ -75,16 +75,17 @@
                                 <div class="col-md-6" *ngIf="activity.value=='0'">
                                     <div class="form-floating">
                                         <input type="number" class="form-control" id="FieldWOrk" placeholder="FieldWOrk"
-                                            formControlName="FieldWOrk">
+                                            formControlName="FieldWork">
                                         <label for="FieldWOrk">Field WOrk</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3">
                                         <select class="form-select" id="UnitofMeasurment"
-                                            formControlName="UnitofMeasurment">
+                                            formControlName="UnitOfMeasurement">
 
-                                            <option>--- Select Unit of Measurment ---</option>
+                                            <option *ngFor="let um of unitMeasurments" value={{um.Id}}>{{um.Name}}
+                                            </option>
 
                                         </select>
                                         <label for="UnitofMeasurment">Unit of Measurment </label>
@@ -94,21 +95,22 @@
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="number" class="form-control" id="Performance"
-                                            placeholder="Performance" formControlName="Performance">
+                                            placeholder="Performance" formControlName="PreviousPerformance">
                                         <label for="Performance">Performance</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="number" class="form-control" id="Target" placeholder="Target"
-                                            formControlName="Target">
+                                            formControlName="Goal">
                                         <label for="Target">Target</label>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" id="assignactivityto" formControlName="WhomToAssign" #assign>
+                                        <select class="form-select" id="assignactivityto" formControlName="WhomToAssign"
+                                            #assign>
 
                                             <option>--- Select Whom to Assign ---</option>
                                             <option value="0"> To Comittee </option>
@@ -120,8 +122,8 @@
                                 </div>
                                 <div class="col-md-6" *ngIf="assign.value=='0'">
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" id="comiteee">
-                                            <option>--- Select Comittee ---</option>
+                                        <select class="form-select" id="comiteee" formControlName="CommiteeId">
+                                            <option *ngFor="let c of committees" value={{c.Id}}>{{c.Name}}</option>
                                         </select>
                                         <label for="comiteee">Comittee</label>
                                     </div>
@@ -129,10 +131,10 @@
                                 <div class="col-md-6" *ngIf="assign.value=='1'">
                                     <div class="form-floating mb-3">
                                         <div class="mb-4">
-                                           
-                                            <select class="form-select" id="employees" multiple>
-                                                <option *ngFor="let emp of task.TaskMembers">{{emp.Name}}</option>
-                                            </select>                                         
+
+                                            <select class="form-select" formControlName="AssignedEmployee" id="employees" multiple>
+                                                <option *ngFor="let emp of task.TaskMembers" value={{emp.EmployeeId}}>{{emp.Name}}</option>
+                                            </select>
 
                                         </div>
                                     </div>
@@ -161,7 +163,7 @@
                                 <span>Remaining Task Weight :{{task.TaskWeight}} %</span>
                             </div>
                         </div>
-                        
+
                     </div>
 
                 </div>
