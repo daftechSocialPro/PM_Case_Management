@@ -58,6 +58,11 @@ export class ComittesComponent implements OnInit {
   update(value : CommitteeView){
 
     let modalRef = this.modalService.open(UpdateCpmmitteeComponent,{size:'md',backdrop:'static'})
+    modalRef.componentInstance.comitee = value
+    modalRef.result.then(()=>{
+
+      this.listCommittee()
+    })
   }
 
 

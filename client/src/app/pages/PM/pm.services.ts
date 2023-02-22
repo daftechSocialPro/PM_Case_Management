@@ -19,6 +19,10 @@ export class PMService {
 
         return this.http.post(this.BaseURI + "/Commite", ComiteeAdd)
     }
+    updateComittee(comiteeAdd:ComiteeAdd){
+
+        return this.http.put(this.BaseURI+"/Commite",comiteeAdd)
+    }
 
     getComittee() {
         return this.http.get<CommitteeView[]>(this.BaseURI + "/Commite")

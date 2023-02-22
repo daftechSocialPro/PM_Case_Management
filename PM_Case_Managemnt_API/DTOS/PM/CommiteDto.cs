@@ -26,6 +26,7 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public string Name { get; set; } = null!;
         public int NoOfEmployees { get; set; }
         public List<SelectListDto> EmployeeList { get; set; } = null!;
+        public string? Remark { get; set; }
     }
 
     public class CommiteEmployeesdto
