@@ -7,16 +7,16 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
     {
         
         public Guid CaseTypeId { get; set; }
-        public virtual CaseType CaseType { get; set; }
-       
-        public string FileName { get; set; }
+        public virtual CaseType CaseType { get; set; } = null!;
+
+        public string FileName { get; set; } = null!;
 
        
-        public filetype FileType { get; set; }
+        public FileType FileType { get; set; }
 
     }
 
-    public enum filetype
+    public enum FileType
     {
         files,
         text

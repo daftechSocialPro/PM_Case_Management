@@ -1,4 +1,5 @@
-﻿using PM_Case_Managemnt_API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.PM;
 using PM_Case_Managemnt_API.Models.Common;
 using PM_Case_Managemnt_API.Models.PM;
@@ -61,8 +62,8 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                     DateTime ShouldEnd = Convert.ToDateTime(XAPI.EthiopicDateTime.GetGregorianDate(Int32.Parse(endDate[0]), Int32.Parse(endDate[1]), Int32.Parse(endDate[2])));
                     activity.ShouldEnd = ShouldEnd;
                 }
-                _dBContext.Activities.Add(activity);
-                _dBContext.SaveChanges();
+               await _dBContext.Activities.AddAsync(activity);
+               await  _dBContext.SaveChangesAsync();
                 if (item.Employees != null)
                 {
                     foreach (var employee in item.Employees)
@@ -79,37 +80,41 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                                 ActivityId = activity.Id,
                                 EmployeeId = Guid.Parse(employee),
                             };
-                            _dBContext.EmployeesAssignedForActivities.Add(EAFA);
-                            _dBContext.SaveChanges();
+                            await _dBContext.EmployeesAssignedForActivities.AddAsync(EAFA);
+                            await  _dBContext.SaveChangesAsync();
                         }
                     }
                 }
 
             }
 
-            var Task = _dBContext.Tasks.Find(activityDetail.TaskId);
-            var plan = _dBContext.Plans.Find(Task.PlanId);
-            //if (plan != null)
-            //{
-            //    var ActParent = _dBContext.ActivityParents.Find(activityParent.Id);
-            //    ActParent.ShouldStartPeriod = ActParent.act.Min(x => x.ShouldStat);
-            //    ActParent.ShouldEnd = ActParent.Activities.Max(x => x.ShouldEnd);
-            //    ActParent.Weight = ActParent.Activities.Sum(x => x.Weight);
-            //    //_db.Entry(Task).State = EntityState.Modified;
-            //    _dBContext.SaveChanges();
-            //    if (Task != null)
-            //    {
-            //        Task.ShouldStartPeriod = Task.ActivitiesParents.Min(x => x.ShouldStartPeriod);
-            //        Task.ShouldEnd = Task.ActivitiesParents.Max(x => x.ShouldEnd);
-            //        Task.Weight = Task.ActivitiesParents.Sum(x => x.Weight);
-            //        // _db.Entry(Task).State = EntityState.Modified;
-            //        _dBContext.SaveChanges();
-            //    }
-            //    plan.PeriodStartAt = plan.Tasks.Min(x => x.ShouldStartPeriod);
-            //    plan.PeriodEndAt = plan.Tasks.Max(x => x.ShouldEnd);
-            //    // _db.Entry(plan).State = EntityState.Modified;
-            //    _dBContext.SaveChanges();
-            //}
+            var Task = await _dBContext.Tasks.FirstOrDefaultAsync(x => x.Id.Equals(activityDetail.TaskId));
+            if (Task != null)
+            {
+                var plan = _dBContext.Plans.FirstOrDefaultAsync(x => x.Id.Equals(Task.PlanId)).Result;
+                if (plan != null)
+                {
+                    var ActParent = _dBContext.ActivityParents.Find(activityParent.Id);
+                    if(ActParent != null)
+                    {
+                        ActParent.ShouldStartPeriod = ActParent.Activities.Min(x => x.ShouldStat);
+                        ActParent.ShouldEnd = ActParent.Activities.Max(x => x.ShouldEnd);
+                        ActParent.Weight = ActParent.Activities.Sum(x => x.Weight);
+                        _dBContext.SaveChanges();
+                    }
+                    if (Task != null)
+                    {
+                        Task.ShouldStartPeriod = Task.ActivitiesParents.Min(x => x.ShouldStartPeriod);
+                        Task.ShouldEnd = Task.ActivitiesParents.Max(x => x.ShouldEnd);
+                        Task.Weight = Task.ActivitiesParents.Sum(x => x.Weight);
+                        _dBContext.SaveChanges();
+                    }
+                    plan.PeriodStartAt = plan.Tasks.Min(x => x.ShouldStartPeriod);
+                    plan.PeriodEndAt = plan.Tasks.Max(x => x.ShouldEnd);
+                    _dBContext.SaveChanges();
+                }
+            }
+
 
             return 1;
         }

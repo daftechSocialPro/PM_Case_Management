@@ -2,26 +2,24 @@
 using PM_Case_Managemnt_API.Models.Common;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PM_Case_Managemnt_API.Models.PM
 {
     public class Task : CommonModel
     {
 
-        //public Task()
-        //{
-        //    TaskMemos = new HashSet<TaskMemo>();
-        //    TaskMember = new HashSet<TaskMembers>();
-        //    ActivitiesParents = new HashSet<ActivityParent>();
-        //    Activities = new HashSet<Activity>();
-        //}
+        public Task()
+        {
+            TaskMemos = new HashSet<TaskMemo>();
+            TaskMember = new HashSet<TaskMembers>();
+            ActivitiesParents = new HashSet<ActivityParent>();
+            Activities = new HashSet<Activity>();
+        }
 
         public Guid? PlanId { get; set; }
-        public virtual Plan Plan { get; set; }
-        public string TaskDescription { get; set; }
-        //public Guid? TaskId { get; set; }
-        //public virtual Task Task { get; set; }
+        public virtual Plan Plan { get; set; } = null!;
+        public string TaskDescription { get; set; } = null!;
         public DateTime? ShouldStartPeriod { get; set; }
         public DateTime? ActuallStart { get; set; }
         public DateTime? ShouldEnd { get; set; }
@@ -35,6 +33,17 @@ namespace PM_Case_Managemnt_API.Models.PM
         [DefaultValue(true)]
         public bool HasActivityParent { get; set; }
 
+        [NotMapped]
+        public ICollection<TaskMemo> TaskMemos { get; set; }
+
+        [NotMapped]
+        public ICollection<TaskMembers> TaskMember { get; set; }
+
+        [NotMapped]
+        public ICollection<ActivityParent> ActivitiesParents { get; set; }
+
+        [NotMapped]
+        public ICollection<Activity> Activities { get; set; }
 
     }
     public enum ReportLevel

@@ -2,7 +2,7 @@
 {
     public class Folder : CommonModel
     {
-        public string FolderName { get; set; }
+        public string FolderName { get; set; } = null!;
 
         public Guid ShelfId { get; set; }
 

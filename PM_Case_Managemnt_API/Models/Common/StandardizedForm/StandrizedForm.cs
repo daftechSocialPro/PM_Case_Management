@@ -1,4 +1,6 @@
-﻿namespace PM_Case_Managemnt_API.Models.Common
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PM_Case_Managemnt_API.Models.Common
 {
     public class StandrizedForm : CommonModel
     {
@@ -7,8 +9,10 @@
         {
             StandardizedFormDocuments = new HashSet<StandardizedFormDocuments>();
         }
-        public string FormName { get; set; }
+        public string FormName { get; set; } = null!;
 
+
+        [NotMapped]
         public virtual ICollection<StandardizedFormDocuments> StandardizedFormDocuments { get; set; }
 
     }

@@ -2,6 +2,6 @@
 {
     public class Shelf :CommonModel
     {
-        public string ShelfNumber { get; set; }
+        public string ShelfNumber { get; set; } = null!;
     }
 }

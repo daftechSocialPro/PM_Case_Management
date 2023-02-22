@@ -6,11 +6,11 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
     {
 
         public Guid? CaseId { get; set; }
-        public virtual Case Case { get; set; }
+        public virtual Case Case { get; set; } = null!;
 
         public MessageFrom MessageFrom { get; set; }
 
-        public string MessageBody { get; set; }
+        public string MessageBody { get; set; } = null!;
 
 
         public bool Messagestatus { get; set; }
