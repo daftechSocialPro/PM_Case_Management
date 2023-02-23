@@ -207,6 +207,7 @@ C:\Users\KIRUB\Desktop\Desktop\Projects\Office Projects\Diredwa Pm and Case Trac
 C:\Users\KIRUB\Desktop\Desktop\Projects\Office Projects\Diredwa Pm and Case Tracking\pm_case_management\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CopyComplete
 C:\Users\KIRUB\Desktop\Desktop\Projects\Office Projects\Diredwa Pm and Case Tracking\pm_case_management\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.dll
 C:\Users\KIRUB\Desktop\Desktop\Projects\Office Projects\Diredwa Pm and Case Tracking\pm_case_management\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.pdb
+<<<<<<< HEAD
 E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.dll
 E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.pdb
 E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\bin\Debug\BouncyCastle.Crypto.dll
@@ -244,85 +245,42 @@ E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\P
 E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CopyComplete
 E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.dll
 E:\kirubel\Office Projects\DAFTech Socail\Diredwa Pm & Case\pm_case_management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.pdb
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.dll.config
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.pdb
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\BouncyCastle.Crypto.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.barcodes.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.forms.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.io.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.kernel.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.layout.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.pdfa.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.sign.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.styledxmlparser.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.svg.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.Build.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.Build.Framework.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.IO.Redist.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.NET.StringTools.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.Common.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Buffers.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Collections.Immutable.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Configuration.ConfigurationManager.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Memory.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Numerics.Vectors.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Reflection.Metadata.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Reflection.MetadataLoadContext.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Security.AccessControl.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Security.Permissions.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Security.Principal.Windows.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Text.Encodings.Web.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Text.Json.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Threading.Tasks.Dataflow.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Threading.Tasks.Extensions.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.ValueTuple.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\BouncyCastle.Crypto.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.pdb
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.pdb
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.barcodes.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.forms.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.io.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.kernel.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.layout.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.pdfa.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.sign.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.styledxmlparser.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.svg.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.Build.pdb
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.Build.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.Build.Framework.pdb
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.Build.Framework.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.IO.Redist.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.NET.StringTools.pdb
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.NET.StringTools.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Buffers.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Collections.Immutable.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Configuration.ConfigurationManager.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Memory.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Numerics.Vectors.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Reflection.Metadata.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Reflection.MetadataLoadContext.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Security.AccessControl.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Security.Permissions.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Security.Principal.Windows.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Text.Encodings.Web.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Text.Json.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Threading.Tasks.Dataflow.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\System.ValueTuple.xml
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.AssemblyReference.cache
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CoreCompileInputs.cache
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CopyComplete
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.dll
-C:\Users\Kaleab\Documents\Projects\new_proj\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.pdb
+=======
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\XAPI.pdb
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.barcodes.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.forms.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.io.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.kernel.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.layout.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.pdfa.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.sign.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.styledxmlparser.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.svg.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Microsoft.SqlServer.Types.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\BouncyCastle.Crypto.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.pdb
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.pdb
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\Common.Logging.Core.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.barcodes.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.forms.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.io.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.kernel.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.layout.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.pdfa.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.sign.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.styledxmlparser.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\bin\Debug\itext.svg.xml
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.AssemblyReference.cache
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CoreCompileInputs.cache
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.csproj.CopyComplete
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.dll
+C:\Users\lilis\OneDrive\Desktop\Office\PM_Case_Management\PM_Case_Managemnt_API\XAPI\obj\Debug\XAPI.pdb
+>>>>>>> 3fa26dc2b6717c13ff2e99349cc45113589b1ce4

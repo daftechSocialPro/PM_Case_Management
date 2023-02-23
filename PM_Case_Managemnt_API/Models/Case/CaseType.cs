@@ -7,7 +7,7 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
 {
     public class CaseType : CommonModel
     {
-
+       
         public CaseType()
         {
             Childrens = new HashSet<CaseType>();
@@ -17,9 +17,10 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
 
 
         public string Code { get; set; } = null!;
+       
 
         public float TotlaPayment { get; set; }
-
+     
         public float Counter { get; set; }
         public Guid? ParentCaseTypeId { get; set; }
         public virtual CaseType ParentCaseType { get; set; } = null!;
