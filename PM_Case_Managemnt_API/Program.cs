@@ -8,6 +8,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.Models.Auth;
+using PM_Case_Managemnt_API.Services.CaseService.CaseTypes;
+using PM_Case_Managemnt_API.Services.CaseService.Encode;
+using PM_Case_Managemnt_API.Services.CaseService.FileSettings;
 using PM_Case_Managemnt_API.Services.Common;
 using PM_Case_Managemnt_API.Services.PM;
 using PM_Case_Managemnt_API.Services.PM.Activity;
@@ -70,6 +73,9 @@ builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<ICommiteService, CommiteService>();
 builder.Services.AddScoped<IActivityService, ActivityService>();
 
+builder.Services.AddScoped<ICaseTypeService, CaseTypeService>();
+builder.Services.AddScoped<IFileSettingsService, FileSettingService>();
+builder.Services.AddScoped<ICaseEncodeService, CaseEncodeService>();
 
 //Jwt Authentication
 

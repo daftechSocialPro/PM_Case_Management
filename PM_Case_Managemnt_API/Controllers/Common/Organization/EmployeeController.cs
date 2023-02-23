@@ -29,8 +29,6 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
                 var folderName = Path.Combine("Assets", "EmployeePhoto");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
-
-
                 if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
@@ -44,7 +42,6 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
                     }
                     var employee = new EmployeeDto
                     {
-                      
                         Photo = dbPath,
                         Title = Request.Form["Title"],
                         FullName = Request.Form["FullName"],
@@ -53,14 +50,9 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
                         Remark = Request.Form["remark"],
                         Position = Request.Form["Position"],
                         StructureId = Request.Form["StructureId"],
-
-
                     };
 
-                   
-
                     var response = _employeeService.CreateEmployee(employee);
-
 
                     return Ok(new { response });
 
@@ -76,8 +68,8 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
                 return StatusCode(500, $"Internal Server Error : {ex}");
             }
         }
-        [HttpGet]
 
+        [HttpGet]
         public async Task<List<EmployeeDto>> getEmployess()
         {
 
