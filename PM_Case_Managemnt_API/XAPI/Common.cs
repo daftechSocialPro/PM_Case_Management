@@ -35,7 +35,6 @@ namespace XAPI
             {
                 return "0 ዓመት";
             }
-            return "";
         }
         public static string GetConcatenatedYearMonthDay(DateTime From, DateTime To)
         {
