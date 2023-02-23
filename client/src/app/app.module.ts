@@ -89,6 +89,7 @@ import { UpdateCpmmitteeComponent } from './pages/pm/comittes/update-cpmmittee/u
 import { AssignedActivitiesComponent } from './pages/pm/assigned-activities/assigned-activities.component';
 import { ViewActivtiesComponent } from './pages/pm/view-activties/view-activties.component';
 import { ActivityTargetComponent } from './pages/pm/view-activties/activity-target/activity-target.component';
+import { AddProgressComponent } from './pages/PM/view-activties/add-progress/add-progress.component';
 
 
 @NgModule({
@@ -170,7 +171,8 @@ import { ActivityTargetComponent } from './pages/pm/view-activties/activity-targ
     UpdateCpmmitteeComponent,
     AssignedActivitiesComponent,
     ViewActivtiesComponent,
-    ActivityTargetComponent
+    ActivityTargetComponent,
+    AddProgressComponent
     
     
   ],
