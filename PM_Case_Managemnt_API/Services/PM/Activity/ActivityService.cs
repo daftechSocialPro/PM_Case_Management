@@ -3,6 +3,7 @@ using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.PM;
 using PM_Case_Managemnt_API.Models.Common;
 using PM_Case_Managemnt_API.Models.PM;
+using System.Collections.Generic;
 
 namespace PM_Case_Managemnt_API.Services.PM.Activity
 {
@@ -119,9 +120,38 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                     _dBContext.SaveChanges();
                 }
             }
+            return 1;
+        }
+
+
+      public async   Task<int> AddTargetActivities(ActivityTargetDivisionDto targetDivisions)
+        {
+
+            foreach (var target in targetDivisions.TargetDivisionDtos)
+            {
+
+                var targetDivision = new ActivityTargetDivision
+                {
+                    Id= Guid.NewGuid(),
+                    CreatedBy = targetDivisions.CreatedBy,
+                    CreatedAt = DateTime.Now,                                     
+                    ActivityId = targetDivisions.ActiviyId,
+                    Order = target.Order+1,
+                    Target = target.Target,
+                    TargetBudget = target.TargetBudget,
+
+                };
+
+               await _dBContext.ActivityTargetDivisions.AddAsync(targetDivision);
+                await _dBContext.SaveChangesAsync();
+            }
+
+
+
 
 
             return 1;
+
         }
     }
 }

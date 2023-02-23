@@ -71,13 +71,13 @@ namespace PM_Case_Managemnt_API.Models.PM
         public virtual ActivityParent ActivityParent { get; set; } = null!;
 
 
-        [NotMapped]
+     
         public ICollection<ActivityProgress> ActProgress { get; set; }
 
-        [NotMapped]
+     
         public ICollection<EmployeesAssignedForActivities> AssignedEmploye { get; set; }
 
-        [NotMapped]
+     
         public ICollection<ActivityTargetDivision> ActivityTargetDivisions { get; set; }
 
     }

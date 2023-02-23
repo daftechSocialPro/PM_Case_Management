@@ -42,8 +42,6 @@ testem.log
 Thumbs.db
 =======
 client/node_modules/
-client/package-lock.json
-client/package.json
 PM_Case_Managemnt_API/bin/
 PM_Case_Managemnt_API/.vs/
 PM_Case_Managemnt_API/obj/

@@ -38,10 +38,10 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
 
         public bool SMSStatus { get; set; }
 
-        [NotMapped]
+     
         public virtual ICollection<CaseHistory> CaseHistories { get; set; }
 
-        [NotMapped]
+     
         public virtual ICollection<CaseHistoryAttachment> CaseAttachments { get; set; }
     }
 

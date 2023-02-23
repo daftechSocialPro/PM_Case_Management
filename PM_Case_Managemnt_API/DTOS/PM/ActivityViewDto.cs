@@ -24,9 +24,35 @@ namespace PM_Case_Managemnt_API.DTOS.PM
 
     public class MonthPerformanceViewDto
     {
+        public int order { get; set; }
         public string MonthName { get; set; } = null!;
-        public decimal Planned { get; set; }
-        public decimal Actual { get; set; }
+        public float Planned { get; set; }
+        public float Actual { get; set; }
         public float Percentage { get; set; }
     }
+
+
+    public class ActivityTargetDivisionDto
+    {
+
+        public Guid ActiviyId { get; set; }
+        public Guid CreatedBy { get; set; }
+        public List<TargetDivisionDto> TargetDivisionDtos { get; set; }
+
+
+    }
+
+    public class TargetDivisionDto
+    {
+
+        public int Order { get; set; }
+        public float Target { get; set; }
+        public float TargetBudget { get; set; }
+
+        
+
+
+    }
+
+
 }

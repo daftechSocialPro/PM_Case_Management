@@ -56,7 +56,7 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         public Guid? ForwardedById { get; set; }
         public virtual Employee ForwardedBy { get; set; }
 
-        [NotMapped]
+     
         public virtual ICollection<CaseHistoryAttachment> Attachments { get; set; }
     }
 

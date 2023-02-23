@@ -32,5 +32,19 @@ namespace PM_Case_Managemnt_API.Controllers.PM
                 return StatusCode(500, $"Internal Server Error : {ex}");
             }
         }
+
+        [HttpPost("targetDivision")]
+        public IActionResult AddTargetDivisionActivity (ActivityTargetDivisionDto activityTarget)
+        {
+            try
+            {
+                var response = _activityService.AddTargetActivities(activityTarget);
+                return Ok(new { response });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error : {ex}");
+            }
+        }
     }
 }

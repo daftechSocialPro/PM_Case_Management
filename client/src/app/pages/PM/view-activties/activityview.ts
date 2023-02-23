@@ -7,9 +7,9 @@ export interface ActivityView {
     PlannedBudget: number ; 
     ActivityType : string ; 
     Weight : Number 
-    Beginning : Number
-    Target : Number
-    UnitMeasurment : string,
+    Begining : number
+    Target : number
+    UnitOfMeasurment : string,
     OverAllPerformance :Number,
     StartDate : string ,
     EndDate : string,
@@ -19,9 +19,23 @@ export interface ActivityView {
 
 }
 export interface MonthPerformanceView {
-
+    order:number,
     MonthName : string ,
     Planned : Number,
     Actual: Number,
     Percentage : Number 
+}
+
+
+export interface ActivityTargetDivisionDto {
+
+    ActiviyId:string;
+    CreatedBy:string;
+    TargetDivisionDtos:TargetDivisionDto[]
+}
+export interface TargetDivisionDto {
+
+    Order:number,
+    Target: number,
+    TargetBudget:number
 }

@@ -2,94 +2,116 @@
 
     <div class="card-header">
 
-        <div class="card-title">
-
+        <div class="card-title ">
+            <li style="list-style: none; text-align: right;">
+                <a class="nav-link nav-profile  pe-0" href="#" data-bs-toggle="dropdown"> <span
+                        class="d-none d-md-block dropdown-toggle ps-2">Action </span> </a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li> <a class="dropdown-item d-flex align-items-center" *ngIf="(actView.MonthPerformance!.length===0)"
+                            style="cursor: pointer;" (click)="AssignTarget()"> <i
+                                class="bi bi-calendar-date text-primary"></i> <span>Assign Target</span> </a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                </ul>
+            </li>
             {{actView.Name}}
 
-            
-
         </div>
+
     </div>
     <div class="card-body">
-
-        <div class="d-flex justify-content-between col-6 p-2 m-2"  >
-
+        <div class="d-flex justify-content-between col-6 p-2 m-2">
             <div>
-                <span> Planned Budget : </span> {{actView.PlannedBudget}} ETB <br/>
-
-                <span> Activity Type : </span> {{actView.ActivityType}} <br/>
-         
-                <span> Weight :</span> {{actView.Weight}} % <br/>
-
+                <span> Planned Budget : </span> {{actView.PlannedBudget}} ETB <br />
+                <span> Activity Type : </span> {{actView.ActivityType}} <br />
+                <span> Weight :</span> {{actView.Weight}} % <br />
             </div>
             <div>
-                  
-        
-        <span>Begining :</span>  {{actView.Beginning}} <br/>
-        
-        <span>Target :</span> {{actView.Target}} <br/>
-        
-        <span>Unit Measurment: </span> {{actView.UnitMeasurment}} 
-
-
-
+                <span>Begining :</span> {{actView.Begining}} <br />
+                <span>Target :</span> {{actView.Target}} <br />
+                <span>Unit Measurment: </span> {{actView.UnitOfMeasurment}}
             </div>
-
         </div>
 
-   
-
-        <table class="table table-bordered">
+        <table class="table table-bordered table-responsive " style="overflow-x: hidden;"   *ngIf="actView.MonthPerformance!.length>0">
             <thead>
-               <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Position</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Start Date</th>
-               </tr>
+                <tr>
+                    <th class="text-center" colspan="3">
+                        July (ሃምሌ)
+                    </th>
+                    <th class="text-center" *ngFor="let month of months " colspan="4">
+
+                        {{month}}
+                    </th>
+
+
+                </tr>
+                <tr>
+
+
+                    <th style="background-color:#c2ccc2"> p</th>
+                    <th style="background-color:#e0e062">A</th>
+                    <th style="background-color:#E2EFDA">P(%) </th>
+                    <ng-container *ngFor="let month of months ">
+
+                        <th style="background-color:#c2ccc2"> p</th>
+                        <th style="background-color:#e0e062">A</th>
+                        <th style="background-color:#E2EFDA">P(%) </th>
+                        <th>Upto {{month}}</th>
+
+                    </ng-container>
+
+
+
+                </tr>
             </thead>
             <tbody>
-               <tr>
-                  <th scope="row">1</th>
-                  <td>Brandon Jacob</td>
-                  <td>Designer</td>
-                  <td>28</td>
-                  <td>2016-05-25</td>
-               </tr>
-               <tr>
-                  <th scope="row">2</th>
-                  <td>Bridie Kessler</td>
-                  <td>Developer</td>
-                  <td>35</td>
-                  <td>2014-12-05</td>
-               </tr>
-               <tr>
-                  <th scope="row">3</th>
-                  <td>Ashleigh Langosh</td>
-                  <td>Finance</td>
-                  <td>45</td>
-                  <td>2011-08-12</td>
-               </tr>
-          
-            </tbody>
-         </table>
 
-       
-        
+                <tr>
+                    <ng-container *ngFor="let perform of actView.MonthPerformance ;let i= index;">
+                        <ng-container *ngIf="i==0">
+                            <td>{{perform.Planned}} </td>
+                            <td style="background-color:#e0e062">{{perform.Actual}} </td>
+                            <td style="background-color:#E2EFDA">{{perform.Percentage}} %</td>
+                        </ng-container>
+                        <ng-container *ngIf="i!=0">
+                            <td>{{perform.Planned}} </td>
+                            <td style="background-color:#e0e062">{{perform.Actual}} </td>
+                            <td style="background-color:#E2EFDA">{{perform.Percentage}} %</td>
+                            <td>100 %</td>
+                        </ng-container>                       
+
+                    </ng-container>
+
+
+                </tr>
+
+            </tbody>
+        </table>
+
+
+
+
+
 
     </div>
 
     <div class="card-footer">
-
         <span>
             Activity Overall Performance
         </span>
-        : 25 % 
+        : 25 %
         <div class="progress mt-3">
             <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-               style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-         </div>
+                style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <br />
+        <i class="bi bi-calendar-check"></i>
+        Start Date: {{actView.StartDate | date:'fullDate'}}
+        <span style="font-size: 25px;font-weight:bold;"> - </span>
+        <i class="bi bi-calendar-check"></i> End Date:
+        {{actView.EndDate | date:'fullDate'}}
 
     </div>
 

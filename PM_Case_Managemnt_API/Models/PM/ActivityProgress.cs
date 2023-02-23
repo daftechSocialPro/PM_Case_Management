@@ -32,7 +32,7 @@ namespace PM_Case_Managemnt_API.Models.PM
         public string Lng { get; set; } = null!;
         public ProgressStatus progressStatus { get; set; }
 
-        [NotMapped]
+     
         public  ICollection<ProgressAttachment> ProgressAttachments { get; set; }
     }
     public enum ProgressStatus

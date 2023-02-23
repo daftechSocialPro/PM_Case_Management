@@ -88,6 +88,7 @@ import { CommitteeEmployeeComponent } from './pages/pm/comittes/committee-employ
 import { UpdateCpmmitteeComponent } from './pages/pm/comittes/update-cpmmittee/update-cpmmittee.component';
 import { AssignedActivitiesComponent } from './pages/pm/assigned-activities/assigned-activities.component';
 import { ViewActivtiesComponent } from './pages/pm/view-activties/view-activties.component';
+import { ActivityTargetComponent } from './pages/pm/view-activties/activity-target/activity-target.component';
 
 
 @NgModule({
@@ -168,7 +169,8 @@ import { ViewActivtiesComponent } from './pages/pm/view-activties/view-activties
     CommitteeEmployeeComponent,
     UpdateCpmmitteeComponent,
     AssignedActivitiesComponent,
-    ViewActivtiesComponent
+    ViewActivtiesComponent,
+    ActivityTargetComponent
     
     
   ],
