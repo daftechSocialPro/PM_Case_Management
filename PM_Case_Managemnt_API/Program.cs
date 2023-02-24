@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.Models.Auth;
+using PM_Case_Managemnt_API.Services.CaseMGMT.Applicants;
 using PM_Case_Managemnt_API.Services.CaseMGMT.CaseAttachments;
 using PM_Case_Managemnt_API.Services.CaseService.CaseTypes;
 using PM_Case_Managemnt_API.Services.CaseService.Encode;
@@ -78,6 +79,7 @@ builder.Services.AddScoped<ICaseTypeService, CaseTypeService>();
 builder.Services.AddScoped<IFileSettingsService, FileSettingService>();
 builder.Services.AddScoped<ICaseEncodeService, CaseEncodeService>();
 builder.Services.AddScoped<ICaseAttachementService, CaseAttachementService>();
+builder.Services.AddScoped<IApplicantService, ApplicantService>();
 
 //Jwt Authentication
 
