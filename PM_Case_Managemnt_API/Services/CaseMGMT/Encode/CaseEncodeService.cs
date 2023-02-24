@@ -1,4 +1,5 @@
-﻿using PM_Case_Managemnt_API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using System.Runtime.CompilerServices;
@@ -14,7 +15,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
             _dbContext = dbContext;
         }
 
-        public async Task AddCaseEncoding(CaseEncodePostDto caseEncodePostDto)
+        public async Task<string> AddCaseEncoding(CaseEncodePostDto caseEncodePostDto)
         {
             try
             {
@@ -38,11 +39,54 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     Representative = caseEncodePostDto.Representative,
                     Remark = caseEncodePostDto.Remark   
                 };
+
+                await _dbContext.AddAsync(newCase);
+                await _dbContext.SaveChangesAsync();
+
+                return newCase.Id.ToString();
             } catch (Exception ex) { 
                 throw new Exception(ex.Message);
             }
         }
 
+        public async Task<List<CaseEncodeGetDto>> GetCaseEncodings()
+        {
+            try
+            {
+                List<Case> cases = _dbContext.Cases.Include(p => p.Employee).Include(p => p.CaseType).Include(p => p.Applicant).ToList();
+                List<CaseEncodeGetDto> results = new List<CaseEncodeGetDto>();
+
+                foreach (Case currCase in cases)
+                {
+                    results.Add(new CaseEncodeGetDto
+                    {
+                        Id = currCase.Id,
+                        CreatedAt = currCase.CreatedAt,
+                        CreatedBy = currCase.CreatedBy,
+                        AffairStatus = currCase.AffairStatus,
+                        PhoneNumber2 = currCase.PhoneNumber2,
+                        ApplicantId = currCase.ApplicantId,
+                        CaseNumber = currCase.CaseNumber,
+                        CaseTypeId = currCase.CaseTypeId,
+                        EmployeeId = currCase.EmployeeId,
+                        IsArchived = currCase.IsArchived,
+                        LetterNumber = currCase.LetterNumber,
+                        LetterSubject = currCase.LetterSubject,
+                        Remark = currCase.Remark,
+                        Representative = currCase.Representative,
+                        SMSStatus = currCase.SMSStatus,
+                        CaseType = currCase.CaseType,
+                        Employee = currCase.Employee,
+                        Applicant = currCase.Applicant,
+                    });
+                }
+
+                return results;
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
     }
 }

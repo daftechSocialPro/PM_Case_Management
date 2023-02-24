@@ -28,13 +28,13 @@ namespace PM_Case_Managemnt_API.Models.PM
         public Status Status { get; set; }
         public bool HasActivity { get; set; }
 
-        [NotMapped]
+     
         public ICollection<Activity> Activities { get; set; }
 
-        [NotMapped]
+     
         public ICollection<TaskMemo> TaskMemos { get; set; }
 
-        [NotMapped]
+     
         public ICollection<TaskMembers> TaskMember { get; set; }
     }
 }

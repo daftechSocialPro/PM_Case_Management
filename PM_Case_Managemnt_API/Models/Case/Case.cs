@@ -26,7 +26,7 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         public Guid CaseTypeId { get; set; }
         public virtual CaseType CaseType { get; set; }
      
-        public string DocumentPath { get; set; }
+        //public string? DocumentPath { get; set; }
         public DateTime? CompletedAt { get; set; }
         public AffairStatus AffairStatus { get; set; }
   
@@ -38,10 +38,10 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
 
         public bool SMSStatus { get; set; }
 
-        [NotMapped]
+     
         public virtual ICollection<CaseHistory> CaseHistories { get; set; }
 
-        [NotMapped]
+     
         public virtual ICollection<CaseHistoryAttachment> CaseAttachments { get; set; }
     }
 

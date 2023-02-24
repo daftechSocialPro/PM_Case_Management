@@ -35,16 +35,16 @@ namespace PM_Case_Managemnt_API.Models.PM
         public float PlandBudget { get; set; }
         public ProjectType ProjectType { get; set; }
 
-        [NotMapped]
+     
         public ICollection<Task> Tasks { get; set; }
 
-        [NotMapped]
+     
         public ICollection<TaskMemo> TaskMemos { get; set; }
 
-        [NotMapped]
+     
         public ICollection<TaskMembers> TaskMember { get; set; }
 
-        [NotMapped]
+     
         public ICollection<Activity> Activities { get; set; }
     }
 

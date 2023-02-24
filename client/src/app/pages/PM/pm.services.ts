@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { ActivityDetailDto } from './activity-parents/add-activities/add-activities';
 import { ComiteeAdd, CommiteeAddEmployeeView, CommitteeView } from './comittes/committee';
+import { ActivityTargetDivisionDto } from './view-activties/activityview';
 
 
 @Injectable({
@@ -51,7 +52,11 @@ export class PMService {
     addActivityParent(activity: ActivityDetailDto) {
         return this.http.post (this.BaseURI+"/Activity",activity)
     }
+    addActivityTargetDivision(activityDto:ActivityTargetDivisionDto){
 
+        return this.http.post(this.BaseURI+"/Activity/targetDivision",activityDto)
+
+    }
 
 
 }

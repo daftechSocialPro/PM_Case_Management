@@ -70,6 +70,7 @@
 
   <ItemGroup>
     <Folder Include="Assets\EmployeePhoto\" />
+    <Folder Include="Assets\CaseAttachments\" />
     <Folder Include="Assets\Organization\" />
     <Folder Include="Models\Auth\" />
   </ItemGroup>

@@ -4,6 +4,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
 {
     public interface ICaseEncodeService
     {
-        public Task AddCaseEncoding(CaseEncodePostDto caseEncodePostDto);
+        public Task<string> AddCaseEncoding(CaseEncodePostDto caseEncodePostDto);
+        public Task<List<CaseEncodeGetDto>> GetCaseEncodings();
     }
 }

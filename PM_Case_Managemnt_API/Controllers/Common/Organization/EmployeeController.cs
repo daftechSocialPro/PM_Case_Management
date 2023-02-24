@@ -38,7 +38,6 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
-
                     }
                     var employee = new EmployeeDto
                     {
