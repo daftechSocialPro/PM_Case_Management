@@ -5,7 +5,7 @@ using PM_Case_Managemnt_API.Services.CaseMGMT.CaseAttachments;
 
 namespace PM_Case_Managemnt_API.Controllers.Case
 {
-    [Route("api/[controller]")]
+    [Route("api/case")]
     [ApiController]
     public class CaseAttachementController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             _caseAttachementService = caseAttachementService;
         }
 
-        [HttpGet]
+        [HttpGet("attachments")]
         public async Task<IActionResult> Get(string CaseId = null)
         {
             try

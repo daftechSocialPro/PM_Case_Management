@@ -6,7 +6,7 @@ using PM_Case_Managemnt_API.Services.CaseService.CaseTypes;
 
 namespace PM_Case_Managemnt_API.Controllers.Case
 {
-    [Route("api/[controller]")]
+    [Route("api/case")]
     [ApiController]
     public class CaseTypeController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             _caseTypeService = caseTypeService;
         }
 
-        [HttpGet]
+        [HttpGet("type")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -30,7 +30,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             }
         }
 
-        [HttpPost]
+        [HttpPost("type")]
         public async Task<IActionResult> Create(CaseTypePostDto caseType)
         {
             try

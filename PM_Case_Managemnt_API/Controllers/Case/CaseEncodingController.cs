@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 
 namespace PM_Case_Managemnt_API.Controllers.Case
 {
-    [Route("api/[controller]")]
+    [Route("api/case")]
     [ApiController]
     public class CaseEncodingController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             _caseAttachmentService = caseAttachementService;
         }
 
-        [HttpPost]
+        [HttpPost("encoding")]
         public async Task<IActionResult> Create([FromForm] CaseEncodePostDto caseEncodePostDto)
         {
             try
@@ -71,7 +71,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         }
 
-        [HttpGet]
+        [HttpGet("Encoding")]
         public async Task<IActionResult> GetAll()
         {
             try

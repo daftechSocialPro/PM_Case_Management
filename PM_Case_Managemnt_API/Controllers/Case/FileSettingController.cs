@@ -5,7 +5,7 @@ using PM_Case_Managemnt_API.Services.CaseService.FileSettings;
 
 namespace PM_Case_Managemnt_API.Controllers.Case
 {
-    [Route("api/[controller]")]
+    [Route("api/case")]
     [ApiController]
     public class FileSettingController : ControllerBase
     {
@@ -15,7 +15,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         {
             _fileSettingsService = fileSettingsService;
         }
-        [HttpGet]
+        [HttpGet("fileSetting")]
         public async Task<IActionResult> GetAll()
         {
             try { 
@@ -28,7 +28,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             }
         }
 
-        [HttpPost]
+        [HttpPost("fileSetting")]
         public async Task<IActionResult> PostFileSetting(FileSettingPostDto fileSettingPostDto)
         {
             try
