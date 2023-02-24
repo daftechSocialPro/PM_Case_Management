@@ -9,6 +9,7 @@ import { ActivityTargetComponent } from './activity-target/activity-target.compo
 
 import { ActivityView } from './activityview';
 import { AddProgressComponent } from './add-progress/add-progress.component';
+import { ViewProgressComponent } from './view-progress/view-progress.component';
 
 @Component({
   selector: 'app-view-activties',
@@ -62,6 +63,12 @@ export class ViewActivtiesComponent implements OnInit {
     modalRef.componentInstance.activity =this.actView
   }
 
+  ViewProgress(){
+
+    let modalRef = this.modalService.open(ViewProgressComponent,{size:'xl',backdrop:'static'})
+    modalRef.componentInstance.activity = this.actView
+
+  }
 
 
 

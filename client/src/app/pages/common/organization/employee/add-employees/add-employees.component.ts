@@ -138,7 +138,7 @@ export class AddEmployeesComponent implements OnInit {
 
           this.toast = {
             message: 'Something went wrong',
-            title: 'Network error.',
+            title: 'Network Error.',
             type: 'error',
             ic: {
               timeOut: 2500,

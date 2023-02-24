@@ -40,4 +40,39 @@ export class CommonService {
     var seconds = Math.floor(diff / 1000) - ((days * 24 * 60 * 60) + (hours * 60 * 60) + (minutes * 60));
     return { day: days, hour: hours, minute: minutes, second: seconds };
 }
+
+
+getCurrentLocation() {
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          if (position) {
+            console.log(
+              'Latitude: ' +
+                position.coords.latitude +
+                'Longitude: ' +
+                position.coords.longitude
+            );
+            let lat = position.coords.latitude;
+            let lng = position.coords.longitude;
+
+            const location = {
+              lat,
+              lng,
+            };
+            resolve(location);
+          }
+        },
+        (error) => console.log(error)
+      );
+    } else {
+      reject('Geolocation is not supported by this browser.');
+    }
+  });
+}
+
+
+
+
 }

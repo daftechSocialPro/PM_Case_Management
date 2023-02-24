@@ -90,6 +90,7 @@ import { AssignedActivitiesComponent } from './pages/pm/assigned-activities/assi
 import { ViewActivtiesComponent } from './pages/pm/view-activties/view-activties.component';
 import { ActivityTargetComponent } from './pages/pm/view-activties/activity-target/activity-target.component';
 import { AddProgressComponent } from './pages/PM/view-activties/add-progress/add-progress.component';
+import { ViewProgressComponent } from './pages/pm/view-activties/view-progress/view-progress.component';
 
 
 @NgModule({
@@ -172,7 +173,8 @@ import { AddProgressComponent } from './pages/PM/view-activties/add-progress/add
     AssignedActivitiesComponent,
     ViewActivtiesComponent,
     ActivityTargetComponent,
-    AddProgressComponent
+    AddProgressComponent,
+    ViewProgressComponent
     
     
   ],

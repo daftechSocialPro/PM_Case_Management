@@ -2,7 +2,7 @@
 
     <div class="card-header">
 
-        <div class="card-title ">
+        <div class="card-title">
             <li style="list-style: none; text-align: right;">
                 <a class="nav-link nav-profile  pe-0" href="#" data-bs-toggle="dropdown"> <span
                         class="d-none d-md-block dropdown-toggle ps-2">Action </span> </a>
@@ -17,6 +17,10 @@
                     <li> <a class="dropdown-item d-flex align-items-center"
                         *ngIf="(isMember)" style="cursor: pointer;"
                         (click)="AddProgress()"> <i class="bi bi-plus text-primary"></i> <span>Add Progress</span> </a></li>
+
+                        <li> <a class="dropdown-item d-flex align-items-center"
+                            *ngIf="(isMember)" style="cursor: pointer;"
+                            (click)="ViewProgress()"> <i class="bi bi-eye text-primary"></i> <span>View Progress</span> </a></li>
                 </ul>
             </li>
             {{actView.Name}}

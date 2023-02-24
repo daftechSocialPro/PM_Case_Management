@@ -114,7 +114,8 @@ namespace PM_Case_Managemnt_API.Services.PM
                                         }).ToList(),
                                         MonthPerformance = _dBContext.ActivityTargetDivisions.Where(x => x.ActivityId == e.Id).OrderBy(x=>x.Order).Select(y => new MonthPerformanceViewDto                                     
                                         {
-                                            order = y.Order,
+                                            Id = y.Id,
+                                            Order = y.Order,
                                             Planned = y.Target,
                                             Actual = 0,
                                             Percentage = (0)*100

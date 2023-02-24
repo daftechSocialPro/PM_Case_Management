@@ -1,0 +1,68 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">View Activity Progress</h5>
+        <button type="button" class="btn-close" id="ModalClose" (click)="closeModal()" aria-label="Close"></button>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Activity Progress for {{activity.Name}}</h5>
+            <hr />
+
+            <table class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Actual Worked</th>
+                        <th scope="col">Used Budget</th>
+                        <th scope="col">Documents </th>
+                        <th scope="col">Finance Doc </th>
+                        <th scope="col">Progress Status </th>
+                        <!-- <th scope="col">Approval reason </th> -->
+                        <th scope="col">Remark</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Action </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pro of progress; let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{pro.ActalWorked}}</td>
+                        <td>{{pro.UsedBudget}}</td>
+                        <td >
+                            <div class="" >
+
+                           
+                            <a target="_blank" class="btn btn-sm btn-secondary " *ngFor="let file of pro.Documents" href={{getFilePath(file)}}>View FIle</a>
+                        </div>
+                        </td>
+                        <td><a target="_blank" class="btn btn-sm btn-secondary" href={{getFilePath(pro.FinanceDocument!)}}>View File</a></td>
+                        <td>
+
+                            <span>
+                                Director:    <span class="badge bg-secondary">{{pro.IsApprovedByDirector}}</span>                                                        
+                            </span><br/>
+
+                            <span>
+                                Finance: <span class="badge bg-secondary">{{pro.IsApprovedByFinance}}</span> 
+                            </span> <br/>
+
+                            <span>
+                                Pro.Man: <span class="badge bg-secondary">{{pro.IsApprovedByManager}}</span>
+                            </span>
+
+
+                    
+
+                        </td>
+                        <td>{{pro.Remark}}</td>
+                        <td>{{pro.CreatedAt| date:'fullDate'}}</td>
+                        <td></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

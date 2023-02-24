@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using PM_Case_Managemnt_API.DTOS.Common;
-
+using PM_Case_Managemnt_API.Models.PM;
 
 namespace PM_Case_Managemnt_API.DTOS.PM
 {
@@ -24,7 +24,8 @@ namespace PM_Case_Managemnt_API.DTOS.PM
 
     public class MonthPerformanceViewDto
     {
-        public int order { get; set; }
+        public Guid Id { get; set; }
+        public int Order { get; set; }
         public string MonthName { get; set; } = null!;
         public float Planned { get; set; }
         public float Actual { get; set; }
@@ -50,6 +51,51 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public float TargetBudget { get; set; }
 
         
+
+
+    }
+
+
+    public class AddProgressActivityDto
+    {
+        public Guid ActivityId { get; set; }
+        public Guid QuarterId { get; set; }
+        public Guid EmployeeValueId { get; set; }
+        public string ProgressStatus { get; set; }
+        public float ActualBudget { get; set; }
+        public float ActualWorked { get; set; } 
+        public string Lat { get; set; } = null!;
+        public string Lng { get; set; } = null!;
+        public Guid CreatedBy { get; set; }
+
+        public string[] DcoumentPath { get; set; }
+        public string FinacncePath { get; set; }
+        public string Remark { get; set; }
+
+        public string lat { get; set; }
+        public string lng { get; set; }
+
+    }
+
+
+    public class ProgressViewDto
+    {
+        public Guid Id { get; set; }
+        public float ActalWorked { get; set; }
+        public float UsedBudget { get; set; }
+
+        public string[] Documents { get; set; }
+        public string FinanceDocument { get; set; }
+        public string Remark { get; set; }
+        public string IsApprovedByManager { get; set; }
+        public string IsApprovedByFinance { get; set; }
+        public string IsApprovedByDirector { get; set; }
+        public string? FinanceApprovalRemark { get; set; }
+        public string? ManagerApprovalRemark { get; set; }
+        public string? DirectorApprovalRemark { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
 
 
     }

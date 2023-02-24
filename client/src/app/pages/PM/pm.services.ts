@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { ActivityDetailDto } from './activity-parents/add-activities/add-activities';
 import { ComiteeAdd, CommiteeAddEmployeeView, CommitteeView } from './comittes/committee';
-import { ActivityTargetDivisionDto } from './view-activties/activityview';
+import { ActivityTargetDivisionDto, ActivityView, ViewProgressDto } from './view-activties/activityview';
 
 
 @Injectable({
@@ -21,23 +21,23 @@ export class PMService {
 
         return this.http.post(this.BaseURI + "/Commite", ComiteeAdd)
     }
-    updateComittee(comiteeAdd:ComiteeAdd){
+    updateComittee(comiteeAdd: ComiteeAdd) {
 
-        return this.http.put(this.BaseURI+"/Commite",comiteeAdd)
+        return this.http.put(this.BaseURI + "/Commite", comiteeAdd)
     }
 
     getComittee() {
         return this.http.get<CommitteeView[]>(this.BaseURI + "/Commite")
     }
 
-    getComitteeSelectList (){
+    getComitteeSelectList() {
 
-        return this.http.get<SelectList[]>(this.BaseURI+"/Commite/getSelectListCommittee")
+        return this.http.get<SelectList[]>(this.BaseURI + "/Commite/getSelectListCommittee")
     }
 
-    getNotIncludedEmployees(CommiteId:string) {
+    getNotIncludedEmployees(CommiteId: string) {
 
-        return this.http.get<SelectList[]>(this.BaseURI + "/Commite/getNotIncludedEmployees?CommiteId="+CommiteId)
+        return this.http.get<SelectList[]>(this.BaseURI + "/Commite/getNotIncludedEmployees?CommiteId=" + CommiteId)
     }
 
     addEmployesInCommitee(value: CommiteeAddEmployeeView) {
@@ -50,13 +50,28 @@ export class PMService {
     /// Activity Parent 
 
     addActivityParent(activity: ActivityDetailDto) {
-        return this.http.post (this.BaseURI+"/Activity",activity)
+        return this.http.post(this.BaseURI + "/Activity", activity)
     }
-    addActivityTargetDivision(activityDto:ActivityTargetDivisionDto){
+    addActivityTargetDivision(activityDto: ActivityTargetDivisionDto) {
 
-        return this.http.post(this.BaseURI+"/Activity/targetDivision",activityDto)
+        return this.http.post(this.BaseURI + "/Activity/targetDivision", activityDto)
 
     }
+
+    addActivityPorgress(progress: FormData) {
+
+        return this.http.post(this.BaseURI + "/Activity/addProgress", progress)
+    }
+    viewProgress (activityId : string){
+
+        return this.http.get<ViewProgressDto[]>(this.BaseURI+"/Activity/viewProgress?actId="+activityId)
+    }
+
+    getAssignedActivities (empId : string ){
+
+        return this.http.get<ActivityView[]>(this.BaseURI+"/Activity/getAssignedActivties?employeeId="+empId)
+    }
+
 
 
 }
