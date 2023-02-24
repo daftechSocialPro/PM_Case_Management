@@ -10,6 +10,7 @@ using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.Models.Auth;
 using PM_Case_Managemnt_API.Services.CaseMGMT.Applicants;
 using PM_Case_Managemnt_API.Services.CaseMGMT.CaseAttachments;
+using PM_Case_Managemnt_API.Services.CaseMGMT.History;
 using PM_Case_Managemnt_API.Services.CaseService.CaseTypes;
 using PM_Case_Managemnt_API.Services.CaseService.Encode;
 using PM_Case_Managemnt_API.Services.CaseService.FileSettings;
@@ -20,6 +21,7 @@ using PM_Case_Managemnt_API.Services.PM.Commite;
 using PM_Case_Managemnt_API.Services.PM.Plan;
 using PM_Case_Managemnt_API.Services.PM.Program;
 using System.Text;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,6 +82,7 @@ builder.Services.AddScoped<IFileSettingsService, FileSettingService>();
 builder.Services.AddScoped<ICaseEncodeService, CaseEncodeService>();
 builder.Services.AddScoped<ICaseAttachementService, CaseAttachementService>();
 builder.Services.AddScoped<IApplicantService, ApplicantService>();
+builder.Services.AddScoped<ICaseHistoryService, CaseHistoryService>();
 
 //Jwt Authentication
 

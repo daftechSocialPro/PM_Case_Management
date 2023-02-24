@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Data;
+using PM_Case_Managemnt_API.DTOS.Case;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.Models.CaseModel;
+using PM_Case_Managemnt_API.Models.Common;
+using PM_Case_Managemnt_API.Services.CaseMGMT.History;
 using System.Runtime.CompilerServices;
 
 namespace PM_Case_Managemnt_API.Services.CaseService.Encode
@@ -9,10 +12,11 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
     public class CaseEncodeService: ICaseEncodeService
     {
         private readonly DBContext _dbContext;
-
-        public CaseEncodeService(DBContext dbContext)
+        private readonly ICaseHistoryService _caseHistoryService;
+        public CaseEncodeService(DBContext dbContext, ICaseHistoryService caseHistoryService)
         {
             _dbContext = dbContext;
+            _caseHistoryService = caseHistoryService;
         }
 
         public async Task<string> AddCaseEncoding(CaseEncodePostDto caseEncodePostDto)
@@ -43,8 +47,45 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 await _dbContext.AddAsync(newCase);
                 await _dbContext.SaveChangesAsync();
 
+                CaseHistoryPostDto history = new()
+                {
+                    CreatedBy = caseEncodePostDto.CreatedBy,
+                    CaseId = newCase.Id,
+                    CaseTypeId = newCase.CaseTypeId,
+                    FromEmployeeId = newCase.CreatedBy,
+                    ToEmployeeId = null,
+                    FromStructureId = null,
+                    ToStructureId = null,
+                    AffairHistoryStatus = AffairHistoryStatus.Waiting,
+                };
+
+                await _caseHistoryService.AddCaseHistory(history);
+
                 return newCase.Id.ToString();
             } catch (Exception ex) { 
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task AssignTask(CaseAssignDto caseAssignDto)
+        {
+            try
+            {
+                //Case caseToAssign = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals())
+                CaseHistory caseHistory = await _dbContext.CaseHistories.SingleOrDefaultAsync(el => el.CaseId.Equals(caseAssignDto.CaseId));
+
+                if (caseHistory == null)
+                    throw new Exception("No Case found for the given ID.");
+
+                caseHistory.ToStructureId = caseAssignDto.ForwardedToStructureId;
+                caseHistory.ToEmployeeId = caseAssignDto.ForwardedToEmployeeId;
+                caseHistory.ForwardedById = caseAssignDto.ForwardedByEmployeeId;
+
+                _dbContext.Entry(caseHistory).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+
+            } catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
             }
         }

@@ -70,8 +70,20 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             }
 
         }
+        [HttpPost("assign")]
+        public async Task<IActionResult> AssignCase(CaseAssignDto caseAssignDto)
+        {
+            try
+            {
+                await _caseEncodeService.AssignTask(caseAssignDto);
+                return NoContent();
+            } catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
 
-        [HttpGet("Encoding")]
+        [HttpGet("encoding")]
         public async Task<IActionResult> GetAll()
         {
             try

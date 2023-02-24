@@ -5,6 +5,14 @@ using PM_Case_Managemnt_API.Models.Common;
 
 namespace PM_Case_Managemnt_API.DTOS.CaseDto
 {
+    public class CaseAssignDto
+    {
+        public Guid CaseId { get; set; }
+        public Guid ForwardedByEmployeeId { get; set; }
+        public Guid? ForwardedToEmployeeId { get; set; }
+        public Guid ForwardedToStructureId { get; set; }
+
+    }
     public class CaseEncodePostDto: CaseEncodeBaseDto
     {
       
