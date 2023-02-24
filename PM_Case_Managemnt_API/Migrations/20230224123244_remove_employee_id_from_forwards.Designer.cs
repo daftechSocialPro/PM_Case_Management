@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PM_Case_Managemnt_API.Data;
 
 #nullable disable
 
-namespace PMCaseManagemntAPI.Migrations
+namespace PMCaseManagemntAPI.Migrations.DB
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20230224123244_remove_employee_id_from_forwards")]
+    partial class removeemployeeidfromforwards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1154,6 +1157,7 @@ namespace PMCaseManagemntAPI.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("CoordinatorApprovalRemark")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -1163,24 +1167,31 @@ namespace PMCaseManagemntAPI.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DirectorApprovalRemark")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DocumentPath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("EmployeeValueId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FinanceApprovalRemark")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FinanceDocumentPath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IsApprovedByCoordinator")
+                        .HasColumnType("int");
 
                     b.Property<int>("IsApprovedByDirector")
                         .HasColumnType("int");
 
                     b.Property<int>("IsApprovedByFinance")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IsApprovedByManager")
                         .HasColumnType("int");
 
                     b.Property<string>("Lat")
@@ -2072,7 +2083,7 @@ namespace PMCaseManagemntAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PM_Case_Managemnt_API.Models.PM.ActivityTargetDivision", "Quarter")
+                    b.HasOne("PM_Case_Managemnt_API.Models.PM.ActivityTargetDivision", "quarter")
                         .WithMany()
                         .HasForeignKey("QuarterId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2082,7 +2093,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Navigation("EmployeeValue");
 
-                    b.Navigation("Quarter");
+                    b.Navigation("quarter");
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.ActivityTargetDivision", b =>

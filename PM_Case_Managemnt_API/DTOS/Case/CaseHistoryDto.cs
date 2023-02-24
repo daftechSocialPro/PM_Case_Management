@@ -1,0 +1,30 @@
+﻿using PM_Case_Managemnt_API.Models.CaseModel;
+using PM_Case_Managemnt_API.Models.Common;
+
+namespace PM_Case_Managemnt_API.DTOS.CaseDto
+{
+    public class CaseHistoryPostDto
+    {
+        public Guid CaseId { get; set; }
+        public Guid? CaseTypeId { get; set; }
+        public Guid? FromEmployeeId { get; set; }
+        public Guid? FromStructureId { get; set; }
+        public Guid? ToEmployeeId { get; set; }
+        public Guid? ToStructureId { get; set; }
+        public AffairHistoryStatus AffairHistoryStatus { get; set; }
+        public DateTime? SeenDateTime { get; set; }
+        public DateTime? TransferedDateTime { get; set; }
+        public DateTime? CompletedDateTime { get; set; }
+        public DateTime? RevertedAt { get; set; }
+        public ReciverType ReciverType { get; set; }
+        public string Document { get; set; }
+        public bool IsSmsSent { get; set; }
+        public bool IsConfirmedBySeretery { get; set; }
+        public bool IsForwardedBySeretery { get; set; }
+        public DateTime? SecreteryConfirmationDateTime { get; set; }
+        public Guid? SecreteryId { get; set; }
+        public DateTime? ForwardedDateTime { get; set; }
+        public Guid? ForwardedById { get; set; }
+        public Guid CreatedBy { get; set; }
+    }
+}

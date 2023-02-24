@@ -13,8 +13,6 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         public Guid FileSettingId { get; set; }
         public virtual FileSetting FileSetting { get; set; } = null!;
         public string filetype { get; set; }
-
-       
     }
 
     public enum Filelookup

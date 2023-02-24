@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PM_Case_Managemnt_API.Data;
 
 #nullable disable
 
-namespace PMCaseManagemntAPI.Migrations
+namespace PMCaseManagemntAPI.Migrations.DB
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20230224093531_remove document from case history")]
+    partial class removedocumentfromcasehistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,44 +243,6 @@ namespace PMCaseManagemntAPI.Migrations
                     b.HasIndex("CaseId");
 
                     b.ToTable("CaseAttachments");
-                });
-
-            modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseForward", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CaseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ForwardedByEmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ForwardedToStructureId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RowStatus")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CaseId");
-
-                    b.HasIndex("ForwardedByEmployeeId");
-
-                    b.HasIndex("ForwardedToStructureId");
-
-                    b.ToTable("CaseForwards");
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseHistory", b =>
@@ -1154,6 +1119,7 @@ namespace PMCaseManagemntAPI.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("CoordinatorApprovalRemark")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -1163,24 +1129,31 @@ namespace PMCaseManagemntAPI.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DirectorApprovalRemark")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DocumentPath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("EmployeeValueId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FinanceApprovalRemark")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FinanceDocumentPath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IsApprovedByCoordinator")
+                        .HasColumnType("int");
 
                     b.Property<int>("IsApprovedByDirector")
                         .HasColumnType("int");
 
                     b.Property<int>("IsApprovedByFinance")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IsApprovedByManager")
                         .HasColumnType("int");
 
                     b.Property<string>("Lat")
@@ -1810,33 +1783,6 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Navigation("Case");
                 });
 
-            modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseForward", b =>
-                {
-                    b.HasOne("PM_Case_Managemnt_API.Models.CaseModel.Case", "Case")
-                        .WithMany()
-                        .HasForeignKey("CaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "ForwardedByEmployee")
-                        .WithMany()
-                        .HasForeignKey("ForwardedByEmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PM_Case_Managemnt_API.Models.Common.OrganizationalStructure", "ForwardedToStructure")
-                        .WithMany()
-                        .HasForeignKey("ForwardedToStructureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Case");
-
-                    b.Navigation("ForwardedByEmployee");
-
-                    b.Navigation("ForwardedToStructure");
-                });
-
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseHistory", b =>
                 {
                     b.HasOne("PM_Case_Managemnt_API.Models.CaseModel.Case", "Case")
@@ -2072,7 +2018,7 @@ namespace PMCaseManagemntAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PM_Case_Managemnt_API.Models.PM.ActivityTargetDivision", "Quarter")
+                    b.HasOne("PM_Case_Managemnt_API.Models.PM.ActivityTargetDivision", "quarter")
                         .WithMany()
                         .HasForeignKey("QuarterId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2082,7 +2028,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Navigation("EmployeeValue");
 
-                    b.Navigation("Quarter");
+                    b.Navigation("quarter");
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.ActivityTargetDivision", b =>

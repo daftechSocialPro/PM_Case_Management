@@ -26,7 +26,7 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         public Guid CaseTypeId { get; set; }
         public virtual CaseType CaseType { get; set; }
      
-        public string DocumentPath { get; set; }
+        //public string? DocumentPath { get; set; }
         public DateTime? CompletedAt { get; set; }
         public AffairStatus AffairStatus { get; set; }
   
