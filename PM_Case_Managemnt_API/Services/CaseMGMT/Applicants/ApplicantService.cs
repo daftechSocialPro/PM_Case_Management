@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using PM_Case_Managemnt_API.Data;
-using PM_Case_Managemnt_API.DTOS.Case;
+using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
 

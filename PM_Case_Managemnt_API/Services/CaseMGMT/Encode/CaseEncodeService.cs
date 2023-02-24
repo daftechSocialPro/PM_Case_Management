@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Data;
-using PM_Case_Managemnt_API.DTOS.Case;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
@@ -58,6 +57,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     ToStructureId = null,
                     AffairHistoryStatus = AffairHistoryStatus.Waiting,
                 };
+
 
                 await _caseHistoryService.AddCaseHistory(history);
 

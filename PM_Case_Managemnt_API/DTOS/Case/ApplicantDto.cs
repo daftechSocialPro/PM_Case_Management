@@ -1,7 +1,7 @@
 ﻿using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
 
-namespace PM_Case_Managemnt_API.DTOS.Case
+namespace PM_Case_Managemnt_API.DTOS.CaseDto
 {
     public class ApplicantPostDto
     {

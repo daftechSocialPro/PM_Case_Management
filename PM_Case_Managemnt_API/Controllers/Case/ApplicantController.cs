@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PM_Case_Managemnt_API.DTOS.Case;
+using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.Services.CaseMGMT.Applicants;
 
 namespace PM_Case_Managemnt_API.Controllers.Case

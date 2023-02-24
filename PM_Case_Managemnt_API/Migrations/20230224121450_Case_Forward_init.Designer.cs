@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PM_Case_Managemnt_API.Data;
 
 #nullable disable
 
-namespace PMCaseManagemntAPI.Migrations
+namespace PMCaseManagemntAPI.Migrations.DB
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20230224121450_Case_Forward_init")]
+    partial class CaseForwardinit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,6 +260,9 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("ForwardedByEmployeeId")
                         .HasColumnType("uniqueidentifier");
 
@@ -273,7 +279,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("CaseId");
 
-                    b.HasIndex("ForwardedByEmployeeId");
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("ForwardedToStructureId");
 
@@ -1826,9 +1832,9 @@ namespace PMCaseManagemntAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "ForwardedByEmployee")
+                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("ForwardedByEmployeeId")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1840,7 +1846,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Navigation("Case");
 
-                    b.Navigation("ForwardedByEmployee");
+                    b.Navigation("Employee");
 
                     b.Navigation("ForwardedToStructure");
                 });
