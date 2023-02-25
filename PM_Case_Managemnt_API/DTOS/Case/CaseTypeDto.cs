@@ -10,8 +10,8 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public string Code { get; set; } = null!;
         public float TotalPayment { get; set; }
         public float Counter { get; set; }
-        public TimeMeasurement MeasurementUnit { get; set; }
-        public CaseForm CaseForm { get; set; }
+        public string MeasurementUnit { get; set; }
+        public string CaseForm { get; set; }
         public string Remark { get; set; }
         public Guid CreatedBy { get; set; }
         public int? OrderNumber { get; set; }
@@ -25,12 +25,12 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public string CaseTypeTitle { get; set; }
         public string Remark { get; set; }
         public float TotalPayment { get; set; }
-        public RowStatus RowStatus { get; set; }
+        public string RowStatus { get; set; }
         public string Code { get; set; }
-        public TimeMeasurement MeasurementUnit { get; set; }
+        public string MeasurementUnit { get; set; }
         public Guid CreatedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
         //public Guid? ParentCaseTypeId { get; set; }
-        public virtual CaseType ParentCaseType { get; set; } = null!;
+       // public virtual CaseType ParentCaseType { get; set; } = null!;
     }
 }

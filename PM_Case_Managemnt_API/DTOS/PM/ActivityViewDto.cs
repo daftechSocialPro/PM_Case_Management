@@ -10,9 +10,9 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public string Name { get; set; } = null!;
         public float PlannedBudget { get; set; }
         public string ActivityType { get; set; } = null!;
-        public float Weight { get; set; } 
+        public float Weight { get; set; }
         public float Begining { get; set; }
-        public  float Target { get; set; }
+        public float Target { get; set; }
         public string UnitOfMeasurment { get; set; } = null!;
         public float OverAllPerformance { get; set; }
         public string StartDate { get; set; } = null!;
@@ -22,7 +22,7 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public List<MonthPerformanceViewDto>? MonthPerformance { get; set; } = null!;
 
 
-        public string ? ProgresscreatedAt { get; set; } 
+        public string? ProgresscreatedAt { get; set; }
         public bool IsFinance { get; set; }
         public bool IsProjectManager { get; set; }
         public bool IsDirector { get; set; }
@@ -56,7 +56,7 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public float Target { get; set; }
         public float TargetBudget { get; set; }
 
-        
+
 
 
     }
@@ -69,7 +69,7 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public Guid EmployeeValueId { get; set; }
         public string ProgressStatus { get; set; }
         public float ActualBudget { get; set; }
-        public float ActualWorked { get; set; } 
+        public float ActualWorked { get; set; }
         public string Lat { get; set; } = null!;
         public string Lng { get; set; } = null!;
         public Guid CreatedBy { get; set; }
@@ -103,6 +103,20 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public DateTime CreatedAt { get; set; }
 
 
+
+    }
+
+    public class ApprovalProgressDto
+    {
+
+        public Guid progressId { get; set; }
+        public string userType { get; set; }
+
+        public string actiontype { get; set; }
+
+        public string Remark { get; set; }
+
+        public Guid createdBy { get; set; }
 
     }
 

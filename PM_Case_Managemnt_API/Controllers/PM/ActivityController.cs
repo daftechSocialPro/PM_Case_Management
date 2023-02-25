@@ -169,6 +169,19 @@ namespace PM_Case_Managemnt_API.Controllers.PM
             return await _activityService.GetActivtiesForApproval(employeeId);
         }
 
+        [HttpPost("approve")]
+       public IActionResult ApproveProgress(ApprovalProgressDto approvalProgressDto)
+        {
+            try
+            {
+                var response = _activityService.ApproveProgress(approvalProgressDto);
+                return Ok(new { response });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error : {ex}");
+            }
+        }
 
 
     }

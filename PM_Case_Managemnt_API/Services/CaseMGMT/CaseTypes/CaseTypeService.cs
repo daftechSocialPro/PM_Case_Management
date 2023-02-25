@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
+using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.Models.CaseModel;
 
 namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
@@ -29,8 +30,8 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
                     Code = caseTypeDto.Code,
                     TotlaPayment = caseTypeDto.TotalPayment,
                     Counter = caseTypeDto.Counter,
-                    MeasurementUnit = caseTypeDto.MeasurementUnit,
-                    CaseForm = caseTypeDto.CaseForm,
+                    MeasurementUnit = Enum.Parse<TimeMeasurement>(caseTypeDto.MeasurementUnit),
+                    CaseForm = Enum.Parse<CaseForm>(caseTypeDto.CaseForm),
                     Remark = caseTypeDto.Remark,
                     OrderNumber = caseTypeDto.OrderNumber,
                     ParentCaseTypeId = null
@@ -60,13 +61,13 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
                         Id = caseType.Id,
                         CaseTypeTitle = caseType.CaseTypeTitle,
                         Code = caseType.Code,
-                        CreatedAt = caseType.CreatedAt,
+                        CreatedAt = caseType.CreatedAt.ToString(),
                         CreatedBy = caseType.CreatedBy,
-                        MeasurementUnit = caseType.MeasurementUnit,
+                        MeasurementUnit = caseType.MeasurementUnit.ToString(),
                         Remark = caseType.Remark,
-                        RowStatus = caseType.RowStatus,
+                        RowStatus = caseType.RowStatus.ToString(),
                         TotalPayment = caseType.TotlaPayment,
-                        ParentCaseType = caseType.ParentCaseType
+                        //ParentCaseType = caseType.ParentCaseType
                     });
                 }
 
@@ -76,6 +77,18 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
             }
         }
 
+        public async Task<List<SelectListDto>> GetAllSelectList()
+        {
+
+            return await (from c in _dbContext.CaseTypes
+                          select new SelectListDto
+                          {
+                              Id= c.Id,
+                              Name= c.CaseTypeTitle
+
+                          }).ToListAsync();
+
+        }
 
     }
 }

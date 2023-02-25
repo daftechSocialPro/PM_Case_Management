@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { ActivityDetailDto } from './activity-parents/add-activities/add-activities';
 import { ComiteeAdd, CommiteeAddEmployeeView, CommitteeView } from './comittes/committee';
-import { ActivityTargetDivisionDto, ActivityView, ViewProgressDto } from './view-activties/activityview';
+import { ActivityTargetDivisionDto, ActivityView, ApprovalProgressDto, ViewProgressDto } from './view-activties/activityview';
 
 
 @Injectable({
@@ -77,6 +77,9 @@ export class PMService {
         return this.http.get<ActivityView[]>(this.BaseURI + "/Activity/forApproval?employeeId=" + empId)
     }
 
+    approveProgress(approvalProgressDto:ApprovalProgressDto){
+        return this.http.post(this.BaseURI+"/Activity/approve",approvalProgressDto)
+    }
 
 
 }

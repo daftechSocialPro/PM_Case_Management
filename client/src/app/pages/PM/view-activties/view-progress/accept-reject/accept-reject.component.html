@@ -4,13 +4,13 @@
             <h5 class="modal-title"><span [class]="actiontype==='Accept'?'badge bg-success':'badge bg-danger'">{{actiontype}} </span> as a {{userType}}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
-         <form [formGroup]="acceptForm" onsubmit="submit()" >
+         <form [formGroup]="acceptForm" (submit)="submit()" >
          <div class="modal-body"> 
 
            
                 <div class="col-12">
                     <div class="form-floating"><textarea class="form-control" formControlName="Remark"
-                            placeholder="Address" id="Remark" style="height: 120px;"></textarea><label
+                            placeholder="Address" #remark id="Remark" style="height: 120px;"></textarea><label
                             for="Remark">Remark</label>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
         </div>
          <div class="modal-footer">
              <button type="button" class="btn btn-secondary" (click)="closeModal()" data-bs-dismiss="modal">Close</button>
-              <button type="button" [class]="actiontype==='Accept'?'btn btn-success':'btn btn-danger'">
+              <button type="submit" [disabled]="!remark.value" [class]="actiontype==='Accept'?'btn btn-success':'btn btn-danger'">
                 {{actiontype}}</button>
         </div>
         </form>

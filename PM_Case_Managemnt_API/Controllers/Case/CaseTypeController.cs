@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
+using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Services.CaseService.CaseTypes;
 
@@ -41,5 +42,19 @@ namespace PM_Case_Managemnt_API.Controllers.Case
                 return StatusCode(500, "Internal Server Error");
             }
         }
+        [HttpGet("typeSelectList")]
+        public async Task<IActionResult> GetSelectList()
+        {
+            try
+            {
+               
+                return Ok(await _caseTypeService.GetAllSelectList());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+       
     }
 }

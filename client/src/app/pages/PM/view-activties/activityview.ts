@@ -15,10 +15,10 @@ export interface ActivityView {
     EndDate: string,
     Members: SelectList[]
     MonthPerformance?: MonthPerformanceView[]
-    ProgresscreatedAt?:string
-    IsFinance :boolean
-    IsProjectManager :boolean
-    IsDirector :boolean
+    ProgresscreatedAt?: string
+    IsFinance: boolean
+    IsProjectManager: boolean
+    IsDirector: boolean
 
 
 }
@@ -66,17 +66,26 @@ export interface ViewProgressDto {
     ActalWorked: number
     UsedBudget: number
     Documents: string[]
-    FinanceDocument ?:string 
+    FinanceDocument?: string
     Remark: string
     IsApprovedByManager: string
     IsApprovedByFinance: string
     IsApprovedByDirector: string
     FinanceApprovalRemark: string
-    CoordinatorApprovalRemark: string
+    ManagerApprovalRemark: string
     DirectorApprovalRemark: string
-    CreatedAt:string
+    CreatedAt: string
 
 
 }
 
+export interface ApprovalProgressDto {
+
+    progressId: string
+    userType: string
+    actiontype: string
+    Remark: string
+    createdBy: string
+
+}
 

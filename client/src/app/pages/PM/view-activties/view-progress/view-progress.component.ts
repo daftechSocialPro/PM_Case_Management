@@ -54,6 +54,12 @@ export class ViewProgressComponent implements OnInit {
     modalRef.componentInstance.progressId = progressId
     modalRef.componentInstance.userType = user
     modalRef.componentInstance.actiontype = actiontype
+    
+    modalRef.result.then(()=>
+    {
+      this.closeModal()
+    }
+    )
 
   }
 

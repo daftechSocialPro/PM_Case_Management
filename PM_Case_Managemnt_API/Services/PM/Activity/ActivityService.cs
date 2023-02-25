@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.Common;
@@ -389,9 +390,62 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
 
 
 
-        //}
+            //}
+        }
+
+        public async Task<int> ApproveProgress(ApprovalProgressDto approvalProgressDto)
+        {
+            var progress = _dBContext.ActivityProgresses.Find(approvalProgressDto.progressId);
+            if (progress != null)
+            {
+                if (approvalProgressDto.userType== "Director")
+                {
+                    progress.DirectorApprovalRemark = approvalProgressDto.Remark;
+                    if (approvalProgressDto.actiontype== "Accept")
+                    {
+                        progress.IsApprovedByDirector = approvalStatus.approved;
+                        
+                    }
+                    else
+                    {
+                        progress.IsApprovedByDirector = approvalStatus.rejected;
+                    }
+                   
+
+                }
+                if (approvalProgressDto.userType == "Project Manager")
+                {
+                    progress.CoordinatorApprovalRemark = approvalProgressDto.Remark;
+                    if (approvalProgressDto.actiontype == "Accept")
+                    {
+                        progress.IsApprovedByManager = approvalStatus.approved;
+
+                    }
+                    else
+                    {
+                        progress.IsApprovedByManager = approvalStatus.rejected;
+                    }
+                }
+                if (approvalProgressDto.userType == "Finance")
+                {
+                    progress.FinanceApprovalRemark = approvalProgressDto.Remark;
+                    if (approvalProgressDto.actiontype == "Accept")
+                    {
+                        progress.IsApprovedByFinance = approvalStatus.approved;
+
+                    }
+                    else
+                    {
+                        progress.IsApprovedByFinance = approvalStatus.rejected;
+                    }
+                }
+
+                
+                _dBContext.SaveChanges();
+               
+            }
+                return 1;
+        }
     }
-
-
 }
 

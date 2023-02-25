@@ -93,6 +93,8 @@ import { AddProgressComponent } from './pages/PM/view-activties/add-progress/add
 import { ViewProgressComponent } from './pages/pm/view-activties/view-progress/view-progress.component';
 import { ActivityforapprovalComponent } from './pages/pm/activityforapproval/activityforapproval.component';
 import { AcceptRejectComponent } from './pages/pm/view-activties/view-progress/accept-reject/accept-reject.component';
+import { AddCaseTypeComponent } from './pages/case/case-type/add-case-type/add-case-type.component';
+import { CaseTypeComponent } from './pages/case/case-type/case-type.component';
 
 
 @NgModule({
@@ -168,6 +170,7 @@ import { AcceptRejectComponent } from './pages/pm/view-activties/view-progress/a
     AddActivitiesComponent,
     EncodeCaseComponent,
     AddCaseComponent,
+    AddCaseTypeComponent,
     ComittesComponent,
     AddComiteeComponent,
     CommitteeEmployeeComponent,
@@ -178,7 +181,8 @@ import { AcceptRejectComponent } from './pages/pm/view-activties/view-progress/a
     AddProgressComponent,
     ViewProgressComponent,
     ActivityforapprovalComponent,
-    AcceptRejectComponent
+    AcceptRejectComponent,
+    CaseTypeComponent
     
     
   ],
