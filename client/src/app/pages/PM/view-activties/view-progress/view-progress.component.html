@@ -29,35 +29,119 @@
                         <th scope="row">{{i+1}}</th>
                         <td>{{pro.ActalWorked}}</td>
                         <td>{{pro.UsedBudget}}</td>
-                        <td >
-                            <div class="" >
+                        <td>
 
-                           
-                            <a target="_blank" class="btn btn-sm btn-success " *ngFor="let file of pro.Documents" href={{getFilePath(file)}}>View FIle</a>
-                        </div>
+
+                            <ng-container *ngFor="let file of pro.Documents;let i = index;">
+                                <a target="_blank" class="btn btn-sm btn-success m-2" href={{getFilePath(file)}}>View
+                                    FIle {{i+1}}</a>
+                            </ng-container>
+
                         </td>
-                        <td><a target="_blank" class="btn btn-sm btn-success" href={{getFilePath(pro.FinanceDocument!)}}>View File</a></td>
+                        <td><a target="_blank" class="btn btn-sm btn-success"
+                                href={{getFilePath(pro.FinanceDocument!)}}>View File</a></td>
                         <td>
 
                             <span>
-                                Director:    <span class="badge bg-secondary">{{pro.IsApprovedByDirector}}</span>                                                        
-                            </span><br/>
+                                Director: <span class="badge bg-secondary">{{pro.IsApprovedByDirector}}</span>
+                            </span><br />
 
                             <span>
-                                Finance: <span class="badge bg-secondary">{{pro.IsApprovedByFinance}}</span> 
-                            </span> <br/>
+                                Finance: <span class="badge bg-secondary">{{pro.IsApprovedByFinance}}</span>
+                            </span> <br />
 
                             <span>
                                 Pro.Man: <span class="badge bg-secondary">{{pro.IsApprovedByManager}}</span>
                             </span>
 
 
-                    
+
 
                         </td>
                         <td>{{pro.Remark}}</td>
                         <td>{{pro.CreatedAt| date:'fullDate'}}</td>
-                        <td></td>
+                        <td>
+
+
+                            <span *ngIf="activity.IsDirector">
+                                Director:
+                                <li style="list-style: none; text-align: right;">
+                                    <a class="nav-link nav-profile  pe-0" href="#" data-bs-toggle="dropdown"> <span
+                                            class="d-none d-md-block dropdown-toggle ps-2">Action </span> </a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                                        <li> <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;"
+                                                (click)="ApporveReject(pro.Id,userType[0],actionType[0])"> <i
+                                                    class="bi bi-bookmark-check-fill text-success"></i>
+                                                <span>Approve</span> </a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li> <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;"
+                                                (click)="ApporveReject(pro.Id,userType[0],actionType[1])"> <i
+                                                    class="bi bi-bookmark-x-fill text-danger"></i> <span>Reject</span>
+                                            </a></li>
+                                        <hr class="dropdown-divider">
+
+
+
+
+                                    </ul>
+                                </li>
+                            </span><br />
+
+                            <span *ngIf="activity.IsFinance">
+                                Finance:
+                                <li style="list-style: none; text-align: right;">
+                                    <a class="nav-link nav-profile  pe-0" href="#" data-bs-toggle="dropdown"> <span
+                                            class="d-none d-md-block dropdown-toggle ps-2">Action </span> </a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                                        <li> <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;"
+                                                (click)="ApporveReject(pro.Id,userType[2],actionType[0])"> <i
+                                                    class="bi bi-bookmark-check-fill text-success"></i>
+                                                <span>Approve</span> </a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li> <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;"
+                                                (click)="ApporveReject(pro.Id,userType[2],actionType[1])"> <i
+                                                    class="bi bi-bookmark-x-fill text-danger"></i> <span>Reject</span>
+                                            </a></li>
+                                        <hr class="dropdown-divider">
+
+
+
+
+                                    </ul>
+                                </li>
+                            </span> <br />
+
+                            <span *ngIf="activity.IsProjectManager">
+                                Pro.Man:
+                                <li style="list-style: none; text-align: right;">
+                                    <a class="nav-link nav-profile  pe-0" href="#" data-bs-toggle="dropdown"> <span
+                                            class="d-none d-md-block dropdown-toggle ps-2">Action </span> </a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                                        <li> <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;"
+                                                (click)="ApporveReject(pro.Id,userType[1],actionType[0])"> <i
+                                                    class="bi bi-bookmark-check-fill text-success"></i>
+                                                <span>Approve</span> </a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li> <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;"
+                                                (click)="ApporveReject(pro.Id,userType[1],actionType[1])"> <i
+                                                    class="bi bi-bookmark-x-fill text-danger"></i> <span>Reject</span>
+                                            </a></li>
+                                        <hr class="dropdown-divider">
+
+
+
+
+                                    </ul>
+                                </li>
+                            </span>
+
+                        </td>
                     </tr>
 
                 </tbody>

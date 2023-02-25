@@ -162,8 +162,14 @@ namespace PM_Case_Managemnt_API.Controllers.PM
         {
             return await _activityService.GetAssignedActivity(employeeId);
         }
-            
 
-         
+        [HttpGet("forApproval")]
+        public async Task<List<ActivityViewDto>> forApproval(Guid employeeId)
+        {
+            return await _activityService.GetActivtiesForApproval(employeeId);
+        }
+
+
+
     }
 }

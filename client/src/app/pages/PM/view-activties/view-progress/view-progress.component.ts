@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from 'src/app/common/common.service';
 import { PMService } from '../../pm.services';
 import { ActivityView, ViewProgressDto } from '../activityview';
+import { AcceptRejectComponent } from './accept-reject/accept-reject.component';
 
 @Component({
   selector: 'app-view-progress',
@@ -12,9 +13,16 @@ import { ActivityView, ViewProgressDto } from '../activityview';
 export class ViewProgressComponent implements OnInit {
 
   @Input() activity !: ActivityView;
-  progress!:ViewProgressDto[]
-  constructor(private activeModal: NgbActiveModal,private pmService : PMService,private commonService : CommonService) { }
-  ngOnInit(): void { this.getProgress() }
+  progress!:ViewProgressDto[];
+  userType :string[]=["Director","Project Manager","Finance"]
+  actionType : string []=["Accept","Reject"]
+  constructor(private activeModal: NgbActiveModal,private modalService : NgbModal,private pmService : PMService,private commonService : CommonService) { }
+  ngOnInit(): void { 
+    
+
+    console.log(this.activity)
+    
+    this.getProgress() }
 
 
   getProgress (){
@@ -38,6 +46,14 @@ export class ViewProgressComponent implements OnInit {
   getFilePath (value:string){
 
     return this.commonService.createImgPath(value)
+
+  }
+
+  ApporveReject(progressId:string,user:string,actiontype:string){
+    let modalRef = this.modalService.open(AcceptRejectComponent,{size:'md',backdrop:'static'})
+    modalRef.componentInstance.progressId = progressId
+    modalRef.componentInstance.userType = user
+    modalRef.componentInstance.actiontype = actiontype
 
   }
 

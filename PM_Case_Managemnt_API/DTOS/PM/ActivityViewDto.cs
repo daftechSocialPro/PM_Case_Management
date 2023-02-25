@@ -20,6 +20,12 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public List<SelectListDto> Members { get; set; } = null!;
 
         public List<MonthPerformanceViewDto>? MonthPerformance { get; set; } = null!;
+
+
+        public string ? ProgresscreatedAt { get; set; } 
+        public bool IsFinance { get; set; }
+        public bool IsProjectManager { get; set; }
+        public bool IsDirector { get; set; }
     }
 
     public class MonthPerformanceViewDto

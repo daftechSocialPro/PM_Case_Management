@@ -71,6 +71,7 @@ export class UserService {
       role : payLoad.role,
       EmployeeId:payLoad.EmployeeId
     }
+    console.log(user)
     return user ; 
   }
 

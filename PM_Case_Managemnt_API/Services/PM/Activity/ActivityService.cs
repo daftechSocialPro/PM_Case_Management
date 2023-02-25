@@ -8,7 +8,10 @@ using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.DTOS.PM;
 using PM_Case_Managemnt_API.Models.Common;
 using PM_Case_Managemnt_API.Models.PM;
+using PMCaseManagemntAPI.Migrations.DB;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace PM_Case_Managemnt_API.Services.PM.Activity
 {
@@ -296,18 +299,95 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                                     ).ToListAsync();
 
             return assignedActivities;
-
-
         }
 
-        public async Task<List<SelectListDto>> GetActivtiesForApproval(Guid employeeId)
+        public async Task<List<ActivityViewDto>> GetActivtiesForApproval(Guid employeeId)
         {
 
-            var plans = _dBContext.Plans.Include(x => x.Structure).Where(x => x.ProjectManagerId == employeeId || x.FinanceId == employeeId).Select(x=>x.Id).ToList();
-            
-            var task = _dBContext.Tasks.Where(x=>x.PlanId==)
-            var activties = await (from a in _dBContext.Activities
-                                   where plans.Contains(a.))
+
+            var not = (from p in _dBContext.Plans.Where(x => (x.FinanceId == employeeId || x.ProjectManagerId == employeeId))
+                       join a in _dBContext.Activities on p.Id equals a.PlanId
+                       join ap in _dBContext.ActivityProgresses on a.Id equals ap.ActivityId
+                       select new
+                       {
+
+                           ap.Id,
+                       }).Union(from p in _dBContext.Plans.Where(x => (x.FinanceId == employeeId || x.ProjectManagerId == employeeId))
+                                join t in _dBContext.Tasks on p.Id equals t.PlanId
+                                join a in _dBContext.Activities on t.Id equals a.TaskId
+                                join ap in _dBContext.ActivityProgresses on a.Id equals ap.ActivityId
+                                select new
+                                {
+                                    ap.Id,
+                                }).Union(from p in _dBContext.Plans.Where(x => (x.FinanceId == employeeId || x.ProjectManagerId == employeeId))
+                                         join t in _dBContext.Tasks on p.Id equals t.PlanId
+                                         join ac in _dBContext.ActivityParents on t.Id equals ac.TaskId
+                                         join a in _dBContext.Activities on ac.Id equals a.ActivityParentId
+                                         join ap in _dBContext.ActivityProgresses on a.Id equals ap.ActivityId
+                                         select new
+                                         {
+                                             ap.Id,
+                                         }).ToList();
+
+
+
+            List<ActivityViewDto> actDtos = new List<ActivityViewDto>();
+
+
+
+            foreach (var activitprogress in not)
+            {
+
+                var activityViewDtos = (from e in _dBContext.ActivityProgresses.Include(x => x.Activity.ActivityParent.Task.Plan.Structure).Where(a => a.Id == activitprogress.Id && (a.IsApprovedByManager == approvalStatus.pending || a.IsApprovedByDirector == approvalStatus.pending || a.IsApprovedByFinance == approvalStatus.pending))
+                                            // join ae in _dBContext.EmployeesAssignedForActivities.Include(x=>x.Employee) on e.Id equals ae.ActivityId
+                                        select new ActivityViewDto
+                                        {
+                                            Id = e.Activity.Id,
+                                            Name = e.Activity.ActivityDescription,
+                                            PlannedBudget = e.Activity.PlanedBudget,
+                                            ActivityType = e.Activity.ActivityType.ToString(),
+                                            Weight = e.Activity.Weight,
+                                            Begining = e.Activity.Begining,
+                                            Target = e.Activity.Goal,
+                                            UnitOfMeasurment = e.Activity.UnitOfMeasurement.Name,
+                                            OverAllPerformance = 0,
+                                            StartDate = e.Activity.ShouldStat.ToString(),
+                                            EndDate = e.Activity.ShouldEnd.ToString(),
+                                            Members = _dBContext.EmployeesAssignedForActivities.Include(x => x.Employee).Where(x => x.ActivityId == e.ActivityId).Select(y => new SelectListDto
+                                            {
+                                                Id = y.Id,
+                                                Name = y.Employee.FullName,
+                                                Photo = y.Employee.Photo,
+                                                EmployeeId = y.EmployeeId.ToString(),
+
+                                            }).ToList(),
+                                            MonthPerformance = _dBContext.ActivityTargetDivisions.Where(x => x.ActivityId == e.ActivityId).OrderBy(x => x.Order).Select(y => new MonthPerformanceViewDto
+                                            {
+                                                Id = y.Id,
+                                                Order = y.Order,
+                                                Planned = y.Target,
+                                                Actual = 0,
+                                                Percentage = (0) * 100
+
+                                            }).ToList(),
+
+                                            ProgresscreatedAt = e.CreatedAt.ToString(),
+                                            IsFinance = e.Activity.Plan.FinanceId == employeeId || e.Activity.Task.Plan.FinanceId == employeeId || e.Activity.ActivityParent.Task.Plan.FinanceId == employeeId ? true : false,
+                                            IsProjectManager = e.Activity.Plan.ProjectManagerId == employeeId || e.Activity.Task.Plan.ProjectManagerId == employeeId || e.Activity.ActivityParent.Task.Plan.ProjectManagerId == employeeId ? true : false,
+                                            IsDirector = _dBContext.EmployeesStructures.Include(x => x.OrganizationalStructure).Any(x => (x.EmployeeId == employeeId && x.Position == Position.Director) && (x.OrganizationalStructureId == e.Activity.Plan.StructureId || x.OrganizationalStructureId == e.Activity.Task.Plan.StructureId || x.OrganizationalStructureId == e.Activity.ActivityParent.Task.Plan.StructureId))
+
+
+                                        }
+                                   ).ToList();
+                actDtos.AddRange(activityViewDtos);
+            }
+
+
+
+            return actDtos.DistinctBy(x => x.Id).ToList();
+
+
+
 
         }
     }

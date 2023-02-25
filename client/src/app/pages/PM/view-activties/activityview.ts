@@ -15,6 +15,10 @@ export interface ActivityView {
     EndDate: string,
     Members: SelectList[]
     MonthPerformance?: MonthPerformanceView[]
+    ProgresscreatedAt?:string
+    IsFinance :boolean
+    IsProjectManager :boolean
+    IsDirector :boolean
 
 
 }

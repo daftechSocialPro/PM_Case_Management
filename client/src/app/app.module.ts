@@ -91,6 +91,8 @@ import { ViewActivtiesComponent } from './pages/pm/view-activties/view-activties
 import { ActivityTargetComponent } from './pages/pm/view-activties/activity-target/activity-target.component';
 import { AddProgressComponent } from './pages/PM/view-activties/add-progress/add-progress.component';
 import { ViewProgressComponent } from './pages/pm/view-activties/view-progress/view-progress.component';
+import { ActivityforapprovalComponent } from './pages/pm/activityforapproval/activityforapproval.component';
+import { AcceptRejectComponent } from './pages/pm/view-activties/view-progress/accept-reject/accept-reject.component';
 
 
 @NgModule({
@@ -174,7 +176,9 @@ import { ViewProgressComponent } from './pages/pm/view-activties/view-progress/v
     ViewActivtiesComponent,
     ActivityTargetComponent,
     AddProgressComponent,
-    ViewProgressComponent
+    ViewProgressComponent,
+    ActivityforapprovalComponent,
+    AcceptRejectComponent
     
     
   ],

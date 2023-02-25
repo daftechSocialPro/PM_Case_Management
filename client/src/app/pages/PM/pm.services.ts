@@ -62,14 +62,19 @@ export class PMService {
 
         return this.http.post(this.BaseURI + "/Activity/addProgress", progress)
     }
-    viewProgress (activityId : string){
+    viewProgress(activityId: string) {
 
-        return this.http.get<ViewProgressDto[]>(this.BaseURI+"/Activity/viewProgress?actId="+activityId)
+        return this.http.get<ViewProgressDto[]>(this.BaseURI + "/Activity/viewProgress?actId=" + activityId)
     }
 
-    getAssignedActivities (empId : string ){
+    getAssignedActivities(empId: string) {
 
-        return this.http.get<ActivityView[]>(this.BaseURI+"/Activity/getAssignedActivties?employeeId="+empId)
+        return this.http.get<ActivityView[]>(this.BaseURI + "/Activity/getAssignedActivties?employeeId=" + empId)
+    }
+
+    getActivityForApproval(empId: string) {
+
+        return this.http.get<ActivityView[]>(this.BaseURI + "/Activity/forApproval?employeeId=" + empId)
     }
 
 
