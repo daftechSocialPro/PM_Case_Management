@@ -16,6 +16,7 @@ import { ActivityView, AddProgressActivityDto } from '../activityview';
 export class AddProgressComponent implements OnInit {
 
   @Input() activity !: ActivityView ;
+  @Input () ProgressStatus! : string;
   progressForm !: FormGroup;
   progress !: AddProgressActivityDto;
   user!: UserView;
@@ -85,7 +86,7 @@ export class AddProgressComponent implements OnInit {
       formData.set('ActualWorked', progressValue.ActualWorked);
       formData.set('Remark', progressValue.Remark);
       formData.set('ActivityId', this.activity.Id);
-      formData.set('ProgressStatus','0');
+      formData.set('ProgressStatus',this.ProgressStatus);
       formData.set('CreatedBy', this.user.UserID);
       formData.set('EmployeeValueId', this.user.EmployeeId);
       formData.set('lat',this.position.lat)

@@ -61,6 +61,12 @@ export class ViewActivtiesComponent implements OnInit {
   AddProgress(){
     let modalRef = this.modalService.open(AddProgressComponent,{size:'lg',backdrop:'static'})
     modalRef.componentInstance.activity =this.actView
+    modalRef.componentInstance.ProgressStatus="0"
+  }
+  FinalizeProgress(){
+    let modalRef = this.modalService.open(AddProgressComponent,{size:'lg',backdrop:'static'})
+    modalRef.componentInstance.activity =this.actView
+    modalRef.componentInstance.ProgressStatus="1"
   }
 
   ViewProgress(){

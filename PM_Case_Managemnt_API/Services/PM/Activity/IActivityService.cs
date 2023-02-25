@@ -1,4 +1,5 @@
-﻿using PM_Case_Managemnt_API.DTOS.PM;
+﻿using PM_Case_Managemnt_API.DTOS.Common;
+using PM_Case_Managemnt_API.DTOS.PM;
 using PM_Case_Managemnt_API.Models.PM;
 
 namespace PM_Case_Managemnt_API.Services.PM.Activity
@@ -15,5 +16,8 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
 
 
         public Task<List<ActivityViewDto>> GetAssignedActivity(Guid employeeId);
+
+
+        public Task <List<SelectListDto>> GetActivtiesForApproval (Guid employeeId);    
     }
 }

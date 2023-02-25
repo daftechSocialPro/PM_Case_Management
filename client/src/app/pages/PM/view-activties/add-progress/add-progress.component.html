@@ -8,7 +8,7 @@
 
         <form [formGroup]="progressForm" (submit)="submit()">
         <div class="card-body">
-            <h5 class="card-title">Add Activity Progress for {{activity.Name}}</h5>
+            <h5 class="card-title">{{ProgressStatus=="0"?"Add":"Finalize"}}Add Activity Progress for {{activity.Name}}</h5>
             <hr />
 
             <div class="row mt-2">
