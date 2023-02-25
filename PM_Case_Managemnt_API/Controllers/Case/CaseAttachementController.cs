@@ -21,8 +21,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         {
             try
             { 
-                List<CaseAttachment> attachments = await _caseAttachementService.GetAttachements(CaseId);
-                return Ok(attachments);
+                return Ok(await _caseAttachementService.GetAll(CaseId));
             } catch (Exception ex)
             {
                 return StatusCode(500, "Internal Server Error");

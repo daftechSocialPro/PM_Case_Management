@@ -9,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.Models.Auth;
 using PM_Case_Managemnt_API.Services.CaseMGMT.Applicants;
+using PM_Case_Managemnt_API.Services.CaseMGMT.AppointmentService;
+using PM_Case_Managemnt_API.Services.CaseMGMT.AppointmentWithCalenderService;
 using PM_Case_Managemnt_API.Services.CaseMGMT.CaseAttachments;
 using PM_Case_Managemnt_API.Services.CaseMGMT.CaseForwardService;
 using PM_Case_Managemnt_API.Services.CaseMGMT.History;
@@ -85,6 +87,8 @@ builder.Services.AddScoped<ICaseAttachementService, CaseAttachementService>();
 builder.Services.AddScoped<IApplicantService, ApplicantService>();
 builder.Services.AddScoped<ICaseHistoryService, CaseHistoryService>();
 builder.Services.AddScoped<ICaseForwardService, CaseForwardService>();
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IAppointmentWithCalenderService, AppointmentWithCalenderService>();
 
 //Jwt Authentication
 

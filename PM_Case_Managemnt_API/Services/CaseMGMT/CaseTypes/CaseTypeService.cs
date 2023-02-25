@@ -15,7 +15,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
             _dbContext = dbContext;
         }
 
-        public async Task AddNewCaseType(CaseTypePostDto caseTypeDto)
+        public async Task Add(CaseTypePostDto caseTypeDto)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
             }
         }
 
-        public async Task<List<CaseTypeGetDto>> GetAllCaseTypes()
+        public async Task<List<CaseTypeGetDto>> GetAll()
         {
             try
             {

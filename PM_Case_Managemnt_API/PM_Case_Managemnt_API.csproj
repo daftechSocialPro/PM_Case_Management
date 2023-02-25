@@ -30,7 +30,7 @@
     <Compile Include="Models\Case\CaseMessages.cs" />
     <Compile Include="Models\Case\Applicant.cs" />
     <Compile Include="Models\Case\Appointement.cs" />
-    <Compile Include="Models\Case\AppointemnetWithCalender.cs" />
+    <Compile Include="Models\Case\AppointementWithCalender.cs" />
     <Compile Include="Models\Case\Case.cs" />
     <Compile Include="Models\Case\CaseAttachment.cs" />
     <Compile Include="Models\Case\CaseHistory.cs" />

@@ -22,8 +22,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         {
             try
             {
-                List<CaseTypeGetDto> caseTypes =  await _caseTypeService.GetAllCaseTypes();
-                return Ok(caseTypes);
+                return Ok(await _caseTypeService.GetAll());
             } catch(Exception ex)
             {
                 return StatusCode(500, "Internal Server Error");
@@ -35,7 +34,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         {
             try
             {
-                await _caseTypeService.AddNewCaseType(caseType);
+                await _caseTypeService.Add(caseType);
                 return NoContent();
             } catch (Exception ex)
             {

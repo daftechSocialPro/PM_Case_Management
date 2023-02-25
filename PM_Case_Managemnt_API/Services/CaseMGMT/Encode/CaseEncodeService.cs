@@ -18,7 +18,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
             _caseHistoryService = caseHistoryService;
         }
 
-        public async Task<string> AddCaseEncoding(CaseEncodePostDto caseEncodePostDto)
+        public async Task<string> Add(CaseEncodePostDto caseEncodePostDto)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     LetterNumber = caseEncodePostDto.LetterNumber,
                     LetterSubject = caseEncodePostDto.LetterSubject,
                     CaseTypeId = caseEncodePostDto.CaseTypeId,
-                    AffairStatus = caseEncodePostDto.AffairStatus,
+                    AffairStatus = AffairStatus.Encoded,
                     PhoneNumber2 = caseEncodePostDto.PhoneNumber2,
                     Representative = caseEncodePostDto.Representative,
                     Remark = caseEncodePostDto.Remark   
@@ -59,7 +59,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 };
 
 
-                await _caseHistoryService.AddCaseHistory(history);
+                await _caseHistoryService.Add(history);
 
                 return newCase.Id.ToString();
             } catch (Exception ex) { 
@@ -67,30 +67,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
             }
         }
 
-        public async Task AssignTask(CaseAssignDto caseAssignDto)
-        {
-            try
-            {
-                //Case caseToAssign = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals())
-                CaseHistory caseHistory = await _dbContext.CaseHistories.SingleOrDefaultAsync(el => el.CaseId.Equals(caseAssignDto.CaseId));
-
-                if (caseHistory == null)
-                    throw new Exception("No Case found for the given ID.");
-
-                caseHistory.ToStructureId = caseAssignDto.ForwardedToStructureId;
-                caseHistory.ToEmployeeId = caseAssignDto.ForwardedToEmployeeId;
-                caseHistory.ForwardedById = caseAssignDto.ForwardedByEmployeeId;
-
-                _dbContext.Entry(caseHistory).State = EntityState.Modified;
-                await _dbContext.SaveChangesAsync();
-
-            } catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public async Task<List<CaseEncodeGetDto>> GetCaseEncodings()
+        public async Task<List<CaseEncodeGetDto>> GetAll()
         {
             try
             {
@@ -123,11 +100,44 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 }
 
                 return results;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task AssignTask(CaseAssignDto caseAssignDto)
+        {
+            try
+            {
+                //Case caseToAssign = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals())
+                CaseHistory caseHistory = await _dbContext.CaseHistories.SingleOrDefaultAsync(el => el.CaseId.Equals(caseAssignDto.CaseId));
+
+                if (caseHistory == null)
+                    throw new Exception("No Case found for the given ID.");
+
+                caseHistory.ToStructureId = caseAssignDto.ForwardedToStructureId;
+                caseHistory.ToEmployeeId = caseAssignDto.ForwardedToEmployeeId;
+                caseHistory.ForwardedById = caseAssignDto.ForwardedByEmployeeId;
+                
+
+                _dbContext.Entry(caseHistory).State = EntityState.Modified;
+
+                Case currCase = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals(caseAssignDto.CaseId));
+                currCase.AffairStatus = AffairStatus.Assigned;
+
+                _dbContext.Entry(currCase).State = EntityState.Modified;
+                
+                await _dbContext.SaveChangesAsync();
+
             } catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
+
 
     }
 }

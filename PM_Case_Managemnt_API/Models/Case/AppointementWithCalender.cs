@@ -2,7 +2,7 @@
 
 namespace PM_Case_Managemnt_API.Models.CaseModel
 {
-    public class AppointemnetWithCalender : CommonModel
+    public class AppointementWithCalender : CommonModel
     {
 
         public Guid EmployeeId { get; set; }

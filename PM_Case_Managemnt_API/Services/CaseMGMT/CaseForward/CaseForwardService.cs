@@ -15,7 +15,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.CaseForwardService
         }
 
 
-        public async Task AddCaseForwarding(CaseForwardPostDto caseForwardPostDto)
+        public async Task Add(CaseForwardPostDto caseForwardPostDto)
         {
             try
             {

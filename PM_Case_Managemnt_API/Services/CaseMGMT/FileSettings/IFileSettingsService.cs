@@ -4,7 +4,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.FileSettings
 {
     public interface IFileSettingsService
     {
-        public Task AddNewFileSetting(FileSettingPostDto fileSettingPost);
-        public Task<List<FileSettingGetDto>> GetAllFileSettings();
+        public Task Add(FileSettingPostDto fileSettingPost);
+        public Task<List<FileSettingGetDto>> GetAll();
     }
 }

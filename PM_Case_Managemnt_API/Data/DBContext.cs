@@ -45,7 +45,7 @@ namespace PM_Case_Managemnt_API.Data
 
         public DbSet<Applicant> Applicants { get; set; }
         public DbSet<Appointement> Appointements { get; set; }
-        public DbSet<AppointemnetWithCalender> AppointemnetWithCalenders { get; set; }
+        public DbSet<AppointementWithCalender> AppointementWithCalender { get; set; }
         public DbSet<Case> Cases { get; set; }
         public DbSet<CaseAttachment> CaseAttachments { get; set; }
         public DbSet<CaseHistory> CaseHistories { get; set; }
