@@ -1,4 +1,5 @@
-﻿using PM_Case_Managemnt_API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
@@ -18,6 +19,12 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.History
         {
             try
             {
+                Case currCase = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals(caseHistoryPostDto.CaseId));
+
+                if (currCase == null)
+                    throw new Exception("Case Not found");
+
+
                 CaseHistory history = new()
                 {
                     Id = Guid.NewGuid(),
@@ -30,20 +37,24 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.History
                     ToEmployeeId = caseHistoryPostDto.ToEmployeeId,
                     FromStructureId = caseHistoryPostDto.FromStructureId,
                     ToStructureId = caseHistoryPostDto.ToStructureId,
-                    AffairHistoryStatus = caseHistoryPostDto.AffairHistoryStatus,
-                    SeenDateTime = caseHistoryPostDto?.SeenDateTime,
-                    TransferedDateTime = caseHistoryPostDto?.TransferedDateTime,
-                    CompletedDateTime = caseHistoryPostDto?.CompletedDateTime,
-                    RevertedAt = caseHistoryPostDto?.RevertedAt,
-                    ReciverType = caseHistoryPostDto.ReciverType,
+                    AffairHistoryStatus = AffairHistoryStatus.Waiting,
+                    //SeenDateTime = caseHistoryPostDto?.SeenDateTime,
+                    //TransferedDateTime = caseHistoryPostDto?.TransferedDateTime,
+                    //CompletedDateTime = caseHistoryPostDto?.CompletedDateTime,
+                    //RevertedAt = caseHistoryPostDto?.RevertedAt,
                     IsSmsSent = caseHistoryPostDto.IsSmsSent,
-                    IsConfirmedBySeretery = caseHistoryPostDto.IsConfirmedBySeretery,
-                    IsForwardedBySeretery = caseHistoryPostDto.IsConfirmedBySeretery,
-                    SecreteryConfirmationDateTime = caseHistoryPostDto?.SecreteryConfirmationDateTime,
+                    //IsConfirmedBySeretery = caseHistoryPostDto.IsConfirmedBySeretery,
+                    //IsForwardedBySeretery = caseHistoryPostDto.IsConfirmedBySeretery,
+                    //SecreteryConfirmationDateTime = caseHistoryPostDto?.SecreteryConfirmationDateTime,
                     SecreteryId = caseHistoryPostDto?.SecreteryId,
-                    ForwardedDateTime = caseHistoryPostDto?.ForwardedDateTime,
-                    ForwardedById = caseHistoryPostDto?.ForwardedById,
+                    //ForwardedDateTime = caseHistoryPostDto?.ForwardedDateTime,
+                    //ForwardedById = caseHistoryPostDto?.ForwardedById,
                 };
+
+                if (history.ToEmployeeId == currCase.EmployeeId)
+                    history.ReciverType = ReciverType.Orginal;
+                else
+                    history.ReciverType = ReciverType.Cc;
 
                 await _dbContext.CaseHistories.AddAsync(history);
                 await _dbContext.SaveChangesAsync();

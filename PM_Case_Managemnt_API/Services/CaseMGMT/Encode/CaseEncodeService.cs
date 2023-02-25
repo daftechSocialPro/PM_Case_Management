@@ -37,7 +37,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     LetterNumber = caseEncodePostDto.LetterNumber,
                     LetterSubject = caseEncodePostDto.LetterSubject,
                     CaseTypeId = caseEncodePostDto.CaseTypeId,
-                    AffairStatus = caseEncodePostDto.AffairStatus,
+                    AffairStatus = AffairStatus.Encoded,
                     PhoneNumber2 = caseEncodePostDto.PhoneNumber2,
                     Representative = caseEncodePostDto.Representative,
                     Remark = caseEncodePostDto.Remark   
@@ -80,8 +80,15 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 caseHistory.ToStructureId = caseAssignDto.ForwardedToStructureId;
                 caseHistory.ToEmployeeId = caseAssignDto.ForwardedToEmployeeId;
                 caseHistory.ForwardedById = caseAssignDto.ForwardedByEmployeeId;
+                
 
                 _dbContext.Entry(caseHistory).State = EntityState.Modified;
+
+                Case currCase = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals(caseAssignDto.CaseId));
+                currCase.AffairStatus = AffairStatus.Assigned;
+
+                _dbContext.Entry(currCase).State = EntityState.Modified;
+                
                 await _dbContext.SaveChangesAsync();
 
             } catch (Exception ex)

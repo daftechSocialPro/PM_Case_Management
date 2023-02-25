@@ -300,16 +300,16 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
 
         }
 
-        public async Task<List<SelectListDto>> GetActivtiesForApproval(Guid employeeId)
-        {
+        //public async Task<List<SelectListDto>> GetActivtiesForApproval(Guid employeeId)
+        //{
 
-            var plans = _dBContext.Plans.Include(x => x.Structure).Where(x => x.ProjectManagerId == employeeId || x.FinanceId == employeeId).Select(x=>x.Id).ToList();
+        //    var plans = _dBContext.Plans.Include(x => x.Structure).Where(x => x.ProjectManagerId == employeeId || x.FinanceId == employeeId).Select(x=>x.Id).ToList();
             
-            var task = _dBContext.Tasks.Where(x=>x.PlanId==)
-            var activties = await (from a in _dBContext.Activities
-                                   where plans.Contains(a.))
+        //    var task = _dBContext.Tasks.Where(x=>x.PlanId==)
+        //    var activties = await (from a in _dBContext.Activities
+        //                           where plans.Contains(a.))
 
-        }
+        //}
     }
 
 

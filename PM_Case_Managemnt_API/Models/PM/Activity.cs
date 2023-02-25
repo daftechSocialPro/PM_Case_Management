@@ -54,32 +54,20 @@ namespace PM_Case_Managemnt_API.Models.PM
 
         [DefaultValue(0.0)]
         public float FieldWork { get; set; }
-
         public TargetDivision? targetDivision { get; set; }
-
         [DefaultValue(false)]
         public Boolean PostToCase { get; set; }
-
         public Guid? EmployeeId { get; set; }
         public virtual Employee Employee { get; set; } = null!; 
-
         public Guid? PlanId { get; set; }
         public virtual Plan Plan { get; set; } = null!;
         public Guid? TaskId { get; set; }
         public virtual Task Task { get; set; } = null!;
         public Guid? ActivityParentId { get; set; }
         public virtual ActivityParent ActivityParent { get; set; } = null!;
-
-
-     
         public ICollection<ActivityProgress> ActProgress { get; set; }
-
-     
         public ICollection<EmployeesAssignedForActivities> AssignedEmploye { get; set; }
-
-     
         public ICollection<ActivityTargetDivision> ActivityTargetDivisions { get; set; }
-
     }
 
     public enum ActivityType
