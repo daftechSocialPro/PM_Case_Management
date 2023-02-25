@@ -59,7 +59,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 };
 
 
-                await _caseHistoryService.AddCaseHistory(history);
+                await _caseHistoryService.Add(history);
 
                 return newCase.Id.ToString();
             } catch (Exception ex) { 

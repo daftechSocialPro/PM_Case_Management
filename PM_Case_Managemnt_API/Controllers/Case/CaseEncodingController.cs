@@ -27,7 +27,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         {
             try
             {
-                string caseId = await _caseEncodeService.AddCaseEncoding(caseEncodePostDto);
+                string caseId = await _caseEncodeService.Add(caseEncodePostDto);
 
                 if (Request.Form.Files.Any())
                 {
