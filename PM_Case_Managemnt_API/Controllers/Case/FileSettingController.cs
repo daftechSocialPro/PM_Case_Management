@@ -19,8 +19,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         public async Task<IActionResult> GetAll()
         {
             try { 
-                List<FileSettingGetDto> fileSettings = await _fileSettingsService.GetAllFileSettings();
-                return Ok(fileSettings);
+                return Ok(await _fileSettingsService.GetAll());
             }
             catch (Exception ex)
             {
@@ -33,7 +32,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         {
             try
             {
-                await _fileSettingsService.AddNewFileSetting(fileSettingPostDto);
+                await _fileSettingsService.Add(fileSettingPostDto);
                 return NoContent();
             }
             catch (Exception ex)

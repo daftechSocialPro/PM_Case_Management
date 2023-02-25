@@ -16,7 +16,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.Applicants
             _dbContext = dbContext;
         }
 
-        public async Task AddApplicant(ApplicantPostDto applicantPost)
+        public async Task Add(ApplicantPostDto applicantPost)
         {
             try
             {

@@ -17,12 +17,25 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             _appointmentService = appointmentService;
         }
 
+        [HttpGet("appointment")]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                return Ok(await _appointmentService.GetAll());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
         [HttpPost("appointment")]
         public async Task<IActionResult> Create(AppointmentPostDto appointmentPostDto)
         {
             try
             {
-                await _appointmentService.AddAppointment(appointmentPostDto);
+                await _appointmentService.Add(appointmentPostDto);
                 return NoContent();
             } catch (Exception ex)
             {
@@ -30,17 +43,6 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             }
         }
 
-        [HttpGet("appointment")]
-        public async Task<IActionResult> GetAll()
-        {
-            try
-            { 
-                List<Appointement> appointements = await _appointmentService.GetAllAppointments();
-                return Ok(appointements);
-            } catch (Exception ex)
-            {
-                return StatusCode(500, "Internal Server Error");
-            }
-        }
+    
     }
 }

@@ -13,7 +13,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.CaseAttachments
             _dBContext = dBContext;
         }
 
-        public async Task AddAttachemnts(List<CaseAttachment> caseAttachments)
+        public async Task Add(List<CaseAttachment> caseAttachments)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.CaseAttachments
             }
         }
 
-        public async Task<List<CaseAttachment>> GetAttachements(string CaseId = null)
+        public async Task<List<CaseAttachment>> GetAll(string CaseId = null)
         {
             try
             {

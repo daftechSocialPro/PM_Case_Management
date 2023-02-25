@@ -15,7 +15,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.FileSettings
             _dbContext = dbContext;
         }
 
-        public async Task AddNewFileSetting(FileSettingPostDto fileSettingPost)
+        public async Task Add(FileSettingPostDto fileSettingPost)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.FileSettings
             }
         }
 
-        public async Task<List<FileSettingGetDto>> GetAllFileSettings()
+        public async Task<List<FileSettingGetDto>> GetAll()
         {
             try
             {

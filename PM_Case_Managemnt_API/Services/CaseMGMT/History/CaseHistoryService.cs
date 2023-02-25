@@ -15,7 +15,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.History
             _dbContext = dbContext;
         }
 
-        public async Task AddCaseHistory(CaseHistoryPostDto caseHistoryPostDto)
+        public async Task Add(CaseHistoryPostDto caseHistoryPostDto)
         {
             try
             {

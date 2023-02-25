@@ -17,12 +17,25 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             _applicantService = applicantService;
         }
 
+        [HttpGet("applicant")]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                return Ok(await _applicantService.GetAll());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
         [HttpPost("applicant")]
         public async Task<IActionResult> Create(ApplicantPostDto applicantPostDto)
         {
             try
             {
-                await _applicantService.AddApplicant(applicantPostDto);
+                await _applicantService.Add(applicantPostDto);
                 return NoContent();
             } catch (Exception ex)
             {
@@ -30,16 +43,6 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             }
         }
 
-        [HttpGet("applicant")]
-        public async Task<IActionResult> GetAll()
-        {
-            try
-            {
-                List<ApplicantGetDto> applicants = await _applicantService.GetAll();
-                return Ok(applicants);
-            } catch(Exception ex) {
-                return StatusCode(500, "Internal Server Error");
-            }
-        }
+      
     }
 }

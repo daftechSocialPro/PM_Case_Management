@@ -16,7 +16,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.AppointmentService
         }
 
 
-        public async Task AddAppointment(AppointmentPostDto appointmentPostDto)
+        public async Task Add(AppointmentPostDto appointmentPostDto)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.AppointmentService
             }
         }
 
-        public async Task<List<Appointement>> GetAllAppointments()
+        public async Task<List<Appointement>> GetAll()
         {
             try
             {

@@ -60,7 +60,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
                             attachments.Add(attachment);
                         }
                     }
-                    await _caseAttachmentService.AddAttachemnts(attachments);
+                    await _caseAttachmentService.Add(attachments);
                 }
 
                 return NoContent();
@@ -88,8 +88,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         {
             try
             {
-                List<CaseEncodeGetDto> cases = await _caseEncodeService.GetCaseEncodings();
-                return Ok(cases);
+                return Ok(await _caseEncodeService.GetAll());
 
             } catch (Exception ex)
             {
