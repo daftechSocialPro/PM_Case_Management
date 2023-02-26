@@ -95,6 +95,9 @@ import { ActivityforapprovalComponent } from './pages/pm/activityforapproval/act
 import { AcceptRejectComponent } from './pages/pm/view-activties/view-progress/accept-reject/accept-reject.component';
 import { AddCaseTypeComponent } from './pages/case/case-type/add-case-type/add-case-type.component';
 import { CaseTypeComponent } from './pages/case/case-type/case-type.component';
+import { AddFileSettingComponent } from './pages/case/file-setting/add-file-setting/add-file-setting.component';
+import { FileSettingComponent } from './pages/case/file-setting/file-setting.component';
+import { AddApplicantComponent } from './pages/Case/encode-case/add-applicant/add-applicant.component';
 
 
 @NgModule({
@@ -182,7 +185,11 @@ import { CaseTypeComponent } from './pages/case/case-type/case-type.component';
     ViewProgressComponent,
     ActivityforapprovalComponent,
     AcceptRejectComponent,
-    CaseTypeComponent
+    CaseTypeComponent,
+    AddFileSettingComponent,
+    FileSettingComponent,
+    AddApplicantComponent,
+    AddCaseComponent
     
     
   ],

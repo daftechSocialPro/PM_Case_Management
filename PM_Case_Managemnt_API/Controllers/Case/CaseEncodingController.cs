@@ -97,5 +97,17 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         }
 
+        [HttpGet("getCaseNumebr")]
+
+        public async Task<string> getCaseNumebr()
+        {
+          
+                return await _caseEncodeService.getCaseNumber();
+
+            
+           
+
+        }
+
     }
 }

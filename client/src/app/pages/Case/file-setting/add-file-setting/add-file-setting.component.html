@@ -7,14 +7,14 @@
     <div class="card" >
 
         <div class="card-body">
-                <form class=""  (ngSubmit)="submit()">
+                <form class=""  [formGroup]="settingForm" (ngSubmit)="submit()">
                     <div class="modal-body">
                         <div class="row g-3">
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <select class="form-select" id="AffairTypeId" #activity
-                                        formControlName="AffairTypeId">
-                                        <option value="0">casetype</option>
+                                    <select class="form-select" id="AffairTypeId" 
+                                        formControlName="CaseTypeId">
+                                        <option *ngFor="let caseType of caseTypes" value={{caseType.Id}} >{{caseType.Name}}</option>
                                     </select>
                                         <label for="AffairTypeId">Affair TypeId</label>
                                 </div>
@@ -30,10 +30,10 @@
                             <div class="col-md-6">
                                 <div class="form-floating">
                                    
-                                        <select class="form-select" id="FileType" #activity
+                                        <select class="form-select" id="FileType"
                                         formControlName="FileType">
-                                        <option value="0">files</option>
-                                        <option value="1">text</option>
+                                        <option value="files">files</option>
+                                        <option value="text">text</option>
                                     </select>
                                     <label for="FileType">File Type</label>
                                 </div>

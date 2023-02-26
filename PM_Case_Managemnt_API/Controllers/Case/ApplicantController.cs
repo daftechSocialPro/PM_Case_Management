@@ -30,6 +30,20 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             }
         }
 
+        [HttpGet("applicantSelectList")]
+        public async Task<IActionResult> GetSelectAll()
+        {
+            try
+            {
+                return Ok(await _applicantService.GetSelectList());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+
         [HttpPost("applicant")]
         public async Task<IActionResult> Create(ApplicantPostDto applicantPostDto)
         {

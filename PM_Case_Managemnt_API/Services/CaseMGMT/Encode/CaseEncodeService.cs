@@ -138,6 +138,25 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
         }
 
 
+        public async Task<string> getCaseNumber()
+        {
+            string CaseNumber = "DDC2015-";
+
+            var latestNumber =  _dbContext.Cases.OrderByDescending(x=>x.CreatedBy).Select(c => c.CaseNumber).FirstOrDefault();
+
+            if (latestNumber!=null)
+            {
+                var split = latestNumber.Split('-');
+                CaseNumber += split[1];
+            }else
+            {
+                CaseNumber += "1";
+            }
+
+            return CaseNumber;
+
+        }
+
 
     }
 }

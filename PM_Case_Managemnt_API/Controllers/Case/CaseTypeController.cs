@@ -55,6 +55,20 @@ namespace PM_Case_Managemnt_API.Controllers.Case
                 return StatusCode(500, "Internal Server Error");
             }
         }
-       
+
+        [HttpGet("byCaseForm")]
+        public async Task<IActionResult> GetALlBYCaseForm(string caseForm)
+        {
+            try
+            {
+
+                return Ok(await _caseTypeService.GetAllByCaseForm(caseForm));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
     }
 }

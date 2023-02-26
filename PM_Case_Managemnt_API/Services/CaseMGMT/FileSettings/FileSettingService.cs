@@ -25,7 +25,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.FileSettings
                     CreatedAt = DateTime.Now,
                     CreatedBy = fileSettingPost.CreatedBy,
                     FileName = fileSettingPost.Name,
-                    FileType = fileSettingPost.FileType,
+                    FileType = Enum.Parse<FileType>( fileSettingPost.FileType),
                     CaseTypeId = fileSettingPost.CaseTypeId,
                 };
 
@@ -41,7 +41,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.FileSettings
         {
             try
             {
-                List<FileSetting> fileSettings = await _dbContext.FileSettings.ToListAsync();
+                List<FileSetting> fileSettings = await _dbContext.FileSettings.Include(x=>x.CaseType).ToListAsync();
                 List<FileSettingGetDto> result = new();
 
                 foreach (FileSetting fileSetting in fileSettings)
@@ -49,10 +49,12 @@ namespace PM_Case_Managemnt_API.Services.CaseService.FileSettings
                     result.Add(new FileSettingGetDto
                     {
                         Id= fileSetting.Id,
+                        CaseTypeTitle = fileSetting.CaseType.CaseTypeTitle,
                         CreatedAt= fileSetting.CreatedAt,
                         CreatedBy = fileSetting.CreatedBy,
                         Name = fileSetting.FileName, 
-                        RowStatus = fileSetting.RowStatus,
+                        FileType = fileSetting.FileType.ToString(),
+                        RowStatus = fileSetting.RowStatus.ToString(),
                     });
                 }
 

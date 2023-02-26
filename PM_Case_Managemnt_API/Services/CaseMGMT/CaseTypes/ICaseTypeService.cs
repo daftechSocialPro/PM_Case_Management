@@ -7,6 +7,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
     {
         public Task Add(CaseTypePostDto caseTypeDto);
         public Task<List<CaseTypeGetDto>> GetAll();
+        public Task<List<SelectListDto>> GetAllByCaseForm(string caseForm);
         public Task<List<SelectListDto>> GetAllSelectList();
     }
 }

@@ -76,6 +76,32 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
                 throw new Exception(ex.Message);
             }
         }
+        public async Task<List<SelectListDto>> GetAllByCaseForm(string caseForm )
+        {
+            try
+            {
+                List<CaseType> caseTypes = await _dbContext.CaseTypes.Include(p => p.ParentCaseType).Where(x=>x.CaseForm==Enum.Parse<CaseForm>(caseForm)).ToListAsync();
+                List<SelectListDto> result = new();
+
+                foreach (CaseType caseType in caseTypes)
+                {
+                    result.Add(new SelectListDto
+                    {
+                        Id = caseType.Id,
+                        Name = caseType.CaseTypeTitle,
+                      
+                      
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public async Task<List<SelectListDto>> GetAllSelectList()
         {

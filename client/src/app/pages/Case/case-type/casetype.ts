@@ -25,3 +25,17 @@ export interface CaseTypeView {
     CreatedAt: string
     //ParentCaseType?:string
 }
+
+export interface FileSettingView {
+
+    Id: string,
+    CaseTypeTitle: string,
+    Name: string,
+    FileType: string,
+    RowStatus: string,
+    CreatedAt: string,
+    CreatedBy: string
+
+}
+
+

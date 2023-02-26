@@ -9,7 +9,7 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public string PhoneNumber { get; set; } = null!;
         public string Email { get; set; }
         public string CustomerIdentityNumber { get; set; } = null!;
-        public ApplicantType ApplicantType { get; set; }
+        public string ApplicantType { get; set; }
         public Guid CreatedBy { get; set; }
 
     }
