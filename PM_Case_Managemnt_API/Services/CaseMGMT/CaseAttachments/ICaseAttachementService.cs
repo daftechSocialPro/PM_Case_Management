@@ -4,7 +4,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.CaseAttachments
 {
     public interface ICaseAttachementService
     {
-        public Task Add(List<CaseAttachment> caseAttachments);
+        public Task AddMany(List<CaseAttachment> caseAttachments);
         public Task<List<CaseAttachment>> GetAll(string CaseId = null);
     }
 }

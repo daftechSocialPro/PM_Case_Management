@@ -13,6 +13,7 @@ using PM_Case_Managemnt_API.Services.CaseMGMT.AppointmentService;
 using PM_Case_Managemnt_API.Services.CaseMGMT.AppointmentWithCalenderService;
 using PM_Case_Managemnt_API.Services.CaseMGMT.CaseAttachments;
 using PM_Case_Managemnt_API.Services.CaseMGMT.CaseForwardService;
+using PM_Case_Managemnt_API.Services.CaseMGMT.FileInformationService;
 using PM_Case_Managemnt_API.Services.CaseMGMT.History;
 using PM_Case_Managemnt_API.Services.CaseService.CaseTypes;
 using PM_Case_Managemnt_API.Services.CaseService.Encode;
@@ -89,6 +90,7 @@ builder.Services.AddScoped<ICaseHistoryService, CaseHistoryService>();
 builder.Services.AddScoped<ICaseForwardService, CaseForwardService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IAppointmentWithCalenderService, AppointmentWithCalenderService>();
+builder.Services.AddScoped<IFilesInformationService, FilesInformationService>();
 
 //Jwt Authentication
 

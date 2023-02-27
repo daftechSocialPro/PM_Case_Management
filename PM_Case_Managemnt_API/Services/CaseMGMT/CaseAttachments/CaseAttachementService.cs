@@ -13,7 +13,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.CaseAttachments
             _dBContext = dBContext;
         }
 
-        public async Task Add(List<CaseAttachment> caseAttachments)
+        public async Task AddMany(List<CaseAttachment> caseAttachments)
         {
             try
             {

@@ -14,16 +14,12 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.FileInformationService
         {
             _dbContext = dbContext;
         }
-
-        public async Task AddFileInformation(FilesInformationPostDto fileInformationPostDto)
+        public async Task AddMany(List<FilesInformation> fileInformations)
         {
-            try {
-                //FilesInformation filesInfo = new()
-                //{
-                //    Id = Guid.NewGuid(),
-                //    CreatedAt = DateTime.Now,
-
-                //}
+            try
+            {
+                await _dbContext.FilesInformations.AddRangeAsync(fileInformations);
+                await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {

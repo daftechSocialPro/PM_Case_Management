@@ -43,9 +43,10 @@ Thumbs.db
 =======
 client/node_modules/
 PM_Case_Managemnt_API/bin/
-PM_Case_Managemnt_API/.vs/
-PM_Case_Managemnt_API/obj/
+PM_Case_Managemnt_API/.vs
+PM_Case_Managemnt_API/obj
 PM_Case_Managemnt_API/packages/
-PM_Case_Managemnt_API/XAPI/bin
-PM_Case_Managemnt_API/XAPI/obj
+./PM_Case_Managemnt_API/XAPI/bin/*
+./PM_Case_Managemnt_API/XAPI/obj/*
 PM_Case_Managemnt_API/Assets/
+PM_Case_Managemnt_API/XAPI/obj/Debug
