@@ -39,7 +39,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     AffairStatus = AffairStatus.Encoded,
                     PhoneNumber2 = caseEncodePostDto.PhoneNumber2,
                     Representative = caseEncodePostDto.Representative,
-                    Remark = caseEncodePostDto.Remark   
+                 
                 };
                 string caseNumber = await getCaseNumber();
                 newCase.CaseNumber = caseNumber;

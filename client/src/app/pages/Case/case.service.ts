@@ -53,13 +53,15 @@ export class CaseService {
 
         return this.http.get<SelectList[]>(this.BaseURI + "/applicantSelectList")
     }
-    addCase(caseValue: FormData) {
-
+    addCase(caseValue: FormData) {  
         
-
-        return this.http.post(this.BaseURI + "/encoding", caseValue,{})
+        
+ 
+        return this.http.post(this.BaseURI + "/encoding",caseValue)
     }
 
+
+   
     getCaseNumber() {
         var HTTPOptions = {
             headers: new HttpHeaders({
@@ -68,7 +70,7 @@ export class CaseService {
             'responseType': 'text' as 'json'
         }
 
-        return this.http.get<string>(this.BaseURI + "/getCaseNumebr", HTTPOptions)
+        return this.http.get<string>(this.BaseURI + "/getCaseNumber", HTTPOptions)
     }
 }
 

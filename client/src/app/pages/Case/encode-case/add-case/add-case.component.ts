@@ -110,12 +110,12 @@ getCaseNumber(){
       const formData = new FormData();
 
       for(let file of this.Documents){
-        formData.append('attachments',file);        
+        formData.append('attachemnts',file);        
       }
-      for (let file of this.settingsFile){
+      // for (let file of this.settingsFile){
 
-        formData.append('fileSettings',file.File,file.FileSettingId)
-      }
+      //   formData.append('fileSettings',file.File,file.FileSettingId)
+      // }
 
       formData.set('CaseNumber',this.CaseNumber)
       formData.set('LetterNumber',this.caseForm.value.LetterNumber)
@@ -128,7 +128,7 @@ getCaseNumber(){
 
       //console.log(formData)
      
-      this.caseService.addCase(this.caseForm.value).subscribe({
+      this.caseService.addCase(formData).subscribe({
         next: (res) => {
           this.toast = {
             message: ' Case Successfully Created',

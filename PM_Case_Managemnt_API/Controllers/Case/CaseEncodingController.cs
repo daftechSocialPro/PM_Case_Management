@@ -18,36 +18,41 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         public CaseEncodingController(ICaseEncodeService caseEncodeService, ICaseAttachementService caseAttachementService)
         {
-                _caseEncodeService = caseEncodeService;
+            _caseEncodeService = caseEncodeService;
             _caseAttachmentService = caseAttachementService;
         }
-        
 
-        [HttpPost("encoding")]
+
+        [HttpPost("encoding"), DisableRequestSizeLimit]
         public async Task<IActionResult> Create()
         {
             try
-                {
-                CaseEncodePostDto caseEncodePostDto = new()
+            {
+
+
+
+                CaseEncodePostDto caseEncodePostDto = new CaseEncodePostDto()
                 {
                     CaseNumber = Request.Form["CaseNumber"],
-                    LetterNumber = Request.Form["ApplicantId"],
-                    LetterSubject = Request.Form["ApplicantId"],
+                    LetterNumber = Request.Form["LetterNumber"],
+                    LetterSubject = Request.Form["LetterSubject"],
                     CaseTypeId = Guid.Parse(Request.Form["CaseTypeId"]),
                     ApplicantId = Guid.Parse(Request.Form["ApplicantId"]),
-                    EmployeeId = Guid.Parse(Request.Form["EmployeeId"]),
-                    PhoneNumber2 = Request.Form["ApplicantId"],
-                    Representative = Request.Form["ApplicantId"],
+                    EmployeeId = Guid.Parse(Request.Form["ApplicantId"]),
+                    PhoneNumber2 = Request.Form["PhoneNumber2"],
+                    Representative = Request.Form["Representative"],
                     CreatedBy = Guid.Parse(Request.Form["CreatedBy"]),
+
+
                 };
-                string caseId = await _caseEncodeService.Add(caseEncodePostDto);
+                //string caseId = await _caseEncodeService.Add(caseEncodePostDto);
 
                 if (Request.Form.Files.Any())
                 {
                     List<CaseAttachment> attachments = new List<CaseAttachment>();
                     foreach (var file in Request.Form.Files)
                     {
-                        
+
                         if (file.Name.ToLower() == "attachemnts")
                         {
                             string folderName = Path.Combine("Assets", "CaseAttachments");
@@ -72,7 +77,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
                                     CreatedAt = DateTime.Now,
                                     CreatedBy = caseEncodePostDto.CreatedBy,
                                     RowStatus = RowStatus.Active,
-                                    CaseId = Guid.Parse(caseId),
+                                    //CaseId = Guid.Parse(caseId),
                                     FilePath = dbPath
                                 };
                                 attachments.Add(attachment);
@@ -112,7 +117,8 @@ namespace PM_Case_Managemnt_API.Controllers.Case
                 }
 
                 return NoContent();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return StatusCode(500, "Internal Server Error");
             }
@@ -125,7 +131,8 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             {
                 await _caseEncodeService.AssignTask(caseAssignDto);
                 return NoContent();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return StatusCode(500, "Internal Server Error");
             }
@@ -138,7 +145,8 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             {
                 return Ok(await _caseEncodeService.GetAll());
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return StatusCode(500, "Internal Server Error");
             }
@@ -149,11 +157,11 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         public async Task<string> getCaseNumebr()
         {
-          
-                return await _caseEncodeService.getCaseNumber();
 
-            
-           
+            return await _caseEncodeService.getCaseNumber();
+
+
+
 
         }
 
