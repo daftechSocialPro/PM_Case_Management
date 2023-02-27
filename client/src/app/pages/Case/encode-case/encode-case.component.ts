@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddCaseComponent } from './add-case/add-case.component';
+import { AssignCaseComponent } from './assign-case/assign-case.component';
 
 @Component({
   selector: 'app-encode-case',
@@ -20,6 +21,10 @@ constructor(private modalService: NgbModal){}
     let modalRef = this.modalService.open(AddCaseComponent,{size:'xl',backdrop:'static'})
 
 
+
+  }
+  assignCase(){
+    let modalRef = this.modalService.open(AssignCaseComponent,{size:'xl',backdrop:'static'})
 
   }
 

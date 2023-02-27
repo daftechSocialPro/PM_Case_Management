@@ -88,6 +88,11 @@ import { CommitteeEmployeeComponent } from './pages/pm/comittes/committee-employ
 import { UpdateCpmmitteeComponent } from './pages/pm/comittes/update-cpmmittee/update-cpmmittee.component';
 import { AssignedActivitiesComponent } from './pages/pm/assigned-activities/assigned-activities.component';
 import { ViewActivtiesComponent } from './pages/pm/view-activties/view-activties.component';
+import { AssignCaseComponent } from './pages/Case/encode-case/assign-case/assign-case.component';
+
+import { CaseListPageComponent } from './pages/Case/case-list-page/case-list-page.component';
+import { CaseHistoryComponent } from './pages/Case/case-history/case-history.component';
+import { CaseDetailComponent } from './pages/Case/case-detail/case-detail.component';
 
 
 @NgModule({
@@ -168,7 +173,12 @@ import { ViewActivtiesComponent } from './pages/pm/view-activties/view-activties
     CommitteeEmployeeComponent,
     UpdateCpmmitteeComponent,
     AssignedActivitiesComponent,
-    ViewActivtiesComponent
+    ViewActivtiesComponent,
+    AssignCaseComponent,
+  
+    CaseListPageComponent,
+        CaseHistoryComponent,
+        CaseDetailComponent
     
     
   ],

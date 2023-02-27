@@ -1,0 +1,80 @@
+<div class="modal-content"  >
+        <div class="modal-header">
+            <h5 class="modal-title">Assign Case</h5>
+            <button type="button" class="btn-close" id="ModalClose" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+    
+            <div class="card-body">
+                    <form class="" [formGroup]="caseForm" (ngSubmit)="submit()">
+                        <div class="modal-body">
+                            <div class="row g-3">
+    
+    
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="selectwho" 
+                                        formControlName="selectwho" #who >
+                                        <option value="0">To Department</option>
+                                        <option value="1">To Employee</option>
+                                    </select>
+                                        <label for="selectwho">Select Whom You Want To Assign </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3" >
+                                        <select class="form-select" id="Structure" 
+                                        formControlName="Structure">
+                                        <option value="0"> Denbengoch Agelgelot</option>   
+                                    </select>
+                                        <label for="Structure">Structure</label>
+                                    </div>
+                                    <div class="form-floating " *ngIf="who.value=='1'">
+                                        <select class="form-select" id="ForEmployee" 
+                                        formControlName="ForEmployee">
+                                        <option value="0">-Select Employee-</option>
+                                        <option value="1">Ms. Tigist Beyene</option>
+                                    </select>
+                                        <label for="ForEmployee">For Employee</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                       <textarea class="form-control" formControlName="CCto"
+                                        placeholder="General Manager" id="CCto" style="height: 100px;">
+                                      </textarea>
+                                      <label for="CCto">CC to</label>
+                                        
+                                </div>
+                                
+                                </div>
+    
+                           
+                          
+    
+                            </div>
+    
+                        </div>
+                        <div class="modal-footer"> <button type="button" class="btn btn-secondary"
+                                (click)="closeModal()">Close</button>
+                            <button type="button" type="submit" [disabled]="!caseForm.valid"
+                                class="btn btn-success">Assign</button>
+                        </div>
+                    </form>
+    
+    
+                  
+                
+    
+    
+            </div>
+
+    </div>
+     
+        
+    
+  
+
+
+
+
+
