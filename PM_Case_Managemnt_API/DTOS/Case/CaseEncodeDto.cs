@@ -31,15 +31,18 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         
         //public IFormFile[]? CaseAttachemnts { get; set; }
     }
-    public class CaseEncodeGetDto: CaseEncodeBaseDto
+    public class CaseEncodeGetDto
     {
         public Guid Id { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string CaseTypeName { get; set; }
         public string CaseNumber { get; set; }
-        public virtual Applicant Applicant { get; set; }
-        public virtual Employee Employee { get; set; }
-        public virtual CaseType CaseType { get; set; }
-        public AffairStatus AffairStatus { get; set; }
+        public string CreatedAt { get; set; }
+        public string? ApplicantName {get; set;}
+        public string? ApplicantPhoneNo { get; set; }
+        public string? EmployeeName { get; set; }
+        public string? EmployeePhoneNo { get; set; }
+        public string LetterNumber { get; set; }
+        public string LetterSubject { get; set; }
      
     }
 
