@@ -22,7 +22,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         {
             try
             {
-                await _caseForwardService.Add(caseForwardPostDto);
+                await _caseForwardService.AddMany(caseForwardPostDto);
                 return NoContent();
             } catch (Exception ex) {
                 return StatusCode(500, "Internal Server Error");

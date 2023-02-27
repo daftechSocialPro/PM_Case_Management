@@ -10,33 +10,35 @@ import { UpdateStructureComponent } from './update-structure/update-structure.co
 @Component({
   selector: 'app-org-structure',
   templateUrl: './org-structure.component.html',
-  styleUrls: ['./org-structure.component.css']
+  styleUrls: ['./org-structure.component.css'],
 })
 export class OrgStructureComponent implements OnInit {
-
   structures: OrganizationalStructure[] = [];
   toast!: toastPayload;
   structure!: OrganizationalStructure;
 
-  constructor(private elementRef: ElementRef, private orgService: OrganizationService, private commonService: CommonService, private modalService: NgbModal) {
-    this.structureList()
+  constructor(
+    private elementRef: ElementRef,
+    private orgService: OrganizationService,
+    private commonService: CommonService,
+    private modalService: NgbModal
+  ) {
+    this.structureList();
   }
 
   ngOnInit(): void {
-
-    var s = document.createElement("script");
-    s.type = "text/javascript";
-    s.src = "../assets/js/main.js";
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.src = '../assets/js/main.js';
     this.elementRef.nativeElement.appendChild(s);
-    this.structureList()
-
+    this.structureList();
   }
   structureList() {
-
     this.orgService.getOrgStructureList().subscribe({
       next: (res) => {
-        this.structures = res
-      }, error: (err) => {
+        this.structures = res;
+      },
+      error: (err) => {
         this.toast = {
           message: 'Something went wrong',
           title: 'Network error.',
@@ -47,29 +49,29 @@ export class OrgStructureComponent implements OnInit {
           } as IndividualConfig,
         };
         this.commonService.showToast(this.toast);
-      }
-    })
-
+      },
+    });
   }
 
   addStructure() {
-
-    let modalRef = this.modalService.open(AddStructureComponent, { size: 'lg', backdrop: 'static' })
+    let modalRef = this.modalService.open(AddStructureComponent, {
+      size: 'lg',
+      backdrop: 'static',
+    });
     modalRef.result.then(() => {
       this.structureList();
-    })
-
+    });
   }
   updateStructure(value: OrganizationalStructure) {
+    let modalRef = this.modalService.open(UpdateStructureComponent, {
+      size: 'lg',
+      backdrop: 'static',
+    });
 
-    let modalRef = this.modalService.open(UpdateStructureComponent, { size: 'lg', backdrop: 'static' })
-
-    modalRef.componentInstance.structure = value
+    modalRef.componentInstance.structure = value;
 
     modalRef.result.then(() => {
-      this.structureList()
-    })
-
+      this.structureList();
+    });
   }
-
 }

@@ -3,6 +3,7 @@ using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
+using PM_Case_Managemnt_API.Services.CaseMGMT.CaseForwardService;
 using PM_Case_Managemnt_API.Services.CaseMGMT.History;
 using System.Runtime.CompilerServices;
 
@@ -12,10 +13,12 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
     {
         private readonly DBContext _dbContext;
         private readonly ICaseHistoryService _caseHistoryService;
-        public CaseEncodeService(DBContext dbContext, ICaseHistoryService caseHistoryService)
+        private readonly ICaseForwardService _caseForwardService;
+        public CaseEncodeService(DBContext dbContext, ICaseHistoryService caseHistoryService, ICaseForwardService caseForwardService)
         {
             _dbContext = dbContext;
             _caseHistoryService = caseHistoryService;
+            _caseForwardService = caseForwardService;
         }
 
         public async Task<string> Add(CaseEncodePostDto caseEncodePostDto)
@@ -103,19 +106,34 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 if (caseHistory == null)
                     throw new Exception("No Case found for the given ID.");
 
-                caseHistory.ToStructureId = caseAssignDto.ForwardedToStructureId;
-                caseHistory.ToEmployeeId = caseAssignDto.ForwardedToEmployeeId;
-                caseHistory.ForwardedById = caseAssignDto.ForwardedByEmployeeId;
-                
+                caseHistory.ToStructureId = caseAssignDto.AssignedToStructureId;
+                caseHistory.ToEmployeeId = caseAssignDto.AssignedToEmployeeId;
+                caseHistory.ForwardedById = caseAssignDto.AssignedByEmployeeId;
 
-                _dbContext.Entry(caseHistory).State = EntityState.Modified;
+
+                _dbContext.Entry(caseHistory).Property(caseHistory => caseHistory.ToStructureId).IsModified = true;
+                _dbContext.Entry(caseHistory).Property(caseHistory => caseHistory.ToEmployeeId).IsModified = true;
+                _dbContext.Entry(caseHistory).Property(caseHistory => caseHistory.ForwardedById).IsModified = true;
 
                 Case currCase = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals(caseAssignDto.CaseId));
                 currCase.AffairStatus = AffairStatus.Assigned;
 
-                _dbContext.Entry(currCase).State = EntityState.Modified;
-                
+                _dbContext.Entry(currCase).Property(curr => curr.AffairStatus).IsModified = true;
                 await _dbContext.SaveChangesAsync();
+                if (caseAssignDto.ForwardedToStructureId != null)
+                {
+                    CaseForwardPostDto caseFwd = new()
+                    {
+                        CaseId = caseAssignDto.CaseId,
+                        CreatedBy = currCase.CreatedBy,
+                        ForwardedByEmployeeId = caseAssignDto.AssignedByEmployeeId,
+                        ForwardedToStructureId = caseAssignDto.ForwardedToStructureId
+                    };
+
+                    await _caseForwardService.AddMany(caseFwd);
+                }
+
+
 
             } catch (Exception ex)
             {
