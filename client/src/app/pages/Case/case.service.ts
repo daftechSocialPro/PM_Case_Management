@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
@@ -24,9 +24,9 @@ export class CaseService {
         return this.http.get<SelectList[]>(this.BaseURI + "/typeSelectList")
     }
 
-    getCaseTypeByCaseForm(caseForm: string ){
+    getCaseTypeByCaseForm(caseForm: string) {
 
-        return this.http.get<SelectList[]>(this.BaseURI+"/byCaseForm?caseForm="+caseForm)
+        return this.http.get<SelectList[]>(this.BaseURI + "/byCaseForm?caseForm=" + caseForm)
     }
 
     //file setting 
@@ -38,23 +38,37 @@ export class CaseService {
         return this.http.get<FileSettingView[]>(this.BaseURI + "/fileSetting")
     }
 
+    getFileSettignsByCaseTypeId(caseTypeId: string) {
+
+        return this.http.get<SelectList[]>(this.BaseURI + "/fileSettingsByCaseTypeId?CaseTypeId=" + caseTypeId)
+    }
+
     //applicant 
 
-    createApplicant (applicant : any ){
-        return this.http.post(this.BaseURI+"/applicant",applicant)
+    createApplicant(applicant: any) {
+        return this.http.post(this.BaseURI + "/applicant", applicant)
     }
 
-    getApplicantSelectList (){
+    getApplicantSelectList() {
 
-        return this.http.get<SelectList[]>(this.BaseURI+"/applicantSelectList")
+        return this.http.get<SelectList[]>(this.BaseURI + "/applicantSelectList")
     }
-    addCase(caseValue:any){
+    addCase(caseValue: FormData) {
 
-        return this.http.post(this.BaseURI,caseValue)
+        
+
+        return this.http.post(this.BaseURI + "/encoding", caseValue,{})
     }
 
-    getCaseNumber (){
-        return this.http.get<string>(this.BaseURI+"/getCaseNumebr")
+    getCaseNumber() {
+        var HTTPOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'text'
+            }),
+            'responseType': 'text' as 'json'
+        }
+
+        return this.http.get<string>(this.BaseURI + "/getCaseNumebr", HTTPOptions)
     }
 }
 

@@ -23,10 +23,17 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         }
 
         [HttpPost("encoding")]
-        public async Task<IActionResult> Create([FromForm] CaseEncodePostDto caseEncodePostDto)
+        public async Task<IActionResult> Create()
         {
             try
             {
+
+                var form = Request.Form.Files;
+
+                CaseEncodePostDto caseEncodePostDto = new CaseEncodePostDto
+                {
+
+                };
                 string caseId = await _caseEncodeService.Add(caseEncodePostDto);
 
                 if (Request.Form.Files.Any())

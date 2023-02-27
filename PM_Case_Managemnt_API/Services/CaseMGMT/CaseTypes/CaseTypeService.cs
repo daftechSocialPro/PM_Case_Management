@@ -111,10 +111,24 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
                           {
                               Id= c.Id,
                               Name= c.CaseTypeTitle
-
+                              
                           }).ToListAsync();
 
         }
+       public async Task<List<SelectListDto>> GetFileSettigs(Guid caseTypeId)
+        {
+
+            return await (from f in _dbContext.FileSettings.Where(x=>caseTypeId == caseTypeId)
+                          select new SelectListDto
+                          {
+
+                              Id = f.Id,
+                              Name = f.FileName
+
+                          } ).ToListAsync();
+
+        }
+
 
     }
 }

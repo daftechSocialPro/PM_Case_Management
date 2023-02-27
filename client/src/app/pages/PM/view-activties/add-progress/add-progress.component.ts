@@ -136,9 +136,7 @@ export class AddProgressComponent implements OnInit {
   }
   onFinanceFileSelected(event:any){
     this.FinanceDoc = (event.target).files[0];
-   
-
- 
+    
   }
 
 

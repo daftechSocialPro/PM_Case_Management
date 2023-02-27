@@ -18,8 +18,8 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
       
         //public string DocumentPath { get; set; }
         //public DateTime? CompletedAt { get; set; }
-        public AffairStatus AffairStatus { get; set; }
-        public IFormFile[]? Files { get; set; }
+        //public AffairStatus AffairStatus { get; set; }
+        //public IFormFile[]? Files { get; set; }
     }
     public class CaseEncodeGetDto: CaseEncodeBaseDto
     {
@@ -42,9 +42,9 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public Guid CaseTypeId { get; set; }
         public string PhoneNumber2 { get; set; }
         public string Representative { get; set; }
-        public bool IsArchived { get; set; }
-        public bool SMSStatus { get; set; }
+        public bool? IsArchived { get; set; }
+        public bool? SMSStatus { get; set; }
         public Guid CreatedBy { get; set; }
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
     }
 }

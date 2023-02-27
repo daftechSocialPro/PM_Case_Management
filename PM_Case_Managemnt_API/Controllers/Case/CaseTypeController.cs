@@ -69,6 +69,22 @@ namespace PM_Case_Managemnt_API.Controllers.Case
                 return StatusCode(500, "Internal Server Error");
             }
         }
+        [HttpGet("fileSettingsByCaseTypeId")]
+
+        public async Task<IActionResult> GetFileSettingsByCaseTypeId(Guid CaseTypeId )
+        {
+
+
+            try
+            {
+                return Ok(await _caseTypeService.GetFileSettigs(CaseTypeId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
 
     }
 }
