@@ -17,7 +17,7 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public DateTime? CompletedDateTime { get; set; }
         public DateTime? RevertedAt { get; set; }
         public ReciverType ReciverType { get; set; }
-        public string Document { get; set; }
+        //public string Document { get; set; }
         public bool IsSmsSent { get; set; }
         public bool IsConfirmedBySeretery { get; set; }
         public bool IsForwardedBySeretery { get; set; }
@@ -26,5 +26,18 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public DateTime? ForwardedDateTime { get; set; }
         public Guid? ForwardedById { get; set; }
         public Guid CreatedBy { get; set; }
+    }
+
+    public class CaseHistorySeenDto
+    {
+        public Guid CaseId { get; set; }
+        public Guid SeenBy { get; set; }
+    }
+
+    public class CaseHistoryCompleteDto
+    {
+        public string Remark { get; set; }
+        public Guid CompleatedBy { get; set; }
+        public Guid CaseId { get; set; }
     }
 }

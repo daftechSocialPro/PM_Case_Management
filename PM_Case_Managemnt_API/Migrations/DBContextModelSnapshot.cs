@@ -61,7 +61,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Applicants");
+                    b.ToTable("Applicants", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.Appointement", b =>
@@ -97,10 +97,10 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Appointements");
+                    b.ToTable("Appointements", (string)null);
                 });
 
-            modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.AppointementWithCalender", b =>
+            modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.AppointemnetWithCalender", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -137,7 +137,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("AppointementWithCalender");
+                    b.ToTable("AppointemnetWithCalenders", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.Case", b =>
@@ -207,7 +207,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Cases");
+                    b.ToTable("Cases", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseAttachment", b =>
@@ -239,7 +239,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("CaseId");
 
-                    b.ToTable("CaseAttachments");
+                    b.ToTable("CaseAttachments", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseForward", b =>
@@ -277,7 +277,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("ForwardedToStructureId");
 
-                    b.ToTable("CaseForwards");
+                    b.ToTable("CaseForwards", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseHistory", b =>
@@ -373,7 +373,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("ToStructureId");
 
-                    b.ToTable("CaseHistories");
+                    b.ToTable("CaseHistories", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseHistoryAttachment", b =>
@@ -410,7 +410,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("CaseId");
 
-                    b.ToTable("CaseHistoryAttachments");
+                    b.ToTable("CaseHistoryAttachments", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseMessages", b =>
@@ -448,7 +448,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("CaseId");
 
-                    b.ToTable("CaseMessages");
+                    b.ToTable("CaseMessages", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseType", b =>
@@ -499,7 +499,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("ParentCaseTypeId");
 
-                    b.ToTable("CaseTypes");
+                    b.ToTable("CaseTypes", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.FileSetting", b =>
@@ -534,7 +534,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("CaseTypeId");
 
-                    b.ToTable("FileSettings");
+                    b.ToTable("FileSettings", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.FilesInformation", b =>
@@ -580,7 +580,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("FileSettingId");
 
-                    b.ToTable("FilesInformations");
+                    b.ToTable("FilesInformations", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.BudgetYear", b =>
@@ -617,7 +617,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("ProgramBudgetYearId");
 
-                    b.ToTable("BudgetYears");
+                    b.ToTable("BudgetYears", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.Employee", b =>
@@ -659,7 +659,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.EmployeeStructures", b =>
@@ -695,7 +695,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("OrganizationalStructureId");
 
-                    b.ToTable("EmployeesStructures");
+                    b.ToTable("EmployeesStructures", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.OrganizationBranch", b =>
@@ -738,7 +738,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("OrganizationProfileId");
 
-                    b.ToTable("OrganizationBranches");
+                    b.ToTable("OrganizationBranches", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.OrganizationProfile", b =>
@@ -792,7 +792,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrganizationProfile");
+                    b.ToTable("OrganizationProfile", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.OrganizationalStructure", b =>
@@ -835,7 +835,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("ParentStructureId");
 
-                    b.ToTable("OrganizationalStructures");
+                    b.ToTable("OrganizationalStructures", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.ProgramBudgetYear", b =>
@@ -868,7 +868,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProgramBudgetYears");
+                    b.ToTable("ProgramBudgetYears", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.StandardizedFormDocuments", b =>
@@ -904,7 +904,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("StandrizedFormId");
 
-                    b.ToTable("FormDocuments");
+                    b.ToTable("FormDocuments", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.StandrizedForm", b =>
@@ -931,7 +931,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StandrizedForms");
+                    b.ToTable("StandrizedForms", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.UnitOfMeasurment", b =>
@@ -965,7 +965,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UnitOfMeasurment");
+                    b.ToTable("UnitOfMeasurment", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.Activity", b =>
@@ -1070,7 +1070,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("UnitOfMeasurementId");
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activities", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.ActivityParent", b =>
@@ -1135,7 +1135,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("TaskId");
 
-                    b.ToTable("ActivityParents");
+                    b.ToTable("ActivityParents", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.ActivityProgress", b =>
@@ -1211,7 +1211,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("QuarterId");
 
-                    b.ToTable("ActivityProgresses");
+                    b.ToTable("ActivityProgresses", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.ActivityTargetDivision", b =>
@@ -1248,7 +1248,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("ActivityId");
 
-                    b.ToTable("ActivityTargetDivisions");
+                    b.ToTable("ActivityTargetDivisions", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.ActivityTerminationHistories", b =>
@@ -1310,7 +1310,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("ToEmployeeId");
 
-                    b.ToTable("ActivityTerminationHistories");
+                    b.ToTable("ActivityTerminationHistories", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.Commitees", b =>
@@ -1337,7 +1337,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Commitees");
+                    b.ToTable("Commitees", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.CommitesEmployees", b =>
@@ -1373,7 +1373,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("CommiteEmployees");
+                    b.ToTable("CommiteEmployees", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.EmployeesAssignedForActivities", b =>
@@ -1406,7 +1406,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("EmployeesAssignedForActivities");
+                    b.ToTable("EmployeesAssignedForActivities", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.Plan", b =>
@@ -1476,7 +1476,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("StructureId");
 
-                    b.ToTable("Plans");
+                    b.ToTable("Plans", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.Programs", b =>
@@ -1511,7 +1511,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("ProgramBudgetYearId");
 
-                    b.ToTable("Programs");
+                    b.ToTable("Programs", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.ProgressAttachment", b =>
@@ -1543,7 +1543,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("ActivityProgressId");
 
-                    b.ToTable("ProgressAttachments");
+                    b.ToTable("ProgressAttachments", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.Task", b =>
@@ -1608,7 +1608,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("PlanId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tasks", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.TaskMembers", b =>
@@ -1651,7 +1651,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("TaskId");
 
-                    b.ToTable("TaskMembers");
+                    b.ToTable("TaskMembers", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.TaskMemo", b =>
@@ -1698,7 +1698,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("TaskId");
 
-                    b.ToTable("TaskMemos");
+                    b.ToTable("TaskMemos", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.PM.TaskMemoReply", b =>
@@ -1735,7 +1735,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasIndex("TaskMemoId");
 
-                    b.ToTable("TaskMemoReplies");
+                    b.ToTable("TaskMemoReplies", (string)null);
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.Appointement", b =>
@@ -1757,7 +1757,7 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.AppointementWithCalender", b =>
+            modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.AppointemnetWithCalender", b =>
                 {
                     b.HasOne("PM_Case_Managemnt_API.Models.CaseModel.Case", "Case")
                         .WithMany()

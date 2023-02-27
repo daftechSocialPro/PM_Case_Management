@@ -5,5 +5,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.History
     public interface ICaseHistoryService
     {
         public Task Add(CaseHistoryPostDto caseHistoryPost);
+        public Task SetCaseSeen(CaseHistorySeenDto seenDto);
+        public Task CompleteCase(CaseHistoryCompleteDto completeDto);
     }
 }
