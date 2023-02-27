@@ -48,6 +48,10 @@ export class EncodeCaseComponent implements OnInit {
     let modalRef = this.modalService.open(AssignCaseComponent,{size:'xl',backdrop:'static'})
     modalRef.componentInstance.caseId = caseId
 
+    modalRef.result.then(()=>{
+      this.getEnocdedCases()
+    })
+
   }
 
 

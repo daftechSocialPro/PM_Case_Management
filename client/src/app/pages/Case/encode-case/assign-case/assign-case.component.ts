@@ -5,6 +5,8 @@ import { IndividualConfig } from 'ngx-toastr';
 import { CommonService, toastPayload } from 'src/app/common/common.service';
 import { SelectList } from 'src/app/pages/common/common';
 import { OrganizationService } from 'src/app/pages/common/organization/organization.service';
+import { UserView } from 'src/app/pages/pages-login/user';
+import { UserService } from 'src/app/pages/pages-login/user.service';
 import { CaseService } from '../../case.service';
 
 @Component({
@@ -21,6 +23,7 @@ export class AssignCaseComponent implements OnInit {
   Structures !: SelectList[]
   Employees !: SelectList[]
   toast!: toastPayload
+  user!: UserView
 
 
   constructor(
@@ -28,12 +31,13 @@ export class AssignCaseComponent implements OnInit {
     private organizationService: OrganizationService,
     private formBuilder: FormBuilder,
     private caseService: CaseService,
-    private commonService: CommonService) {
+    private commonService: CommonService,
+    private userService : UserService) {
 
     this.caseForm = this.formBuilder.group({
       selectwho: [0, Validators.required],
       Structure: ['', Validators.required],
-      ForEmployee: ['', Validators.required],
+      ForEmployee: [''],
       CCto: ['', Validators.required]
     })
 
@@ -43,6 +47,7 @@ export class AssignCaseComponent implements OnInit {
   ngOnInit(): void {
 
     this.getBranches()
+    this.user  = this.userService.getCurrentUser()
 
   }
   getBranches() {
@@ -82,14 +87,15 @@ export class AssignCaseComponent implements OnInit {
 
     if (this.caseForm.valid) {
 
+
+
       this.caseService.assignCase(
         {
-          "CaseId": "275C1D3A-707F-4179-9E67-90FF1CF1FC86",
-          "AssignedByEmployeeId": "278B4187-413D-4F28-A63A-3D4F2B6C7F45",
-          "AssignedToEmployeeId": "4390EAD4-EEA7-408C-8E7C-2FDB2923258E",
-          "ForwardedToStructureId": [
-            "973514F9-E636-4564-8B2F-3B501495698A"
-          ]
+          CaseId:this.caseId,
+          AssignedByEmployeeId: this.user.EmployeeId,
+          AssignedToEmployeeId: this.caseForm.value.ForEmployee||null,
+          AssignedToStructureId:this.caseForm.value.Structure,
+          ForwardedToStructureId:this.caseForm.value.CCto
         }
       ).subscribe({
         next: (res) => {
@@ -104,6 +110,7 @@ export class AssignCaseComponent implements OnInit {
           };
           this.commonService.showToast(this.toast);
           this.closeModal();
+          
         }, error: (err) => {
 
           this.toast = {
@@ -116,7 +123,7 @@ export class AssignCaseComponent implements OnInit {
             } as IndividualConfig,
           };
           this.commonService.showToast(this.toast);
-          this.closeModal();
+         // this.closeModal();
 
         }
       })
