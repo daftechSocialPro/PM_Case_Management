@@ -148,11 +148,11 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         }
 
         [HttpGet("encoding")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(Guid userId)
         {
             try
             {
-                return Ok(await _caseEncodeService.GetAll());
+                return Ok(await _caseEncodeService.GetAll(userId));
 
             }
             catch (Exception ex)

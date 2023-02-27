@@ -67,39 +67,25 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
             }
         }
 
-        public async Task<List<CaseEncodeGetDto>> GetAll()
+        public async Task<List<CaseEncodeGetDto>> GetAll(Guid userId)
         {
             try
             {
-                List<Case> cases = _dbContext.Cases.Include(p => p.Employee).Include(p => p.CaseType).Include(p => p.Applicant).ToList();
-                List<CaseEncodeGetDto> results = new List<CaseEncodeGetDto>();
-
-                foreach (Case currCase in cases)
+                List<CaseEncodeGetDto> cases = await _dbContext.Cases.Where(ca => ca.CreatedBy.Equals(userId) && ca.AffairStatus.Equals(AffairStatus.Encoded)).Include(p => p.Employee).Include(p => p.CaseType).Include(p => p.Applicant).Select(st => new CaseEncodeGetDto
                 {
-                    results.Add(new CaseEncodeGetDto
-                    {
-                        Id = currCase.Id,
-                        CreatedAt = currCase.CreatedAt,
-                        CreatedBy = currCase.CreatedBy,
-                        AffairStatus = currCase.AffairStatus,
-                        PhoneNumber2 = currCase.PhoneNumber2,
-                        ApplicantId = currCase.ApplicantId,
-                        CaseNumber = currCase.CaseNumber,
-                        CaseTypeId = currCase.CaseTypeId,
-                        EmployeeId = currCase.EmployeeId,
-                        IsArchived = currCase.IsArchived,
-                        LetterNumber = currCase.LetterNumber,
-                        LetterSubject = currCase.LetterSubject,
-                        Remark = currCase.Remark,
-                        Representative = currCase.Representative,
-                        SMSStatus = currCase.SMSStatus,
-                        CaseType = currCase.CaseType,
-                        Employee = currCase.Employee,
-                        Applicant = currCase.Applicant,
-                    });
-                }
+                    Id = st.Id,
+                    CaseNumber = st.CaseNumber,
+                    LetterNumber = st.LetterNumber,
+                    LetterSubject = st.LetterSubject,
+                    CaseTypeName = st.CaseType.CaseTypeTitle,
+                    ApplicantName = st.Applicant.ApplicantName,
+                    EmployeeName = st.Employee.FullName,
+                    ApplicantPhoneNo = st.Applicant.PhoneNumber,
+                    EmployeePhoneNo = st.Employee.PhoneNumber,
+                    CreatedAt = st.CreatedAt.ToString(),
+                }).ToListAsync();
 
-                return results;
+                return cases;
             }
             catch (Exception ex)
             {
