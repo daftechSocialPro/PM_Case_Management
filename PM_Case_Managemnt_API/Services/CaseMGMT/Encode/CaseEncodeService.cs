@@ -160,6 +160,24 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
             return CaseNumber;
 
         }
+        //public async Task<List<CaseEncodeGetDto>> GetAllTrnsferd(Guid employeeId, string[] Roles) {
+
+
+        //    if (Roles.Contains("Secretary"))
+        //    {
+        //        notificationCount = Db.AffairHistories.Count(x => x.ToEmployee.StructureId == employee.StructureId &&
+        //        (x.AffairHistoryStatus == AffairHistoryStatus.Pend || x.AffairHistoryStatus == AffairHistoryStatus.Transfered) &&
+        //        (!x.IsConfirmedBySeretery || !x.IsForwardedBySeretery));
+        //    }
+        //    else
+        //    {
+        //        notificationCount = Db.AffairHistories.Count(x => x.ToEmployeeId == currentUser.EmployeeId && (x.AffairHistoryStatus == AffairHistoryStatus.Pend || x.AffairHistoryStatus == AffairHistoryStatus.Transfered));
+        //    }
+
+
+
+
+        //};
 
 
     }

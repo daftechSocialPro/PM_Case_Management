@@ -9,5 +9,8 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
         public Task AssignTask(CaseAssignDto caseAssignDto);
 
         public Task<string> getCaseNumber();
+
+
+        //public Task<List<CaseEncodeGetDto>> GetAllTrnsferd(Guid employeeId);
     }
 }
