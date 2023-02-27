@@ -1,7 +1,7 @@
 <main id="main" class="main">
    <div class="pagetitle">
       <h1>Cases</h1>
-      <nav>
+      <nav>  
          <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
             <li class="breadcrumb-item">Encode </li>
@@ -14,7 +14,7 @@
    </div>
    <section class="section profile">
 
-      <div class="col-lg-4">
+      <div class="col-lg-4" *ngFor="let encodedCase of encodedCases">
          <div class="card">
             <div class="card-header">
                <div>
@@ -34,7 +34,7 @@
                      </li>
                   </div>
                   <div>
-                     Case Name
+                    {{encodedCase.CaseTypeName}}
                   </div>
               
                </div>
@@ -42,19 +42,19 @@
             <div class="card-body" style="background-color: #f6f9ff !important;">
                <h5 class="card-title ">
 
-                  remark
+                  {{encodedCase.LetterSubject}}
                </h5>
 
                <div class="row">
                   <div class="col-6">
 
-                     <span> Denekew Berihun | 1234 </span><br />
-
+                     <span> {{encodedCase.ApplicantName || encodedCase.EmployeeName}} | {{encodedCase.LetterNumber}} </span><br />
+                     <span> {{encodedCase.ApplicantPhoneNo || encodedCase.EmployeePhoneNo}}</span>
 
                   </div>
                   <div class="col-6 " style="text-align: right!important;">
 
-                     <span style="font-size: 20px;" class="badge bg-secondary">AF2020-6</span>
+                     <span style="font-size: 20px;" class="badge bg-secondary">{{encodedCase.CaseNumber}}</span>
 
                   </div>
 
