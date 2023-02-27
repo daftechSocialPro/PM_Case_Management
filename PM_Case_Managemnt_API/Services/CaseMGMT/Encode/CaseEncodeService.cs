@@ -31,7 +31,6 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     CreatedAt = DateTime.Now,
                     RowStatus = Models.Common.RowStatus.Active,
                     CreatedBy = caseEncodePostDto.CreatedBy,
-                    CaseNumber = caseEncodePostDto.CaseNumber,
                     ApplicantId = caseEncodePostDto.ApplicantId,
                     EmployeeId = caseEncodePostDto.EmployeeId,
                     LetterNumber = caseEncodePostDto.LetterNumber,
@@ -42,6 +41,8 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     Representative = caseEncodePostDto.Representative,
                     Remark = caseEncodePostDto.Remark   
                 };
+                string caseNumber = await getCaseNumber();
+                newCase.CaseNumber = caseNumber;
 
                 await _dbContext.AddAsync(newCase);
                 await _dbContext.SaveChangesAsync();
@@ -146,8 +147,8 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
 
             if (latestNumber!=null)
             {
-                var split = latestNumber.Split('-');
-                CaseNumber += split[1];
+                int currCaseNumber = int.Parse(latestNumber.Split('-')[1]);
+                CaseNumber += (currCaseNumber + 1).ToString(); 
             }else
             {
                 CaseNumber += "1";

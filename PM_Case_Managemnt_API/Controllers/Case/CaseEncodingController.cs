@@ -21,18 +21,24 @@ namespace PM_Case_Managemnt_API.Controllers.Case
                 _caseEncodeService = caseEncodeService;
             _caseAttachmentService = caseAttachementService;
         }
+        
 
         [HttpPost("encoding")]
         public async Task<IActionResult> Create()
         {
             try
-            {
-
-                var form = Request.Form.Files;
-
-                CaseEncodePostDto caseEncodePostDto = new CaseEncodePostDto
                 {
-
+                CaseEncodePostDto caseEncodePostDto = new()
+                {
+                    CaseNumber = Request.Form["CaseNumber"],
+                    LetterNumber = Request.Form["ApplicantId"],
+                    LetterSubject = Request.Form["ApplicantId"],
+                    CaseTypeId = Guid.Parse(Request.Form["CaseTypeId"]),
+                    ApplicantId = Guid.Parse(Request.Form["ApplicantId"]),
+                    EmployeeId = Guid.Parse(Request.Form["EmployeeId"]),
+                    PhoneNumber2 = Request.Form["ApplicantId"],
+                    Representative = Request.Form["ApplicantId"],
+                    CreatedBy = Guid.Parse(Request.Form["CreatedBy"]),
                 };
                 string caseId = await _caseEncodeService.Add(caseEncodePostDto);
 
@@ -41,31 +47,66 @@ namespace PM_Case_Managemnt_API.Controllers.Case
                     List<CaseAttachment> attachments = new List<CaseAttachment>();
                     foreach (var file in Request.Form.Files)
                     {
-                        string folderName = Path.Combine("Assets", "CaseAttachments");
-                        string pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-
-
-                        if (file.Length > 0)
+                        
+                        if (file.Name.ToLower() == "attachemnts")
                         {
-                            string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                            string fullPath = Path.Combine(pathToSave, fileName);
-                            string dbPath = Path.Combine(folderName, fileName);
+                            string folderName = Path.Combine("Assets", "CaseAttachments");
+                            string pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
-                            using (var stream = new FileStream(fullPath, FileMode.Create))
+                            //Create directory if not exists
+                            (new FileInfo(folderName)).Directory.Create();
+
+                            if (file.Length > 0)
                             {
-                                file.CopyTo(stream);
+                                string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                                string fullPath = Path.Combine(pathToSave, fileName);
+                                string dbPath = Path.Combine(folderName, fileName);
+
+                                using (var stream = new FileStream(fullPath, FileMode.Create))
+                                {
+                                    file.CopyTo(stream);
+                                }
+                                CaseAttachment attachment = new()
+                                {
+                                    Id = Guid.NewGuid(),
+                                    CreatedAt = DateTime.Now,
+                                    CreatedBy = caseEncodePostDto.CreatedBy,
+                                    RowStatus = RowStatus.Active,
+                                    CaseId = Guid.Parse(caseId),
+                                    FilePath = dbPath
+                                };
+                                attachments.Add(attachment);
                             }
-                            CaseAttachment attachment = new()
-                            {
-                                Id = Guid.NewGuid(),
-                                CreatedAt = DateTime.Now,
-                                CreatedBy = caseEncodePostDto.CreatedBy,
-                                RowStatus = RowStatus.Active,
-                                CaseId = Guid.Parse(caseId),
-                                FilePath = dbPath
-                            };
-                            attachments.Add(attachment);
+
                         }
+                        //else if (file.Name.ToString() == "filesettings")
+                        //{
+                        //    string folderName = Path.Combine("Assets", "FileSettings");
+                        //    string pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                        //    // Create the directory if not exists
+                        //    (new FileInfo(folderName)).Directory.Create();
+
+                        //    if (file.Length > 0)
+                        //    {
+                        //        string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                        //        string fullPath = Path.Combine(pathToSave, fileName);
+                        //        string dbPath = Path.Combine(folderName, fileName);
+
+
+                        //        using (var stream = new FileStream(fullPath, FileMode.Create))
+                        //        {
+                        //            file.CopyTo(stream);
+                        //        }
+
+                        //        FilesInformationPostDto filesInformation = new()
+                        //        {
+                        //            CreatedBy = caseEncodePostDto.CreatedBy,
+                        //            CaseId = Guid.Parse(caseId),
+                        //            FilePath = dbPath,
+                        //        };
+                        //    }
+                        //}
                     }
                     await _caseAttachmentService.Add(attachments);
                 }
@@ -104,7 +145,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         }
 
-        [HttpGet("getCaseNumebr")]
+        [HttpGet("getCaseNumber")]
 
         public async Task<string> getCaseNumebr()
         {
