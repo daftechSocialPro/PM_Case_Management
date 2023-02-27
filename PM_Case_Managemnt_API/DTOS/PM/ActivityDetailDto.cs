@@ -11,8 +11,7 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public Guid CreatedBy { get; set; }
         public List<SubActivityDetailDto>? ActivityDetails { get; set; }
     }
-
-
+     
     public class SubActivityDetailDto
     {
         public string SubActivityDesctiption { get; set; } = null!;
@@ -20,7 +19,7 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public string EndDate { get; set; } = null!;
         public float PlannedBudget { get; set; }
         public float Weight { get; set; }
-        public ActivityType ActivityType { get; set; }
+        public int ActivityType { get; set; }
         public float OfficeWork { get; set; }
         public float FieldWork { get; set; }
         public Guid UnitOfMeasurement { get; set; }

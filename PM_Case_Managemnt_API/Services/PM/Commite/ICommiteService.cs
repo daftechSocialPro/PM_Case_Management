@@ -13,5 +13,6 @@ namespace PM_Case_Managemnt_API.Services.PM.Commite
         public Task<int> AddEmployeestoCommitte(CommiteEmployeesdto commiteEmployeesdto);
 
         public Task<int> RemoveEmployeestoCommitte(CommiteEmployeesdto commiteEmployeesdto);
+        public Task<List<SelectListDto>> GetSelectListCommittee();
     }
 }

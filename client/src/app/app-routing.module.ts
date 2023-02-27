@@ -50,9 +50,9 @@ import { ComittesComponent } from './pages/pm/comittes/comittes.component';
 import { AssignedActivitiesComponent } from './pages/pm/assigned-activities/assigned-activities.component';
 import { CaseTypeComponent } from './pages/case/case-type/case-type.component';
 import { FileSettingComponent } from './pages/case/file-setting/file-setting.component';
-import { CaseListPageComponent } from './pages/Case/case-list-page/case-list-page.component';
-import { CaseHistoryComponent } from './pages/Case/case-history/case-history.component';
-import { CaseDetailComponent } from './pages/Case/case-detail/case-detail.component';
+import { ActivityforapprovalComponent } from './pages/pm/activityforapproval/activityforapproval.component';
+
+
 
 const routes: Routes = [
 
@@ -76,9 +76,9 @@ const routes: Routes = [
   { path: 'assignedactivities' , canActivate:[AuthGuard], component: AssignedActivitiesComponent },
   { path: 'casetype' ,canActivate:[AuthGuard],component : CaseTypeComponent},
   { path: 'filesetting' ,canActivate:[AuthGuard],component : FileSettingComponent},
-  { path: 'caselistpage' ,canActivate:[AuthGuard],component : CaseListPageComponent},
-  { path: 'casehistory' ,canActivate:[AuthGuard],component : CaseHistoryComponent},
-  { path: 'casedetiel' ,canActivate:[AuthGuard],component : CaseDetailComponent},
+  { path: 'actForApproval' ,canActivate:[AuthGuard],component : ActivityforapprovalComponent},
+
+
   
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },

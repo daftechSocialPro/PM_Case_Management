@@ -11,7 +11,7 @@ namespace PM_Case_Managemnt_API.Models.PM
             Tasks = new HashSet<Task>();
             TaskMemos = new HashSet<TaskMemo>();
             TaskMember = new HashSet<TaskMembers>();
-            Activities = new HashSet<Activity>();
+           // Activities = new HashSet<Activity>();
         }
 
         public string PlanName { get; set; } = null!;
@@ -23,7 +23,7 @@ namespace PM_Case_Managemnt_API.Models.PM
         public DateTime? PeriodEndAt { get; set; }
         public Guid ProjectManagerId { get; set; }
         public virtual Employee ProjectManager { get; set; } = null!;
-        public Guid ProjectCordinatorId { get; set; }
+       // public Guid ProjectCordinatorId { get; set; }
         public Guid FinanceId { get; set; }
         public virtual Employee Finance { get; set; } = null!;
         public Guid? ProgramId { get; set; }
@@ -35,17 +35,18 @@ namespace PM_Case_Managemnt_API.Models.PM
         public float PlandBudget { get; set; }
         public ProjectType ProjectType { get; set; }
 
-        [NotMapped]
+     
         public ICollection<Task> Tasks { get; set; }
 
-        [NotMapped]
+     
         public ICollection<TaskMemo> TaskMemos { get; set; }
 
-        [NotMapped]
+     
         public ICollection<TaskMembers> TaskMember { get; set; }
 
-        [NotMapped]
-        public ICollection<Activity> Activities { get; set; }
+     
+        public  List<Activity> Activities { get; set; }
+
     }
 
     public enum ProjectType

@@ -1,20 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CaseService } from '../case.service';
 import { AddCaseTypeComponent } from './add-case-type/add-case-type.component';
+import { CaseTypeView } from './casetype';
 @Component({
   selector: 'app-case-type',
   templateUrl: './case-type.component.html',
   styleUrls: ['./case-type.component.css']
 })
-export class CaseTypeComponent implements OnInit{
-  constructor(private modalService: NgbModal){}
+export class CaseTypeComponent implements OnInit {
+
+  caseTypes!: CaseTypeView[] 
+
+  constructor(private modalService: NgbModal, private caseService: CaseService) { }
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.getCaseTypes()
   }
-  addCaseType(){
-    let modalRef = this.modalService.open(AddCaseTypeComponent,{size:'lg',backdrop:'static'})
+  getCaseTypes() {
+    this.caseService.getCaseType().subscribe({
+      next: (res) => {
+        this.caseTypes = res
+        console.log('res',res)
 
+      }, error: (err) => {
 
+        console.log(err)
+      }
+    })
+
+  }
+  addCaseType() {
+    let modalRef = this.modalService.open(AddCaseTypeComponent, { size: 'lg', backdrop: 'static' })
+
+modalRef.result.then(()=>{
+  this.getCaseTypes()
+})
 
   }
 

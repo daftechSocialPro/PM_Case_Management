@@ -28,7 +28,7 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         public TimeMeasurement MeasurementUnit { get; set; }
         public CaseForm CaseForm { get; set; }
 
-        [NotMapped]
+     
         public virtual ICollection<CaseType> Childrens { get; set; }
 
     }

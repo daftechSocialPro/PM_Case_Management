@@ -1,4 +1,5 @@
 import { SelectList } from "../../common/common"
+import { ActivityView } from "../view-activties/activityview"
 
 export interface Task {
 
@@ -24,6 +25,7 @@ export interface TaskView {
     PlannedBudget?: Number
     TaskMembers?: SelectList[]
     TaskMemos?:TaskMemoView[]
+    ActivityViewDtos ?:ActivityView[]
 
 }
 export interface TaskMembers {

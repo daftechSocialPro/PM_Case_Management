@@ -20,7 +20,7 @@ namespace PM_Case_Managemnt_API.Models.PM
         public virtual Employee Employee { get; set; } = null!;
         public string Description { get; set; } = null!;
 
-        [NotMapped]
+     
         public virtual ICollection<TaskMemoReply> Replies { get; set; }
     }
 }

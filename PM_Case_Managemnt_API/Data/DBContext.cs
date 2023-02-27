@@ -45,33 +45,21 @@ namespace PM_Case_Managemnt_API.Data
 
         public DbSet<Applicant> Applicants { get; set; }
         public DbSet<Appointement> Appointements { get; set; }
-
-        public DbSet<AppointemnetWithCalender> AppointemnetWithCalenders { get; set; }
-
+        public DbSet<AppointementWithCalender> AppointementWithCalender { get; set; }
         public DbSet<Case> Cases { get; set; }
-
         public DbSet<CaseAttachment> CaseAttachments { get; set; }
-
         public DbSet<CaseHistory> CaseHistories { get; set; }
-
-
         public DbSet<CaseHistoryAttachment> CaseHistoryAttachments { get; set; }
-
         public DbSet<CaseMessages> CaseMessages { get; set; }
-
         public DbSet<CaseType> CaseTypes { get; set; }
-
+        public DbSet<CaseForward> CaseForwards { get; set; }
         public DbSet<FileSetting> FileSettings { get; set; }
-
         public DbSet<FilesInformation> FilesInformations { get; set; }
-
 
         // pm 
 
         public DbSet<Programs> Programs { get; set; }
-
         public DbSet<Plan> Plans { get; set; }
-
         public DbSet<ActivityParent> ActivityParents { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityProgress> ActivityProgresses { get; set; }

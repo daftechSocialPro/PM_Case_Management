@@ -26,10 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Models\Case\CaseForward.cs" />
     <Compile Include="Models\Case\CaseMessages.cs" />
     <Compile Include="Models\Case\Applicant.cs" />
     <Compile Include="Models\Case\Appointement.cs" />
-    <Compile Include="Models\Case\AppointemnetWithCalender.cs" />
+    <Compile Include="Models\Case\AppointementWithCalender.cs" />
     <Compile Include="Models\Case\Case.cs" />
     <Compile Include="Models\Case\CaseAttachment.cs" />
     <Compile Include="Models\Case\CaseHistory.cs" />
@@ -70,6 +71,7 @@
 
   <ItemGroup>
     <Folder Include="Assets\EmployeePhoto\" />
+    <Folder Include="Assets\ActivityDocuments\" />
     <Folder Include="Assets\Organization\" />
     <Folder Include="Models\Auth\" />
   </ItemGroup>

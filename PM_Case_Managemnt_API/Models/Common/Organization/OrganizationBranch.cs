@@ -25,7 +25,7 @@ namespace PM_Case_Managemnt_API.Models.Common
         [DefaultValue(false)]
         public bool IsHeadOffice { get; set; }
 
-        [NotMapped]
+     
         public ICollection<OrganizationalStructure> structures { get; set; }
 
     }

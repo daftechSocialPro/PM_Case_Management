@@ -23,36 +23,24 @@
                      <th scope="col">Elaps(hr)</th>
                      <th scope="col">Measurement Unit</th>
                      <th scope="col">Status</th>
-                     <th scope="col">Totla Payment</th>
+                     <th scope="col">Total Payment</th>
                      <th scope="col">SMS Code</th>
                      
                   </tr>
                </thead>
                <tbody>
-                  <tr>
-                     <th scope="row">1</th>
-                     <td>የቆሸሹ ቆጣሪዎችን መጥረግ</td>
-                     <td></td>
-                     <td>2</td>
-                     <td>Hour</td>
-                     <td>Active</td>
-                     <td>100</td>
-                     <td>123</td>
-                     <td>ICON</td>
-                  
+                  <tr *ngFor="let casetype of caseTypes; let i = index">
+                     <th scope="row">{{i+1}}</th>
+                     <td>{{casetype.CaseTypeTitle}}</td>
+                     <td>{{casetype.Remark}}</td>
+                     <td>{{casetype.TotalPayment}}</td>
+                     <td>{{casetype.MeasurementUnit}}</td>
+                     <td>{{casetype.RowStatus}}</td>
+                     <td>{{casetype.TotalPayment}}</td>
+                     <td>{{casetype.Code}}</td>
+                   
                   </tr>
-                  <tr>
-                     <th scope="row">2</th>
-                     <td>የተፋቁ ፤ ያረጁና ዘገምተኛ ቆጣሪዎችን መቀየር</td>
-                     <td></td>
-                     <td>100</td>
-                     <td>Minutes</td>
-                     <td>Active</td>
-                     <td>1234</td>
-                     <td>1234</td>
-                     <td>ICON</td>
-                  
-                  </tr>
+
                   
                </tbody>
             </table>

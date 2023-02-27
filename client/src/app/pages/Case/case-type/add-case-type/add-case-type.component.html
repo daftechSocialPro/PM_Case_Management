@@ -7,15 +7,15 @@
     <div class="card" >
 
         <div class="card-body">
-                <form class=""  (ngSubmit)="submit()">
+                <form [formGroup]="caseForm"  (ngSubmit)="submit()">
                     <div class="modal-body">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     
                                     <input type="text" class="form-control" id="CaseTypeTittle" 
-                                        formControlName="CaseTypeTittle">
-                                        <label for="CaseTypeTittle">Case Type Tittle</label>
+                                        formControlName="CaseTypeTitle">
+                                        <label for="CaseTypeTittle">Case Type Title</label>
                                 </div>
                             </div>
 
@@ -29,7 +29,7 @@
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <input type="number" class="form-control" id="TotaLength" placeholder="Enter only numbers"
-                                        formControlName="TotaLength">
+                                        formControlName="Counter">
                                     <label for="TotaLength">Total Length</label>
                                 </div>
                             </div>
@@ -37,10 +37,10 @@
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <select class="form-select" id="MesurementUnit" 
-                                        formControlName="MesurementUnit">
-                                        <option value="0">Minutes</option>
-                                        <option value="1">Hours</option>
-                                        <option value="2">Days</option>
+                                        formControlName="MeasurementUnit">
+                                        <option value="Minutes">Minutes</option>
+                                        <option value="Hour">Hours</option>
+                                        <option value="Day">Days</option>
 
                                     </select>
                                     <label for="MesurementUnit">Mesurement Unit</label>
@@ -48,24 +48,24 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="SMSCode"  formControlName="SMSCode">
-                                    <label for="SMSCode">SMS Code</label>
+                                    <input type="text" class="form-control" id="SMSCode"  formControlName="Code">
+                                    <label for="Code">SMS Code</label>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <select class="form-select" id="casetype" #activity
-                                        formControlName="casetype">
-                                        <option value="0">Inside Case</option>
-                                        <option value="1">Outside Case</option>
+                                        formControlName="CaseForm">
+                                        <option value="Inside">Inside Case</option>
+                                        <option value="Outside">Outside Case</option>
                                     </select>
                                     <label for="casetype">Case Type</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating"><textarea class="form-control" formControlName="Remark"
-                                        placeholder="Address" id="Remark" style="height: 100px;"></textarea><label
+                                        placeholder="Remark" id="Remark" style="height: 100px;"></textarea><label
                                         for="Remark">Remark</label>
                                 </div>
                             </div>

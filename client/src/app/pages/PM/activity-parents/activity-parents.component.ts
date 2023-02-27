@@ -45,7 +45,6 @@ export class ActivityParentsComponent implements OnInit {
     this.ListofEmployees();
     this.user = this.userService.getCurrentUser();
 
-
   }
 
   getDateDiff(startDate: string) {

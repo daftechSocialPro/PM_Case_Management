@@ -62,6 +62,14 @@ namespace PM_Case_Managemnt_API.Controllers.PM
 
             return response;
         }
+        [HttpGet("getSelectListCommittee")]
+
+        public async Task<List<SelectListDto>> getCommitteeSelectList()
+        {
+
+            var response = await _commiteService.GetSelectListCommittee();
+            return response;
+        }
 
         [HttpPost("addEmployesInCommitee")]
 

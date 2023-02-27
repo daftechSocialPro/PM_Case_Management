@@ -33,16 +33,16 @@ namespace PM_Case_Managemnt_API.Models.PM
         [DefaultValue(true)]
         public bool HasActivityParent { get; set; }
 
-        [NotMapped]
+     
         public ICollection<TaskMemo> TaskMemos { get; set; }
 
-        [NotMapped]
+     
         public ICollection<TaskMembers> TaskMember { get; set; }
 
-        [NotMapped]
+     
         public ICollection<ActivityParent> ActivitiesParents { get; set; }
 
-        [NotMapped]
+     
         public ICollection<Activity> Activities { get; set; }
 
     }

@@ -12,7 +12,7 @@ namespace PM_Case_Managemnt_API.Models.Common
         public string FormName { get; set; } = null!;
 
 
-        [NotMapped]
+     
         public virtual ICollection<StandardizedFormDocuments> StandardizedFormDocuments { get; set; }
 
     }
