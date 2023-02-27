@@ -1,0 +1,12 @@
+.name{
+    font-weight: 200;
+    color: #000;
+    margin-top: -10px;
+}
+.remark{
+    font-weight: 100;
+    color: #899bbd;
+    line-height: 2;
+    font-size: 12px;
+    margin: 10px;
+}
