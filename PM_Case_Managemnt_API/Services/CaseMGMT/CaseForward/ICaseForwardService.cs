@@ -5,6 +5,6 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.CaseForwardService
 {
     public interface ICaseForwardService
     {
-        public Task Add(CaseForwardPostDto caseForwardPostDto);
+        public Task AddMany(CaseForwardPostDto caseForwardPostDto);
     }
 }

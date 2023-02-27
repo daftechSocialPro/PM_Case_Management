@@ -8,9 +8,10 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
     public class CaseAssignDto
     {
         public Guid CaseId { get; set; }
-        public Guid ForwardedByEmployeeId { get; set; }
-        public Guid? ForwardedToEmployeeId { get; set; }
-        public Guid ForwardedToStructureId { get; set; }
+        public Guid AssignedByEmployeeId { get; set; }
+        public Guid? AssignedToEmployeeId { get; set; }
+        public Guid AssignedToStructureId { get; set; }
+        public Guid[]? ForwardedToStructureId { get; set; }
 
     }
     public class CaseEncodePostDto

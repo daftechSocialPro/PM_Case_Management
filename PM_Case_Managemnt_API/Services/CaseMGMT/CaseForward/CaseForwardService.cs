@@ -1,4 +1,5 @@
-﻿using PM_Case_Managemnt_API.Data;
+﻿using Microsoft.Identity.Client;
+using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
@@ -15,7 +16,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.CaseForwardService
         }
 
 
-        public async Task Add(CaseForwardPostDto caseForwardPostDto)
+        public async Task AddMany(CaseForwardPostDto caseForwardPostDto)
         {
             try
             {
@@ -24,7 +25,6 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.CaseForwardService
                 foreach(Guid forwardToStructureId in caseForwardPostDto.ForwardedToStructureId)
                 {
                     caseForwards.Add(
-
                     new()
                     {
                         Id = Guid.NewGuid(),
@@ -32,7 +32,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.CaseForwardService
                         CreatedBy = caseForwardPostDto.CreatedBy,
                         CaseId = caseForwardPostDto.CaseId,
                         ForwardedByEmployeeId = caseForwardPostDto.ForwardedByEmployeeId,
-                        ForwardedToStructureId = caseForwardPostDto.ForwardedToStructureId[0],
+                        ForwardedToStructureId = forwardToStructureId,
                         RowStatus = RowStatus.Active,
                     }
                         );
