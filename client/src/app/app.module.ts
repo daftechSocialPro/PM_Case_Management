@@ -88,6 +88,11 @@ import { CommitteeEmployeeComponent } from './pages/pm/comittes/committee-employ
 import { UpdateCpmmitteeComponent } from './pages/pm/comittes/update-cpmmittee/update-cpmmittee.component';
 import { AssignedActivitiesComponent } from './pages/pm/assigned-activities/assigned-activities.component';
 import { ViewActivtiesComponent } from './pages/pm/view-activties/view-activties.component';
+import { AssignCaseComponent } from './pages/Case/encode-case/assign-case/assign-case.component';
+
+import { CaseListPageComponent } from './pages/Case/case-list-page/case-list-page.component';
+import { CaseHistoryComponent } from './pages/Case/case-history/case-history.component';
+import { CaseDetailComponent } from './pages/Case/case-detail/case-detail.component';
 import { ActivityTargetComponent } from './pages/pm/view-activties/activity-target/activity-target.component';
 import { AddProgressComponent } from './pages/PM/view-activties/add-progress/add-progress.component';
 import { ViewProgressComponent } from './pages/pm/view-activties/view-progress/view-progress.component';
@@ -180,6 +185,11 @@ import { AddApplicantComponent } from './pages/Case/encode-case/add-applicant/ad
     UpdateCpmmitteeComponent,
     AssignedActivitiesComponent,
     ViewActivtiesComponent,
+    AssignCaseComponent,
+  
+    CaseListPageComponent,
+        CaseHistoryComponent,
+        CaseDetailComponent,
     ActivityTargetComponent,
     AddProgressComponent,
     ViewProgressComponent,

@@ -76,6 +76,13 @@ export class CaseService {
 
         return this.http.get<string>(this.BaseURI + "/getCaseNumber", HTTPOptions)
     }
+
+
+    //assign case
+
+    assignCase(assigncase:any){
+        return this.http.post(this.BaseURI+"/assign",assigncase)
+    }
 }
 
 

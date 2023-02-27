@@ -5,6 +5,7 @@ import { UserService } from '../../pages-login/user.service';
 import { CaseService } from '../case.service';
 import { AddCaseComponent } from './add-case/add-case.component';
 import { ICaseView } from './Icase';
+import { AssignCaseComponent } from './assign-case/assign-case.component';
 
 @Component({
   selector: 'app-encode-case',
@@ -36,8 +37,16 @@ export class EncodeCaseComponent implements OnInit {
   addCase() {
 
     let modalRef = this.modalService.open(AddCaseComponent, { size: 'xl', backdrop: 'static' })
+    modalRef.result.then(()=>{
+      this.getEnocdedCases()
+    })
 
 
+
+  }
+  assignCase(caseId : string){
+    let modalRef = this.modalService.open(AssignCaseComponent,{size:'xl',backdrop:'static'})
+    modalRef.componentInstance.caseId = caseId
 
   }
 

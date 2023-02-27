@@ -84,6 +84,10 @@ export class OrganizationService {
     return this.http.get<SelectList[]>(this.BaseURI+"/Employee/selectlistNoUser")
   }
 
+  getEmployeesBystructureId (structureId : string ){
+
+    return this.http.get<SelectList[]>(this.BaseURI+"/Employee/byStructureId?StructureId="+structureId)
+  }
   //unit of measurment 
 
   unitOfMeasurmentCreate(unitmeasurment: UnitMeasurment) {

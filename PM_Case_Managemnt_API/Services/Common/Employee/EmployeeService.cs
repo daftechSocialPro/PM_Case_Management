@@ -164,5 +164,21 @@ namespace PM_Case_Managemnt_API.Services.Common
 
         }
 
+        public async Task<List<SelectListDto>> GetEmployeeByStrucutreSelectList(Guid StructureId)
+        {
+
+
+            List<SelectListDto> employees = await (from e in _dBContext.Employees 
+                                                   join es in _dBContext.EmployeesStructures.Where(x=>x.OrganizationalStructureId == StructureId) on  e.Id equals es.EmployeeId 
+                                   select new SelectListDto
+                                   {
+                                       Id = e.Id,
+                                       Name =$"{e.FullName} ( {es.Position } ) "
+                                   }).ToListAsync();
+            return employees;
+
+
+        }
+
     }
 }

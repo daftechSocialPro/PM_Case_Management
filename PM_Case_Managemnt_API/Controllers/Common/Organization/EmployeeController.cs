@@ -162,6 +162,20 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
             }
         }
 
+        [HttpGet("byStructureId")]
+        public async Task<IActionResult> GetByStructureId( Guid StructureId )
+        {
+            try
+            {
+                return Ok(await _employeeService.GetEmployeeByStrucutreSelectList(StructureId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+
     }
 
 
