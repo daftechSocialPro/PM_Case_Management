@@ -359,23 +359,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
             return CaseNumber;
 
         }
-<<<<<<< HEAD
-        public async Task<List<CaseEncodeGetDto>> GetAllTransferd(Guid employeeId)
-        {
 
-
-
-            //if (Roles.Contains("Secretary"))
-            //{
-            //    notificationCount = Db.AffairHistories.Count(x => x.ToEmployee.StructureId == employee.StructureId &&
-            //    (x.AffairHistoryStatus == AffairHistoryStatus.Pend || x.AffairHistoryStatus == AffairHistoryStatus.Transfered) &&
-            //    (!x.IsConfirmedBySeretery || !x.IsForwardedBySeretery));
-            //}
-            //else
-            //{
-            //    notificationCount = Db.AffairHistories.Count(x => x.ToEmployeeId == currentUser.EmployeeId && (x.AffairHistoryStatus == AffairHistoryStatus.Pend || x.AffairHistoryStatus == AffairHistoryStatus.Transfered));
-            //}
-=======
         public async Task<List<CaseEncodeGetDto>> GetAllTransfred(Guid employeeId)
 
 
@@ -384,14 +368,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
             Employee user = _dbContext.Employees.Include(x => x.OrganizationalStructure).Where(x => x.Id == employeeId).FirstOrDefault();
 
             List<CaseEncodeGetDto> notfications = new List<CaseEncodeGetDto>();
->>>>>>> e1e86e45ff346c8adbd133d710d67d2a052d22e3
 
-
-
-
-<<<<<<< HEAD
-        }
-=======
 
             if (user.Position == Position.Secertary)
             {
@@ -417,11 +394,10 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                      ReciverType = x.ReciverType.ToString(),
                      SecreateryNeeded = x.SecreateryNeeded,
                      IsConfirmedBySeretery = x.IsConfirmedBySeretery,
-                     Position= x.ToEmployee.Position.ToString(),
+                     Position = user.Position.ToString(),
                      AffairHistoryStatus = x.AffairHistoryStatus.ToString()
 
                  }).ToListAsync();
->>>>>>> e1e86e45ff346c8adbd133d710d67d2a052d22e3
 
 
             }
@@ -448,7 +424,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     AffairHistoryStatus = x.AffairHistoryStatus.ToString(),
                     ToEmployee = x.ToEmployee.FullName,
                     ToStructure = x.ToStructure.StructureName,
-                    Position = x.ToEmployee.Position.ToString(),
+                    Position = user.Position.ToString(),
 
                 }).ToListAsync(); ;
             }
@@ -495,7 +471,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                                     EmployeePhoneNo = x.Case.Employee.PhoneNumber,
                                     LetterNumber = x.Case.LetterNumber,
                                     LetterSubject = x.Case.LetterSubject,
-                                    Position = x.ToEmployee.Position.ToString(),
+                                    Position = user.Position.ToString(),
                                     FromStructure = x.FromStructure.StructureName,
                                     FromEmployeeId = x.FromEmployee.FullName,
                                     ReciverType = x.ReciverType.ToString(),
@@ -535,7 +511,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                                 EmployeePhoneNo = x.Case.Employee.PhoneNumber,
                                 LetterNumber = x.Case.LetterNumber,
                                 LetterSubject = x.Case.LetterSubject,
-                                Position = x.ToEmployee.Position.ToString(),
+                                Position = user.Position.ToString(),
                                 FromStructure = x.FromStructure.StructureName,
                                 FromEmployeeId = x.FromEmployee.FullName,
                                 ReciverType = x.ReciverType.ToString(),

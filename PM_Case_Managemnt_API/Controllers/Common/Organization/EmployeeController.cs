@@ -29,6 +29,10 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
                 var folderName = Path.Combine("Assets", "EmployeePhoto");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
+                if (!Directory.Exists(pathToSave))
+                    Directory.CreateDirectory(pathToSave);
+                
+
                 if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');

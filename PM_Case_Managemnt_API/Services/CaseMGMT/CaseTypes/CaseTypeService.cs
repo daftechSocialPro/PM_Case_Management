@@ -118,7 +118,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
        public async Task<List<SelectListDto>> GetFileSettigs(Guid caseTypeId)
         {
 
-            return await (from f in _dbContext.FileSettings.Where(x=>caseTypeId == caseTypeId)
+            return await (from f in _dbContext.FileSettings.Where(x=>x.CaseTypeId == caseTypeId)
                           select new SelectListDto
                           {
 

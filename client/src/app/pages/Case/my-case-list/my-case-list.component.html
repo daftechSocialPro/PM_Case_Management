@@ -24,13 +24,25 @@
                                         style="color: #204382;" class="d-none d-md-block dropdown-toggle ps-2">Action
                                     </span> </a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                                    <li *ngIf="(mycase.Position==='Secretary'&& (!affair.IsConfirmedBySeretery && affair.ToEmployee.StructureId == currentUser.Employee.StructureId && affair.ToEmployee.EmployeeMemberShipLevel == EmployeeMemberShipLevel.Head)">
-                                         <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;" 
-                                > <i class="bi bi-bookmark-check text-primary"></i> <span>Assign
-                                     Case</span> </a></li>
+                                    <li *ngIf="mycase.Position==='Secertary'&& !mycase.IsConfirmedBySeretery">
+                                        <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;"> <i
+                                                class="bi bi-bookmark-check text-success"></i> <span>Confirm</span> </a>
+                                    </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
+
+                                    <li
+                                        *ngIf=" mycase.AffairHistoryStatus == 'Pend' || mycase.AffairHistoryStatus == 'Seen'">
+                                        <a class="dropdown-item d-flex align-items-center" (click)="detailCase(mycase.Id)" style="cursor: pointer;"> <i
+                                                class="bi bi-list text-primary" ></i> <span>Detail</span> </a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+
+
                                 </ul>
                             </li>
                         </div>
@@ -42,56 +54,64 @@
                 </div>
                 <div class="card-body" style="background-color: #f6f9ff !important;">
 
-                    <span style="color: #798eb3;"> From : </span> {{mycase.FromEmployeeId}} {{mycase.FromStructure}}
+                    <span style="color: #798eb3;"> From : </span> {{mycase.FromEmployeeId}} ( {{mycase.FromStructure}} )
                     <h5 class="card-title ">
 
                         {{mycase.LetterSubject}}
                     </h5>
-                    
+
                     <div class="row">
                         <div class="col-6">
-            
-                            <span > {{mycase.ApplicantName || mycase.EmployeeName}} | {{mycase.LetterNumber}}
+
+                            <span> {{mycase.ApplicantName || mycase.EmployeeName}} | {{mycase.LetterNumber}}
                             </span>
-                          
-                            <span > {{mycase.ApplicantPhoneNo || mycase.EmployeePhoneNo}}</span><br/>
-                            <span *ngIf="mycase.SecreateryNeeded&& mycase.IsConfirmedBySeretery" class="badge bg-success">Confirmed by secretery</span>
-                        
-                        
-                            <span *ngIf="mycase.SecreateryNeeded&& !mycase.IsConfirmedBySeretery" class="badge bg-danger">Not Confirmed by secretery</span>
-                        
-                
-                            <span *ngIf="!mycase.SecreateryNeeded&& mycase.IsConfirmedBySeretery" class="badge bg-success">Confirmed by {{mycase.ToEmployee}} </span>
-                      
-                            <span *ngIf="!mycase.SecreateryNeeded&& mycase.IsConfirmedBySeretery" class="badge bg-danger">Not Confirmed by  {{mycase.ToEmployee}}</span>
-                        
-               
-                          
+
+                            <span> {{mycase.ApplicantPhoneNo || mycase.EmployeePhoneNo}}</span><br />
+                            <span *ngIf="mycase.SecreateryNeeded&& mycase.IsConfirmedBySeretery"
+                                class="badge bg-success">Confirmed by secretery</span>
+
+
+                            <span *ngIf="mycase.SecreateryNeeded&& !mycase.IsConfirmedBySeretery"
+                                class="badge bg-danger">Not Confirmed by secretery</span>
+
+
+                            <span *ngIf="!mycase.SecreateryNeeded&& mycase.IsConfirmedBySeretery"
+                                class="badge bg-success">Confirmed by {{mycase.ToEmployee}} </span>
+
+                            <span *ngIf="!mycase.SecreateryNeeded&& mycase.IsConfirmedBySeretery"
+                                class="badge bg-danger">Not Confirmed by {{mycase.ToEmployee}}</span>
+
+
+
                         </div>
                         <div class="col-6 text-end ">
-                            
+
                             <div style="position: absolute">
                                 <span style="font-size: 25px;" class="badge bg-secondary">{{mycase.CaseNumber}}</span>
 
-                         
-                                <span *ngIf="mycase.AffairHistoryStatus == 'seen'" style="position: absolute; right: -20px; bottom: -15px; font-size:80%" class="badge bg-success">{{mycase.AffairHistoryStatus}} </span>
-                         
-                                <span *ngIf="mycase.AffairHistoryStatus != 'seen'" style="position: absolute;right: -20px; bottom: -15px; font-size:80%" class="badge bg-danger"> {{mycase.AffairHistoryStatus }}</span>
-                            
+
+                                <span *ngIf="mycase.AffairHistoryStatus == 'seen'"
+                                    style="position: absolute; right: -20px; bottom: -15px; font-size:80%"
+                                    class="badge bg-success">{{mycase.AffairHistoryStatus}} </span>
+
+                                <span *ngIf="mycase.AffairHistoryStatus != 'seen'"
+                                    style="position: absolute;right: -20px; bottom: -15px; font-size:80%"
+                                    class="badge bg-danger"> {{mycase.AffairHistoryStatus }}</span>
+
                             </div>
 
-                           
+
 
                         </div>
 
                     </div>
                 </div>
                 <div class="card-footer text-end">
-          
-                    <span >Reciver Type : </span><span class="badge bg-success">{{mycase.ReciverType}}</span>
 
-                
-                        
+                    <span>Reciver Type : </span><span class="badge bg-success">{{mycase.ReciverType}}</span>
+
+
+
 
                 </div>
             </div>

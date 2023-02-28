@@ -52,6 +52,8 @@ import { CaseTypeComponent } from './pages/case/case-type/case-type.component';
 import { FileSettingComponent } from './pages/case/file-setting/file-setting.component';
 import { ActivityforapprovalComponent } from './pages/pm/activityforapproval/activityforapproval.component';
 import { MyCaseListComponent } from './pages/case/my-case-list/my-case-list.component';
+import { CaseDetailComponent } from './pages/Case/case-detail/case-detail.component';
+import { CaseHistoryComponent } from './pages/Case/case-history/case-history.component';
 
 
 
@@ -79,7 +81,8 @@ const routes: Routes = [
   { path: 'filesetting' ,canActivate:[AuthGuard],component : FileSettingComponent},
   { path: 'actForApproval' ,canActivate:[AuthGuard],component : ActivityforapprovalComponent},
   { path: 'mycaselist', canActivate:[AuthGuard], component:MyCaseListComponent},
-
+  { path: 'casedetail',canActivate:[AuthGuard],component:CaseDetailComponent},
+  { path: 'caseHistory',canActivate:[AuthGuard],component:CaseHistoryComponent},
   
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },

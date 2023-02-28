@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserView } from '../../pages-login/user';
 import { UserService } from '../../pages-login/user.service';
@@ -15,7 +16,10 @@ export class MyCaseListComponent implements OnInit {
   myacaselist!: ICaseView[]
   user!: UserView
 
-  constructor(private modalService: NgbModal, private caseService: CaseService, private userService: UserService) { }
+  constructor(
+    
+    private route: Router,
+    private modalService: NgbModal, private caseService: CaseService, private userService: UserService) { }
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser()
     this.getMyCaseList()
@@ -25,10 +29,15 @@ export class MyCaseListComponent implements OnInit {
     this.caseService.getMyCaseList(this.user.EmployeeId).subscribe({
       next: (res) => {
         this.myacaselist = res
+        console.log(res)
       }, error: (err) => {
         console.error(err)
       }
     })
+  }
+
+  detailCase(caseHistoryId:string){
+    this.route.navigate(['caseHistory'])
   }
 
 }

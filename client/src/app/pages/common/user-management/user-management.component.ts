@@ -16,19 +16,23 @@ export class UserManagementComponent implements OnInit {
   constructor(private modalService: NgbModal, private userService: UserService, private commonService : CommonService) { }
 
   ngOnInit(): void {
-    this.userService.getSystemUsers().subscribe({
-      next: (res) => {
-        this.employees = res
-      }, error: (err) => {
-        console.error(err)
-      }
-    })
+ this.getUsers()
   }
 
-
+getUsers(){
+  this.userService.getSystemUsers().subscribe({
+    next: (res) => {
+      this.employees = res
+    }, error: (err) => {
+      console.error(err)
+    }
+  })
+}
   addModal() {
     let modalRef = this.modalService.open(AddUsersComponent, { size: 'lg', backdrop: 'static' })
-    modalRef.result.then((res) => {})
+    modalRef.result.then((res) => {
+      this.getUsers()
+    })
 
   }
 
