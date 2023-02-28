@@ -29,6 +29,8 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public string PhoneNumber2 { get; set; }
         public string Representative { get; set; }
         public Guid CreatedBy { get; set; }
+        public Guid EncoderEmpId { get; set; }
+
         
         //public IFormFile[]? CaseAttachemnts { get; set; }
     }

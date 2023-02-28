@@ -28,6 +28,15 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 if (caseEncodePostDto.EmployeeId == null && caseEncodePostDto.ApplicantId == null)
                     throw new Exception("Please Provide an Applicant ID or Employee ID");
 
+
+                // structure of current structure.
+                var curStructc = from e in _dbContext.Employees
+                                 where e.Id.Equals(caseEncodePostDto.EncoderEmpId)
+                                   join es in _dbContext.EmployeesStructures on e.Id equals es.EmployeeId
+                                   select es.OrganizationalStructureId;
+
+                Guid structureId = (Guid)curStructc.First();
+
                 Case newCase = new()
                 {
                     Id = Guid.NewGuid(),
@@ -55,10 +64,10 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     CreatedBy = caseEncodePostDto.CreatedBy,
                     CaseId = newCase.Id,
                     CaseTypeId = newCase.CaseTypeId,
+                    FromStructureId = structureId,
                     ToEmployeeId = null,
-                    FromStructureId = null,
                     ToStructureId = null,
-                    AffairHistoryStatus = AffairHistoryStatus.Waiting,
+                    AffairHistoryStatus = AffairHistoryStatus.Pend,
                 };
 
 
@@ -114,6 +123,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 _dbContext.Entry(caseHistory).Property(caseHistory => caseHistory.ToStructureId).IsModified = true;
                 _dbContext.Entry(caseHistory).Property(caseHistory => caseHistory.ToEmployeeId).IsModified = true;
                 _dbContext.Entry(caseHistory).Property(caseHistory => caseHistory.ForwardedById).IsModified = true;
+
 
                 Case currCase = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals(caseAssignDto.CaseId));
                 currCase.AffairStatus = AffairStatus.Assigned;
