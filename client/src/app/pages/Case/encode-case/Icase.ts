@@ -9,6 +9,16 @@ export interface ICaseView{
     EmployeeName : string,
     ApplicantPhoneNo : string,
     EmployeePhoneNo : string
-    CreatedAt : string
+    CreatedAt : string,
+    FromStructure :string,
+    FromEmployeeId :string,
+    ReciverType :string,
+
+     ToStructure :string
+     ToEmployee :string
+     Position:string
+    SecreateryNeeded:boolean,
+    IsConfirmedBySeretery :boolean,
+    AffairHistoryStatus :string
 
 } 

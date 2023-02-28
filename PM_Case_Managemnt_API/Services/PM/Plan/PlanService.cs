@@ -41,12 +41,15 @@ namespace PM_Case_Managemnt_API.Services.PM.Plan
         }
 
         public async Task<List<PlanViewDto>> GetPlans()
+        
+        
         {
 
+            var plans = _dBContext.Plans.ToList();
 
-            return await (from p in _dBContext.Plans.Include(x => x.Structure).Include(x => x.ProjectManager).Include(x => x.Finance)
-                          join es in _dBContext.EmployeesStructures.Where(x => x.Position == Models.Common.Position.Director) on p.StructureId equals es.OrganizationalStructureId
-                          join e in _dBContext.Employees on es.EmployeeId equals e.Id
+
+            return await (from p in _dBContext.Plans.Include(x => x.Structure).Include(x => x.ProjectManager).Include(x => x.Finance)             
+                          
                           select new PlanViewDto
                           {
 
@@ -58,7 +61,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Plan
                               RemainingBudget = p.PlandBudget,
                               ProjectManager = p.ProjectManager.FullName,
                               FinanceManager = p.Finance.FullName,
-                              Director = e.FullName,
+                              Director = _dBContext.Employees.Where(x => x.Position == Models.Common.Position.Director&&x.OrganizationalStructureId== p.StructureId).FirstOrDefault().FullName,
                               ProjectType = p.ProjectType.ToString(),
                               NumberOfTask = 0,
                               NumberOfActivities = 0,

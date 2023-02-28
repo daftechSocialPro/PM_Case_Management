@@ -12,7 +12,6 @@ namespace PM_Case_Managemnt_API.Models.Common
 
         public int ToYear { get; set; }
 
-        [ForeignKey("ProgramBudgetYearId")]
-        public virtual ICollection<BudgetYear> BudgetYears { get; set; } = null!;
+        public virtual ICollection<BudgetYear>? BudgetYears { get; set; } = null!;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.DTOS.PM;
 using PM_Case_Managemnt_API.Models.PM;
-using PMCaseManagemntAPI.Migrations.DB;
+
 
 namespace PM_Case_Managemnt_API.Services.PM.Activity
 {

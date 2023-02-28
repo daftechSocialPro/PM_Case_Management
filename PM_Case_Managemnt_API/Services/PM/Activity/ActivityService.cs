@@ -9,7 +9,7 @@ using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.DTOS.PM;
 using PM_Case_Managemnt_API.Models.Common;
 using PM_Case_Managemnt_API.Models.PM;
-using PMCaseManagemntAPI.Migrations.DB;
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -375,7 +375,8 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                                             ProgresscreatedAt = e.CreatedAt.ToString(),
                                             IsFinance = e.Activity.Plan.FinanceId == employeeId || e.Activity.Task.Plan.FinanceId == employeeId || e.Activity.ActivityParent.Task.Plan.FinanceId == employeeId ? true : false,
                                             IsProjectManager = e.Activity.Plan.ProjectManagerId == employeeId || e.Activity.Task.Plan.ProjectManagerId == employeeId || e.Activity.ActivityParent.Task.Plan.ProjectManagerId == employeeId ? true : false,
-                                            IsDirector = _dBContext.EmployeesStructures.Include(x => x.OrganizationalStructure).Any(x => (x.EmployeeId == employeeId && x.Position == Position.Director) && (x.OrganizationalStructureId == e.Activity.Plan.StructureId || x.OrganizationalStructureId == e.Activity.Task.Plan.StructureId || x.OrganizationalStructureId == e.Activity.ActivityParent.Task.Plan.StructureId))
+
+                                            IsDirector = _dBContext.Employees.Include(x => x.OrganizationalStructure).Any(x => (x.Id == employeeId && x.Position == Position.Director) && (x.OrganizationalStructureId == e.Activity.Plan.StructureId || x.OrganizationalStructureId == e.Activity.Task.Plan.StructureId || x.OrganizationalStructureId == e.Activity.ActivityParent.Task.Plan.StructureId))
 
 
                                         }

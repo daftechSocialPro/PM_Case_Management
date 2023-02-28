@@ -46,11 +46,11 @@ export class BudgetYearComponent implements OnInit {
 
     modalref.result.then((isConfirmed) => {
 
-      if (isConfirmed){
+   
    
       this.programBudgetYearList()
-      }
-      else return ;
+      
+     
     })
 
 }
@@ -60,10 +60,7 @@ budgetYearsDetails(value:ProgramBudgetYear){
   let modalRef = this.modalService.open(ProgramByDetailsComponent,{size:'lg',backdrop:"static"})
   modalRef.componentInstance.programBudget= value;
   modalRef.result.then((isConfirmed)=>{
-    if(isConfirmed){
-
-    }
-    else return ;
+this.programBudgetYearList()
   })
 
 }

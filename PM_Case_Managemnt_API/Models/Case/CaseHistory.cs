@@ -2,6 +2,7 @@
 
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PM_Case_Managemnt_API.Models.CaseModel
@@ -35,6 +36,9 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         public bool IsSmsSent { get; set; }
         public bool IsConfirmedBySeretery { get; set; }
         public bool IsForwardedBySeretery { get; set; }
+
+        [DefaultValue(false)]
+        public bool SecreateryNeeded { get; set; }
         public DateTime? SecreteryConfirmationDateTime { get; set; }
         public Guid? SecreteryId { get; set; }
         public virtual Employee Secretery { get; set; }

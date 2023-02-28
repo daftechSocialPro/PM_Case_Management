@@ -8,6 +8,7 @@ export interface UserView {
     role: string [];
     UserID : string ;
     EmployeeId:string;
+    Photo:string;
 }
 
 export interface Token {

@@ -54,6 +54,8 @@ export class CaseService {
 
         return this.http.get<SelectList[]>(this.BaseURI + "/applicantSelectList")
     }
+
+    //case
     addCase(caseValue: FormData) {
 
 
@@ -61,6 +63,18 @@ export class CaseService {
     }
     getEncodedCases(userId: string) {
         return this.http.get<ICaseView[]>(this.BaseURI + "/encoding?userId=" + userId)
+
+    }
+    getMyCaseList (employeeId: string ){
+
+        return this.http.get<ICaseView[]>(this.BaseURI+"/mycaseList?employeeId="+employeeId)
+    }
+    //notification 
+    getCasesNotification(employeeId: string) {
+
+
+        return this.http.get<ICaseView[]>(this.BaseURI + "/getnotification?employeeId=" + employeeId)
+
 
     }
 
@@ -80,8 +94,8 @@ export class CaseService {
 
     //assign case
 
-    assignCase(assigncase:any){
-        return this.http.post(this.BaseURI+"/assign",assigncase)
+    assignCase(assigncase: any) {
+        return this.http.post(this.BaseURI + "/assign", assigncase)
     }
 }
 

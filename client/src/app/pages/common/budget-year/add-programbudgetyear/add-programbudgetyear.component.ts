@@ -27,8 +27,8 @@ export class AddProgrambudgetyearComponent implements OnInit {
     this.programBudgetForm = this.formBuilder.group({
 
       Name: ['', Validators.required],
-      FromYear: [null, Validators.required],
-      ToYear: [null, Validators.required],
+      FromYear: [0, Validators.required],
+      ToYear: [0, Validators.required],
       Remark: ['']
 
     })

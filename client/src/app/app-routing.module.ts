@@ -51,6 +51,7 @@ import { AssignedActivitiesComponent } from './pages/pm/assigned-activities/assi
 import { CaseTypeComponent } from './pages/case/case-type/case-type.component';
 import { FileSettingComponent } from './pages/case/file-setting/file-setting.component';
 import { ActivityforapprovalComponent } from './pages/pm/activityforapproval/activityforapproval.component';
+import { MyCaseListComponent } from './pages/case/my-case-list/my-case-list.component';
 
 
 
@@ -77,7 +78,7 @@ const routes: Routes = [
   { path: 'casetype' ,canActivate:[AuthGuard],component : CaseTypeComponent},
   { path: 'filesetting' ,canActivate:[AuthGuard],component : FileSettingComponent},
   { path: 'actForApproval' ,canActivate:[AuthGuard],component : ActivityforapprovalComponent},
-
+  { path: 'mycaselist', canActivate:[AuthGuard], component:MyCaseListComponent},
 
   
   { path: 'alerts', component: AlertsComponent },
