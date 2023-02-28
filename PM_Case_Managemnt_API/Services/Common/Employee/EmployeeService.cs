@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.Models.Common;
-using PMCaseManagemntAPI.Migrations;
+
 
 
 namespace PM_Case_Managemnt_API.Services.Common
@@ -34,8 +34,10 @@ namespace PM_Case_Managemnt_API.Services.Common
                     PhoneNumber = employee.PhoneNumber,
                     Gender = Enum.Parse<Gender>(employee.Gender),
                     Remark = employee.Remark,
+                   OrganizationalStructureId = Guid.Parse(employee.StructureId),
+                   Position = Enum.Parse<Position>(employee.Position),
 
-                };
+               };
 
 
 
@@ -43,15 +45,7 @@ namespace PM_Case_Managemnt_API.Services.Common
 
                 await _dBContext.AddAsync(employee1);
 
-                var empstructure = new EmployeeStructures
-                {
-                    EmployeeId = employee1.Id,
-                    OrganizationalStructureId = Guid.Parse(employee.StructureId),
-                    Position = Enum.Parse<Position>(employee.Position),
-                };
-
-                await _dBContext.AddAsync(empstructure);
-
+       
 
 
                 await _dBContext.SaveChangesAsync();
@@ -86,9 +80,8 @@ namespace PM_Case_Managemnt_API.Services.Common
         public async Task<List<EmployeeDto>> GetEmployees()
         {
 
-            var k=  await (from e in _dBContext.Employees
-                          join es in _dBContext.EmployeesStructures.Include(x => x.OrganizationalStructure) on e.Id equals es.EmployeeId
-
+            var k=  await (from e in _dBContext.Employees.Include(x=>x.OrganizationalStructure)
+                         
                           select new EmployeeDto
                           {
                               Id= e.Id,
@@ -97,10 +90,10 @@ namespace PM_Case_Managemnt_API.Services.Common
                               FullName = e.FullName,
                               Gender = e.Gender.ToString(),
                               PhoneNumber = e.PhoneNumber,
-                              Position = es.Position.ToString(),
-                              StructureName = es.OrganizationalStructure.StructureName,
-                              BranchId = es.OrganizationalStructure.OrganizationBranchId.ToString(),
-                              StructureId = es.OrganizationalStructureId.ToString(),
+                              Position = e.Position.ToString(),
+                              StructureName = e.OrganizationalStructure.StructureName,
+                              BranchId = e.OrganizationalStructure.OrganizationBranchId.ToString(),
+                              StructureId = e.OrganizationalStructureId.ToString(),
                               Remark = e.Remark
 
                           }).ToListAsync();
@@ -140,7 +133,7 @@ namespace PM_Case_Managemnt_API.Services.Common
 
 
             var orgEmployee = _dBContext.Employees.Find(employeeDto.Id);
-            var orgEmployeeStructure  = _dBContext.EmployeesStructures.Where(x=>x.EmployeeId == employeeDto.Id).ToList().FirstOrDefault();
+         
 
             orgEmployee.Photo = employeeDto.Photo;
             orgEmployee.Title = employeeDto.Title;
@@ -148,19 +141,30 @@ namespace PM_Case_Managemnt_API.Services.Common
             orgEmployee.Gender = Enum.Parse<Gender>( employeeDto.Gender);
             orgEmployee.PhoneNumber = employeeDto.PhoneNumber;
             orgEmployee.Remark = employeeDto.Remark;
-            orgEmployeeStructure.Position = Enum.Parse<Position>( employeeDto.Position);
-            orgEmployeeStructure.OrganizationalStructureId = Guid.Parse(employeeDto.StructureId);
+            orgEmployee.Position = Enum.Parse<Position>( employeeDto.Position);
+            orgEmployee.OrganizationalStructureId = Guid.Parse(employeeDto.StructureId);
             orgEmployee.RowStatus = employeeDto.RowStatus==0?RowStatus.Active:RowStatus.InActive;
 
-
-
-
-            _dBContext.Entry(orgEmployeeStructure).State = EntityState.Modified;
-            await _dBContext.SaveChangesAsync();
 
             _dBContext.Entry(orgEmployee).State = EntityState.Modified;
             await _dBContext.SaveChangesAsync();
             return 1;
+
+        }
+
+        public async Task<List<SelectListDto>> GetEmployeeByStrucutreSelectList(Guid StructureId)
+        {
+
+
+            List<SelectListDto> employees = await (from e in _dBContext.Employees.Where(x => x.OrganizationalStructureId == StructureId)
+                                                  
+                                   select new SelectListDto
+                                   {
+                                       Id = e.Id,
+                                       Name =$"{e.FullName} ( {e.Position } ) "
+                                   }).ToListAsync();
+            return employees;
+
 
         }
 

@@ -14,34 +14,46 @@
                                     <div class="form-floating">
                                         <select class="form-select" id="selectwho" 
                                         formControlName="selectwho" #who >
-                                        <option value="0">To Department</option>
+                                        <option value="0">To Structure</option>
                                         <option value="1">To Employee</option>
                                     </select>
                                         <label for="selectwho">Select Whom You Want To Assign </label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
+
                                     <div class="form-floating mb-3" >
-                                        <select class="form-select" id="Structure" 
+                                        <select class="form-select" id="branch" #branch (change)="getStructures(branch.value)"
+                                      >
+                                       <option value=""></option>
+                                        <option *ngFor="let branch of Branches" [value]="branch.Id"  > {{branch.Name}}  </option>   
+                                    </select>
+                                        <label for="branch">Brnaches</label>
+                                    </div>
+                                    <div class="form-floating mb-3" >
+                                        <select class="form-select" id="Structure" #structure  (change)="getEmployees(structure.value)"
                                         formControlName="Structure">
-                                        <option value="0"> Denbengoch Agelgelot</option>   
+                                        <option value=""></option>
+                                        <option *ngFor="let structure of Structures" [value]="structure.Id"> {{structure.Name}}</option>   
                                     </select>
                                         <label for="Structure">Structure</label>
                                     </div>
                                     <div class="form-floating " *ngIf="who.value=='1'">
                                         <select class="form-select" id="ForEmployee" 
                                         formControlName="ForEmployee">
-                                        <option value="0">-Select Employee-</option>
-                                        <option value="1">Ms. Tigist Beyene</option>
-                                    </select>
+                                        <option value=""></option>
+                                        <option *ngFor="let employee of Employees" [value]="employee.Id"> {{employee.Name}}</option>   
+                                      </select>
                                         <label for="ForEmployee">For Employee</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-floating">
-                                       <textarea class="form-control" formControlName="CCto"
-                                        placeholder="General Manager" id="CCto" style="height: 100px;">
-                                      </textarea>
+                                       <select class="form-control" formControlName="CCto"
+                                        placeholder="General Manager" multiple id="CCto" style="height: 300px;">
+
+                                        <option *ngFor="let structure of Structures" [value]="structure.Id"> {{structure.Name}}</option>   
+                                       </select>
                                       <label for="CCto">CC to</label>
                                         
                                 </div>

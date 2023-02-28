@@ -136,10 +136,7 @@ namespace PM_Case_Managemnt_API.Controllers
 
 
             return (from u in Users
-                    join e in _dbcontext.Employees on u.EmployeesId equals e.Id
-                    join s in _dbcontext.EmployeesStructures.Include(x => x.OrganizationalStructure) on e.Id equals s.EmployeeId
-
-
+                    join e in _dbcontext.Employees.Include(x=>x.OrganizationalStructure) on u.EmployeesId equals e.Id
                     select new EmployeeDto
                     {
 
@@ -149,8 +146,8 @@ namespace PM_Case_Managemnt_API.Controllers
                         Title = e.Title,
                         Gender = e.Gender.ToString(),
                         PhoneNumber = e.PhoneNumber,
-                        StructureName = s.OrganizationalStructure.StructureName,
-                        Position = s.Position.ToString(),
+                        StructureName = e.OrganizationalStructure.StructureName,
+                        Position = e.Position.ToString(),
                         Remark = e.Remark,
 
 

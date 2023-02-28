@@ -5,6 +5,26 @@ using PM_Case_Managemnt_API.Models.Common;
 
 namespace PM_Case_Managemnt_API.DTOS.CaseDto
 {
+    public class CaseTransferDto
+    {
+        public Guid CaseHistoryId { get; set; }
+        public Guid ToEmployeeId { get; set; }
+        public Guid FromEmployeeId { get; set; }
+        public Guid CaseTypeId { get; set; }
+        public Guid ToStructureId { get; set; }
+        public string Remark { get; set; }
+    }
+
+    public class CaseRevertDto: CaseCompleteDto
+    {
+        public Guid EmployeeId { get; set; }
+    }
+    public class CaseCompleteDto
+    {
+        public Guid CaseHistoryId { get; set; }
+        public string Remark { get; set; }
+
+    }
     public class CaseAssignDto
     {
         public Guid CaseId { get; set; }
@@ -12,6 +32,8 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public Guid? AssignedToEmployeeId { get; set; }
         public Guid AssignedToStructureId { get; set; }
         public Guid[]? ForwardedToStructureId { get; set; }
+
+       
 
     }
     public class CaseEncodePostDto

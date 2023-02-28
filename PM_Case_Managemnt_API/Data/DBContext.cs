@@ -24,7 +24,7 @@ namespace PM_Case_Managemnt_API.Data
         //
 
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<EmployeeStructures> EmployeesStructures { get; set; }
+       // public DbSet<EmployeeStructures> EmployeesStructures { get; set; }
 
         // 
 
@@ -52,7 +52,7 @@ namespace PM_Case_Managemnt_API.Data
         public DbSet<CaseHistoryAttachment> CaseHistoryAttachments { get; set; }
         public DbSet<CaseMessages> CaseMessages { get; set; }
         public DbSet<CaseType> CaseTypes { get; set; }
-        public DbSet<CaseForward> CaseForwards { get; set; }
+       // public DbSet<CaseForward> CaseForwards { get; set; }
         public DbSet<FileSetting> FileSettings { get; set; }
         public DbSet<FilesInformation> FilesInformations { get; set; }
 

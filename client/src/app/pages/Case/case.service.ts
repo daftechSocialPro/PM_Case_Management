@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { CaseType, CaseTypeView, FileSettingView } from './case-type/casetype';
+import { ICaseView } from './encode-case/Icase';
 
 
 @Injectable({
@@ -53,15 +54,18 @@ export class CaseService {
 
         return this.http.get<SelectList[]>(this.BaseURI + "/applicantSelectList")
     }
-    addCase(caseValue: FormData) {  
-        
-        
- 
-        return this.http.post(this.BaseURI + "/encoding",caseValue)
+    addCase(caseValue: FormData) {
+
+
+        return this.http.post(this.BaseURI + "/encoding", caseValue)
+    }
+    getEncodedCases(userId: string) {
+        return this.http.get<ICaseView[]>(this.BaseURI + "/encoding?userId=" + userId)
+
     }
 
 
-   
+
     getCaseNumber() {
         var HTTPOptions = {
             headers: new HttpHeaders({
@@ -71,6 +75,13 @@ export class CaseService {
         }
 
         return this.http.get<string>(this.BaseURI + "/getCaseNumber", HTTPOptions)
+    }
+
+
+    //assign case
+
+    assignCase(assigncase:any){
+        return this.http.post(this.BaseURI+"/assign",assigncase)
     }
 }
 

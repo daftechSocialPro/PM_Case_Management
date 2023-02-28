@@ -242,44 +242,6 @@ namespace PMCaseManagemntAPI.Migrations
                     b.ToTable("CaseAttachments");
                 });
 
-            modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseForward", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CaseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ForwardedByEmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ForwardedToStructureId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RowStatus")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CaseId");
-
-                    b.HasIndex("ForwardedByEmployeeId");
-
-                    b.HasIndex("ForwardedToStructureId");
-
-                    b.ToTable("CaseForwards");
-                });
-
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseHistory", b =>
                 {
                     b.Property<Guid>("Id")
@@ -336,6 +298,9 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Property<int>("RowStatus")
                         .HasColumnType("int");
+
+                    b.Property<bool>("SecreateryNeeded")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("SecreteryConfirmationDateTime")
                         .HasColumnType("datetime2");
@@ -636,6 +601,9 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("OrganizationalStructureId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -643,6 +611,9 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Property<string>("Photo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
 
                     b.Property<string>("Remark")
                         .HasColumnType("nvarchar(max)");
@@ -656,43 +627,9 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.EmployeeStructures", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("OrganizationalStructureId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RowStatus")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
                     b.HasIndex("OrganizationalStructureId");
 
-                    b.ToTable("EmployeesStructures");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.OrganizationBranch", b =>
@@ -1807,33 +1744,6 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Navigation("Case");
                 });
 
-            modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseForward", b =>
-                {
-                    b.HasOne("PM_Case_Managemnt_API.Models.CaseModel.Case", "Case")
-                        .WithMany()
-                        .HasForeignKey("CaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "ForwardedByEmployee")
-                        .WithMany()
-                        .HasForeignKey("ForwardedByEmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PM_Case_Managemnt_API.Models.Common.OrganizationalStructure", "ForwardedToStructure")
-                        .WithMany()
-                        .HasForeignKey("ForwardedToStructureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Case");
-
-                    b.Navigation("ForwardedByEmployee");
-
-                    b.Navigation("ForwardedToStructure");
-                });
-
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseHistory", b =>
                 {
                     b.HasOne("PM_Case_Managemnt_API.Models.CaseModel.Case", "Case")
@@ -1959,21 +1869,13 @@ namespace PMCaseManagemntAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.EmployeeStructures", b =>
+            modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.Employee", b =>
                 {
-                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PM_Case_Managemnt_API.Models.Common.OrganizationalStructure", "OrganizationalStructure")
                         .WithMany()
                         .HasForeignKey("OrganizationalStructureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Employee");
 
                     b.Navigation("OrganizationalStructure");
                 });

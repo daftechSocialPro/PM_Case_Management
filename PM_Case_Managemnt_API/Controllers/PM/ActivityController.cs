@@ -73,7 +73,14 @@ namespace PM_Case_Managemnt_API.Controllers.PM
                     {
 
                         var folderName = Path.Combine("Assets", "ActivityDocuments");
+                        
                         var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+
+                        if (!Directory.Exists(pathToSave))
+                        
+                            Directory.CreateDirectory(pathToSave);
+                        
 
 
 

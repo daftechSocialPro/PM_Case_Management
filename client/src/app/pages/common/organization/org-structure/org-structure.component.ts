@@ -7,6 +7,8 @@ import { AddStructureComponent } from './add-structure/add-structure.component';
 import { OrganizationalStructure } from './org-structure';
 import { UpdateStructureComponent } from './update-structure/update-structure.component';
 
+declare const jsc: any;
+
 @Component({
   selector: 'app-org-structure',
   templateUrl: './org-structure.component.html',

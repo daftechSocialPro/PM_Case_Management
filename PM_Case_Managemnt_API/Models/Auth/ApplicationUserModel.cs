@@ -14,5 +14,7 @@ namespace PM_Case_Managemnt_API.Models.Auth
         public string[] Roles { get; set; } = null!;
         public Guid EmployeeId { get; set; }
 
+
+
     }
 }
