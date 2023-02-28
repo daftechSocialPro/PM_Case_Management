@@ -24,7 +24,6 @@ export class EncodeCaseComponent implements OnInit {
   }
 
   getEnocdedCases() {
-
     this.caseService.getEncodedCases(this.user.UserID).subscribe({
       next: (res) => {
         this.encodedCases = res
@@ -35,26 +34,19 @@ export class EncodeCaseComponent implements OnInit {
   }
 
   addCase() {
-
     let modalRef = this.modalService.open(AddCaseComponent, { size: 'xl', backdrop: 'static' })
     modalRef.result.then(()=>{
       this.getEnocdedCases()
     })
-
-
-
   }
+
   assignCase(caseId : string){
     let modalRef = this.modalService.open(AssignCaseComponent,{size:'xl',backdrop:'static'})
     modalRef.componentInstance.caseId = caseId
-
     modalRef.result.then(()=>{
       this.getEnocdedCases()
     })
-
   }
-
-
 
 
 }

@@ -22,24 +22,24 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.CaseForwardService
             {
                 List<CaseForward> caseForwards = new List<CaseForward>();
 
-                foreach(Guid forwardToStructureId in caseForwardPostDto.ForwardedToStructureId)
-                {
-                    caseForwards.Add(
-                    new()
-                    {
-                        Id = Guid.NewGuid(),
-                        CreatedAt = DateTime.Now,
-                        CreatedBy = caseForwardPostDto.CreatedBy,
-                        CaseId = caseForwardPostDto.CaseId,
-                        ForwardedByEmployeeId = caseForwardPostDto.ForwardedByEmployeeId,
-                        ForwardedToStructureId = forwardToStructureId,
-                        RowStatus = RowStatus.Active,
-                    }
-                        );
-                }
+                //foreach(Guid forwardToStructureId in caseForwardPostDto.ForwardedToStructureId)
+                //{
+                //    caseForwards.Add(
+                //    new()
+                //    {
+                //        Id = Guid.NewGuid(),
+                //        CreatedAt = DateTime.Now,
+                //        CreatedBy = caseForwardPostDto.CreatedBy,
+                //        CaseId = caseForwardPostDto.CaseId,
+                //        ForwardedByEmployeeId = caseForwardPostDto.ForwardedByEmployeeId,
+                //        ForwardedToStructureId = forwardToStructureId,
+                //        RowStatus = RowStatus.Active,
+                //    }
+                //        );
+                //}
 
-                await _dbContext.CaseForwards.AddRangeAsync(caseForwards);
-                await _dbContext.SaveChangesAsync();
+                //await _dbContext.CaseForwards.AddRangeAsync(caseForwards);
+                //await _dbContext.SaveChangesAsync();
                 
             } catch (Exception ex)
             {

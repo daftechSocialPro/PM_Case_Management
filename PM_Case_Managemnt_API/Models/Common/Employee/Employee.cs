@@ -13,6 +13,13 @@ namespace PM_Case_Managemnt_API.Models.Common
         public Gender Gender { get; set; }
 
         public string PhoneNumber { get; set; } = null!;
+
+        public virtual OrganizationalStructure OrganizationalStructure { get; set; } = null!;
+
+        public Guid OrganizationalStructureId { get; set; }
+
+        public Position Position { get; set; }
+
     }
 
     public enum Gender

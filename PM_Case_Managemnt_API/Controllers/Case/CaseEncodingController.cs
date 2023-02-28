@@ -173,6 +173,23 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
 
         }
+        [HttpGet("getnotification")]
+        public async Task<IActionResult> getNotification(Guid employeeId)
+        {
+            try
+            {
+                return Ok(await _caseEncodeService.GetAllTransfred(employeeId));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
+
+
+
 
     }
 }

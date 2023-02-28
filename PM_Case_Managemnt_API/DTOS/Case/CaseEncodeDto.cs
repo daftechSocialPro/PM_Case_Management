@@ -13,6 +13,8 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public Guid AssignedToStructureId { get; set; }
         public Guid[]? ForwardedToStructureId { get; set; }
 
+       
+
     }
     public class CaseEncodePostDto
     {

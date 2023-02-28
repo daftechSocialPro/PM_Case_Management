@@ -28,11 +28,9 @@ export class ProgramByDetailsComponent implements OnInit {
   addBudgetYear() {
 
     let modalref = this.modalService.open(AddBudgetyearComponent, { size: 'lg', backdrop: "static" })
+    modalref.componentInstance.programBudget=this.programBudget
     modalref.result.then((isConfirmed) => {
-      if (isConfirmed) {
-        this.result = true;
-      }
-      else return;
+    this.getBudgetYears()
     })
   }
 

@@ -21,6 +21,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.History
             try
             {
                 Case currCase = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals(caseHistoryPostDto.CaseId));
+                
 
                 if (currCase == null)
                     throw new Exception("Case Not found");

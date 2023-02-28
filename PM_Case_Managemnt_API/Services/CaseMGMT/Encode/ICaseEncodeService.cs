@@ -11,6 +11,8 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
         public Task<string> getCaseNumber();
 
 
-        //public Task<List<CaseEncodeGetDto>> GetAllTrnsferd(Guid employeeId);
+        public Task<List<CaseEncodeGetDto>> GetAllTransfred(Guid employeeId);
+
+        //public Task<List>>
     }
 }
