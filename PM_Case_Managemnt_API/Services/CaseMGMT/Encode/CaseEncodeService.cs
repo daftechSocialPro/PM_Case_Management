@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.DTOS.Common;
@@ -13,13 +14,13 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
     public class CaseEncodeService : ICaseEncodeService
     {
         private readonly DBContext _dbContext;
-        private readonly AuthenticationContext _authContext;
         private readonly ICaseHistoryService _caseHistoryService;
         private readonly ICaseForwardService _caseForwardService;
-        public CaseEncodeService(DBContext dbContext, AuthenticationContext authContext, ICaseHistoryService caseHistoryService, ICaseForwardService caseForwardService)
+        private readonly AuthenticationContext _authenticationContext;
+        public CaseEncodeService(DBContext dbContext, AuthenticationContext authenticationContext, ICaseHistoryService caseHistoryService, ICaseForwardService caseForwardService)
         {
             _dbContext = dbContext;
-            _authContext = authContext;
+            _authenticationContext = authenticationContext;
             _caseHistoryService = caseHistoryService;
             _caseForwardService = caseForwardService;
 
@@ -31,6 +32,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
             {
                 if (caseEncodePostDto.EmployeeId == null && caseEncodePostDto.ApplicantId == null)
                     throw new Exception("Please Provide an Applicant ID or Employee ID");
+
 
                 Case newCase = new()
                 {
@@ -94,7 +96,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
         {
             try
             {
-                string userId = _authContext.ApplicationUsers.Where(x => x.EmployeesId == caseAssignDto.AssignedByEmployeeId).FirstOrDefault().Id;
+                string userId = _authenticationContext.ApplicationUsers.Where(x => x.EmployeesId == caseAssignDto.AssignedByEmployeeId).FirstOrDefault().Id;
                 Case caseToAssign = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals(caseAssignDto.CaseId));
                 // CaseHistory caseHistory = await _dbContext.CaseHistories.SingleOrDefaultAsync(el => el.CaseId.Equals(caseAssignDto.CaseId));
 
@@ -107,74 +109,131 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
 
                 var fromEmployeestructure = _dbContext.Employees.Include(x => x.OrganizationalStructure).Where(x => x.Id == caseAssignDto.AssignedByEmployeeId).First().OrganizationalStructure.Id;
 
-                var startupHistory = new CaseHistory
+
+                Case currCase = await _dbContext.Cases.SingleOrDefaultAsync(el => el.Id.Equals(caseAssignDto.CaseId));
+                currCase.AffairStatus = AffairStatus.Assigned;
+
+                _dbContext.Entry(currCase).Property(curr => curr.AffairStatus).IsModified = true;
+                await _dbContext.SaveChangesAsync();
+                if (caseAssignDto.ForwardedToStructureId != null)
                 {
-                    Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = Guid.Parse(userId),
-                    RowStatus = RowStatus.Active,
-                    CaseId = caseAssignDto.CaseId,
-                    CaseTypeId = _dbContext.Cases.Find(caseAssignDto.CaseId).CaseTypeId,
-                    AffairHistoryStatus = AffairHistoryStatus.Pend,
-                    FromEmployeeId = caseAssignDto.AssignedByEmployeeId,
-                    FromStructureId = fromEmployeestructure,
-                    ReciverType = ReciverType.Orginal,
-                    ToStructureId = caseAssignDto.AssignedToStructureId,
-                    ToEmployeeId = toEmployee,
-
-                };
-                startupHistory.SecreateryNeeded = (caseAssignDto.AssignedToEmployeeId == Guid.Empty || caseAssignDto.AssignedToEmployeeId == null) ? true : false;
-
-                caseToAssign.AffairStatus = AffairStatus.Assigned;
-                _dbContext.Entry(caseToAssign).Property(x => x.AffairStatus).IsModified = true;
-
-                _dbContext.CaseHistories.Add(startupHistory);
-                _dbContext.SaveChanges();
-
-
-
-
-
-
-                foreach (var row in caseAssignDto.ForwardedToStructureId)
-                {
-
-
-                    if (toEmployee != null)
+                    var startupHistory = new CaseHistory
                     {
-                        toEmployee =
-                         _dbContext.Employees.FirstOrDefault(
-                             e =>
-                                 e.OrganizationalStructureId == row &&
-                                 e.Position == Position.Director) == null ? null : _dbContext.Employees.FirstOrDefault(
-                             e =>
-                                 e.OrganizationalStructureId == row &&
-                                 e.Position == Position.Director).Id;
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = Guid.Parse(userId),
+                        RowStatus = RowStatus.Active,
+                        CaseId = caseAssignDto.CaseId,
+                        CaseTypeId = _dbContext.Cases.Find(caseAssignDto.CaseId).CaseTypeId,
+                        AffairHistoryStatus = AffairHistoryStatus.Pend,
+                        FromEmployeeId = caseAssignDto.AssignedByEmployeeId,
+                        FromStructureId = fromEmployeestructure,
+                        ReciverType = ReciverType.Orginal,
+                        ToStructureId = caseAssignDto.AssignedToStructureId,
+                        ToEmployeeId = toEmployee,
 
-                        CaseHistory history = new()
+                    };
+                    startupHistory.SecreateryNeeded = (caseAssignDto.AssignedToEmployeeId == Guid.Empty || caseAssignDto.AssignedToEmployeeId == null) ? true : false;
+
+                    caseToAssign.AffairStatus = AffairStatus.Assigned;
+                    _dbContext.Entry(caseToAssign).Property(x => x.AffairStatus).IsModified = true;
+
+                    _dbContext.CaseHistories.Add(startupHistory);
+                    _dbContext.SaveChanges();
+
+
+
+
+
+
+                    foreach (var row in caseAssignDto.ForwardedToStructureId)
+                    {
+
+
+                        if (toEmployee != null)
                         {
-                            Id = Guid.NewGuid(),
-                            CreatedAt = DateTime.Now,
-                            CreatedBy = Guid.Parse(userId),
-                            CaseId = caseAssignDto.CaseId,
-                            AffairHistoryStatus = AffairHistoryStatus.Pend,
-                            FromEmployeeId = caseAssignDto.AssignedByEmployeeId,
-                            FromStructureId = fromEmployeestructure,
-                            ToStructureId = row,
-                            ReciverType = ReciverType.Cc,
-                            ToEmployeeId = toEmployee,
-                            RowStatus = RowStatus.Active,
+                            toEmployee =
+                             _dbContext.Employees.FirstOrDefault(
+                                 e =>
+                                     e.OrganizationalStructureId == row &&
+                                     e.Position == Position.Director) == null ? null : _dbContext.Employees.FirstOrDefault(
+                                 e =>
+                                     e.OrganizationalStructureId == row &&
+                                     e.Position == Position.Director).Id;
 
-                        };
+                            CaseHistory history = new()
+                            {
+                                Id = Guid.NewGuid(),
+                                CreatedAt = DateTime.Now,
+                                CreatedBy = Guid.Parse(userId),
+                                CaseId = caseAssignDto.CaseId,
+                                AffairHistoryStatus = AffairHistoryStatus.Pend,
+                                FromEmployeeId = caseAssignDto.AssignedByEmployeeId,
+                                FromStructureId = fromEmployeestructure,
+                                ToStructureId = row,
+                                ReciverType = ReciverType.Cc,
+                                ToEmployeeId = toEmployee,
+                                RowStatus = RowStatus.Active,
+
+                            };
 
 
-                        _dbContext.CaseHistories.Add(history);
-                        _dbContext.SaveChanges();
+                            _dbContext.CaseHistories.Add(history);
+                            _dbContext.SaveChanges();
+                        }
+
+
+
                     }
 
 
-
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task CompleteTask(CaseCompleteDto caseCompleteDto)
+        {
+            try
+            {
+                CaseHistory selectedHistory = _dbContext.CaseHistories.Find(caseCompleteDto.CaseHistoryId);
+                selectedHistory.AffairHistoryStatus = AffairHistoryStatus.Completed;
+                selectedHistory.CompletedDateTime = DateTime.Now;
+                selectedHistory.Remark = caseCompleteDto.Remark;
+
+                Case currentCase = await _dbContext.Cases.Include(x => x.Applicant).Include(x => x.Employee).FirstOrDefaultAsync(x => x.Id == selectedHistory.CaseId);
+                CaseHistory currentHist = await _dbContext.CaseHistories.Include(x => x.Case).Include(x => x.ToStructure).FirstOrDefaultAsync(x => x.Id == selectedHistory.Id);
+
+                if (currentCase != null)
+                {
+                    if (selectedHistory != null)
+                    {
+
+                    }
+                }
+
+                _dbContext.CaseHistories.Attach(selectedHistory);
+                _dbContext.Entry(selectedHistory).Property(x => x.AffairHistoryStatus).IsModified = true;
+                _dbContext.Entry(selectedHistory).Property(x => x.CompletedDateTime).IsModified = true;
+                _dbContext.Entry(selectedHistory).Property(x => x.Remark).IsModified = true;
+                //_dbContext.Entry(selectedHistory).Property(x => x.IsSmsSent).IsModified = true;
+                //_dbContext.SaveChanges();
+
+                var selectedCase = _dbContext.Cases.Find(selectedHistory.CaseId);
+                selectedCase.CompletedAt = DateTime.Now;
+                selectedCase.AffairStatus = AffairStatus.Completed;
+
+
+                _dbContext.Cases.Attach(selectedCase);
+                _dbContext.Entry(selectedCase).Property(x => x.CompletedAt).IsModified = true;
+                _dbContext.Entry(selectedCase).Property(x => x.AffairStatus).IsModified = true;
+
+
+                await _dbContext.SaveChangesAsync();
+
 
 
             }
@@ -183,7 +242,103 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 throw new Exception(ex.Message);
             }
         }
+        public async Task RevertTask(CaseRevertDto revertCase)
+        {
+            try
+            {
 
+                Employee currEmp = await _dbContext.Employees.Include(x => x.OrganizationalStructure).Where(x => x.Id.Equals(revertCase.EmployeeId)).FirstOrDefaultAsync();
+                CaseHistory selectedHistory = _dbContext.CaseHistories.Find(revertCase.CaseHistoryId);
+
+                selectedHistory.AffairHistoryStatus = AffairHistoryStatus.Revert;
+                selectedHistory.RevertedAt = DateTime.Now;
+                selectedHistory.Remark = revertCase.Remark;
+                _dbContext.CaseHistories.Attach(selectedHistory);
+                _dbContext.Entry(selectedHistory).Property(x => x.AffairHistoryStatus).IsModified = true;
+                _dbContext.Entry(selectedHistory).Property(x => x.RevertedAt).IsModified = true;
+                _dbContext.Entry(selectedHistory).Property(x => x.Remark).IsModified = true;
+                CaseHistory newHistory = new()
+                {
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = Guid.Parse(_authenticationContext.ApplicationUsers.Where(appUsr => appUsr.EmployeesId.Equals(revertCase.EmployeeId)).First().Id),
+                    RowStatus = RowStatus.Active,
+                    FromEmployeeId = revertCase.EmployeeId,
+                    FromStructureId = currEmp.OrganizationalStructureId,
+                    ToEmployeeId = selectedHistory.FromEmployeeId,
+                    ToStructureId = selectedHistory.FromStructureId,
+                    Remark = "",
+                    CaseId = selectedHistory.CaseId,
+                    ReciverType = ReciverType.Orginal,
+                };
+                _dbContext.CaseHistories.Add(newHistory);
+
+
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task TransferCase(CaseTransferDto caseTransferDto)
+        {
+            try
+            {
+                //var currentUser = DbContext.Users.Find(User.Identity.GetUserId());
+                Employee currEmp = await _dbContext.Employees.Where(el => el.Id.Equals(caseTransferDto.FromEmployeeId)).FirstOrDefaultAsync();
+                CaseHistory currentLastHistory = await _dbContext.CaseHistories.Where(el => el.Id.Equals(caseTransferDto.CaseHistoryId)).OrderByDescending(x => x.CreatedAt).FirstAsync();
+                currentLastHistory.AffairHistoryStatus = AffairHistoryStatus.Transfered;
+                currentLastHistory.TransferedDateTime = DateTime.Now;
+                _dbContext.CaseHistories.Attach(currentLastHistory);
+                _dbContext.Entry(currentLastHistory).Property(c => c.AffairHistoryStatus).IsModified = true;
+                _dbContext.Entry(currentLastHistory).Property(c => c.TransferedDateTime).IsModified = true;
+
+                var newHistory = new CaseHistory
+                {
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = Guid.Parse(_authenticationContext.ApplicationUsers.Where(appUsr => appUsr.EmployeesId.Equals(caseTransferDto.ToEmployeeId)).First().Id),
+                    RowStatus = RowStatus.Active,
+                    FromEmployeeId = caseTransferDto.FromEmployeeId,
+                    FromStructureId = currEmp.OrganizationalStructureId,
+                    ToEmployeeId = caseTransferDto.FromEmployeeId,
+                    ToStructureId = caseTransferDto.FromEmployeeId,
+                    Remark = caseTransferDto.Remark,
+                    CaseId = currentLastHistory.CaseId,
+                    ReciverType = ReciverType.Orginal,
+                    CaseTypeId = caseTransferDto.CaseTypeId
+                };
+
+
+                await _dbContext.CaseHistories.AddAsync(newHistory);
+                await _dbContext.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task AddToWaiting(Guid caseId)
+        {
+            try
+            {
+                CaseHistory currHistory = await _dbContext.CaseHistories.Where(el => el.CaseId.Equals(caseId)).FirstAsync();
+
+                currHistory.AffairHistoryStatus = AffairHistoryStatus.Waiting;
+
+                await _dbContext.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public async Task<string> getCaseNumber()
         {
@@ -219,7 +374,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
 
             if (user.Position == Position.Secertary)
             {
-                notfications =await  _dbContext.CaseHistories.Include(c
+                notfications = await _dbContext.CaseHistories.Include(c
                    => c.Case.CaseType).Include(x => x.Case.Applicant).Where(x => x.ToStructureId == user.OrganizationalStructureId &&
                  (x.AffairHistoryStatus == AffairHistoryStatus.Pend || x.AffairHistoryStatus == AffairHistoryStatus.Transfered) &&
                  (!x.IsConfirmedBySeretery || !x.IsForwardedBySeretery)).Select(x => new CaseEncodeGetDto
@@ -259,7 +414,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     CreatedAt = x.Case.CreatedAt.ToString(),
                     ApplicantName = x.Case.Applicant.ApplicantName,
                     ApplicantPhoneNo = x.Case.Applicant.PhoneNumber,
-                    EmployeeName = x.Case.Employee.FullName, 
+                    EmployeeName = x.Case.Employee.FullName,
                     EmployeePhoneNo = x.Case.Employee.PhoneNumber,
                     LetterNumber = x.Case.LetterNumber,
                     LetterSubject = x.Case.LetterSubject,
