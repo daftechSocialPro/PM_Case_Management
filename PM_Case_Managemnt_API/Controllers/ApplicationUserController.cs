@@ -79,6 +79,7 @@ namespace PM_Case_Managemnt_API.Controllers
 
 
             var user = await _userManager.FindByNameAsync(model.UserName);
+            string empPhoto = _dbcontext.Employees.Find(user.EmployeesId).Photo; 
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 //Get role assigned to the user
@@ -92,6 +93,7 @@ namespace PM_Case_Managemnt_API.Controllers
                         new Claim("UserID",user.Id.ToString()),
                         new Claim("FullName",user.FullName),
                         new Claim("EmployeeId",user.EmployeesId.ToString()),
+                        new Claim("Photo",empPhoto),
                         new Claim(_options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault())
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),

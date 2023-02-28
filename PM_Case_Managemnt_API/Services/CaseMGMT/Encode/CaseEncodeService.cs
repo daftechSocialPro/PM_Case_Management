@@ -233,7 +233,16 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                      EmployeeName = x.Case.Employee.FullName,
                      EmployeePhoneNo = x.Case.Employee.PhoneNumber,
                      LetterNumber = x.Case.LetterNumber,
-                     LetterSubject = x.Case.LetterSubject
+                     LetterSubject = x.Case.LetterSubject,
+                     FromStructure = x.FromStructure.StructureName,
+                     ToEmployee = x.ToEmployee.FullName,
+                     ToStructure = x.ToStructure.StructureName,
+                     FromEmployeeId = x.FromEmployee.FullName,
+                     ReciverType = x.ReciverType.ToString(),
+                     SecreateryNeeded = x.SecreateryNeeded,
+                     IsConfirmedBySeretery = x.IsConfirmedBySeretery,
+                     Position= x.ToEmployee.Position.ToString(),
+                     AffairHistoryStatus = x.AffairHistoryStatus.ToString()
 
                  }).ToListAsync();
 
@@ -253,7 +262,16 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     EmployeeName = x.Case.Employee.FullName, 
                     EmployeePhoneNo = x.Case.Employee.PhoneNumber,
                     LetterNumber = x.Case.LetterNumber,
-                    LetterSubject = x.Case.LetterSubject
+                    LetterSubject = x.Case.LetterSubject,
+                    FromStructure = x.FromStructure.StructureName,
+                    FromEmployeeId = x.FromEmployee.FullName,
+                    ReciverType = x.ReciverType.ToString(),
+                    SecreateryNeeded = x.SecreateryNeeded,
+                    IsConfirmedBySeretery = x.IsConfirmedBySeretery,
+                    AffairHistoryStatus = x.AffairHistoryStatus.ToString(),
+                    ToEmployee = x.ToEmployee.FullName,
+                    ToStructure = x.ToStructure.StructureName,
+                    Position = x.ToEmployee.Position.ToString(),
 
                 }).ToListAsync(); ;
             }
@@ -264,5 +282,96 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
         }
 
 
+
+        public async Task<List<CaseEncodeGetDto>> MyCaseList(Guid employeeId)
+        {
+            Employee user = _dbContext.Employees.Include(x => x.OrganizationalStructure).Where(x => x.Id == employeeId).FirstOrDefault();
+            
+
+            if (user.Position == Position.Secertary)
+            {
+                var HeadEmployees =
+                    _dbContext.Employees.Include(x => x.OrganizationalStructure).Where(
+                        x =>
+                            x.OrganizationalStructureId == user.OrganizationalStructureId &&
+                            x.Position == Position.Director).ToList();
+                var allAffairHistory =await  _dbContext.CaseHistories
+                    .Include(x => x.Case)
+                    .Include(x => x.FromEmployee)
+                    .Include(x => x.FromStructure)
+                    .OrderByDescending(x => x.CreatedAt)
+                    .Where(x => ((x.ToEmployee.OrganizationalStructureId == user.OrganizationalStructureId &&
+                                x.ToEmployee.Position == Position.Director && !x.IsConfirmedBySeretery)
+                                || (x.FromEmployee.OrganizationalStructureId == user.OrganizationalStructureId &&
+                                x.FromEmployee.Position == Position.Director &&
+                                !x.IsForwardedBySeretery &&
+                                !x.IsConfirmedBySeretery && x.SecreateryNeeded)
+                                ) && x.AffairHistoryStatus != AffairHistoryStatus.Seen).Select(x => new CaseEncodeGetDto
+                                {
+                                    Id = x.Id,
+                                    CaseTypeName = x.Case.CaseType.CaseTypeTitle,
+                                    CaseNumber = x.Case.CaseNumber,
+                                    CreatedAt = x.Case.CreatedAt.ToString(),
+                                    ApplicantName = x.Case.Applicant.ApplicantName,
+                                    ApplicantPhoneNo = x.Case.Applicant.PhoneNumber,
+                                    EmployeeName = x.Case.Employee.FullName,
+                                    EmployeePhoneNo = x.Case.Employee.PhoneNumber,
+                                    LetterNumber = x.Case.LetterNumber,
+                                    LetterSubject = x.Case.LetterSubject,
+                                    Position = x.ToEmployee.Position.ToString(),
+                                    FromStructure = x.FromStructure.StructureName,
+                                    FromEmployeeId = x.FromEmployee.FullName,
+                                    ReciverType = x.ReciverType.ToString(),
+                                    SecreateryNeeded= x.SecreateryNeeded,
+                                    IsConfirmedBySeretery = x.IsConfirmedBySeretery,
+                                    ToEmployee = x.ToEmployee.FullName,
+                                    ToStructure = x.ToStructure.StructureName,
+                                    AffairHistoryStatus = x.AffairHistoryStatus.ToString()
+                                }).ToListAsync();
+                ;
+
+      
+        
+                return allAffairHistory;
+            }
+            else
+            {
+                var allAffairHistory =await  _dbContext.CaseHistories
+                .Include(x => x.Case)
+
+                .Include(x => x.FromEmployee)
+                .Include(x => x.FromStructure)
+                .OrderByDescending(x => x.CreatedAt)
+                .Where(x => x.AffairHistoryStatus != AffairHistoryStatus.Completed
+                            && x.AffairHistoryStatus != AffairHistoryStatus.Waiting
+                            && x.AffairHistoryStatus != AffairHistoryStatus.Transfered
+                            && x.AffairHistoryStatus != AffairHistoryStatus.Revert
+                            && x.ToEmployeeId == employeeId).Select(x => new CaseEncodeGetDto
+                            {
+                                Id = x.Id,
+                                CaseTypeName = x.Case.CaseType.CaseTypeTitle,
+                                CaseNumber = x.Case.CaseNumber,
+                                CreatedAt = x.Case.CreatedAt.ToString(),
+                                ApplicantName = x.Case.Applicant.ApplicantName,
+                                ApplicantPhoneNo = x.Case.Applicant.PhoneNumber,
+                                EmployeeName = x.Case.Employee.FullName,
+                                EmployeePhoneNo = x.Case.Employee.PhoneNumber,
+                                LetterNumber = x.Case.LetterNumber,
+                                LetterSubject = x.Case.LetterSubject,
+                                Position = x.ToEmployee.Position.ToString(),
+                                FromStructure = x.FromStructure.StructureName,
+                                FromEmployeeId = x.FromEmployee.FullName,
+                                ReciverType = x.ReciverType.ToString(),
+                                SecreateryNeeded = x.SecreateryNeeded,
+                                IsConfirmedBySeretery = x.IsConfirmedBySeretery,
+                                ToEmployee = x.ToEmployee.FullName,
+                                ToStructure = x.ToStructure.StructureName,
+                                AffairHistoryStatus = x.AffairHistoryStatus.ToString()
+                            }).ToListAsync();
+
+                return allAffairHistory;
+            }
+
+        }
     }
 }

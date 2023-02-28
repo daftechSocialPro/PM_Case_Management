@@ -69,7 +69,8 @@ export class UserService {
       UserID : payLoad.UserID,
       FullName: payLoad.FullName,
       role : payLoad.role,
-      EmployeeId:payLoad.EmployeeId
+      EmployeeId:payLoad.EmployeeId,
+      Photo : payLoad.Photo
     }
     console.log(user)
     return user ; 

@@ -164,7 +164,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         [HttpGet("getCaseNumber")]
 
-        public async Task<string> getCaseNumebr()
+        public async Task<string> GetCaseNumebr()
         {
 
             return await _caseEncodeService.getCaseNumber();
@@ -174,11 +174,25 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         }
         [HttpGet("getnotification")]
-        public async Task<IActionResult> getNotification(Guid employeeId)
+        public async Task<IActionResult> GetNotification(Guid employeeId)
         {
             try
             {
                 return Ok(await _caseEncodeService.GetAllTransfred(employeeId));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
+        [HttpGet("mycaseList")]
+        public async Task<IActionResult> MyCaseList(Guid employeeId)
+        {
+            try
+            {
+                return Ok(await _caseEncodeService.MyCaseList(employeeId));
 
             }
             catch (Exception ex)

@@ -6,6 +6,9 @@ import { UserService } from 'src/app/pages/pages-login/user.service';
 import { UserView } from 'src/app/pages/pages-login/user';
 import { ActivityView } from 'src/app/pages/PM/view-activties/activityview';
 import { Route, Router } from '@angular/router';
+import { ICaseView } from 'src/app/pages/case/encode-case/Icase';
+import { CaseService } from 'src/app/pages/case/case.service';
+import { CommonService } from 'src/app/common/common.service';
 
 @Component({
   selector: 'app-header',
@@ -16,19 +19,35 @@ export class HeaderComponent implements OnInit {
 
   activites!: ActivityView[]
   user!: UserView
+  assignedCases !: ICaseView[]
 
   constructor(@Inject(DOCUMENT) private document: Document,
    private authGuard: AuthGuard, 
    private pmService: PMService, 
    private userService: UserService,
-   private router : Router) { }
+   private caseService : CaseService,
+   private router : Router,
+   private commonService: CommonService) { }
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser()
 
     this.getActivityForApproval()
 
-    
+    this.getAssignedCases()
+  }
+
+  getAssignedCases(){
+
+    this.caseService.getCasesNotification(this.user.EmployeeId).subscribe({
+      next:(res)=>{
+        this.assignedCases = res 
+      },
+      error:(err)=>{
+        console.error(err)
+      }
+
+    })
   }
 
 
@@ -46,6 +65,12 @@ export class HeaderComponent implements OnInit {
         console.error(err)
       }
     })
+  }
+
+  createImagePath(value: string){
+
+    return this.commonService.createImgPath(value)
+
   }
   sidebarToggle() {
     //toggle sidebar function

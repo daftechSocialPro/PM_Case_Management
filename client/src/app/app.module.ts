@@ -103,6 +103,7 @@ import { CaseTypeComponent } from './pages/case/case-type/case-type.component';
 import { AddFileSettingComponent } from './pages/case/file-setting/add-file-setting/add-file-setting.component';
 import { FileSettingComponent } from './pages/case/file-setting/file-setting.component';
 import { AddApplicantComponent } from './pages/Case/encode-case/add-applicant/add-applicant.component';
+import { MyCaseListComponent } from './pages/case/my-case-list/my-case-list.component';
 
 
 @NgModule({
@@ -199,7 +200,8 @@ import { AddApplicantComponent } from './pages/Case/encode-case/add-applicant/ad
     AddFileSettingComponent,
     FileSettingComponent,
     AddApplicantComponent,
-    AddCaseComponent
+    AddCaseComponent,
+    MyCaseListComponent
     
     
   ],
