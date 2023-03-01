@@ -22,6 +22,7 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
     public class CaseCompleteDto
     {
         public Guid CaseHistoryId { get; set; }
+        public Guid EmployeeId { get; set; }
         public string Remark { get; set; }
 
     }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PM_Case_Managemnt_API.Data;
+using PM_Case_Managemnt_API.Helpers;
 using PM_Case_Managemnt_API.Models.Auth;
 using PM_Case_Managemnt_API.Services.CaseMGMT;
 using PM_Case_Managemnt_API.Services.CaseMGMT.Applicants;
@@ -63,8 +64,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.Configure<FormOptions>(o =>
 {
     o.ValueLengthLimit = int.MaxValue;
-    o.MultipartBodyLengthLimit= int.MaxValue;
-    o.MemoryBufferThreshold= int.MaxValue;
+    o.MultipartBodyLengthLimit = int.MaxValue;
+    o.MemoryBufferThreshold = int.MaxValue;
 });
 
 
@@ -93,6 +94,8 @@ builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IAppointmentWithCalenderService, AppointmentWithCalenderService>();
 builder.Services.AddScoped<IFilesInformationService, FilesInformationService>();
 builder.Services.AddScoped<ICaseProccessingService, CaseProccessingService>();
+builder.Services.AddScoped<ISMSHelper, SMSHelper>();
+
 //Jwt Authentication
 
 var key = Encoding.UTF8.GetBytes(builder.Configuration["ApplicationSettings:JWT_Secret"].ToString());

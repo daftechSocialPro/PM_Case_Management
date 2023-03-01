@@ -32,6 +32,98 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         }
 
+        [HttpPost("assign")]
+        public async Task<IActionResult> AssignCase(CaseAssignDto caseAssignDto)
+        {
+            try
+            {
+                await _caseProcessingService.AssignTask(caseAssignDto);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpPost("complete")]
+        public async Task<IActionResult> CompleteCase(CaseCompleteDto caseCompeleteDto)
+        {
+            try
+            {
+                await _caseProcessingService.CompleteTask(caseCompeleteDto);
+                return NoContent();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpPost("revert")]
+        public async Task<IActionResult> RevertCase(CaseRevertDto caseRevertDto)
+        {
+            try
+            {
+                await _caseProcessingService.RevertTask(caseRevertDto);
+                return NoContent();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpPost("transfer"), DisableRequestSizeLimit]
+        public async Task<IActionResult> TransferCase()
+        {
+            try
+            {
+                //public Guid CaseHistoryId { get; set; }
+                //public Guid ToEmployeeId { get; set; }
+                //public Guid FromEmployeeId { get; set; }
+                //public Guid CaseTypeId { get; set; }
+                //public Guid ToStructureId { get; set; }
+                //public string Remark { get; set; }
+
+                CaseTransferDto caseTransferDto = new()
+                {
+                    CaseHistoryId = Guid.Parse(Request.Form["CaseHistoryId"]),
+                    CaseTypeId = Guid.Parse(Request.Form["CaseTypeId"]),
+                    FromEmployeeId = Guid.Parse(Request.Form["FromEmployeeId"]),
+                    Remark = Request.Form["Remark"],
+                    ToEmployeeId = Guid.Parse(Request.Form["ToEmployeeId"]),
+                    ToStructureId = Guid.Parse(Request.Form["ToStructureId"])
+                };
+
+                await _caseProcessingService.TransferCase(caseTransferDto);
+                return NoContent();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpPost("waiting")]
+        public async Task<IActionResult> AddToWaiting(Guid caseId)
+        {
+            try
+            {
+                await _caseProcessingService.AddToWaiting(caseId);
+                return NoContent();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
+
 
 
 
