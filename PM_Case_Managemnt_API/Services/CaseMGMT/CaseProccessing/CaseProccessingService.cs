@@ -171,7 +171,11 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                 _dbContext.Entry(selectedCase).Property(x => x.AffairStatus).IsModified = true;
 
                 await _dbContext.SaveChangesAsync();
-                await _smshelper.SendSmsForCase(currentHist.CaseId, currentHist.Id, UserId.ToString());
+
+                string name = currentCase.Applicant != null ? currentCase.Applicant.ApplicantName : currentCase.Employee.FullName;
+                string message = name + "\nበጉዳይ ቁጥር፡" + currentCase.CaseNumber + "\nየተመዘገበ ጉዳዮ በ፡" + currentHist.ToStructure.StructureName + " ተጠናቋል\nየቢሮ ቁጥር: - ";
+
+                await _smshelper.SendSmsForCase(message, currentHist.CaseId, currentHist.Id, UserId.ToString());
 
             }
             catch (Exception ex)
@@ -215,7 +219,11 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                 await _dbContext.CaseHistories.AddAsync(newHistory);
                 await _dbContext.SaveChangesAsync();
 
-                await _smshelper.SendSmsForCase(newHistory.CaseId, newHistory.Id, UserId.ToString());
+                Case currentCase = await _dbContext.Cases.Include(x => x.Applicant).Include(x => x.Employee).FirstOrDefaultAsync(x => x.Id == selectedHistory.CaseId);
+                string name = currentCase.Applicant != null ? currentCase.Applicant.ApplicantName : currentCase.Employee.FullName;
+                var message = name + "\nበጉዳይ ቁጥር፡" + currentCase.CaseNumber + "\nየተመዘገበ ጉዳዮ በ፡" + selectedHistory.ToStructure.StructureName + " ወደኋላ ተመልሷል  \nየቢሮ ቁጥር: -";
+
+                await _smshelper.SendSmsForCase(message, newHistory.CaseId, newHistory.Id, UserId.ToString());
             }
             catch (Exception ex)
             {
@@ -229,6 +237,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
             {
                 Employee currEmp = await _dbContext.Employees.Where(el => el.Id.Equals(caseTransferDto.FromEmployeeId)).FirstOrDefaultAsync();
                 CaseHistory currentLastHistory = await _dbContext.CaseHistories.Where(el => el.Id.Equals(caseTransferDto.CaseHistoryId)).OrderByDescending(x => x.CreatedAt).FirstAsync();
+
                 Guid UserId = Guid.Parse((await _authenticationContext.ApplicationUsers.Where(appUsr => appUsr.EmployeesId.Equals(caseTransferDto.ToEmployeeId)).FirstAsync()).Id);
 
                 if (caseTransferDto.FromEmployeeId != currentLastHistory.FromEmployeeId)
@@ -260,9 +269,13 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
 
                 await _dbContext.CaseHistories.AddAsync(newHistory);
                 await _dbContext.SaveChangesAsync();
-                await _smshelper.SendSmsForCase(newHistory.CaseId, newHistory.Id, UserId.ToString());
 
+                /// Sending SMS
+                Case currentCase = await _dbContext.Cases.Include(x => x.Applicant).Include(x => x.Employee).FirstOrDefaultAsync(x => x.Id == newHistory.CaseId);
+                string name = currentCase.Applicant != null ? currentCase.Applicant.ApplicantName : currentCase.Employee.FullName;
+                string message = name + "\nበጉዳይ ቁጥር፡" + currentCase.CaseNumber + "\nየተመዘገበ ጉዳዮ ለ " + newHistory.ToStructure.StructureName + " ተላልፏል\nየቢሮ ቁጥር:" + newHistory.ToStructure.StructureName;
 
+                await _smshelper.SendSmsForCase(message, newHistory.CaseId, newHistory.Id, UserId.ToString());
             }
             catch (Exception ex)
 
