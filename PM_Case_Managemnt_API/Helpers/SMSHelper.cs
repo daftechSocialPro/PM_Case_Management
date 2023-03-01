@@ -43,13 +43,13 @@ namespace PM_Case_Managemnt_API.Helpers
                     byte[] byteArray = Encoding.UTF8.GetBytes(message);
                     using (HttpClient c = new HttpClient())
                     {
-                        var apiUri = new Uri(uri);
-                        var body = new ByteArrayContent(byteArray, 0, byteArray.Length);
-                        var multiPartFormData = new MultipartFormDataContent
+                        Uri apiUri = new Uri(uri);
+                        ByteArrayContent body = new ByteArrayContent(byteArray, 0, byteArray.Length);
+                        MultipartFormDataContent multiPartFormData = new MultipartFormDataContent
                                 {
                                     body
                                 };
-                        var result = await c.PostAsync(apiUri, multiPartFormData);
+                        HttpResponseMessage result = await c.PostAsync(apiUri, multiPartFormData);
                     }
                 }
                 return true;
@@ -62,7 +62,7 @@ namespace PM_Case_Managemnt_API.Helpers
         }
 
 
-        public async Task<bool> UnlimettedMessageSender(string reciver, string message, string UserId, Guid? orgId = null)
+        public async Task<bool> UnlimittedMessageSender(string reciver, string message, string UserId, Guid? orgId = null)
         {
             try
             {
@@ -84,15 +84,15 @@ namespace PM_Case_Managemnt_API.Helpers
                     byte[] byteArray = Encoding.UTF8.GetBytes(message);
                     using (HttpClient c = new HttpClient())
                     {
-                        var apiUri = new Uri(uri);
-                        var body = new ByteArrayContent(byteArray, 0, byteArray.Length);
-                        var multiPartFormData = new MultipartFormDataContent
+                        Uri apiUri = new Uri(uri);
+                        ByteArrayContent body = new ByteArrayContent(byteArray, 0, byteArray.Length);
+                        MultipartFormDataContent multiPartFormData = new MultipartFormDataContent
                                 {
                                     body
                                 };
                         try
                         {
-                            var result = await c.PostAsync(apiUri, multiPartFormData);
+                            HttpResponseMessage result = await c.PostAsync(apiUri, multiPartFormData);
                             if (!result.IsSuccessStatusCode)
                             {
                                 bool newMessage = await MessageSender(reciver, message, UserId, orgId);
@@ -140,7 +140,7 @@ namespace PM_Case_Managemnt_API.Helpers
                                 phoneNumber = "0" + phone[1] + phone[2];
                             }
                         }
-                        result = await UnlimettedMessageSender(phoneNumber, message, userId);
+                        result = await UnlimittedMessageSender(phoneNumber, message, userId);
                         currentHistory.IsSmsSent = result;
                         if (currentCase.PhoneNumber2 != null && !result)
                             result = await MessageSender(currentCase.PhoneNumber2.ToString(), message, userId);
