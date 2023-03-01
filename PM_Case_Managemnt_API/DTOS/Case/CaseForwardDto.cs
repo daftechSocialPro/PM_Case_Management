@@ -11,4 +11,13 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public Guid CreatedBy { get; set; }
 
     }
+
+
+
+    public class ConfirmTranscationDto
+    {
+        public Guid EmployeeId { get; set; }
+
+        public Guid CaseHistoryId { get; set; }
+    }
 }

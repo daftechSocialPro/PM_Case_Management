@@ -14,8 +14,8 @@
     <section class="section dashboard">
         <div class="row">
            <div class="col-lg-12">  
-                 <div class="card-body">
-                    <h5 class="card-title">Recent this and that</h5>
+                 <div class="card-body" id="eku-card">
+                    <h5 class="card-title">{{caseTypeTitle}}</h5>
                     <div class="activity">
                        <div class="activity-item d-flex">
                           <div class="activite-label "></div>
@@ -23,51 +23,9 @@
                           <div class="activity-content first"></div>
                        </div>
                     </div>
-                    <div class="activity">
-                        <div class="activity-item d-flex ">
-                            <div class="activite-label "></div>
-                           <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                           <div class="card activety ribbon-corner shadow">
-                                <h5 class="card-title subTitle">Orginal</h5>
-                                <div class="timeline-arrow"></div>
-                                <div class="activity-content"> <p class="date">15/06/2015 2:12 </p>
-                                    <p class="date">የቅርንጫፍ አገልግሎት መስጫ ማዕከላት - የቅርንጫፍ አገልግሎት መስጫ ማዕከላት </p>
-                                    <p class="date">Jafar Abdi - Jafar Abdi</p>
-                                    <i class="bi bi-envelope icon m-2"> Not sent</i>
-                                </div>
-                                    <a routerLink="/casedetiel"  class="p-2 col-lg-4 btn">Detail<i class="bi bi-chevron-double-right m-2"></i></a>
-                               </div>
-                               
 
-                            </div>
-                         
-                           
-                          
-                        </div>
-                        <div class="activity">
-                           <div class="activity-item d-flex ">
-                               <div class="activite-label "></div>
-                              <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                                 <div class="card activety ribbon-corner shadow right">
-                                    <h5 class="card-title subTitle">Orginal</h5>
-                                    <div class="timeline-arrow-2"></div>
-                                    <div class="activity-content"> <p class="date">15/06/2015 2:12 </p>
-                                        <p class="date">የቅርንጫፍ አገልግሎት መስጫ ማዕከላት - የቅርንጫፍ አገልግሎት መስጫ ማዕከላት </p>
-                                        <p class="date">Jafar Abdi - Jafar Abdi</p>
-                                        <i class="bi bi-envelope icon m-2"> Not sent</i>
-                                    </div>
-                                        <a routerLink="/casedetiel"  class="p-2 col-lg-4 btn">Detail<i class="bi bi-chevron-double-right m-2"></i></a>
-                                   </div>
-
-                              </div>
-                         
-                                  
-   
-                  
-                            
-                              
-                             
-                           </div>
+                    <app-history-card *ngFor="let caseHistory of caseHistories; let i  = index" [caseHistory]="caseHistory" [index]="i" [user]="user" ></app-history-card>
+    
  
                      </div>
                  </div>

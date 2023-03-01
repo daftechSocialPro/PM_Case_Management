@@ -68,24 +68,18 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public string? EmployeePhoneNo { get; set; }
         public string LetterNumber { get; set; }
         public string LetterSubject { get; set; }
-
         public string ? FromStructure { get; set; }
         public string ? FromEmployeeId { get; set; }
-
         public string? ToStructure { get; set; }
-        public string? ToEmployee { get; set; }
-      
+        public string? ToEmployee { get; set; }  
+        public string ? ToEmployeeId { get; set; }
         public string ? ReciverType { get; set; }
-
         public bool? SecreateryNeeded { get; set; }
-
         public bool? IsConfirmedBySeretery { get; set; }
         public string? AffairHistoryStatus { get; set; }
-
         public string ? Position { get; set; }
+        public bool? IsSMSSent { get; set; }
         
-
-            
 
     }
 

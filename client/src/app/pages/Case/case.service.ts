@@ -97,8 +97,22 @@ export class CaseService {
     assignCase(assigncase: any) {
         return this.http.post(this.BaseURI + "/assign", assigncase)
     }
-}
 
+
+
+
+    //casetransaction 
+
+    ConfirmTransaction (confirmtracactionDto : any){
+        return this.http.put(this.BaseURI+"/confirmcase",confirmtracactionDto)
+   
+    }
+    GetCaseHistories (EmployeeId : string ,CaseHistoryId:string){
+        
+
+     return this.http.get<ICaseView[]>(this.BaseURI+"/getHistories?EmployeeId="+EmployeeId+"&CaseHistoryId="+CaseHistoryId)
+    }
+}
 
 
 

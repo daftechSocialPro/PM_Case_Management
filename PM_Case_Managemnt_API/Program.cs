@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.Models.Auth;
+using PM_Case_Managemnt_API.Services.CaseMGMT;
 using PM_Case_Managemnt_API.Services.CaseMGMT.Applicants;
 using PM_Case_Managemnt_API.Services.CaseMGMT.AppointmentService;
 using PM_Case_Managemnt_API.Services.CaseMGMT.AppointmentWithCalenderService;
@@ -91,7 +92,7 @@ builder.Services.AddScoped<ICaseForwardService, CaseForwardService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IAppointmentWithCalenderService, AppointmentWithCalenderService>();
 builder.Services.AddScoped<IFilesInformationService, FilesInformationService>();
-
+builder.Services.AddScoped<ICaseProccessingService, CaseProccessingService>();
 //Jwt Authentication
 
 var key = Encoding.UTF8.GetBytes(builder.Configuration["ApplicationSettings:JWT_Secret"].ToString());

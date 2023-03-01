@@ -104,6 +104,8 @@ import { AddFileSettingComponent } from './pages/case/file-setting/add-file-sett
 import { FileSettingComponent } from './pages/case/file-setting/file-setting.component';
 import { AddApplicantComponent } from './pages/Case/encode-case/add-applicant/add-applicant.component';
 import { MyCaseListComponent } from './pages/case/my-case-list/my-case-list.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { HistoryCardComponent } from './pages/case/case-history/history-card/history-card.component';
 
 
 @NgModule({
@@ -158,7 +160,7 @@ import { MyCaseListComponent } from './pages/case/my-case-list/my-case-list.comp
     EmployeeDetailsComponent,
     AddEmployeesComponent,
     UpdateEmployeeComponent,
-    UnitMeasurementComponent,    
+    UnitMeasurementComponent,
     ProgramByDetailsComponent,
     ArchiveManagementComponent,
     AddShelfComponent,
@@ -187,10 +189,10 @@ import { MyCaseListComponent } from './pages/case/my-case-list/my-case-list.comp
     AssignedActivitiesComponent,
     ViewActivtiesComponent,
     AssignCaseComponent,
-  
+
     CaseListPageComponent,
-        CaseHistoryComponent,
-        CaseDetailComponent,
+    CaseHistoryComponent,
+    CaseDetailComponent,
     ActivityTargetComponent,
     AddProgressComponent,
     ViewProgressComponent,
@@ -201,16 +203,19 @@ import { MyCaseListComponent } from './pages/case/my-case-list/my-case-list.comp
     FileSettingComponent,
     AddApplicantComponent,
     AddCaseComponent,
-    MyCaseListComponent
-    
-    
+    MyCaseListComponent,
+    ConfirmationDialogComponent,
+    HistoryCardComponent
+
+
+
   ],
   imports: [
-    BrowserModule,    
+    BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,    
+    HttpClientModule,
     BrowserAnimationsModule,
     NgbModalModule,
     AutocompleteLibModule,
@@ -218,9 +223,9 @@ import { MyCaseListComponent } from './pages/case/my-case-list/my-case-list.comp
       preventDuplicates: true,
 
     }),
-            NgbModule,
+    NgbModule,
   ],
-  providers: [  
+  providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderIneterceptor,

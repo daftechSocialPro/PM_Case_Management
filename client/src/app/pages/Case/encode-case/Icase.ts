@@ -13,10 +13,11 @@ export interface ICaseView{
     FromStructure :string,
     FromEmployeeId :string,
     ReciverType :string,
-
-     ToStructure :string
-     ToEmployee :string
-     Position:string
+    IsSMSSent:boolean,
+    ToStructure :string,
+    ToEmployee :string,
+    ToEmployeeId :string,
+    Position:string,
     SecreateryNeeded:boolean,
     IsConfirmedBySeretery :boolean,
     AffairHistoryStatus :string

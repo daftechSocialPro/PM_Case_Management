@@ -130,5 +130,59 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.History
                 throw new Exception(ex.Message);
             }
         }
+
+
+        public async Task<List<CaseEncodeGetDto>>GetCaseHistory(Guid EmployeeId, Guid CaseHistoryId)
+        {
+            Employee user = _dbContext.Employees.Include(x => x.OrganizationalStructure).Where(x => x.Id == EmployeeId).FirstOrDefault();
+
+
+            var caseHistory = _dbContext.CaseHistories.Find(CaseHistoryId);
+            var affair = _dbContext.Cases.Include(x=>x.CaseType).Where(x=>x.Id== caseHistory.CaseId).FirstOrDefault();
+
+            // ViewBag.affairtypes = Db.AffairTypes.Where(x => x.ParentAffairTypeId == af.AffairTypeId).ToList();
+            //ViewBag.parentaffairname = af.AffairType.AffairTypeTitle;
+
+
+
+
+            List<CaseEncodeGetDto> affairHistories  = await _dbContext.CaseHistories
+                .Include(a => a.Case)
+                .Include(a => a.FromStructure)
+                .Include(a => a.FromEmployee)
+                .Include(a => a.ToStructure)
+                .Include(a => a.ToEmployee)
+                .Include(a => a.CaseType)
+
+                .Where(x => x.CaseId == affair.Id)
+                .OrderByDescending(x => x.CreatedAt)
+                .ThenBy(x => x.ReciverType).Select(x => new CaseEncodeGetDto
+                {
+                    Id = x.Id,
+                    CaseTypeName = x.Case.CaseType.CaseTypeTitle,
+                    CaseNumber = x.Case.CaseNumber,
+                    CreatedAt = x.Case.CreatedAt.ToString(),
+                    ApplicantName = x.Case.Applicant.ApplicantName,
+                    ApplicantPhoneNo = x.Case.Applicant.PhoneNumber,
+                    EmployeeName = x.Case.Employee.FullName,
+                    EmployeePhoneNo = x.Case.Employee.PhoneNumber,
+                    LetterNumber = x.Case.LetterNumber,
+                    LetterSubject = x.Case.LetterSubject,
+                    Position = user.Position.ToString(),
+                    FromStructure = x.FromStructure.StructureName,
+                    FromEmployeeId = x.FromEmployee.FullName,
+                    ToEmployeeId = x.ToEmployeeId.ToString(),
+                    ReciverType = x.ReciverType.ToString(),
+                    SecreateryNeeded = x.SecreateryNeeded,
+                    IsConfirmedBySeretery = x.IsConfirmedBySeretery,
+                    ToEmployee = x.ToEmployee.FullName,
+                    ToStructure = x.ToStructure.StructureName,
+                    IsSMSSent = x.IsSmsSent,
+                    AffairHistoryStatus = x.AffairHistoryStatus.ToString()
+                }).ToListAsync();
+
+
+            return affairHistories;
+        }
     }
 }

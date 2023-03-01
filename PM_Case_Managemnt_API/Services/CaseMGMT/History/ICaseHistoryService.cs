@@ -7,5 +7,6 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.History
         public Task Add(CaseHistoryPostDto caseHistoryPost);
         public Task SetCaseSeen(CaseHistorySeenDto seenDto);
         public Task CompleteCase(CaseHistoryCompleteDto completeDto);
+        public Task<List<CaseEncodeGetDto>> GetCaseHistory(Guid EmployeeId, Guid CaseHistoryId);
     }
 }

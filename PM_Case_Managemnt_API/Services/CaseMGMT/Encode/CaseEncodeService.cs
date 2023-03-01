@@ -375,7 +375,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 notfications = await _dbContext.CaseHistories.Include(c
                    => c.Case.CaseType).Include(x => x.Case.Applicant).Where(x => x.ToStructureId == user.OrganizationalStructureId &&
                  (x.AffairHistoryStatus == AffairHistoryStatus.Pend || x.AffairHistoryStatus == AffairHistoryStatus.Transfered) &&
-                 (!x.IsConfirmedBySeretery || !x.IsForwardedBySeretery)).Select(x => new CaseEncodeGetDto
+                 (!x.IsConfirmedBySeretery )).Select(x => new CaseEncodeGetDto
                  {
                      Id = x.Id,
                      CaseTypeName = x.Case.CaseType.CaseTypeTitle,

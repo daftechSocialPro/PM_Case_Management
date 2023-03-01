@@ -24,8 +24,8 @@
                                         style="color: #204382;" class="d-none d-md-block dropdown-toggle ps-2">Action
                                     </span> </a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                                    <li *ngIf="mycase.Position==='Secertary'&& !mycase.IsConfirmedBySeretery">
-                                        <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;"> <i
+                                    <li *ngIf="(mycase.Position==='Secertary'&& !mycase.IsConfirmedBySeretery)||( mycase.Position==='Director' && (mycase.AffairHistoryStatus == 'pend' || mycase.AffairHistoryStatus == 'seen') && !mycase.SecreateryNeeded)">
+                                        <a class="dropdown-item d-flex align-items-center" (click)="confirmTransaction(mycase.Id)" style="cursor: pointer;"> <i
                                                 class="bi bi-bookmark-check text-success"></i> <span>Confirm</span> </a>
                                     </li>
                                     <li>

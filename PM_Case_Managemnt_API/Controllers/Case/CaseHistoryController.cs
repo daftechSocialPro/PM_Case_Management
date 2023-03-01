@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
+using PM_Case_Managemnt_API.Models.CaseModel;
+using PM_Case_Managemnt_API.Models.Common;
 using PM_Case_Managemnt_API.Services.CaseMGMT.History;
 
 namespace PM_Case_Managemnt_API.Controllers.Case
@@ -42,6 +44,22 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             }
         }
 
-        
+        [HttpGet("getHistories")]
+        public async Task<IActionResult> GetHistories(Guid EmployeeId  ,Guid CaseHistoryId)
+        {
+            try
+            {
+                return Ok(await _caseHistoryService.GetCaseHistory( EmployeeId,  CaseHistoryId));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
+
+
+
     }
 }
