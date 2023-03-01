@@ -112,6 +112,12 @@ export class CaseService {
 
      return this.http.get<ICaseView[]>(this.BaseURI+"/getHistories?EmployeeId="+EmployeeId+"&CaseHistoryId="+CaseHistoryId)
     }
+
+    GetCaseDetail (EmployeeId : string ,CaseHistoryId:string){
+
+        return this.http.get<ICaseView>(this.BaseURI+"/getCaseDetail?EmployeeId="+EmployeeId+"&CaseHistoryId="+CaseHistoryId)
+        
+    }
 }
 
 

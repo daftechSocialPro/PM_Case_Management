@@ -22,8 +22,10 @@ export class HistoryCardComponent implements OnInit {
 
   caseDetail(historyId:string){
 
-    this.router.navigate(['casedetail'])
+    this.router.navigate(['casedetail',{historyId:historyId}])
 
   }
+
+  
 
 }

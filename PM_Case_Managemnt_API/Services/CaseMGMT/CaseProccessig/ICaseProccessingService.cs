@@ -6,5 +6,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
     {
 
         public Task<int> ConfirmTranasaction(ConfirmTranscationDto confirmTranscationDto);
+        public Task<CaseEncodeGetDto> GetCaseDetial(Guid historyId, Guid employeeId);
+
     }
 }

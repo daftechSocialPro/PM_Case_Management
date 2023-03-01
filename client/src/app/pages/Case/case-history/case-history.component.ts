@@ -36,7 +36,7 @@ export class CaseHistoryComponent implements OnInit {
       next: (res) => {
        this.caseHistories = res 
        this.caseTypeTitle = this.caseHistories[0]?.CaseTypeName
-       console.log('sdfdfd',res)
+     
       }, error: (err) => {
         console.error(err)
       }

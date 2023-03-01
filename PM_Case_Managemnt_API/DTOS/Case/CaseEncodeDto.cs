@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
 
@@ -79,6 +80,8 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public string? AffairHistoryStatus { get; set; }
         public string ? Position { get; set; }
         public bool? IsSMSSent { get; set; }
+
+        public List<SelectListDto> ? Attachments { get; set; } 
         
 
     }

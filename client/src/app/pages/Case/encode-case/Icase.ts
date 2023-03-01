@@ -1,3 +1,5 @@
+import { SelectList } from "../../common/common"
+
 export interface ICaseView{
 
     Id : string,
@@ -21,5 +23,7 @@ export interface ICaseView{
     SecreateryNeeded:boolean,
     IsConfirmedBySeretery :boolean,
     AffairHistoryStatus :string
+    Attachments:SelectList[]
+  
 
 } 
