@@ -119,7 +119,7 @@ namespace PM_Case_Managemnt_API.Helpers
 
         }
 
-        public async Task<bool> SendSmsForCase(string message, Guid caseId, Guid caseHistoryId, string userId)
+        public async Task<bool> SendSmsForCase(string message, Guid caseId, Guid caseHistoryId, string userId, MessageFrom messageFrom)
         {
             try
             {
@@ -146,6 +146,22 @@ namespace PM_Case_Managemnt_API.Helpers
                             result = await MessageSender(currentCase.PhoneNumber2.ToString(), message, userId);
                     }
                 }
+
+
+                CaseMessages caseMessages = new CaseMessages()
+                {
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.UtcNow,
+                    CaseId = caseId,
+                    CreatedBy = Guid.Parse(userId),
+                    MessageBody = message,
+                    MessageFrom = messageFrom,
+                    Messagestatus = result,
+                    RowStatus = RowStatus.Active
+                };
+
+                await _dbContext.CaseMessages.AddAsync(caseMessages);
+                await _dbContext.SaveChangesAsync();
                 return result;
             }
             catch (Exception ex)

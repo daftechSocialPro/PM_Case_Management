@@ -175,7 +175,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                 string name = currentCase.Applicant != null ? currentCase.Applicant.ApplicantName : currentCase.Employee.FullName;
                 string message = name + "\nበጉዳይ ቁጥር፡" + currentCase.CaseNumber + "\nየተመዘገበ ጉዳዮ በ፡" + currentHist.ToStructure.StructureName + " ተጠናቋል\nየቢሮ ቁጥር: - ";
 
-                await _smshelper.SendSmsForCase(message, currentHist.CaseId, currentHist.Id, UserId.ToString());
+                await _smshelper.SendSmsForCase(message, currentHist.CaseId, currentHist.Id, UserId.ToString(), MessageFrom.Complete);
 
             }
             catch (Exception ex)
@@ -223,7 +223,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                 string name = currentCase.Applicant != null ? currentCase.Applicant.ApplicantName : currentCase.Employee.FullName;
                 var message = name + "\nበጉዳይ ቁጥር፡" + currentCase.CaseNumber + "\nየተመዘገበ ጉዳዮ በ፡" + selectedHistory.ToStructure.StructureName + " ወደኋላ ተመልሷል  \nየቢሮ ቁጥር: -";
 
-                await _smshelper.SendSmsForCase(message, newHistory.CaseId, newHistory.Id, UserId.ToString());
+                await _smshelper.SendSmsForCase(message, newHistory.CaseId, newHistory.Id, UserId.ToString(), MessageFrom.Revert);
             }
             catch (Exception ex)
             {
@@ -275,7 +275,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                 string name = currentCase.Applicant != null ? currentCase.Applicant.ApplicantName : currentCase.Employee.FullName;
                 string message = name + "\nበጉዳይ ቁጥር፡" + currentCase.CaseNumber + "\nየተመዘገበ ጉዳዮ ለ " + newHistory.ToStructure.StructureName + " ተላልፏል\nየቢሮ ቁጥር:" + newHistory.ToStructure.StructureName;
 
-                await _smshelper.SendSmsForCase(message, newHistory.CaseId, newHistory.Id, UserId.ToString());
+                await _smshelper.SendSmsForCase(message, newHistory.CaseId, newHistory.Id, UserId.ToString(), MessageFrom.Transfer);
             }
             catch (Exception ex)
 
