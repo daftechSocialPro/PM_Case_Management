@@ -16,7 +16,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         }
 
 
-        [HttpPut("confirmcase")]
+        [HttpPut("confirm")]
 
         public async Task<IActionResult> ConfirmCase(ConfirmTranscationDto confirmTranscationDto)
         {
