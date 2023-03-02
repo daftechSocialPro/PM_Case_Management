@@ -11,10 +11,10 @@ namespace PM_Case_Managemnt_API.Controllers.Case
     [ApiController]
     public class CaseProccessingController : ControllerBase
     {
-        private readonly ICaseProccessingService _caseProcessingService; 
+        private readonly ICaseProccessingService _caseProcessingService;
         public CaseProccessingController(ICaseProccessingService caseProccessingService)
         {
-            _caseProcessingService= caseProccessingService;
+            _caseProcessingService = caseProccessingService;
         }
 
 
@@ -36,11 +36,18 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         [HttpGet("getCaseDetail")]
 
-        public async Task<IActionResult> GetCaseDetail(Guid EmployeeId,Guid CaseHistoryId)
+        public async Task<IActionResult> GetCaseDetail(Guid EmployeeId, Guid CaseHistoryId)
         {
             try
             {
                 return Ok(await _caseProcessingService.GetCaseDetial(EmployeeId, CaseHistoryId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
         [HttpPost("assign")]
         public async Task<IActionResult> AssignCase(CaseAssignDto caseAssignDto)
         {
