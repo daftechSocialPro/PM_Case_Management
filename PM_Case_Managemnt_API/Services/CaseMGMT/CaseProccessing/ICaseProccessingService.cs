@@ -10,7 +10,9 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
         public Task CompleteTask(CaseCompleteDto caseCompleteDto);
         public Task RevertTask(CaseRevertDto revertAffair);
         public Task TransferCase(CaseTransferDto caseTransferDto);
-        public Task AddToWaiting(Guid caseId);
+        public Task AddToWaiting(Guid caseHistoryId);
+        public Task<CaseEncodeGetDto> GetCaseDetial(Guid historyId, Guid employeeId);
 
+        public Task SendSMS(CaseCompleteDto smsdetail);
     }
 }

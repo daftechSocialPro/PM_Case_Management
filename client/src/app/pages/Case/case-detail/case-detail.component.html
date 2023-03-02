@@ -25,22 +25,32 @@
                   </ul>
                </div>
             </div>
-            <div class="col-lg-8">
-               <div class="card-title m-2">{{caseDetail.CaseNumber}}</div>
-               <h5 class="name m-2">Denekew Berihun </h5>
-               <span class="remark">( 1 Reviews )</span>
-               <p class="m-2">From Employee: Jafar Abdi From Structure: የቅርንጫፍ አገልግሎት መስጫ ማዕከላት</p>
-               <span class="badge bg-success m-2">seen</span>
+            <div class="col-lg-8 box">
+
+               <div class="ribbon ribbon-top-right"><span [class]="caseDetail.AffairHistoryStatus=='Pend'||caseDetail.AffairHistoryStatus=='Waiting'?'bg-warning':
+                  caseDetail.AffairHistoryStatus=='Seen'||caseDetail.AffairHistoryStatus=='Completed'?'bg-success':
+                  caseDetail.AffairHistoryStatus=='Transfered'?'bg-info':'bg-danger'">
+                     {{caseDetail.AffairHistoryStatus}}
+                  </span></div>
+
+               <div class="card-title m-2">{{caseDetail.CaseNumber!}}</div>
+               <h5 class="name m-2">{{caseDetail.EmployeeName!}} {{caseDetail.ApplicantName!}} </h5>
+               <span class="remark">( {{caseDetail.LetterSubject}} )</span>
+               <p class="m-2"><span style="color: #798eb3;"> From : </span> {{caseDetail.FromEmployeeId}} (
+                  {{caseDetail.FromStructure}} )</p>
+
+
                <div>
-                  <span class="remark">kptari</span>
+
                </div>
                <div class="buttons">
-                  <button type="button" class="btn btn-outline-danger m-2">Add to Waiting</button>
-                  <button type="button" class="btn btn-outline-info m-2">Transfer</button>
-                  <button type="button" class="btn btn-outline-success m-2">Complete</button>
+                  <button type="button" (click)="AddtoWaiting()" class="btn btn-outline-danger m-2">Add to
+                     Waiting</button>
+                  <button type="button" (click)="TransferCase()" class="btn btn-outline-info m-2">Transfer</button>
+                  <button type="button" (click)="CompleteCase()" class="btn btn-outline-success m-2">Complete</button>
                   <button type="button" class="btn btn-outline-primary m-2">Make Appointment</button>
-                  <button type="button" class="btn btn-outline-warning m-2">Revert</button>
-                  <button type="button" class="btn btn-outline-secondary m-2">Send SMS</button>
+                  <button type="button" (click)="Revert()" class="btn btn-outline-warning m-2">Revert</button>
+                  <button type="button" (click)="SendSMS()" class="btn btn-outline-secondary m-2">Send SMS</button>
                </div>
 
             </div>
