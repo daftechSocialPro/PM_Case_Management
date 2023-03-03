@@ -4,7 +4,6 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
 {
    public class CaseMessages: CommonModel
     {
-
         public Guid? CaseId { get; set; }
         public virtual Case Case { get; set; } = null!;
         public MessageFrom MessageFrom { get; set; }

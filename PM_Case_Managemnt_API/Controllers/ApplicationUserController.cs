@@ -79,7 +79,12 @@ namespace PM_Case_Managemnt_API.Controllers
 
 
             var user = await _userManager.FindByNameAsync(model.UserName);
-            string empPhoto = _dbcontext.Employees.Find(user.EmployeesId).Photo; 
+            if (user == null)
+                return BadRequest(new { message = "Username or password is incorrect." });
+            Employee emp = _dbcontext.Employees.Find(user.EmployeesId);
+            string empPhoto = "";
+            if (emp != null) 
+                empPhoto = emp.Photo;
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 //Get role assigned to the user
