@@ -13,7 +13,7 @@
 
     </div>
     <section class="section profile">
-
+<div class="row">
         <div class="col-lg-4" *ngFor="let mycase of myacaselist">
             <div class="card">
                 <div class="card-header">
@@ -33,7 +33,7 @@
                                     </li>
 
                                     <li
-                                        *ngIf=" mycase.AffairHistoryStatus == 'Pend' || mycase.AffairHistoryStatus == 'Seen'">
+                                        *ngIf=" mycase.AffairHistoryStatus == 'Pend' || mycase.AffairHistoryStatus == 'Seen' || mycase.AffairHistoryStatus == 'Waiting'">
                                         <a class="dropdown-item d-flex align-items-center" (click)="detailCase(mycase.Id)" style="cursor: pointer;"> <i
                                                 class="bi bi-list text-primary" ></i> <span>Detail</span> </a>
                                     </li>
@@ -90,11 +90,11 @@
                                 <span style="font-size: 25px;" class="badge bg-secondary">{{mycase.CaseNumber}}</span>
 
 
-                                <span *ngIf="mycase.AffairHistoryStatus == 'seen'"
+                                <span *ngIf="mycase.AffairHistoryStatus == 'Seen'"
                                     style="position: absolute; right: -20px; bottom: -15px; font-size:80%"
                                     class="badge bg-success">{{mycase.AffairHistoryStatus}} </span>
 
-                                <span *ngIf="mycase.AffairHistoryStatus != 'seen'"
+                                <span *ngIf="mycase.AffairHistoryStatus != 'Seen'"
                                     style="position: absolute;right: -20px; bottom: -15px; font-size:80%"
                                     class="badge bg-danger"> {{mycase.AffairHistoryStatus }}</span>
 
@@ -116,5 +116,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </section>
 </main>

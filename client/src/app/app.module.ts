@@ -106,6 +106,11 @@ import { AddApplicantComponent } from './pages/Case/encode-case/add-applicant/ad
 import { MyCaseListComponent } from './pages/case/my-case-list/my-case-list.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { HistoryCardComponent } from './pages/case/case-history/history-card/history-card.component';
+import { TransferCaseComponent } from './pages/Case/case-detail/transfer-case/transfer-case.component';
+
+import { CompleteCaseComponent } from './pages/Case/case-detail/complete-case/complete-case.component';
+import { MakeAppointmentCaseComponent } from './pages/Case/case-detail/make-appointment-case/make-appointment-case.component';
+import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.component';
 
 
 @NgModule({
@@ -205,7 +210,12 @@ import { HistoryCardComponent } from './pages/case/case-history/history-card/his
     AddCaseComponent,
     MyCaseListComponent,
     ConfirmationDialogComponent,
-    HistoryCardComponent
+    HistoryCardComponent,
+    TransferCaseComponent,
+
+    CompleteCaseComponent,
+    MakeAppointmentCaseComponent,
+    SendSmsComponent
 
 
 

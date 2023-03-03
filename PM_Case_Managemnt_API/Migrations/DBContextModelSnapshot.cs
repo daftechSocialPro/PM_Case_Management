@@ -106,8 +106,9 @@ namespace PMCaseManagemntAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("AppointementDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AppointementDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("CaseId")
                         .HasColumnType("uniqueidentifier");

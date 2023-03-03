@@ -215,7 +215,7 @@ export class AddPlansComponent implements OnInit {
         }, error: (err) => {
 
           this.toast = {
-            message: err,
+            message: 'Something went wrong!!',
             title: 'Network error.',
             type: 'error',
             ic: {

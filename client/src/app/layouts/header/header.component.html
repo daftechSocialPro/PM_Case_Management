@@ -44,7 +44,7 @@
                 </li>
                 <ng-container *ngFor="let case of assignedCases">
                 <li class="message-item">
-                   <a href="#">
+                   <a (click)="detailCase(case.Id)">
                       
                       <div>
                          <h4>{{case.CaseNumber}} (Needs Action)</h4>

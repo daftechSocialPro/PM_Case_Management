@@ -51,6 +51,9 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  detailCase(caseHistoryId: string) {
+    this.router.navigate(['caseHistory',{caseHistoryId:caseHistoryId}])
+  }
   
   getActivityForApproval() {
 

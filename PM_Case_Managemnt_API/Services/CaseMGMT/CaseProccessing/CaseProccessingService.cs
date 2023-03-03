@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
+using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.Helpers;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
@@ -240,7 +241,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
 
                 Guid UserId = Guid.Parse((await _authenticationContext.ApplicationUsers.Where(appUsr => appUsr.EmployeesId.Equals(caseTransferDto.ToEmployeeId)).FirstAsync()).Id);
 
-                if (caseTransferDto.FromEmployeeId != currentLastHistory.FromEmployeeId)
+                if (caseTransferDto.FromEmployeeId != currentLastHistory.ToEmployeeId)
                     throw new Exception("You are not authorized to transfer this case.");
 
                 currentLastHistory.AffairHistoryStatus = AffairHistoryStatus.Transfered;
@@ -255,15 +256,16 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                     Id = Guid.NewGuid(),
                     CreatedAt = DateTime.Now,
                     CreatedBy = UserId,
+                    
                     RowStatus = RowStatus.Active,
                     FromEmployeeId = caseTransferDto.FromEmployeeId,
                     FromStructureId = currEmp.OrganizationalStructureId,
-                    ToEmployeeId = caseTransferDto.FromEmployeeId,
-                    ToStructureId = caseTransferDto.FromEmployeeId,
+                    ToEmployeeId = caseTransferDto.ToEmployeeId,
+                    ToStructureId = caseTransferDto.ToStructureId,
                     Remark = caseTransferDto.Remark,
                     CaseId = currentLastHistory.CaseId,
                     ReciverType = ReciverType.Orginal,
-                    CaseTypeId = caseTransferDto.CaseTypeId
+                    CaseTypeId = currentLastHistory.CaseTypeId//must be change
                 };
 
 
@@ -273,7 +275,10 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                 /// Sending SMS
                 Case currentCase = await _dbContext.Cases.Include(x => x.Applicant).Include(x => x.Employee).FirstOrDefaultAsync(x => x.Id == newHistory.CaseId);
                 string name = currentCase.Applicant != null ? currentCase.Applicant.ApplicantName : currentCase.Employee.FullName;
-                string message = name + "\nበጉዳይ ቁጥር፡" + currentCase.CaseNumber + "\nየተመዘገበ ጉዳዮ ለ " + newHistory.ToStructure.StructureName + " ተላልፏል\nየቢሮ ቁጥር:" + newHistory.ToStructure.StructureName;
+                string toStructure = _dbContext.OrganizationalStructures.Find(newHistory.ToStructureId).StructureName;
+
+
+                string message = name + "\nበጉዳይ ቁጥር፡" + currentCase.CaseNumber + "\nየተመዘገበ ጉዳዮ ለ " + toStructure + " ተላልፏል\nየቢሮ ቁጥር:" ;
 
                 await _smshelper.SendSmsForCase(message, newHistory.CaseId, newHistory.Id, UserId.ToString(), MessageFrom.Transfer);
             }
@@ -286,21 +291,123 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
 
 
 
-        public async Task AddToWaiting(Guid caseId)
+        public async Task AddToWaiting(Guid caseHistoryId)
         {
             try
             {
-                CaseHistory currHistory = await _dbContext.CaseHistories.Where(el => el.CaseId.Equals(caseId)).FirstAsync();
 
-                currHistory.AffairHistoryStatus = AffairHistoryStatus.Waiting;
+
+                var history = _dbContext.CaseHistories.Find(caseHistoryId);
+                history.AffairHistoryStatus = AffairHistoryStatus.Waiting;
+                history.SeenDateTime = null;
+                _dbContext.CaseHistories.Attach(history);
+                _dbContext.Entry(history).Property(c => c.AffairHistoryStatus).IsModified = true;
+                _dbContext.Entry(history).Property(c => c.SeenDateTime).IsModified = true;
+
+
 
                 await _dbContext.SaveChangesAsync();
+
+
+
+
 
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task SendSMS(CaseCompleteDto smsdetail)
+        {
+
+            var history = _dbContext.CaseHistories.Find(smsdetail.CaseHistoryId);
+            await _smshelper.SendSmsForCase(smsdetail.Remark, history.CaseId, history.Id, smsdetail.EmployeeId.ToString(), MessageFrom.Custom_text);
+        }
+
+        public async Task<CaseEncodeGetDto> GetCaseDetial(Guid employeeId, Guid historyId)
+        {
+
+            Employee user = _dbContext.Employees.Include(x => x.OrganizationalStructure).Where(x => x.Id == employeeId).FirstOrDefault();
+
+
+            CaseHistory currentHistry = _dbContext.CaseHistories
+                .Include(x => x.Case.CaseType)
+                 .Include(x => x.Case.Applicant)
+                 .Include(x => x.Case.Employee)
+                .Include(x => x.FromEmployee)
+                .Include(x => x.FromStructure)
+                .Include(x => x.Case)?.FirstOrDefault(x => x.AffairHistoryStatus != AffairHistoryStatus.Completed
+                                     && x.ToEmployeeId == employeeId
+                                     && x.Id == historyId);
+
+
+
+
+            if (currentHistry != null && (currentHistry.AffairHistoryStatus == AffairHistoryStatus.Pend || currentHistry.AffairHistoryStatus == AffairHistoryStatus.Waiting))
+            {
+                currentHistry.AffairHistoryStatus = AffairHistoryStatus.Seen;
+                currentHistry.SeenDateTime = DateTime.Now;
+                _dbContext.CaseHistories.Attach(currentHistry);
+                _dbContext.Entry(currentHistry).Property(x => x.AffairHistoryStatus).IsModified = true;
+                _dbContext.Entry(currentHistry).Property(x => x.SeenDateTime).IsModified = true;
+                _dbContext.SaveChanges();
+            }
+
+
+
+            List<SelectListDto> attachments = (from x in _dbContext.CaseAttachments.Where(x => x.CaseId == currentHistry.CaseId)
+                                               select new SelectListDto
+                                               {
+                                                   Id = x.Id,
+                                                   Name = x.FilePath
+
+                                               }).ToList();
+
+            List<CaseDetailStructureDto> caseDetailstructures = _dbContext.CaseHistories.Include(x=>x.FromEmployee).Include(x=>x.FromStructure).Where(x => x.CaseId == currentHistry.CaseId).OrderByDescending(x=>x.CreatedAt).Select(x => new CaseDetailStructureDto
+            {
+                FromEmployee = x.FromEmployee.FullName,
+                FormStructure = x.FromStructure.StructureName,
+                SeenDate = x.CreatedAt.ToString()
+
+            }).ToList();
+
+            CaseEncodeGetDto result = new CaseEncodeGetDto
+            {
+                Id = currentHistry.Id,
+                CaseTypeName = currentHistry.Case.CaseType.CaseTypeTitle,
+                CaseNumber = currentHistry.Case.CaseNumber,
+                CreatedAt = currentHistry.Case.CreatedAt.ToString(),
+                ApplicantName = currentHistry.Case.Applicant.ApplicantName,
+                ApplicantPhoneNo = currentHistry.Case.Applicant.PhoneNumber,
+                EmployeeName = currentHistry.Case.Employee?.FullName,
+                EmployeePhoneNo = currentHistry.Case.Employee?.PhoneNumber,
+                LetterNumber = currentHistry.Case.LetterNumber,
+                LetterSubject = currentHistry.Case.LetterSubject,
+                Position = user.Position.ToString(),
+                FromStructure = currentHistry.FromStructure.StructureName,
+                FromEmployeeId = currentHistry.FromEmployee.FullName,
+                ReciverType = currentHistry.ReciverType.ToString(),
+                SecreateryNeeded = currentHistry.SecreateryNeeded,
+                IsConfirmedBySeretery = currentHistry.IsConfirmedBySeretery,
+                ToEmployee = currentHistry.ToEmployee.FullName,
+                ToStructure = currentHistry.ToStructure.StructureName,
+                AffairHistoryStatus = currentHistry.AffairHistoryStatus.ToString(),
+                Attachments = attachments,
+                CaseDetailStructures= caseDetailstructures
+
+            };
+
+
+            return result;
+
+
+
+
+
+
+
         }
 
 

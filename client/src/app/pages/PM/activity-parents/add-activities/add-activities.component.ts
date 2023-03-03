@@ -25,8 +25,7 @@ export class AddActivitiesComponent implements OnInit {
   user !: UserView;
   committees: SelectList[] = [];
   unitMeasurments: SelectList[] = [];
-  StartDate: string = "";
-  EndDate: string = "";
+
 
   toast!: toastPayload
 
@@ -43,6 +42,9 @@ export class AddActivitiesComponent implements OnInit {
 
     this.activityForm = this.formBuilder.group({
 
+      
+      StartDate: ['', Validators.required],
+      EndDate: ['', Validators.required],
       ActivityDescription: ['', Validators.required],
       PlannedBudget: [0, Validators.required],
       Weight: [0, Validators.required],
@@ -84,18 +86,18 @@ export class AddActivitiesComponent implements OnInit {
     $('#StartDate').calendarsPicker({
       calendar: $.calendars.instance('ethiopian', 'am'),
 
-      onSelect: (date: string) => {
-        this.StartDate = date
-
-        alert(this.StartDate)
+      onSelect: (date: any) => {
+      
+        this.activityForm.controls['StartDate'].setValue(date[0]._month+"/"+date[0]._day+"/"+date[0]._year)
+       
       },
     })
     $('#EndDate').calendarsPicker({
       calendar: $.calendars.instance('ethiopian', 'am'),
 
-      onSelect: (date: string) => {
-
-        this.EndDate = date
+      onSelect: (date: any) => {
+        this.activityForm.controls['EndDate'].setValue(date[0]._month+"/"+date[0]._day+"/"+date[0]._year)
+       
       },
     })
 
@@ -121,8 +123,8 @@ export class AddActivitiesComponent implements OnInit {
       let actvityP: SubActivityDetailDto []= [{
 
         SubActivityDesctiption: this.activityForm.value.ActivityDescription,
-        StartDate: '1/11/2014', //this.StartDate,
-        EndDate: '30/10/2015',//this.EndDate,
+        StartDate: this.activityForm.value.StartDate,
+        EndDate: this.activityForm.value.EndDate,
         PlannedBudget: this.activityForm.value.PlannedBudget,
         Weight: this.activityForm.value.Weight,
         ActivityType: this.activityForm.value.ActivityType,

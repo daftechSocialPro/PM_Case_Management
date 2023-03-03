@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
+import { IAppointmentGet, IAppointmentWithCalander } from './case-detail/make-appointment-case/Iappointmentwithcalander';
 import { CaseType, CaseTypeView, FileSettingView } from './case-type/casetype';
 import { ICaseView } from './encode-case/Icase';
 
@@ -104,7 +105,7 @@ export class CaseService {
     //casetransaction 
 
     ConfirmTransaction (confirmtracactionDto : any){
-        return this.http.put(this.BaseURI+"/confirmcase",confirmtracactionDto)
+        return this.http.put(this.BaseURI+"/confirm",confirmtracactionDto)
    
     }
     GetCaseHistories (EmployeeId : string ,CaseHistoryId:string){
@@ -112,6 +113,45 @@ export class CaseService {
 
      return this.http.get<ICaseView[]>(this.BaseURI+"/getHistories?EmployeeId="+EmployeeId+"&CaseHistoryId="+CaseHistoryId)
     }
+
+    GetCaseDetail (EmployeeId : string ,CaseHistoryId:string){
+
+        return this.http.get<ICaseView>(this.BaseURI+"/getCaseDetail?EmployeeId="+EmployeeId+"&CaseHistoryId="+CaseHistoryId)
+        
+    }
+
+    AddtoWaiting(caseHistoryId:string){
+
+        return this.http.post(this.BaseURI+"/waiting?caseHistoryId="+caseHistoryId,{})
+    }
+    CompleteCase(completecasedto : any ){
+
+        return this.http.post (this.BaseURI+"/complete",completecasedto)
+    }
+    RevertCase (reveertcasedto:any){
+
+        return this.http.post (this.BaseURI+"/revert",reveertcasedto)
+    }
+        
+    SendSms (smscasedto:any){
+
+        return this.http.post(this.BaseURI+"/sendSms",smscasedto)
+    }
+    TransferCase(transferCaseDto:FormData){
+        
+        return this.http.post(this.BaseURI+"/transfer",transferCaseDto)
+    }
+    AppointCase (appointment: IAppointmentWithCalander){
+
+        return this.http.post<IAppointmentGet>(this.BaseURI+"/appointmetWithCalender",appointment)
+    }
+
+    getAppointment (employeeId:string){
+
+        return this.http.get<IAppointmentGet[]>(this.BaseURI+"/appointmetWithCalender?employeeId="+employeeId)
+    }
+        
+        
 }
 
 

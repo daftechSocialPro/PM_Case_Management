@@ -235,7 +235,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 .Include(x => x.FromStructure)
                 .OrderByDescending(x => x.CreatedAt)
                 .Where(x => x.AffairHistoryStatus != AffairHistoryStatus.Completed
-                            && x.AffairHistoryStatus != AffairHistoryStatus.Waiting
+                            //&& x.AffairHistoryStatus != AffairHistoryStatus.Waiting
                             && x.AffairHistoryStatus != AffairHistoryStatus.Transfered
                             && x.AffairHistoryStatus != AffairHistoryStatus.Revert
                             && x.ToEmployeeId == employeeId).Select(x => new CaseEncodeGetDto
@@ -265,5 +265,14 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
             }
 
         }
+
+     
     }
+
+
+
 }
+
+
+
+

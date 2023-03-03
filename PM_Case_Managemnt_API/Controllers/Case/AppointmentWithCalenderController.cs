@@ -17,11 +17,11 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         }
 
         [HttpGet("appointmetWithCalender")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(Guid employeeId)
         {
             try
             {
-                return Ok(await _appointmentWithCalenderService.GetAll());
+                return Ok(await _appointmentWithCalenderService.GetAll(employeeId));
             } catch (Exception ex)
             {
                 return StatusCode(500, "Internal Server Error");
@@ -33,8 +33,8 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         {
             try
             {
-                await _appointmentWithCalenderService.Add(appointmentWithCalender);
-                return NoContent();
+               
+                return Ok(await _appointmentWithCalenderService.Add(appointmentWithCalender));
             } catch (Exception ex)
             {
                 return StatusCode(500, "Internal Server Error");
