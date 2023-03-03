@@ -48,12 +48,15 @@ namespace PM_Case_Managemnt_API.Services.Common
             List<OrgStructureDto> structures = await (from x in _dBContext.OrganizationalStructures.Include(x => x.OrganizationBranch).Include(x => x.ParentStructure)
                                                       select new OrgStructureDto
                                                       {
+                                                          Id = x.Id,
                                                           BranchName = x.OrganizationBranch.Name + (x.OrganizationBranch.IsHeadOffice ? " ( Head Office )" : ""),
                                                           OrganizationBranchId = x.OrganizationBranch.Id,
                                                           ParentStructureName = x.ParentStructure.StructureName,
+                                                          ParentStructureId = x.ParentStructure.Id,
                                                           StructureName = x.StructureName,
                                                           Order = x.Order,
                                                           Weight = x.Weight,
+                                                          ParentWeight = x.ParentStructure.Weight,
                                                           Remark = x.Remark
 
                                                       }).ToListAsync();

@@ -112,10 +112,10 @@ import { CompleteCaseComponent } from './pages/Case/case-detail/complete-case/co
 import { MakeAppointmentCaseComponent } from './pages/Case/case-detail/make-appointment-case/make-appointment-case.component';
 import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.component';
 
+import { GojsAngularModule } from 'gojs-angular';
 
 @NgModule({
   declarations: [
-
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -215,10 +215,7 @@ import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.com
 
     CompleteCaseComponent,
     MakeAppointmentCaseComponent,
-    SendSmsComponent
-
-
-
+    SendSmsComponent,
   ],
   imports: [
     BrowserModule,
@@ -231,17 +228,17 @@ import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.com
     AutocompleteLibModule,
     ToastrModule.forRoot({
       preventDuplicates: true,
-
     }),
     NgbModule,
+    GojsAngularModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderIneterceptor,
-      multi: true
+      multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
