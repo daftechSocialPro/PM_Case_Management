@@ -20,6 +20,11 @@
                      <li class="nav-item" style="width: 120px;">
                         <a href="" class="nav-link product-thumb active" data-toggle="tab" aria-expanded="false">
                            <img src="" alt="image" class="img-fluid mx-auto d-block rounded" style="width: 120px;">
+<!-- 
+
+                           <app-image-viewer [images]="['https://images.nga.gov/en/web_images/niagara2.jpg']"
+[idContainer]="'idOnHTML'"
+[loadOnInit]="true"></app-image-viewer> -->
                         </a>
                      </li>
                   </ul>
@@ -43,12 +48,12 @@
                <div>
 
                </div>
-               <div class="buttons">
+               <div class="buttons" *ngIf="caseDetail.ToEmployee.toLowerCase() == user.FullName.toLowerCase() && caseDetail.ReciverType != 'Cc'">
                   <button type="button" (click)="AddtoWaiting()" class="btn btn-outline-danger m-2">Add to
                      Waiting</button>
                   <button type="button" (click)="TransferCase()" class="btn btn-outline-info m-2">Transfer</button>
                   <button type="button" (click)="CompleteCase()" class="btn btn-outline-success m-2">Complete</button>
-                  <button type="button" class="btn btn-outline-primary m-2">Make Appointment</button>
+                  <button type="button" (click)="Appointment()" class="btn btn-outline-primary m-2">Make Appointment</button>
                   <button type="button" (click)="Revert()" class="btn btn-outline-warning m-2">Revert</button>
                   <button type="button" (click)="SendSMS()" class="btn btn-outline-secondary m-2">Send SMS</button>
                </div>
@@ -64,10 +69,10 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr>
-                        <td>Jafar Abdi</td>
-                        <td>የቅርንጫፍ አገልግሎት መስጫ ማዕከላት</td>
-                        <td> Thursday, February 23, 2023</td>
+                     <tr *ngFor="let casestructures of caseDetail.CaseDetailStructures">
+                        <td>{{casestructures.FromEmployee}}</td>
+                        <td>{{casestructures.FormStructure}}</td>
+                        <td> {{casestructures.SeenDate | date:'fullDate'}}</td>
 
                      </tr>
 

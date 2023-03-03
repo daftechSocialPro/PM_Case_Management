@@ -365,6 +365,14 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
 
                                                }).ToList();
 
+            List<CaseDetailStructureDto> caseDetailstructures = _dbContext.CaseHistories.Include(x=>x.FromEmployee).Include(x=>x.FromStructure).Where(x => x.CaseId == currentHistry.CaseId).OrderByDescending(x=>x.CreatedAt).Select(x => new CaseDetailStructureDto
+            {
+                FromEmployee = x.FromEmployee.FullName,
+                FormStructure = x.FromStructure.StructureName,
+                SeenDate = x.CreatedAt.ToString()
+
+            }).ToList();
+
             CaseEncodeGetDto result = new CaseEncodeGetDto
             {
                 Id = currentHistry.Id,
@@ -386,7 +394,8 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                 ToEmployee = currentHistry.ToEmployee.FullName,
                 ToStructure = currentHistry.ToStructure.StructureName,
                 AffairHistoryStatus = currentHistry.AffairHistoryStatus.ToString(),
-                Attachments = attachments
+                Attachments = attachments,
+                CaseDetailStructures= caseDetailstructures
 
             };
 

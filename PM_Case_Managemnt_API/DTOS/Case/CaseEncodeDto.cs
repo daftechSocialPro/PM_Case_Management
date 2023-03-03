@@ -84,7 +84,14 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
 
         public List<SelectListDto> ? Attachments { get; set; } 
         
+        public List<CaseDetailStructureDto>? CaseDetailStructures { get; set; }
+    }
 
+    public class CaseDetailStructureDto
+    {
+        public string FromEmployee { get; set; }
+        public string FormStructure { get; set; }
+        public string SeenDate { get; set; }
     }
 
     public class CaseEncodeBaseDto

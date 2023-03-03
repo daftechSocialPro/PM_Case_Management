@@ -16,6 +16,7 @@ export class CaseHistoryComponent implements OnInit {
   user!: UserView
   caseHistories!: ICaseView[]
   caseTypeTitle : string = ""
+  CaseNumber:string=""
 
   constructor(private caseService: CaseService, private userService: UserService,private router : ActivatedRoute) { }
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class CaseHistoryComponent implements OnInit {
       next: (res) => {
        this.caseHistories = res 
        this.caseTypeTitle = this.caseHistories[0]?.CaseTypeName
-     
+       this.CaseNumber = this.caseHistories[0]?.CaseNumber
       }, error: (err) => {
         console.error(err)
       }

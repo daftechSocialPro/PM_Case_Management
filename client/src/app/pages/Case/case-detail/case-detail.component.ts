@@ -9,6 +9,7 @@ import { UserService } from '../../pages-login/user.service';
 import { CaseService } from '../case.service';
 import { ICaseView } from '../encode-case/Icase';
 import { CompleteCaseComponent } from './complete-case/complete-case.component';
+import { MakeAppointmentCaseComponent } from './make-appointment-case/make-appointment-case.component';
 import { SendSmsComponent } from './send-sms/send-sms.component';
 import { TransferCaseComponent } from './transfer-case/transfer-case.component';
 
@@ -166,6 +167,10 @@ export class CaseDetailComponent implements OnInit {
     modalRef.componentInstance.CaseTypeName = this.caseDetail.CaseTypeName
   }
 
+  Appointment(){
+    let modalRef = this.modalService.open(MakeAppointmentCaseComponent,{size:'xl',backdrop:'static'})
+    modalRef.componentInstance.historyId = this.caseHistoryId
+  }
 
-
+  
 }

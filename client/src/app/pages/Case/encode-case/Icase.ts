@@ -22,8 +22,14 @@ export interface ICaseView{
     Position:string,
     SecreateryNeeded:boolean,
     IsConfirmedBySeretery :boolean,
-    AffairHistoryStatus :string
-    Attachments:SelectList[]
-  
-
+    AffairHistoryStatus :string,
+    Attachments:SelectList[],  
+    CaseDetailStructures:CaseDetailStructures[]
 } 
+export interface CaseDetailStructures{
+
+
+    FromEmployee :string
+    FormStructure :string
+    SeenDate :string
+}

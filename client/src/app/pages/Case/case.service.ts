@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
+import { IAppointmentGet, IAppointmentWithCalander } from './case-detail/make-appointment-case/Iappointmentwithcalander';
 import { CaseType, CaseTypeView, FileSettingView } from './case-type/casetype';
 import { ICaseView } from './encode-case/Icase';
 
@@ -139,6 +140,15 @@ export class CaseService {
     TransferCase(transferCaseDto:FormData){
         
         return this.http.post(this.BaseURI+"/transfer",transferCaseDto)
+    }
+    AppointCase (appointment: IAppointmentWithCalander){
+
+        return this.http.post<IAppointmentGet>(this.BaseURI+"/appointmetWithCalender",appointment)
+    }
+
+    getAppointment (employeeId:string){
+
+        return this.http.get<IAppointmentGet[]>(this.BaseURI+"/appointmetWithCalender?employeeId="+employeeId)
     }
         
         
