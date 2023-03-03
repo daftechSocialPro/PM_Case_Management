@@ -104,7 +104,7 @@ export class CaseService {
     //casetransaction 
 
     ConfirmTransaction (confirmtracactionDto : any){
-        return this.http.put(this.BaseURI+"/confirmcase",confirmtracactionDto)
+        return this.http.put(this.BaseURI+"/confirm",confirmtracactionDto)
    
     }
     GetCaseHistories (EmployeeId : string ,CaseHistoryId:string){
@@ -118,6 +118,30 @@ export class CaseService {
         return this.http.get<ICaseView>(this.BaseURI+"/getCaseDetail?EmployeeId="+EmployeeId+"&CaseHistoryId="+CaseHistoryId)
         
     }
+
+    AddtoWaiting(caseHistoryId:string){
+
+        return this.http.post(this.BaseURI+"/waiting?caseHistoryId="+caseHistoryId,{})
+    }
+    CompleteCase(completecasedto : any ){
+
+        return this.http.post (this.BaseURI+"/complete",completecasedto)
+    }
+    RevertCase (reveertcasedto:any){
+
+        return this.http.post (this.BaseURI+"/revert",reveertcasedto)
+    }
+        
+    SendSms (smscasedto:any){
+
+        return this.http.post(this.BaseURI+"/sendSms",smscasedto)
+    }
+    TransferCase(transferCaseDto:FormData){
+        
+        return this.http.post(this.BaseURI+"/transfer",transferCaseDto)
+    }
+        
+        
 }
 
 
