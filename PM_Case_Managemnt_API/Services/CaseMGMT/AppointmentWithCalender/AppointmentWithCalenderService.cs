@@ -54,10 +54,10 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT.AppointmentWithCalenderService
                  " ሰዐት በቢሮ ቁጥር፡ - ይገኙ";
 
 
-               bool isSmssent= await _smsService.UnlimettedMessageSender(cases.Applicant.PhoneNumber, message, appointment.CreatedBy.ToString());
+               bool isSmssent= await _smsService.UnlimittedMessageSender(cases.Applicant.PhoneNumber, message, appointment.CreatedBy.ToString());
 
                 if (!isSmssent)
-                    await _smsService.UnlimettedMessageSender(cases.PhoneNumber2, message, appointment.CreatedBy.ToString());
+                    await _smsService.UnlimittedMessageSender(cases.PhoneNumber2, message, appointment.CreatedBy.ToString());
 
                 await _dbContext.AppointementWithCalender.AddAsync(appointment);
                 await _dbContext.SaveChangesAsync();

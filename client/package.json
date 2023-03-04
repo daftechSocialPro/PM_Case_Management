@@ -27,6 +27,8 @@
     "bootstrap": "^5.2.3",
     "dropify": "^0.2.2",
     "ethiopian-date": "^0.0.6",
+    "gojs": "^2.3.3",
+    "gojs-angular": "^2.0.6",
     "jquery": "^3.6.3",
     "ngx-toastr": "^16.0.2",
     "rxjs": "~7.5.0",

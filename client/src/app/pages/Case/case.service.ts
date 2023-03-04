@@ -5,6 +5,7 @@ import { SelectList } from '../common/common';
 import { IAppointmentGet, IAppointmentWithCalander } from './case-detail/make-appointment-case/Iappointmentwithcalander';
 import { CaseType, CaseTypeView, FileSettingView } from './case-type/casetype';
 import { ICaseView } from './encode-case/Icase';
+import { IUnsentMessage } from './list-of-messages/Imessage';
 
 
 @Injectable({
@@ -149,6 +150,11 @@ export class CaseService {
     getAppointment (employeeId:string){
 
         return this.http.get<IAppointmentGet[]>(this.BaseURI+"/appointmetWithCalender?employeeId="+employeeId)
+    }
+
+    getMessages(){
+
+        return this.http.get<IUnsentMessage[]>(this.BaseURI+"/CaseMessages")
     }
         
         

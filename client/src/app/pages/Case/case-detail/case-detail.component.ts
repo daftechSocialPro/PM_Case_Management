@@ -17,29 +17,17 @@ import { TransferCaseComponent } from './transfer-case/transfer-case.component';
 @Component({
   selector: 'app-case-detail',
   templateUrl: './case-detail.component.html',
-  styleUrls: ['./case-detail.component.css']
+  styleUrls: ['./case-detail.component.css'],
 })
 export class CaseDetailComponent implements OnInit {
 
-  images = [
-    { src: 'https://picsum.photos/seed/1/800/600' },
-    { src: 'https://picsum.photos/seed/2/600/800' },
-    { src: 'https://picsum.photos/seed/3/800/800' },
-    { src: 'https://picsum.photos/seed/4/800/600' },
-    { src: 'https://picsum.photos/seed/5/600/800' },
-    { src: 'https://picsum.photos/seed/6/800/800' },
-    { src: 'https://picsum.photos/seed/7/800/600' },
-    { src: 'https://picsum.photos/seed/8/600/800' },
-    { src: 'https://picsum.photos/seed/9/800/800' },
-    { src: 'https://picsum.photos/seed/10/800/600' },
-    { src: 'https://picsum.photos/seed/11/600/800' },
-    { src: 'https://picsum.photos/seed/12/800/800' },
-  ];
+
 
   caseHistoryId!: string
   user!: UserView
   caseDetail!: ICaseView
   toast !: toastPayload
+
 
   constructor(
     private caseService: CaseService,
@@ -48,40 +36,36 @@ export class CaseDetailComponent implements OnInit {
     private route: Router,
     private commonService: CommonService,
     private modalService: NgbModal,
-    private confirmationDialogService: ConfirmationDialogService) { }
+    private confirmationDialogService: ConfirmationDialogService
+  ) {}
   ngOnInit(): void {
 
     this.user = this.userService.getCurrentUser()
     this.caseHistoryId = this.router.snapshot.paramMap.get('historyId')!
     this.getCaseDetail()
-
-
-
-
   
   }
 
   getCaseDetail() {
-    this.caseService.GetCaseDetail(
-      this.user.EmployeeId,
-      this.caseHistoryId
-    ).subscribe({
-      next: (res) => {
-        this.caseDetail = res
-        console.log(res)
-
-
-      }, error: (err) => {
-        console.error(err)
-      }
-    })
-
-
+    this.caseService
+      .GetCaseDetail(this.user.EmployeeId, this.caseHistoryId)
+      .subscribe({
+        next: (res) => {
+          this.caseDetail = res;
+          console.log(res);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 
   AddtoWaiting() {
-
-    this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to Add Case to waiting list ?')
+    this.confirmationDialogService
+      .confirm(
+        'Please confirm..',
+        'Do you really want to Add Case to waiting list ?'
+      )
       .then((confirmed) => {
         if (confirmed) {
           this.caseService.AddtoWaiting(this.caseHistoryId).subscribe({
@@ -96,9 +80,9 @@ export class CaseDetailComponent implements OnInit {
                 } as IndividualConfig,
               };
               this.commonService.showToast(this.toast);
-              this.route.navigate(['mycaselist'])
-
-            }, error: (err) => {
+              this.route.navigate(['mycaselist']);
+            },
+            error: (err) => {
               this.toast = {
                 message: 'Something went wrong!!',
                 title: 'Network error.',
@@ -109,88 +93,93 @@ export class CaseDetailComponent implements OnInit {
                 } as IndividualConfig,
               };
               this.commonService.showToast(this.toast);
-            }
-          })
-
+            },
+          });
         }
-
       })
-      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+      .catch(() =>
+        console.log(
+          'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
+        )
+      );
   }
 
   SendSMS() {
-    let modalRef = this.modalService.open(SendSmsComponent, { backdrop: 'static' })
-    modalRef.componentInstance.historyId = this.caseHistoryId
+    let modalRef = this.modalService.open(SendSmsComponent, {
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.historyId = this.caseHistoryId;
   }
 
   CompleteCase() {
-    let modalRef = this.modalService.open(CompleteCaseComponent, { backdrop: 'static' })
-    modalRef.componentInstance.historyId = this.caseHistoryId
-
+    let modalRef = this.modalService.open(CompleteCaseComponent, {
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.historyId = this.caseHistoryId;
   }
 
   Revert() {
-    this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to Revert this Case ?')
+    this.confirmationDialogService
+      .confirm('Please confirm..', 'Do you really want to Revert this Case ?')
       .then((confirmed) => {
         if (confirmed) {
+          this.caseService
+            .RevertCase({
+              CaseHistoryId: this.caseHistoryId,
+              EmployeeId: this.user.EmployeeId,
+            })
+            .subscribe({
+              next: (res) => {
+                this.toast = {
+                  message: 'Case Reverted Successfully!!',
+                  title: 'Successfull.',
+                  type: 'success',
+                  ic: {
+                    timeOut: 2500,
+                    closeButton: true,
+                  } as IndividualConfig,
+                };
+                this.commonService.showToast(this.toast);
 
-
-          this.caseService.RevertCase({
-            CaseHistoryId: this.caseHistoryId,
-            EmployeeId: this.user.EmployeeId,
-
-          }).subscribe({
-            next: (res) => {
-              this.toast = {
-                message: 'Case Reverted Successfully!!',
-                title: 'Successfull.',
-                type: 'success',
-                ic: {
-                  timeOut: 2500,
-                  closeButton: true,
-                } as IndividualConfig,
-              };
-              this.commonService.showToast(this.toast);
-
-              this.route.navigate(['mycaselist'])
-
-
-
-            }, error: (err) => {
-
-              this.toast = {
-                message: 'Something went wrong!!',
-                title: 'Network error.',
-                type: 'error',
-                ic: {
-                  timeOut: 2500,
-                  closeButton: true,
-                } as IndividualConfig,
-              };
-              this.commonService.showToast(this.toast);
-            }
-
-          })
-
-
-
-
+                this.route.navigate(['mycaselist']);
+              },
+              error: (err) => {
+                this.toast = {
+                  message: 'Something went wrong!!',
+                  title: 'Network error.',
+                  type: 'error',
+                  ic: {
+                    timeOut: 2500,
+                    closeButton: true,
+                  } as IndividualConfig,
+                };
+                this.commonService.showToast(this.toast);
+              },
+            });
         }
       })
-      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-
+      .catch(() =>
+        console.log(
+          'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
+        )
+      );
   }
 
-
-  TransferCase(){
-    let modalRef = this.modalService.open(TransferCaseComponent, {size:'xl', backdrop: 'static' })
-    modalRef.componentInstance.historyId = this.caseHistoryId
-    modalRef.componentInstance.CaseTypeName = this.caseDetail.CaseTypeName
+  TransferCase() {
+    let modalRef = this.modalService.open(TransferCaseComponent, {
+      size: 'xl',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.historyId = this.caseHistoryId;
+    modalRef.componentInstance.CaseTypeName = this.caseDetail.CaseTypeName;
   }
 
-  Appointment(){
-    let modalRef = this.modalService.open(MakeAppointmentCaseComponent,{size:'xl',backdrop:'static'})
-    modalRef.componentInstance.historyId = this.caseHistoryId
+  Appointment() {
+    let modalRef = this.modalService.open(MakeAppointmentCaseComponent, {
+      size: 'xl',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.historyId = this.caseHistoryId;
   }
 
 

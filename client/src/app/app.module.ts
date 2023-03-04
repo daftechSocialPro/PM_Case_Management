@@ -111,12 +111,13 @@ import { TransferCaseComponent } from './pages/Case/case-detail/transfer-case/tr
 import { CompleteCaseComponent } from './pages/Case/case-detail/complete-case/complete-case.component';
 import { MakeAppointmentCaseComponent } from './pages/Case/case-detail/make-appointment-case/make-appointment-case.component';
 import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.component';
+import { GojsAngularModule } from 'gojs-angular';
+import { ListOfMessagesComponent } from './pages/case/list-of-messages/list-of-messages.component';
+import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-appointments.component';
 
-import { PhotoGalleryModule } from '@twogate/ngx-photo-gallery';
 
 @NgModule({
   declarations: [
-
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -216,16 +217,14 @@ import { PhotoGalleryModule } from '@twogate/ngx-photo-gallery';
 
     CompleteCaseComponent,
     MakeAppointmentCaseComponent,
-    SendSmsComponent
-
-
-
+    SendSmsComponent,
+    ListOfMessagesComponent,
+    CaseAppointmentsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    PhotoGalleryModule.forRoot({ defaultOptions: { showHideOpacity: true } }),
+    ReactiveFormsModule,   
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -233,17 +232,17 @@ import { PhotoGalleryModule } from '@twogate/ngx-photo-gallery';
     AutocompleteLibModule,
     ToastrModule.forRoot({
       preventDuplicates: true,
-
     }),
     NgbModule,
+    GojsAngularModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderIneterceptor,
-      multi: true
+      multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

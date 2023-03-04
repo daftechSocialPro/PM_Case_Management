@@ -10,6 +10,7 @@ namespace PM_Case_Managemnt_API.DTOS.Common
         public Guid? ParentStructureId { get; set; }
         public string? ParentStructureName { get; set; }
         public string StructureName { get; set; }
+        public float? ParentWeight { get; set; }
 
         public int Order { get; set; }
 
