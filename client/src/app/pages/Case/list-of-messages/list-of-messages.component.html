@@ -1,0 +1,54 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Cases</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                <li class="breadcrumb-item">Case </li>
+                <li class="breadcrumb-item active">List of Unsent Messages</li>
+            </ol>
+        </nav>
+    </div>
+
+
+    <section class="section dashboard">
+        <div class="card p-4">
+            <div class="card-body">
+                <h5 class="card-title">Unsent Messages <span></span></h5>
+                <table class="table table-border ">
+                   <thead>
+                      <tr>
+                         <th scope="col">#</th>
+                         <th scope="col">Applicant Name</th>
+                         <th scope="col">Letter Number</th>
+                         <th scope="col">Subject</th>
+                         <th scope="col">Case Type Tittle</th>
+                         <th scope="col">Phone Number</th>
+                         <th scope="col">Phone Number 2</th>
+                         <th scope="col">Message</th>
+                         <th scope="col">Message Group</th>
+                         <th scope="col">Is SMS Sent</th>
+                      </tr>
+
+                       	 	 	 	 	 	 	 	 	
+                   </thead>
+                   <tbody>
+                      <tr *ngFor="let message of messages; let i = index">
+                         <th scope="row"><a href="#">#{{i+1}}</a></th>
+                         <td>{{message.ApplicantName}}</td>
+                         <td>{{message.LetterNumber}}</td>
+                         <td>{{message.Subject}}</td>
+                         <td>{{message.CaseTypeTitle}}</td>
+                         <td>{{message.PhoneNumber}}</td>
+                         <td>{{message.PhoneNumber2}}</td>
+                         <td>{{message.Message}}</td>
+                         <td>{{message.MessageGroup}}</td>
+                         <td><span [class]="message.IsSmsSent?'badge bg-success':'badge bg-danger'">{{message.IsSmsSent}}</span></td>
+                      </tr>
+               
+                   </tbody>
+                </table>
+             </div>
+        </div>
+    </section>
+</main>

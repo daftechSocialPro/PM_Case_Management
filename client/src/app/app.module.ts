@@ -111,8 +111,10 @@ import { TransferCaseComponent } from './pages/Case/case-detail/transfer-case/tr
 import { CompleteCaseComponent } from './pages/Case/case-detail/complete-case/complete-case.component';
 import { MakeAppointmentCaseComponent } from './pages/Case/case-detail/make-appointment-case/make-appointment-case.component';
 import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.component';
-
 import { GojsAngularModule } from 'gojs-angular';
+import { ListOfMessagesComponent } from './pages/case/list-of-messages/list-of-messages.component';
+import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-appointments.component';
+
 
 @NgModule({
   declarations: [
@@ -216,11 +218,13 @@ import { GojsAngularModule } from 'gojs-angular';
     CompleteCaseComponent,
     MakeAppointmentCaseComponent,
     SendSmsComponent,
+    ListOfMessagesComponent,
+    CaseAppointmentsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,   
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

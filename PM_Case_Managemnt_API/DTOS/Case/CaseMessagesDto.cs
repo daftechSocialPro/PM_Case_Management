@@ -12,4 +12,23 @@ namespace PM_Case_Managemnt_API.DTOS.Case
         public Guid CreatedBy { get; set; }
 
     }
+    public class CaseUnsentMessagesGetDto
+    {
+
+        public string ApplicantName { get; set; }
+        public string LetterNumber { get; set; }
+        public string Subject { get; set; }
+        public string CaseTypeTitle { get; set; }
+
+        public string PhoneNumber { get; set; }
+        public string PhoneNumber2 { get; set; }
+
+        public string Message { get; set; }
+
+        public string MessageGroup { get; set; }
+
+        public bool IsSmsSent { get; set; }
+
+   
+    }
 }

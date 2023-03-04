@@ -16,5 +16,9 @@ export class DashboardComponent implements OnInit {
     s.src = "../assets/js/main.js";
     this.elementRef.nativeElement.appendChild(s);
   }
+  alert(){
+
+    alert('sdfsdf')
+  }
 
 }

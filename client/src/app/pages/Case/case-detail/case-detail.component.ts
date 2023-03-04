@@ -12,7 +12,7 @@ import { CompleteCaseComponent } from './complete-case/complete-case.component';
 import { MakeAppointmentCaseComponent } from './make-appointment-case/make-appointment-case.component';
 import { SendSmsComponent } from './send-sms/send-sms.component';
 import { TransferCaseComponent } from './transfer-case/transfer-case.component';
-import ImageViewer from 'awesome-image-viewer';
+
 
 @Component({
   selector: 'app-case-detail',
@@ -20,10 +20,14 @@ import ImageViewer from 'awesome-image-viewer';
   styleUrls: ['./case-detail.component.css'],
 })
 export class CaseDetailComponent implements OnInit {
-  caseHistoryId!: string;
-  user!: UserView;
-  caseDetail!: ICaseView;
-  toast!: toastPayload;
+
+
+
+  caseHistoryId!: string
+  user!: UserView
+  caseDetail!: ICaseView
+  toast !: toastPayload
+
 
   constructor(
     private caseService: CaseService,
@@ -35,12 +39,11 @@ export class CaseDetailComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService
   ) {}
   ngOnInit(): void {
-    this.user = this.userService.getCurrentUser();
-    this.caseHistoryId = this.router.snapshot.paramMap.get('historyId')!;
-    this.getCaseDetail();
-    new ImageViewer({
-      images: [{ mainUrl: this.caseDetail.Attachments[0].Photo as string }],
-    });
+
+    this.user = this.userService.getCurrentUser()
+    this.caseHistoryId = this.router.snapshot.paramMap.get('historyId')!
+    this.getCaseDetail()
+  
   }
 
   getCaseDetail() {
@@ -178,4 +181,6 @@ export class CaseDetailComponent implements OnInit {
     });
     modalRef.componentInstance.historyId = this.caseHistoryId;
   }
+
+
 }

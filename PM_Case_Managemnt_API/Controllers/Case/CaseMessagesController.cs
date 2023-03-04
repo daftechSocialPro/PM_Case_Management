@@ -4,7 +4,7 @@ using PM_Case_Managemnt_API.Services.CaseMGMT.CaseMessagesService;
 
 namespace PM_Case_Managemnt_API.Controllers.Case
 {
-    [Route("api/case")]
+    [Route("api/case/[Controller]")]
     [ApiController]
     public class CaseMessagesController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace PM_Case_Managemnt_API.Controllers.Case
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMany(bool messageStatus)
+        public async Task<IActionResult> GetMany(bool messageStatus= false)
         {
             try
             {
