@@ -13,12 +13,28 @@ import { MakeAppointmentCaseComponent } from './make-appointment-case/make-appoi
 import { SendSmsComponent } from './send-sms/send-sms.component';
 import { TransferCaseComponent } from './transfer-case/transfer-case.component';
 
+
 @Component({
   selector: 'app-case-detail',
   templateUrl: './case-detail.component.html',
   styleUrls: ['./case-detail.component.css']
 })
 export class CaseDetailComponent implements OnInit {
+
+  images = [
+    { src: 'https://picsum.photos/seed/1/800/600' },
+    { src: 'https://picsum.photos/seed/2/600/800' },
+    { src: 'https://picsum.photos/seed/3/800/800' },
+    { src: 'https://picsum.photos/seed/4/800/600' },
+    { src: 'https://picsum.photos/seed/5/600/800' },
+    { src: 'https://picsum.photos/seed/6/800/800' },
+    { src: 'https://picsum.photos/seed/7/800/600' },
+    { src: 'https://picsum.photos/seed/8/600/800' },
+    { src: 'https://picsum.photos/seed/9/800/800' },
+    { src: 'https://picsum.photos/seed/10/800/600' },
+    { src: 'https://picsum.photos/seed/11/600/800' },
+    { src: 'https://picsum.photos/seed/12/800/800' },
+  ];
 
   caseHistoryId!: string
   user!: UserView
@@ -38,6 +54,11 @@ export class CaseDetailComponent implements OnInit {
     this.user = this.userService.getCurrentUser()
     this.caseHistoryId = this.router.snapshot.paramMap.get('historyId')!
     this.getCaseDetail()
+
+
+
+
+  
   }
 
   getCaseDetail() {
@@ -172,5 +193,5 @@ export class CaseDetailComponent implements OnInit {
     modalRef.componentInstance.historyId = this.caseHistoryId
   }
 
-  
+
 }

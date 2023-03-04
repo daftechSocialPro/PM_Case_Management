@@ -19,12 +19,12 @@
                   <ul class="nav nav-pills nav-justified">
                      <li class="nav-item" style="width: 120px;">
                         <a href="" class="nav-link product-thumb active" data-toggle="tab" aria-expanded="false">
-                           <img src="" alt="image" class="img-fluid mx-auto d-block rounded" style="width: 120px;">
-<!-- 
+                           <!-- <img src="" alt="image" class="img-fluid mx-auto d-block rounded" style="width: 120px;"> -->
 
-                           <app-image-viewer [images]="['https://images.nga.gov/en/web_images/niagara2.jpg']"
-[idContainer]="'idOnHTML'"
-[loadOnInit]="true"></app-image-viewer> -->
+                           <div class="grid" [photoGalleryGroup]="{ arrowEl: true, indexIndicatorSep: ' - ' }">
+                              <div class="grid-item" *ngFor="let image of images" [photoGallery]="image.src"><img [src]="image.src" alt="" /></div>
+                            </div>
+                        
                         </a>
                      </li>
                   </ul>

@@ -145,3 +145,29 @@
     bottom: 30px;
     transform: rotate(-225deg);
   }
+
+  .grid {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+ }
+  .grid img {
+    display: block;
+    height: 400px;
+    object-fit: cover;
+    width: 400px;
+ }
+  .grid-item {
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+ }
+  .grid-item img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 100%;
+ }
+  

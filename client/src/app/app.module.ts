@@ -112,6 +112,7 @@ import { CompleteCaseComponent } from './pages/Case/case-detail/complete-case/co
 import { MakeAppointmentCaseComponent } from './pages/Case/case-detail/make-appointment-case/make-appointment-case.component';
 import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.component';
 
+import { PhotoGalleryModule } from '@twogate/ngx-photo-gallery';
 
 @NgModule({
   declarations: [
@@ -224,6 +225,7 @@ import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.com
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    PhotoGalleryModule.forRoot({ defaultOptions: { showHideOpacity: true } }),
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
