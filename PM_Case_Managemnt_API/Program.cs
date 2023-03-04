@@ -22,6 +22,9 @@ using PM_Case_Managemnt_API.Services.CaseService.CaseTypes;
 using PM_Case_Managemnt_API.Services.CaseService.Encode;
 using PM_Case_Managemnt_API.Services.CaseService.FileSettings;
 using PM_Case_Managemnt_API.Services.Common;
+using PM_Case_Managemnt_API.Services.Common.FolderService;
+using PM_Case_Managemnt_API.Services.Common.RowService;
+using PM_Case_Managemnt_API.Services.Common.ShelfService;
 using PM_Case_Managemnt_API.Services.PM;
 using PM_Case_Managemnt_API.Services.PM.Activity;
 using PM_Case_Managemnt_API.Services.PM.Commite;
@@ -77,6 +80,10 @@ builder.Services.AddScoped<IOrgStructureService, OrgStructureService>();
 builder.Services.AddScoped<IBudgetyearService, BudgetYearService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IUnitOfMeasurmentService, UnitOfMeasurmentService>();
+
+builder.Services.AddScoped<IFolderService, FolderService>();
+builder.Services.AddScoped<IRowService, RowService>();
+builder.Services.AddScoped<IShelfService, ShelfService>();
 
 builder.Services.AddScoped<IProgramService, ProgramService>();
 builder.Services.AddScoped<IPlanService, PlanService>();

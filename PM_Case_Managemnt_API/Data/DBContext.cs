@@ -26,12 +26,18 @@ namespace PM_Case_Managemnt_API.Data
         public DbSet<Employee> Employees { get; set; }
        // public DbSet<EmployeeStructures> EmployeesStructures { get; set; }
 
+
+        // Archive
+        public DbSet<Folder> Folder { get; set; }
+        public DbSet<Row> Rows { get; set; }
+        public DbSet<Shelf> Shelf { get; set; }
+
         // 
 
         public DbSet<ProgramBudgetYear> ProgramBudgetYears { get; set; }
 
         public DbSet<BudgetYear> BudgetYears { get; set; }
-
+        
         public DbSet<UnitOfMeasurment> UnitOfMeasurment { get; set; }
 
 
