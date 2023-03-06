@@ -50,9 +50,6 @@ export class MyCaseListComponent implements OnInit {
 
   confirmTransaction(caseHistoryId: string) {
 
-
-
-
     this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to Confirm Case ?')
     .then((confirmed) => {
       if (confirmed){

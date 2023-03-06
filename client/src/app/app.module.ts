@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -114,6 +114,8 @@ import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.com
 import { GojsAngularModule } from 'gojs-angular';
 import { ListOfMessagesComponent } from './pages/case/list-of-messages/list-of-messages.component';
 import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-appointments.component';
+import { ArchivecaseComponent } from './pages/case/archivecase/archivecase.component';
+import { Angular2ImageGalleryModule } from 'angular2-image-gallery';
 
 
 @NgModule({
@@ -220,6 +222,8 @@ import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-a
     SendSmsComponent,
     ListOfMessagesComponent,
     CaseAppointmentsComponent,
+    ArchivecaseComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -235,6 +239,8 @@ import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-a
     }),
     NgbModule,
     GojsAngularModule,
+    Angular2ImageGalleryModule,
+    HammerModule
   ],
   providers: [
     {

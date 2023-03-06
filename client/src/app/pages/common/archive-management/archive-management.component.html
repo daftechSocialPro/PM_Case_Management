@@ -14,7 +14,7 @@
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"> Shelf</h5>
@@ -27,7 +27,7 @@
                                 <tr>
     
                                     <th scope="col">#</th>
-                                    <th scope="col">Shelf Number</th>
+                                    <th scope="col">Shelf ID</th>
                                     <th scope="col">Remark</th>
                                     <th scope="col">Action</th>
                                     
@@ -64,12 +64,12 @@
                 </div>
 
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"> Row</h5>
                         <div class="text-end col-lg-12">
-                            <button class="btn btn-primary text-end mb-3" (click)="addShelf()"> Add Row </button>
+                            <button class="btn btn-primary text-end mb-3" [disabled]="true" (click)="addShelf()"> Add Row </button>
                         </div>
     
                         <table class="table  table-hover">
@@ -77,8 +77,59 @@
                                 <tr>
     
                                     <th scope="col">#</th>
-                                    <th scope="col">Row Number</th>
+                                    <th scope="col">Row ID</th>
+                                    <th scope="col">Shelf </th>
                                     <th scope="col">Remark</th>
+                                    <th scope="col">Action</th>
+                                    
+    
+                                </tr>
+                            </thead>
+                            <tbody>
+<!--     
+                                <tr *ngFor="let pby of programBudgetYear ; let i= index">
+    
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{pby.Name}}</td>
+                                    <td>{{pby.FromYear}}</td>
+                                    <td>{{pby.ToYear}}</td>
+                                    <td>{{pby.Remark}}</td>
+                                    <td>
+    
+    
+                                        <button class="btn btn-success text-white" data-bs-toggle="modal"
+                                            data-bs-target="#BudgetYearList" (click)="budgetYearsDetails(pby)">
+                                            <i class="bi bi-card-list"></i>&nbsp; Budget Years 
+                                        </button>
+    
+                                        
+                                    </td>
+    
+                                </tr> -->
+                            </tbody>
+    
+    
+                        </table>
+    
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"> Folder</h5>
+                        <div class="text-end col-lg-12">
+                            <button class="btn btn-primary text-end mb-3" [disabled]="true" (click)="addShelf()"> Add Row </button>
+                        </div>
+    
+                        <table class="table  table-hover">
+                            <thead>
+                                <tr>
+    
+                                    <th scope="col">#</th>
+                                    <th scope="col">Folder ID</th>
+                                    <th scope="col">Row</th>
+                                    <th scope="col">Shelf</th>
                                     <th scope="col">Action</th>
                                     
     

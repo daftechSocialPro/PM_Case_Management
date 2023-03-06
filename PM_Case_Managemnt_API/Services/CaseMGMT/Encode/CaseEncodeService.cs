@@ -266,7 +266,31 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
 
         }
 
-     
+
+        public async Task<List<CaseEncodeGetDto>> CompletedCases()
+        {
+            // Employee user = _dbContext.Employees.Include(x => x.OrganizationalStructure).Where(x => x.Id == employeeId).FirstOrDefault();
+
+
+            List<CaseEncodeGetDto> cases = await _dbContext.Cases.Where(ca => ca.AffairStatus.Equals(AffairStatus.Completed)).Include(p => p.Employee).Include(p => p.CaseType).Include(p => p.Applicant).Select(st => new CaseEncodeGetDto
+            {
+                Id = st.Id,
+                CaseNumber = st.CaseNumber,
+                LetterNumber = st.LetterNumber,
+                LetterSubject = st.LetterSubject,
+                CaseTypeName = st.CaseType.CaseTypeTitle,
+                ApplicantName = st.Applicant.ApplicantName,
+                EmployeeName = st.Employee.FullName,
+                ApplicantPhoneNo = st.Applicant.PhoneNumber,
+                EmployeePhoneNo = st.Employee.PhoneNumber,
+                CreatedAt = st.CreatedAt.ToString(),
+            }).ToListAsync();
+
+            return cases;
+
+        }
+
+
     }
 
 
