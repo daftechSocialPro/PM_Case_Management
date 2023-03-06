@@ -7,9 +7,9 @@
        <ul class="d-flex align-items-center">
           <li class="nav-item d-block d-lg-none"> <a class="nav-link nav-icon search-bar-toggle " href="#"> <i class="bi bi-search"></i> </a></li>
           <li class="nav-item dropdown">
-             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"> <i class="bi bi-bell"></i> <span class="badge bg-primary badge-number">{{activites.length}}</span> </a>
+             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"> <i class="bi bi-bell"></i> <span class="badge bg-primary badge-number">{{activites.length!}}</span> </a>
              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                <li class="dropdown-header"> You have {{activites.length}} new notifications <a href="/actForApproval"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a></li>
+                <li class="dropdown-header"> You have {{activites.length!}} new notifications <a href="/actForApproval"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a></li>
               
                 <li>
                    <hr class="dropdown-divider">
@@ -36,9 +36,9 @@
              </ul>
           </li>
           <li class="nav-item dropdown">
-             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"> <i class="bi bi-chat-left-text"></i> <span class="badge bg-success badge-number">{{assignedCases.length}}</span> </a>
+             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"> <i class="bi bi-chat-left-text"></i> <span class="badge bg-success badge-number">{{assignedCases.length!}}</span> </a>
              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                <li class="dropdown-header"> You have {{assignedCases.length}} Assigned Cases <a href="/mycaselist"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a></li>
+                <li class="dropdown-header"> You have {{assignedCases.length!}} Assigned Cases <a href="/mycaselist"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a></li>
                 <li>
                    <hr class="dropdown-divider">
                 </li>

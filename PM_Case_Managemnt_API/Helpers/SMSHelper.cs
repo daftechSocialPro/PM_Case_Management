@@ -8,6 +8,8 @@ using System.IO.Ports;
 using PM_Case_Managemnt_API.Models.Auth;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using Microsoft.Net.Http.Headers;
+using PM_Case_Managemnt_API.DTOS.Case;
+using PM_Case_Managemnt_API.Services.CaseMGMT.CaseMessagesService;
 
 namespace PM_Case_Managemnt_API.Helpers
 {
@@ -15,11 +17,13 @@ namespace PM_Case_Managemnt_API.Helpers
     {
         private readonly AuthenticationContext _authenticationContext;
         private readonly DBContext _dbContext;
+        private readonly ICaseMessagesService _caseMessagesService;
 
-        public SMSHelper(AuthenticationContext authenticationContext, DBContext dBContext)
+        public SMSHelper(AuthenticationContext authenticationContext, DBContext dBContext, ICaseMessagesService caseMessagesService)
         {
             _authenticationContext = authenticationContext;
             _dbContext = dBContext;
+            _caseMessagesService = caseMessagesService;
         }
         public async Task<bool> MessageSender(string reciver, string message, string UserId, Guid? orgId = null)
         {
@@ -148,20 +152,16 @@ namespace PM_Case_Managemnt_API.Helpers
                 }
 
 
-                CaseMessages caseMessages = new CaseMessages()
+                CaseMessagesPostDto caseMessages = new ()
                 {
-                    Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.UtcNow,
                     CaseId = caseId,
                     CreatedBy = Guid.Parse(userId),
                     MessageBody = message,
                     MessageFrom = messageFrom,
                     Messagestatus = result,
-                    RowStatus = RowStatus.Active
                 };
 
-                await _dbContext.CaseMessages.AddAsync(caseMessages);
-                await _dbContext.SaveChangesAsync();
+                await _caseMessagesService.Add(caseMessages);
                 return result;
             }
             catch (Exception ex)

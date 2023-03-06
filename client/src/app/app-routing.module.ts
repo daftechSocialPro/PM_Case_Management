@@ -54,6 +54,8 @@ import { ActivityforapprovalComponent } from './pages/pm/activityforapproval/act
 import { MyCaseListComponent } from './pages/case/my-case-list/my-case-list.component';
 import { CaseDetailComponent } from './pages/Case/case-detail/case-detail.component';
 import { CaseHistoryComponent } from './pages/Case/case-history/case-history.component';
+import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-appointments.component';
+import { ListOfMessagesComponent } from './pages/case/list-of-messages/list-of-messages.component';
 
 
 
@@ -83,6 +85,9 @@ const routes: Routes = [
   { path: 'mycaselist', canActivate:[AuthGuard], component:MyCaseListComponent},
   { path: 'casedetail',canActivate:[AuthGuard],component:CaseDetailComponent},
   { path: 'caseHistory',canActivate:[AuthGuard],component:CaseHistoryComponent},
+  
+  { path: 'caseappointments',canActivate:[AuthGuard],component:CaseAppointmentsComponent},
+  { path: 'listmessages',canActivate:[AuthGuard],component:ListOfMessagesComponent},
   
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },

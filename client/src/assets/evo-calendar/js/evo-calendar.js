@@ -51,17 +51,21 @@
                 dates: {
 
                     am: {
-                        days: ["እሁድ", "ሰኞ", "ማክሰኞ", "ረቡዕ", "ሐሙስ", "አርብ", "ቅዳሜ"],
-                        daysShort: ["እሁድ", "ሰኞ", "ማክ", "ረቡዕ", "ሐሙስ", "አርብ", "ቅዳሜ"],
-                        daysMin: ["እሁድ", "ሰኞ", "ማክ", "ረቡዕ", "ሐሙስ", "አርብ", "ቅዳሜ"],
+                        
+
+                        days: ["እሁድ", "ሰኞ", "ማክሰኞ", "ረቡዕ", "ሐሙስ", "ዓርብ", "ቅዳሜ"],
+                        daysShort: ["እሁድ", "ሰኞ", "ማክ", "ረቡዕ", "ሐሙስ", "ዓርብ", "ቅዳሜ"],
+                        daysMin: ["እሁድ", "ሰኞ", "ማክ", "ረቡዕ", "ሐሙስ", "ዓርብ", "ቅዳሜ"],
                         months: ["መስከረም", "ጥቅምት", "ህዳር", "ታህሳስ","ጥር", "የካቲት", "መጋቢት", "ሚያዝያ", "ግንቦት", "ሰኔ", "ሐምሌ","ነሃሴ" ,"ጷግሜ"],
                         monthsShort: ["መስከ", "ጥቅም", "ህዳር", "ታህሳ","ጥር", "የካቲ", "መጋቢ", "ሚያዝ", "ግንቦ", "ሰኔ", "ሐምሌ", "ነሃሴ","ጷግሜ"],
-                        noEventForToday: "No event for today.. so take a rest! :)",
-                        noEventForThisDay: "No event for this day.. so take a rest! :)",
-                        previousYearText: "Previous year",
-                        nextYearText: "Next year",
-                        closeSidebarText: "Close sidebar",
-                        closeEventListText: "Close event list"
+                        noEventForToday: "ለዛሬ ምንም ቀጠሮ የለም.. ስለዚህ እረፍት ይውሰዱ! :)",
+                        noEventForThisDay: "ለዚህ ቀን ምንም ክስተት የለም.. ስለዚህ እረፍት ይውሰዱ !! :)",
+                        previousYearText: "ያለፈው ዓመት",
+                        nextYearText: "የሚመጣው አመት",
+                        closeSidebarText: "የጎን ዝርዝር ዝጋ",
+                        closeEventListText: "የክስተት ዝርዝር ዝጋ"
+
+
                     },
                     en: {
                         days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -727,11 +731,12 @@ function GetETYear( intGCMonth,  intGCYear,  intECMonth)
     EvoCalendar.prototype.calculateDays = function() {
         var _ = this, nameDays, weekStart, firstDay;
         _.monthLength = _.$label.days_in_month[_.$active.month]; // find number of days in month
-        if (_.$active.month == 1) { // compensate for leap year - february only!
+        if (_.$active.month == 12) { // compensate for leap year - february only!
             if((_.$active.year % 4 == 0 && _.$active.year % 100 != 0) || _.$active.year % 400 == 0){
-                _.monthLength = 29;
+                _.monthLength = 6;
             }
         }
+        debugger
         nameDays = _.initials.dates[_.options.language].daysShort;
         weekStart = _.options.firstDayOfWeek;
         
@@ -742,8 +747,143 @@ function GetETYear( intGCMonth,  intGCYear,  intECMonth)
             _.$label.days.push(nameDays[weekStart]);
             weekStart++;
         }
-        firstDay = new Date(_.$active.year, _.$active.month).getDay() - weekStart;
+        debugger
+        let {Year: enYear,Month:enMonth,Day:enDay} = SetGCDate(1 ,_.$active.month+1,_.$active.year)
+        firstDay = new Date(enYear, enMonth-1,enDay).getDay() - weekStart;
         _.startingDay = firstDay < 0 ? (_.$label.days.length + firstDay) : firstDay;
+    }
+
+
+    function  GetGCYear( intECMonth,  intECYear,  intGCMonth)
+    {
+        let intYearTemp;
+        switch (intGCMonth)
+        {
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+                intYearTemp = intECYear + 7;
+                if ((intGCMonth == 9) && ((intECMonth == 12) || (intECMonth == 13)))
+                {
+                    intYearTemp = intYearTemp + 1;
+                }
+                break;
+            default:
+                intYearTemp = intECYear + 8;
+                break;
+        }
+        return intYearTemp;
+    }
+    function SetGCDate( intEthDay,  intEthMonth,  intEthYear)
+    {
+        
+       let  intDayDiff = 0;
+        let  intGCDay = 0;
+        let  intGCMonth = 0;
+        let intGCYear = 0;
+        let intAdd = 0;
+         let intMax = 0;
+
+        if (IsLeapYear(intEthYear + 8))
+        {
+            intAdd = 1;
+        }
+        switch (intEthMonth)
+        {
+            case 1:
+                intGCMonth = 9;
+                intDayDiff = 10 + intAdd;
+                intMax = 30;
+                break;
+            case 2:
+                intGCMonth = 10;
+                intDayDiff = 10 + intAdd;
+                intMax = 31;
+                break;
+            case 3:
+                intGCMonth = 11;
+                intDayDiff = 9 + intAdd;
+                intMax = 30;
+                break;
+            case 4:
+                intGCMonth = 12;
+                intDayDiff = 9 + intAdd;
+                intMax = 31;
+                break;
+            case 5:
+                intGCMonth = 1;
+                intDayDiff = 8 + intAdd;
+                intMax = 31;
+                break;
+            case 6:
+                intGCMonth = 2;
+                intDayDiff = 7 + intAdd;
+                if (intAdd > 0)
+                {
+                    intMax = 29;
+                }
+                else
+                {
+                    intMax = 28;
+                }
+                break;
+            case 7:
+                intGCMonth = 3;
+                intDayDiff = 9;
+                intMax = 31;
+                break;
+            case 8:
+                intGCMonth = 4;
+                intDayDiff = 8;
+                intMax = 30;
+                break;
+            case 9:
+                intGCMonth = 5;
+                intDayDiff = 8;
+                intMax = 31;
+                break;
+            case 10:
+                intGCMonth = 6;
+                intDayDiff = 7;
+                intMax = 30;
+                break;
+            case 11:
+                intGCMonth = 7;
+                intDayDiff = 7;
+                intMax = 31;
+                break;
+            case 12:
+                intGCMonth = 8;
+                intDayDiff = 6;
+                intMax = 31;
+                break;
+            case 13:
+                intGCMonth = 9;
+                intDayDiff = 5;
+                intMax = 30;
+                break;
+        }
+
+        intGCDay = intEthDay + intDayDiff;
+        if (intGCDay > intMax)
+        {
+            intGCDay = intGCDay - intMax;
+            intGCMonth = intGCMonth + 1;
+            if (intGCMonth == 13) { intGCMonth = 1; }
+        }
+
+        intGCYear = GetGCYear(intEthMonth, intEthYear, intGCMonth);
+        let Year = intGCYear;
+       let  Month = intGCMonth;
+        let Day = intGCDay;
+
+        return{
+            Year :intGCYear,
+            Month : intGCMonth,
+            Day :intGCDay
+        }
+
     }
 
     // v1.0.0 - Build the bones! (incl. sidebar, inner, events), called once in every initialization

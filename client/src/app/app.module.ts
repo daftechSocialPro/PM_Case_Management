@@ -111,6 +111,9 @@ import { TransferCaseComponent } from './pages/Case/case-detail/transfer-case/tr
 import { CompleteCaseComponent } from './pages/Case/case-detail/complete-case/complete-case.component';
 import { MakeAppointmentCaseComponent } from './pages/Case/case-detail/make-appointment-case/make-appointment-case.component';
 import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.component';
+import { ListOfMessagesComponent } from './pages/case/list-of-messages/list-of-messages.component';
+import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-appointments.component';
+import { GojsAngularModule } from 'gojs-angular';
 
 
 @NgModule({
@@ -215,10 +218,12 @@ import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.com
 
     CompleteCaseComponent,
     MakeAppointmentCaseComponent,
-    SendSmsComponent
+    SendSmsComponent,
 
 
 
+    ListOfMessagesComponent,
+    CaseAppointmentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -234,14 +239,15 @@ import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.com
 
     }),
     NgbModule,
+   GojsAngularModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderIneterceptor,
-      multi: true
+      multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
