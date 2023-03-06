@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PM_Case_Managemnt_API.Data;
 
 #nullable disable
 
-namespace PMCaseManagemntAPI.Migrations
+namespace PMCaseManagemntAPI.Migrations.DB
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20230306064136_Case Number unique")]
+    partial class CaseNumberunique
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -650,7 +653,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Property<string>("FolderName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Remark")
                         .HasColumnType("nvarchar(max)");
@@ -661,12 +664,14 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Property<int>("RowStatus")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("ShelfId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RowId");
 
-                    b.HasIndex("FolderName", "RowId")
-                        .IsUnique();
+                    b.HasIndex("ShelfId");
 
                     b.ToTable("Folder");
                 });
@@ -861,7 +866,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Property<string>("RowNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RowStatus")
                         .HasColumnType("int");
@@ -872,9 +877,6 @@ namespace PMCaseManagemntAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ShelfId");
-
-                    b.HasIndex("RowNumber", "ShelfId")
-                        .IsUnique();
 
                     b.ToTable("Rows");
                 });
@@ -899,12 +901,9 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Property<string>("ShelfNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ShelfNumber")
-                        .IsUnique();
 
                     b.ToTable("Shelf");
                 });
@@ -1992,7 +1991,15 @@ namespace PMCaseManagemntAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Shelf", "Shelf")
+                        .WithMany()
+                        .HasForeignKey("ShelfId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Row");
+
+                    b.Navigation("Shelf");
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.Common.OrganizationBranch", b =>
