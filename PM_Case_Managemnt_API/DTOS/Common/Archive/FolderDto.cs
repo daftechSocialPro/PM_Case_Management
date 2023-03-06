@@ -3,7 +3,6 @@
     public class FolderPostDto
     {
         public string FolderName { get; set; }
-        public Guid ShelfId { get; set; }
         public Guid RowId { get; set; }
         public string Remark { get; set; }
         public Guid CreatedBy { get; set; }

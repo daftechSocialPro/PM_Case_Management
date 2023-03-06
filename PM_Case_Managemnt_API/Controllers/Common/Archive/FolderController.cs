@@ -43,5 +43,19 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Archive
         }
 
 
+        [HttpGet("folder/filtered")]
+        public async Task<IActionResult> GetFiltered(Guid? shelfId = null, Guid? rowId = null)
+        {
+            try
+            {
+                return Ok(await _folderService.GetFilltered(shelfId, rowId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
     }
 }

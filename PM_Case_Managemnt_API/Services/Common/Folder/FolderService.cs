@@ -28,7 +28,6 @@ namespace PM_Case_Managemnt_API.Services.Common.FolderService
                     FolderName = folderPostDto.FolderName,
                     Remark = folderPostDto.Remark,
                     RowId = folderPostDto.RowId,
-                    ShelfId = folderPostDto.ShelfId
                 };
 
                 await _dbContext.Folder.AddAsync(newFolder);
@@ -42,20 +41,51 @@ namespace PM_Case_Managemnt_API.Services.Common.FolderService
         {
             try
             {
-                return (await _dbContext.Folder.Include(x => x.Row).Include(x => x.Shelf).Select(x => new FolderGetDto()
+                return (await _dbContext.Folder.Include(x => x.Row.Shelf).Select(x => new FolderGetDto()
                 {
                     FolderName = x.FolderName,
                     Id = x.Id,
                     Remark = x.Remark,
                     RowId = x.RowId,
-                    ShelfId = x.ShelfId,
+                    ShelfId = x.Row.ShelfId,
                     RowNumber = x.Row.RowNumber,
-                    ShelfNumber = x.Shelf.ShelfNumber
+                    ShelfNumber = x.Row.Shelf.ShelfNumber
                 }).ToListAsync());
             } catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<List<FolderGetDto>> GetFilltered(Guid? shelfId = null, Guid? rowId = null)
+        {
+            try
+            {
+                return (await _dbContext.Folder.Include(x => x.Row.Shelf).Where(x => x.RowId.Equals(rowId) || !rowId.HasValue).Where(x => x.Row.ShelfId.Equals(shelfId)).Select(x => new FolderGetDto()
+                {
+                    Id = x.Id,
+                    Remark = x.Remark,
+                    RowId= x.RowId,
+                    ShelfId = x.Row.ShelfId,
+                    RowNumber = x.Row.RowNumber,
+                    ShelfNumber = x.Row.Shelf.ShelfNumber
+                }).ToListAsync());
+
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        //public async Task<List<FolderGetDto>> GetByRowId(Guid rowId)
+        //{
+        //    try
+        //    {
+
+        //    } catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
     }
 }

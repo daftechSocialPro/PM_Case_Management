@@ -1,5 +1,8 @@
-﻿namespace PM_Case_Managemnt_API.Models.Common
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace PM_Case_Managemnt_API.Models.Common
 {
+    [Index(nameof(RowNumber), nameof(ShelfId), IsUnique = true)]
     public class Row : CommonModel
     {
         public string RowNumber { get; set; } = null!;
