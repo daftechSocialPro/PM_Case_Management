@@ -165,6 +165,11 @@ export class CaseService {
 
         return this.http.get<ICaseView[]>(this.BaseURI+"/completedList")
     }
+    
+    archiveCase(archive:any){
+
+        return this.http.post(this.BaseURI+"/archive",archive)
+    }
         
 }
 

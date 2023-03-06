@@ -58,6 +58,7 @@ import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-a
 import { ListOfMessagesComponent } from './pages/case/list-of-messages/list-of-messages.component';
 
 import { ArchivecaseComponent } from './pages/case/archivecase/archivecase.component';
+import { CompletedCasesComponent } from './pages/case/completed-cases/completed-cases.component';
 
 
 
@@ -90,8 +91,10 @@ const routes: Routes = [
   
   { path: 'caseappointments',canActivate:[AuthGuard],component:CaseAppointmentsComponent},
   { path: 'listmessages',canActivate:[AuthGuard],component:ListOfMessagesComponent},
+  { path: 'completedCases', canActivate:[AuthGuard],component: CompletedCasesComponent},
   { path: 'archivecase', canActivate:[AuthGuard],component: ArchivecaseComponent},
-  
+
+
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
   { path: 'badges', component: BadgesComponent },

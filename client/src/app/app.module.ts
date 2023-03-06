@@ -116,6 +116,10 @@ import { ListOfMessagesComponent } from './pages/case/list-of-messages/list-of-m
 import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-appointments.component';
 import { ArchivecaseComponent } from './pages/case/archivecase/archivecase.component';
 import { Angular2ImageGalleryModule } from 'angular2-image-gallery';
+import { AddRowComponent } from './pages/common/archive-management/add-row/add-row.component';
+import { AddFolderComponent } from './pages/common/archive-management/add-folder/add-folder.component';
+import { CompletedCasesComponent } from './pages/case/completed-cases/completed-cases.component';
+import { ArchiveCaseActionComponent } from './pages/case/archivecase/archive-case-action/archive-case-action.component';
 
 
 @NgModule({
@@ -223,6 +227,10 @@ import { Angular2ImageGalleryModule } from 'angular2-image-gallery';
     ListOfMessagesComponent,
     CaseAppointmentsComponent,
     ArchivecaseComponent,
+    AddRowComponent,
+    AddFolderComponent,
+    CompletedCasesComponent,
+    ArchiveCaseActionComponent,
     
   ],
   imports: [

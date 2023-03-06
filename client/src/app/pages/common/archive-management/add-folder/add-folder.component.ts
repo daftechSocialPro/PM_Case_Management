@@ -1,55 +1,60 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IndividualConfig } from 'ngx-toastr';
-import { CommonService, toastPayload } from 'src/app/common/common.service';
+import { toastPayload, CommonService } from 'src/app/common/common.service';
 import { UserView } from 'src/app/pages/pages-login/user';
 import { UserService } from 'src/app/pages/pages-login/user.service';
+import { IRow, IShelf } from '../Iarchive';
 
 @Component({
-  selector: 'app-add-shelf',
-  templateUrl: './add-shelf.component.html',
-  styleUrls: ['./add-shelf.component.css']
+  selector: 'app-add-folder',
+  templateUrl: './add-folder.component.html',
+  styleUrls: ['./add-folder.component.css']
 })
-export class AddShelfComponent implements OnInit {
+export class AddFolderComponent implements OnInit {
 
-  shelfForm !: FormGroup;
+  @Input() row !: IRow 
+
+  folderForm !: FormGroup;
   user!: UserView;
   toast!: toastPayload;
-
+  
   constructor(
     private commonService: CommonService,
     private userService: UserService,
     private activeModal: NgbActiveModal,
     private formBuilder: FormBuilder) {
-
-    this.shelfForm = this.formBuilder.group({
-      ShelfNumber: ['', Validators.required],
+  
+    this.folderForm = this.formBuilder.group({
+      FolderName: ['', Validators.required],
       Remark: ['']
     })
   }
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser()
   }
-
-
+  
+  
   closeModal() {
     this.activeModal.close()
   }
-
+  
   submit() {
-
-    if (this.shelfForm.valid) {
-
-      this.commonService.postShelf({
-        ShelfNumber: this.shelfForm.value.ShelfNumber,
-        Remark: this.shelfForm.value.Remark,
+  
+    if (this.folderForm.valid) {
+  
+  
+      this.commonService.postFolder({
+        RowId:this.row.Id,
+        FolderName: this.folderForm.value.FolderName,
+        Remark: this.folderForm.value.Remark,
         CreatedBy: this.user.UserID
       }).subscribe({
         next: (res) => {
-
+  
           this.toast = {
-            message: "Shelf Successfully Creted",
+            message: "Fodler Successfully Creted",
             title: 'Successfully Created.',
             type: 'success',
             ic: {
@@ -59,9 +64,9 @@ export class AddShelfComponent implements OnInit {
           };
           this.commonService.showToast(this.toast);
           this.closeModal()
-
+  
         }, error: (err) => {
-
+  
           this.toast = {
             message: "Something went wrong",
             title: 'Network Error.',
@@ -75,10 +80,6 @@ export class AddShelfComponent implements OnInit {
         }
       })
     }
-
+  
   }
-
-
-
-
 }
