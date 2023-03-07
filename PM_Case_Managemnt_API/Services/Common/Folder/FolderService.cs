@@ -61,8 +61,9 @@ namespace PM_Case_Managemnt_API.Services.Common.FolderService
         {
             try
             {
-                return (await _dbContext.Folder.Include(x => x.Row.Shelf).Where(x => x.RowId.Equals(rowId) || !rowId.HasValue).Where(x => x.Row.ShelfId.Equals(shelfId)).Select(x => new FolderGetDto()
+                return (await _dbContext.Folder.Include(x => x.Row.Shelf).Where(x => x.RowId.Equals(rowId) || !rowId.HasValue).Where(x => x.Row.ShelfId.Equals(shelfId)|| !shelfId.HasValue ).Select(x => new FolderGetDto()
                 {
+                    FolderName = x.FolderName,
                     Id = x.Id,
                     Remark = x.Remark,
                     RowId= x.RowId,

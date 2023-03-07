@@ -170,6 +170,11 @@ export class CaseService {
 
         return this.http.post(this.BaseURI+"/archive",archive)
     }
+
+    getArchiveCases (){
+
+        return this.http.get<ICaseView[]>(this.BaseURI+"/getArchivedCases")
+    }
         
 }
 

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CaseService } from '../case.service';
 import { ICaseView } from '../encode-case/Icase';
-import { ArchiveCaseActionComponent } from './archive-case-action/archive-case-action.component';
 
 @Component({
   selector: 'app-archivecase',
@@ -11,9 +10,26 @@ import { ArchiveCaseActionComponent } from './archive-case-action/archive-case-a
 })
 export class ArchivecaseComponent implements OnInit {
 
-  constructor(private modalService : NgbModal) { }
-  ngOnInit(): void {
+  ArchivedCases!: ICaseView[]
 
+  constructor(private caseService : CaseService) { }
+  ngOnInit(): void {
+    
+    this.getArchivedCases()
+
+  }
+
+  getArchivedCases(){
+
+    this.caseService.getArchiveCases().subscribe({
+      next:(res)=>{
+
+        this.ArchivedCases = res 
+      },error:(err)=>{
+
+        console.error(err)
+      }
+    })
   }
 
 

@@ -121,6 +121,8 @@ import { AddFolderComponent } from './pages/common/archive-management/add-folder
 import { CompletedCasesComponent } from './pages/case/completed-cases/completed-cases.component';
 import { ArchiveCaseActionComponent } from './pages/case/archivecase/archive-case-action/archive-case-action.component';
 
+import { LightgalleryModule } from 'lightgallery/angular';
+
 
 @NgModule({
   declarations: [
@@ -246,6 +248,7 @@ import { ArchiveCaseActionComponent } from './pages/case/archivecase/archive-cas
       preventDuplicates: true,
     }),
     NgbModule,
+    LightgalleryModule,
     GojsAngularModule,
     Angular2ImageGalleryModule,
     HammerModule

@@ -24,7 +24,12 @@ export interface ICaseView{
     IsConfirmedBySeretery :boolean,
     AffairHistoryStatus :string,
     Attachments:SelectList[],  
-    CaseDetailStructures:CaseDetailStructures[]
+    CaseDetailStructures:CaseDetailStructures[],
+    
+    FolderName ?: string 
+    RowNumber ?: string 
+    ShelfNumber ?: string 
+    
 } 
 export interface CaseDetailStructures{
 

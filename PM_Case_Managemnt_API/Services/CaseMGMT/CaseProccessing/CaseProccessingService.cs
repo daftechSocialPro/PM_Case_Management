@@ -411,6 +411,24 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
         }
 
 
+        public async Task<int> ArchiveCase(ArchivedCaseDto archivedCaseDto)
+        {
+
+            Case cases = _dbContext.Cases.Find(archivedCaseDto.CaseId);
+
+            cases.FolderId = archivedCaseDto.FolderId;
+            cases.IsArchived = true;
+
+
+            _dbContext.Entry(cases).Property(x => x.FolderId).IsModified = true;
+            _dbContext.Entry(cases).Property(x => x.IsArchived).IsModified = true;
+
+           await  _dbContext.SaveChangesAsync();
+
+            return 1; 
+        }
+
+
 
     }
 }

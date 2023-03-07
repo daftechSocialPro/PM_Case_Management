@@ -13,6 +13,8 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
 
         public Task<List<CaseEncodeGetDto>> CompletedCases();
 
+        public Task<List<CaseEncodeGetDto>> GetArchivedCases();
+
        
 
 

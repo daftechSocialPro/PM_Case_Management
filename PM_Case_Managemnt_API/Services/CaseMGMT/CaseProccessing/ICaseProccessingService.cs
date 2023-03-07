@@ -14,5 +14,8 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
         public Task<CaseEncodeGetDto> GetCaseDetial(Guid historyId, Guid employeeId);
 
         public Task SendSMS(CaseCompleteDto smsdetail);
+
+
+        public Task<int> ArchiveCase(ArchivedCaseDto archivedCaseDto);
     }
 }

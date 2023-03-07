@@ -203,6 +203,21 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             }
 
         }
+        [HttpGet("getArchivedCases")]
+
+        public async Task<IActionResult> GetArchivedCases()
+        {
+            try
+            {
+                return Ok(await _caseEncodeService.GetArchivedCases());
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
 
 
 

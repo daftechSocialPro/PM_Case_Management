@@ -208,6 +208,23 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         }
 
+        [HttpPost("archive")]
+        public async Task<IActionResult> Archive(ArchivedCaseDto archivedCaseDto)
+        {
+            try
+            {
+                await _caseProcessingService.ArchiveCase(archivedCaseDto);
+                return NoContent();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
+
+
 
 
 

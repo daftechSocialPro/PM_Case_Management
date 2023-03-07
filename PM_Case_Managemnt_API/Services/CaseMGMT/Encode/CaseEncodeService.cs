@@ -90,7 +90,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
         {
             string CaseNumber = "DDC2015-";
 
-            var latestNumber = _dbContext.Cases.OrderByDescending(x => x.CreatedBy).Select(c => c.CaseNumber).FirstOrDefault();
+            var latestNumber = _dbContext.Cases.OrderByDescending(x => x.CreatedAt).Select(c => c.CaseNumber).FirstOrDefault();
 
             if (latestNumber != null)
             {
@@ -274,6 +274,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
 
             List<CaseEncodeGetDto> cases = await _dbContext.Cases.Where(ca => ca.AffairStatus.Equals(AffairStatus.Completed)).Include(p => p.Employee).Include(p => p.CaseType).Include(p => p.Applicant).Select(st => new CaseEncodeGetDto
             {
+
                 Id = st.Id,
                 CaseNumber = st.CaseNumber,
                 LetterNumber = st.LetterNumber,
@@ -284,9 +285,42 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                 ApplicantPhoneNo = st.Applicant.PhoneNumber,
                 EmployeePhoneNo = st.Employee.PhoneNumber,
                 CreatedAt = st.CreatedAt.ToString(),
+                AffairHistoryStatus = st.AffairStatus.ToString()
+
             }).ToListAsync();
 
             return cases;
+
+        }
+
+
+        public async Task<List<CaseEncodeGetDto>> GetArchivedCases()
+        {
+
+
+            List<CaseEncodeGetDto> cases = await _dbContext.Cases.Where(ca => ca.IsArchived).Include(p => p.Employee).Include(p => p.CaseType).Include(p => p.Applicant).Include(x=>x.Folder.Row.Shelf).Select(st => new CaseEncodeGetDto
+            {
+
+                Id = st.Id,
+                CaseNumber = st.CaseNumber,
+                LetterNumber = st.LetterNumber,
+                LetterSubject = st.LetterSubject,
+                CaseTypeName = st.CaseType.CaseTypeTitle,
+                ApplicantName = st.Applicant.ApplicantName,
+                EmployeeName = st.Employee.FullName,
+                ApplicantPhoneNo = st.Applicant.PhoneNumber,
+                EmployeePhoneNo = st.Employee.PhoneNumber,
+                CreatedAt = st.CreatedAt.ToString(),
+                AffairHistoryStatus = st.AffairStatus.ToString(),
+                FolderName = st.Folder.FolderName,
+                RowNumber = st.Folder.Row.RowNumber,
+                ShelfNumber = st.Folder.Row.Shelf.ShelfNumber
+
+            }).ToListAsync();
+
+            return cases;
+
+
 
         }
 

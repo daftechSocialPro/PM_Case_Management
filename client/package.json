@@ -32,6 +32,8 @@
     "gojs-angular": "^2.0.6",
     "hammerjs": "^2.0.8",
     "jquery": "^3.6.3",
+    "lg-zoom": "^1.3.0",
+    "lightgallery": "^2.7.1",
     "ngx-toastr": "^16.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
