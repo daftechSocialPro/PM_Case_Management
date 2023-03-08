@@ -18,7 +18,9 @@ export class PlanService {
         return this.http.post(this.BaseURI, plan)
     }
 
-    getPlans (){
+    getPlans (programId ?: string){
+        if (programId)
+        return this.http.get<PlanView[]>(this.BaseURI+"?programId="+programId)
         return this.http.get<PlanView[]>(this.BaseURI)
     }
 

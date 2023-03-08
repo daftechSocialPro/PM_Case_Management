@@ -7,7 +7,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Plan
     {
         public Task<int> CreatePlan(PlanDto plan);
 
-        public Task<List<PlanViewDto>> GetPlans();
+        public Task<List<PlanViewDto>> GetPlans(Guid? programId);
 
         public Task<PlanSingleViewDto> GetSinglePlan(Guid planId);
         //public Task<int> UpdatePrograms(Programs Programs);

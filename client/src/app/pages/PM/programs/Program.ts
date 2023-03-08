@@ -1,9 +1,15 @@
 export interface Program {
+    Id : string,
 
     ProgramName: string ;     
     ProgramPlannedBudget:Number;
     ProgramBudgetYear:string ;
-    ProgramStructures :ProgramStructure[];
+
+    RemainingBudget:number
+
+    RemainingWeight :number
+
+    ProgramStructure :ProgramStructure[];
     NumberOfProjects: Number;
     Remark:string;
     

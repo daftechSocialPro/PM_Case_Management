@@ -52,7 +52,7 @@
                      <span class="card-title"> Planned Budegt :</span>
                      {{plan.PlandBudget}} ETB &nbsp;
                      <span class="card-title"> Remaining Budegt : </span>
-                     {{plan.PlandBudget}} ETB <br />
+                     {{plan.RemainingBudget}} ETB <br />
                      <div class="mt-2">
 
                      </div>
@@ -72,11 +72,11 @@
                   <div class="row">
                      <div class="col-lg-6">
                         Tasks: {{plan.NumberOfTask}} &nbsp;&nbsp;
-                        Actvities : {{plan.NumberOfTask}}
+                        Actvities : {{plan.NumberOfActivities}}
 
                      </div>
                      <div class="col-lg-6" style="text-align: right!important;">
-                        {{plan.PlanWeight}} %
+                        Weight : {{plan.PlanWeight}} %
                      </div>
                   </div>
 
@@ -87,7 +87,9 @@
 
                   <div class="progress mt-3">
                      <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-                        style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                     
+                     [ngStyle]="applyStyles(plan.NumberOfActivities,plan.NumberOfTaskCompleted)"
+                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                </div>
             </div>

@@ -97,14 +97,14 @@
 
                                 <div class="col-md-4">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="PlanWeight"
-                                            placeholder="PlanWeight" formControlName="PlanWeight">
+                                        <input type="number" class="form-control" id="PlanWeight" #weight
+                                            placeholder="PlanWeight" (change)="weightChange(weight.value)" formControlName="PlanWeight">
                                         <label for="PlanWeight">Plan Weight</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" [min]="0"   #budget (change)="CheckBudget(budget.value)" id="PlandBudget"
+                                        <input type="number" class="form-control" [min]="0"   #budget (change)="budgetChange(budget.value)" id="PlandBudget"
                                             placeholder="PlannedBudget" formControlName="PlandBudget">
                                         <label for="PlandBudget">Planned Budget</label>
                                     </div>
@@ -159,13 +159,13 @@
 
                         </div>
 
-                        <div class="modal-body" *ngIf="program">
+                        <div class="modal-body" style="color:#012970b8" *ngIf="program">
                              
                            <div class="card-title text-center">{{program.ProgramName!}}</div>
-                           <div class="text-center">{{program.ProgramBudgetYear!}}</div> 
-                           <span> Planned Budget : {{program.ProgramPlannedBudget!}}</span> <br/>
-                           <span> Remaining Budget : {{program.ProgramPlannedBudget!}}</span> 
-                            
+                           <div>{{program.ProgramBudgetYear!}}</div> 
+                           <span> Planned Budget : {{program.ProgramPlannedBudget!}} ETB</span> <br/>
+                           <span> Remai.. Budget : {{program.RemainingBudget!}} ETB</span> 
+                           <span> Remaining Weight : {{program.RemainingWeight!}} %</span> 
                           
                         </div>
                     </div>

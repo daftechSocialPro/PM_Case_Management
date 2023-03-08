@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProgramService } from '../programs/programs.services';
@@ -14,19 +14,25 @@ import { PlanView } from './plans';
 })
 export class PlansComponent implements OnInit {
 
+  programId!: string;
   Plans: PlanView[] = []
   constructor(
     private modalService: NgbModal,
     private planService: PlanService,
-    private router: Router) { }
+    private router: Router,
+    private activeRoute: ActivatedRoute) { }
+
+
   ngOnInit(): void {
+
+    this.programId = this.activeRoute.snapshot.paramMap.get('programId')!
 
     this.listPlans()
   }
 
   listPlans() {
 
-    this.planService.getPlans().subscribe({
+    this.planService.getPlans(this.programId).subscribe({
       next: (res) => {
         console.log("projects", res)
         this.Plans = res
@@ -52,8 +58,15 @@ export class PlansComponent implements OnInit {
   tasks(plan: PlanView) {
 
     const planId = plan ? plan.Id : null
-    this.router.navigate(['task',{planId:planId}])
-  
+    this.router.navigate(['task', { planId: planId }])
+
+  }
+
+  applyStyles(act: number, completed: number) {
+
+    let percentage = (completed / act) * 100
+    const styles = { 'width': percentage + "%" };
+    return styles;
   }
 
 }

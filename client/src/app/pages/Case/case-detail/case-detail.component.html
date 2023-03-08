@@ -17,30 +17,42 @@
             <div class="col-lg-4">
 
 
-                  <div class="card-body">
-                   <h5 class="card-title">Attachments</h5>
-                   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                     <div class="carousel-indicators"> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button></div>
+               <div class="card-body">
+                  <h5 class="card-title">Attachments</h5>
+                  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                     <div class="carousel-indicators"> <button type="button" data-bs-target="#carouselExampleIndicators"
+                           data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                           aria-label="Slide 2"></button> <button type="button"
+                           data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                           aria-label="Slide 3"></button></div>
                      <div class="carousel-inner">
-                    
+
                         <lightgallery [settings]="settings" [onBeforeSlide]="onBeforeSlide">
-                     
-                        <a *ngFor="let att of caseDetail.Attachments; let i = index"  [href]="getImage(att.Name)" [class]="i==0 ? 'carousel-item active': 'carousel-item'"  > 
-                              
-                           <img [alt]="caseDetail.Attachments[0].Id" width="100%" class="d-block w-100 " style="height:500px ;"  [src]="getImage(att.Name)" />
-                                             </a>
+
+                           <a *ngFor="let att of caseDetail.Attachments; let i = index" [href]="getImage(att.Name)"
+                              [class]="i==0 ? 'carousel-item active': 'carousel-item'">
+
+                              <img [alt]="caseDetail.Attachments[0].Id" width="100%" class="d-block w-100 "
+                                 style="height:500px ;" [src]="getImage(att.Name)" />
+                           </a>
 
                         </lightgallery>
-              
+
 
 
                      </div>
-                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span> </button> <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </button>
+                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+                           class="visually-hidden">Previous</span> </button> <button class="carousel-control-next"
+                        type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"> <span
+                           class="carousel-control-next-icon" aria-hidden="true"></span> <span
+                           class="visually-hidden">Next</span> </button>
                   </div>
-             
-                  </div>
-             
-             
+
+               </div>
+
+
             </div>
             <div class="col-lg-8 box">
 
@@ -60,12 +72,14 @@
                <div>
 
                </div>
-               <div class="buttons" *ngIf="caseDetail.ToEmployee.toLowerCase() == user.FullName.toLowerCase() && caseDetail.ReciverType != 'Cc'">
+               <div class="buttons"
+                  *ngIf="caseDetail.ToEmployee.toLowerCase() == user.FullName.toLowerCase() && caseDetail.ReciverType != 'Cc'">
                   <button type="button" (click)="AddtoWaiting()" class="btn btn-outline-danger m-2">Add to
                      Waiting</button>
                   <button type="button" (click)="TransferCase()" class="btn btn-outline-info m-2">Transfer</button>
                   <button type="button" (click)="CompleteCase()" class="btn btn-outline-success m-2">Complete</button>
-                  <button type="button" (click)="Appointment()" class="btn btn-outline-primary m-2">Make Appointment</button>
+                  <button type="button" (click)="Appointment()" class="btn btn-outline-primary m-2">Make
+                     Appointment</button>
                   <button type="button" (click)="Revert()" class="btn btn-outline-warning m-2">Revert</button>
                   <button type="button" (click)="SendSMS()" class="btn btn-outline-secondary m-2">Send SMS</button>
                </div>
@@ -83,17 +97,17 @@
                            <td>{{casestructures.FromEmployee}}</td>
                            <td>{{casestructures.FormStructure}}</td>
                            <td> {{casestructures.SeenDate | date:'fullDate'}}</td>
-   
+
                         </tr>
-   
+
                      </tbody>
                   </table>
-   
+
                </div>
-              
+
 
             </div>
-           
+
 
 
          </div>

@@ -45,14 +45,14 @@ namespace PM_Case_Managemnt_API.DTOS.PM
     {
         public Guid Id { get; set; }
         public string PlanName { get; set; }
-        public float PlanWeight { get; set; }
+        public float? PlanWeight { get; set; }
 
         public float RemainingWeight { get; set; }
         public float PlannedBudget { get; set; }
         public float RemainingBudget { get; set; }
-        public DateTime StartDate { get; set; }
+        public string StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public string EndDate { get; set; }
 
         public List<TaskVIewDto> Tasks { get; set; }
 
