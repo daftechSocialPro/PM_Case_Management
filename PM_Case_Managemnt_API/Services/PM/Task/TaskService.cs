@@ -112,13 +112,13 @@ namespace PM_Case_Managemnt_API.Services.PM
                                             EmployeeId = y.EmployeeId.ToString(),
 
                                         }).ToList(),
-                                        MonthPerformance = _dBContext.ActivityTargetDivisions.Where(x => x.ActivityId == e.Id).OrderBy(x=>x.Order).Select(y => new MonthPerformanceViewDto                                     
+                                        MonthPerformance = _dBContext.ActivityTargetDivisions.Where(x => x.ActivityId == e.Id).OrderBy(x => x.Order).Select(y => new MonthPerformanceViewDto
                                         {
                                             Id = y.Id,
                                             Order = y.Order,
                                             Planned = y.Target,
                                             Actual = 0,
-                                            Percentage = (0)*100
+                                            Percentage = (0) * 100
 
                                         }).ToList()
 
@@ -127,8 +127,7 @@ namespace PM_Case_Managemnt_API.Services.PM
                                     ).ToList();
 
 
-
-
+          
 
             return (from t in task
                     select new TaskVIewDto
@@ -138,7 +137,14 @@ namespace PM_Case_Managemnt_API.Services.PM
                         TaskName = t.TaskDescription,
                         TaskMembers = taskMembers,
                         TaskMemos = taskMemos,
-                        ActivityViewDtos = activityViewDtos
+                        PlannedBudget = t.PlanedBudget,
+                        RemainingBudget = t.PlanedBudget - activityViewDtos.Sum(x => x.PlannedBudget),
+                        ActivityViewDtos = activityViewDtos,
+                        TaskWeight = activityViewDtos.Sum(x => x.Weight),
+                        RemianingWeight = 100 - activityViewDtos.Sum(x => x.Weight),
+                        NumberofActivities =  _dBContext.Activities.Include(x=>x.ActivityParent).Count(x=>x.TaskId == t.Id || x.ActivityParent.TaskId== t.Id )
+
+
 
 
                     }).FirstOrDefault();

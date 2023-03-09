@@ -55,4 +55,9 @@ export class TasksComponent implements OnInit {
     const taskId = task ? task.Id :null
     this.router.navigate(['activityparent',{taskId}])
   }
+  hh(value:string){
+
+    alert(value)
+
+  }
 }

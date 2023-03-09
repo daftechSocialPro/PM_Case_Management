@@ -66,7 +66,13 @@ namespace PM_Case_Managemnt_API.DTOS.PM
 
         public float? TaskWeight { get; set; }
 
+        public float RemianingWeight { get; set; }
+
         public int NumberofActivities { get; set; }
+
+        public int NumberOfFinalized { get; set; }
+
+        public int NumberOfTerminated { get; set; }
 
         public int FinishedActivitiesNo { get; set; }
 
@@ -86,6 +92,7 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public bool HasActivity { get; set; }
 
         public float PlannedBudget { get; set; }
+        public float RemainingBudget { get; set; }
 
 
     }

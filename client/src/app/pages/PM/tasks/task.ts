@@ -14,18 +14,26 @@ export interface TaskView {
 
     Id?: String
     TaskName?: String
-    TaskWeight?: Number
-    NumberofActivities?: Number
-    FinishedActivitiesNo?: Number
-    TerminatedActivitiesNo?: Number
+    TaskWeight?: number
+    RemianingWeight?: number
+    NumberofActivities?: number
+    FinishedActivitiesNo?: number
+    TerminatedActivitiesNo?: number
     StartDate?: Date
     EndDate?: Date
-    NumberOfMembers?: Number
+    NumberOfMembers?: number
     HasActivity?: Boolean
-    PlannedBudget?: Number
+    PlannedBudget?: number
+    RemainingBudget?: number
+
+    NumberOfFinalized?: number
+
+    NumberOfTerminated?: number
+
+
     TaskMembers?: SelectList[]
-    TaskMemos?:TaskMemoView[]
-    ActivityViewDtos ?:ActivityView[]
+    TaskMemos?: TaskMemoView[]
+    ActivityViewDtos?: ActivityView[]
 
 }
 export interface TaskMembers {
@@ -37,13 +45,13 @@ export interface TaskMembers {
 }
 
 
-export interface TaskMemoView{
-    Employee : SelectList
-    Description: String 
-    DateTime:string
+export interface TaskMemoView {
+    Employee: SelectList
+    Description: String
+    DateTime: string
 }
-export interface TaskMemo{
-    EmployeeId:String,
-    Description:String,
-    TaskId :String
+export interface TaskMemo {
+    EmployeeId: String,
+    Description: String,
+    TaskId: String
 }

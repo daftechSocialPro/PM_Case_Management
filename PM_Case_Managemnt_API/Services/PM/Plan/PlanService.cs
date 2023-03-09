@@ -86,16 +86,24 @@ namespace PM_Case_Managemnt_API.Services.PM.Plan
                             Id= t.Id,
                             TaskName = t.TaskDescription,
                             TaskWeight = t.Weight,
-                            NumberofActivities =0,
+                           
                             FinishedActivitiesNo= 0,
                             TerminatedActivitiesNo= 0,
-                            StartDate= DateTime.Now,
-                            EndDate= DateTime.Now,
+                            StartDate= t.ShouldStartPeriod??DateTime.Now,
+                            EndDate=t.ShouldEnd??DateTime.Now,
                             NumberOfMembers= 0,
                             HasActivity= t.HasActivityParent,
-                            PlannedBudget  = t.PlanedBudget
+                            PlannedBudget  = t.PlanedBudget,
+                         
+                            RemianingWeight = 100 - _dBContext.Activities.Sum(x => x.Weight),
+                            NumberofActivities = _dBContext.Activities.Include(x => x.ActivityParent).Count(x => x.TaskId == t.Id || x.ActivityParent.TaskId == t.Id),
+                            NumberOfFinalized = _dBContext.Activities.Include(x => x.ActivityParent).Count(x => x.Status == Status.Finalized && ( x.TaskId == t.Id || x.ActivityParent.TaskId == t.Id)),
+                            NumberOfTerminated = _dBContext.Activities.Include(x => x.ActivityParent).Count(x => x.Status == Status.Terminated &&( x.TaskId == t.Id || x.ActivityParent.TaskId == t.Id))
+
                         }).ToList();
 
+            float taskBudgetsum = tasks.Sum(x => x.PlannedBudget);
+            float taskweightSum = tasks.Sum(x => x.TaskWeight ?? 0); 
 
      
                 return await( from p in _dBContext.Plans.Where(x=>x.Id == planId)
@@ -105,8 +113,8 @@ namespace PM_Case_Managemnt_API.Services.PM.Plan
                            PlanName = p.PlanName,
                            PlanWeight = p.PlanWeight,
                            PlannedBudget = p.PlandBudget,
-                           RemainingBudget = p.PlandBudget - tasks.Sum(x=>x.PlannedBudget),
-                           RemainingWeight = float.Parse( (100.0 - tasks.Sum(x=>x.TaskWeight)).ToString()),
+                           RemainingBudget = p.PlandBudget - taskBudgetsum,
+                           RemainingWeight = float.Parse( (100.0 - taskweightSum).ToString()),
                            EndDate = p.PeriodEndAt.ToString(),
                            StartDate = p.PeriodStartAt.ToString(),
                            Tasks = tasks

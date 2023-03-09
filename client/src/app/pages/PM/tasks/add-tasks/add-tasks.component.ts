@@ -34,7 +34,7 @@ export class AddTasksComponent {
     this.taskForm = this.formBuilder.group({
       TaskDescription:['',Validators.required],
       HasActvity: [false, Validators.required],
-      PlannedBudget:[0,Validators.required]
+      PlannedBudget:['',[Validators.required,Validators.max(this.plan.RemainingBudget)]]
 
     })
   
@@ -87,6 +87,10 @@ export class AddTasksComponent {
         }
       })
     }
+
+  }
+
+  checkBudget(budget:string){
 
   }
 

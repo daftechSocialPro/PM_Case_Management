@@ -51,10 +51,10 @@ export class AddPlansComponent implements OnInit {
       PlanName: ['', Validators.required],
       BudgetYearId: ['', Validators.required],
       StructureId: ['', Validators.required],
-      ProgramId: ['', Validators.required],
-      PlanWeight: ['', Validators.required],
+      ProgramId: ['', Validators.required,],
+      PlanWeight: [0, [Validators.required,Validators.max(this.program?.RemainingWeight)]],
       HasTask: [false, Validators.required],
-      PlandBudget: ['', Validators.required],
+      PlandBudget: [0, [Validators.required,Validators.max(this.program?.RemainingBudget)]],
       ProjectType: ['', Validators.required],
       Remark: ['']
 
