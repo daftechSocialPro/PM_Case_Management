@@ -19,6 +19,7 @@ export interface ActivityView {
     IsFinance: boolean
     IsProjectManager: boolean
     IsDirector: boolean
+    OverAllProgress:number
 
 
 }

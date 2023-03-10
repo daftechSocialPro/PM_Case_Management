@@ -25,6 +25,9 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
 
 
         public Task<int> ApproveProgress(ApprovalProgressDto approvalProgressDto);
+
+
+        public Task<List<ActivityAttachmentDto>> getAttachemnts(Guid taskId);
         
     }
 }

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { ActivityDetailDto } from './activity-parents/add-activities/add-activities';
 import { ComiteeAdd, CommiteeAddEmployeeView, CommitteeView } from './comittes/committee';
+import { IActivityAttachment } from './tasks/Iactivity';
 import { ActivityTargetDivisionDto, ActivityView, ApprovalProgressDto, ViewProgressDto } from './view-activties/activityview';
 
 
@@ -81,5 +82,11 @@ export class PMService {
         return this.http.post(this.BaseURI+"/Activity/approve",approvalProgressDto)
     }
 
+    
+  getActivityAttachments (taskId : string ){
+
+    return this.http.get<IActivityAttachment[]>(this.BaseURI+"/Activity/getActivityAttachments?taskId="+taskId)
+    
+  }
 
 }

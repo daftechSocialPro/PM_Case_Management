@@ -91,9 +91,10 @@ namespace PM_Case_Managemnt_API.Services.PM.Plan
                             TerminatedActivitiesNo= 0,
                             StartDate= t.ShouldStartPeriod??DateTime.Now,
                             EndDate=t.ShouldEnd??DateTime.Now,
-                            NumberOfMembers= 0,
+                           
                             HasActivity= t.HasActivityParent,
                             PlannedBudget  = t.PlanedBudget,
+                            NumberOfMembers = _dBContext.TaskMembers.Count(x=>x.TaskId == t.Id),
                          
                             RemianingWeight = 100 - _dBContext.Activities.Sum(x => x.Weight),
                             NumberofActivities = _dBContext.Activities.Include(x => x.ActivityParent).Count(x => x.TaskId == t.Id || x.ActivityParent.TaskId == t.Id),
@@ -117,6 +118,8 @@ namespace PM_Case_Managemnt_API.Services.PM.Plan
                            RemainingWeight = float.Parse( (100.0 - taskweightSum).ToString()),
                            EndDate = p.PeriodEndAt.ToString(),
                            StartDate = p.PeriodStartAt.ToString(),
+                          
+
                            Tasks = tasks
 
                        }).FirstOrDefaultAsync();

@@ -335,7 +335,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
             List<ActivityViewDto> actDtos = new List<ActivityViewDto>();
 
 
-
+            var activityProgress = _dBContext.ActivityProgresses.ToList();
             foreach (var activitprogress in not)
             {
 
@@ -343,7 +343,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                                             // join ae in _dBContext.EmployeesAssignedForActivities.Include(x=>x.Employee) on e.Id equals ae.ActivityId
                                         select new ActivityViewDto
                                         {
-                                            Id = e.Activity.Id,
+                                            Id = e.ActivityId,
                                             Name = e.Activity.ActivityDescription,
                                             PlannedBudget = e.Activity.PlanedBudget,
                                             ActivityType = e.Activity.ActivityType.ToString(),
@@ -367,10 +367,12 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                                                 Id = y.Id,
                                                 Order = y.Order,
                                                 Planned = y.Target,
-                                                Actual = 0,
-                                                Percentage = (0) * 100
+                                                Actual = activityProgress.Where(x => x.QuarterId == y.Id).Sum(x => x.ActualWorked),
+                                                Percentage = y.Target != 0 ? (activityProgress.Where(x => x.QuarterId == y.Id && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) / y.Target) * 100 : 0
+
 
                                             }).ToList(),
+                                            OverAllProgress = activityProgress.Where(x=>x.ActivityId == e.ActivityId && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x=>x.ActualWorked) * 100 /e.Activity.Goal,
 
                                             ProgresscreatedAt = e.CreatedAt.ToString(),
                                             IsFinance = e.Activity.Plan.FinanceId == employeeId || e.Activity.Task.Plan.FinanceId == employeeId || e.Activity.ActivityParent.Task.Plan.FinanceId == employeeId ? true : false,
@@ -399,19 +401,19 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
             var progress = _dBContext.ActivityProgresses.Find(approvalProgressDto.progressId);
             if (progress != null)
             {
-                if (approvalProgressDto.userType== "Director")
+                if (approvalProgressDto.userType == "Director")
                 {
                     progress.DirectorApprovalRemark = approvalProgressDto.Remark;
-                    if (approvalProgressDto.actiontype== "Accept")
+                    if (approvalProgressDto.actiontype == "Accept")
                     {
                         progress.IsApprovedByDirector = approvalStatus.approved;
-                        
+
                     }
                     else
                     {
                         progress.IsApprovedByDirector = approvalStatus.rejected;
                     }
-                   
+
 
                 }
                 if (approvalProgressDto.userType == "Project Manager")
@@ -441,11 +443,38 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                     }
                 }
 
-                
+
                 _dBContext.SaveChanges();
-               
+
             }
-                return 1;
+            return 1;
+        }
+
+        public async Task<List<ActivityAttachmentDto>> getAttachemnts(Guid taskId)
+        {
+
+
+            var response = await (from x in _dBContext.ProgressAttachments.Include(x => x.ActivityProgress.Activity.ActivityParent).Where(x => x.ActivityProgress.Activity.TaskId == taskId || x.ActivityProgress.Activity.ActivityParent.TaskId == taskId)
+                                  select new ActivityAttachmentDto
+                                  {
+                                      ActivityDesctiption = x.ActivityProgress.Activity.ActivityDescription,
+                                      FilePath = x.FilePath,
+                                      FileType = "Attachments"
+                                  }).ToListAsync();
+
+
+            response.AddRange(
+                await (from x in _dBContext.ActivityProgresses.Include(x => x.Activity.ActivityParent).Where(x => x.Activity.TaskId == taskId || x.Activity.ActivityParent.TaskId == taskId)
+                       select new ActivityAttachmentDto
+                       {
+                           ActivityDesctiption = x.Activity.ActivityDescription,
+                           FilePath = x.FinanceDocumentPath,
+                           FileType = "Finance"
+                       }).ToListAsync()
+                       );
+
+            return response;
+
         }
     }
 }

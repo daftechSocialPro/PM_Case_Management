@@ -76,6 +76,12 @@ export class ViewActivtiesComponent implements OnInit {
 
   }
 
+  applyStyles(value: number){
+
+    let percentage = value
+    const styles = { 'width': percentage + "%" };
+    return styles;
+  }
 
 
 

@@ -47,8 +47,8 @@
 
                   <i class="bi bi-list-check"></i> {{task.NumberofActivities}} Actvities
                   &nbsp;&nbsp;
-                  {{task.NumberOfFinalized}}<span class="badge bg-success">Finalized</span>&nbsp;&nbsp;
-                  {{task.NumberOfTerminated}} <span class="badge bg-danger">Terminated</span>
+                  {{task.NumberOfFinalized}} &nbsp;<span class="badge bg-success"> Finalized</span>&nbsp;&nbsp;
+                  {{task.NumberOfTerminated}} &nbsp; <span class="badge bg-danger"> Terminated</span>
 
                </div>
                <div class="card-footer">
@@ -81,13 +81,14 @@
                   <h5 class="modal-title">Tips</h5>
                </div>
 
-               <div class="modal-body" *ngIf="plan" style="background-color: #f6f9ff;">
+               <div class="modal-body" *ngIf="plan" >
                   <div class="card-title text-center">{{plan.PlanName!}}</div>
                   <!-- <div class="text-center">{{plan?.ProgramBudgetYear}}</div>  -->
 
                   <div class=" text-center" *ngIf="plan.Tasks.length>0">
                      <span class="card-title">{{plan.StartDate|date:"MMMM d, YYYY"}}</span> - <span class="card-title">{{plan.StartDate|date:"MMMM d, YYYY"}}</span>
                   </div>
+                  
                   <div class="text-center">
                      <span class="card-title"> Planned Budget : {{plan.PlannedBudget!}} ETB</span> <br />
                      <span class="card-title"> Remaining Budget : {{plan.RemainingBudget!}} ETB</span> <br />

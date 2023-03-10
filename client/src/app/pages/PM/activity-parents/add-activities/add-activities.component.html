@@ -156,7 +156,7 @@
                             <h5 class="modal-title">Tips</h5>
                         </div>
 
-                        <div class="modal-body" *ngIf="task" style="background-color: #f6f9ff;">
+                        <div class="modal-body" *ngIf="task" >
                             <div class="card-title text-center">{{task.TaskName!}}</div>
                             <div class="text-center">
                                 <span  class="card-title"> {{task.StartDate! | date:"MMMM d, YYYY"}} - {{task.EndDate! | date:"MMMM d, YYYY"}} </span> <br />

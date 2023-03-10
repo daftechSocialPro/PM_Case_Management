@@ -78,11 +78,13 @@ namespace PM_Case_Managemnt_API.DTOS.PM
 
         public int TerminatedActivitiesNo { get; set; }
 
+        public int NumberOfMembers { get; set; }
+
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
 
-        public int NumberOfMembers { get; set; }
+     
 
         public List<SelectListDto> TaskMembers { get; set; }
         public List<TaskMemoDto> TaskMemos { get; set; }

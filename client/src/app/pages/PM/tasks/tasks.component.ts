@@ -4,7 +4,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PlanService } from '../plans/plan.service';
 import { PlanSingleview } from '../plans/plans';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
+import { IActivityAttachment } from './Iactivity';
 import { TaskView } from './task';
+import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-tasks',
@@ -17,11 +19,14 @@ export class TasksComponent implements OnInit {
   plan!: PlanSingleview
   planId: String = ""
 
+  
+
   constructor(
     private planService: PlanService, 
     private route: ActivatedRoute,
     private modalService: NgbModal,
-    private router: Router 
+    private router: Router ,
+   
      ) { }
   ngOnInit(): void {
   

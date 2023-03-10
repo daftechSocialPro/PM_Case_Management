@@ -87,6 +87,7 @@ namespace PM_Case_Managemnt_API.Services.PM
                                  Description = t.Description
 
                              }).ToList();
+            var activityProgress = _dBContext.ActivityProgresses;
 
             var activityViewDtos = (from a in _dBContext.ActivityParents.Where(x => x.TaskId == taskId)
                                     join e in _dBContext.Activities.Include(x => x.UnitOfMeasurement) on a.Id equals e.ActivityParentId
@@ -117,10 +118,11 @@ namespace PM_Case_Managemnt_API.Services.PM
                                             Id = y.Id,
                                             Order = y.Order,
                                             Planned = y.Target,
-                                            Actual = 0,
-                                            Percentage = (0) * 100
+                                            Actual = activityProgress.Where(x => x.QuarterId == y.Id).Sum(x => x.ActualWorked),
+                                            Percentage = y.Target!=0? (activityProgress.Where(x => x.QuarterId == y.Id && x.IsApprovedByDirector==approvalStatus.approved &&x.IsApprovedByFinance==approvalStatus.approved &&x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) / y.Target) * 100:0
 
-                                        }).ToList()
+                                        }).ToList(),
+                                           OverAllProgress = activityProgress.Where(x => x.ActivityId == e.Id && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) * 100 / e.Goal,
 
 
                                     }

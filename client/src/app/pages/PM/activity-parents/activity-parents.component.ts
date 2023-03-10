@@ -9,6 +9,8 @@ import { UserView } from '../../pages-login/user';
 import { UserService } from '../../pages-login/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddActivitiesComponent } from './add-activities/add-activities.component';
+import { IActivityAttachment } from '../tasks/Iactivity';
+import { PMService } from '../pm.services';
 
 
 
@@ -20,21 +22,22 @@ import { AddActivitiesComponent } from './add-activities/add-activities.componen
 })
 export class ActivityParentsComponent implements OnInit {
 
-  @ViewChild('taskMemoDesc') taskMemoDesc! : ElementRef
+  @ViewChild('taskMemoDesc') taskMemoDesc!: ElementRef
   task: TaskView = {};
-  taskId: String = "";
+  taskId: string = "";
   Employees: SelectList[] = [];
   selectedEmployee: SelectList[] = [];
   user!: UserView;
   isUserTaskMember: boolean = false;
   toast!: toastPayload
-
+  attachments !: IActivityAttachment[]
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,
     private userService: UserService,
     private commonService: CommonService,
-    private modalService : NgbModal,
+    private modalService: NgbModal,
+    private pmService: PMService
 
   ) { }
 
@@ -44,6 +47,7 @@ export class ActivityParentsComponent implements OnInit {
     this.getSingleTask();
     this.ListofEmployees();
     this.user = this.userService.getCurrentUser();
+    this.getAttachments()
 
   }
 
@@ -55,6 +59,18 @@ export class ActivityParentsComponent implements OnInit {
 
   }
 
+  getAttachments() {
+
+    this.pmService.getActivityAttachments(this.taskId).subscribe({
+      next: (res) => {
+        this.attachments = res
+        console.log('attachments', res)
+      }, error: (err) => {
+        console.error(err)
+      }
+
+    })
+  }
 
   ListofEmployees() {
 
@@ -188,11 +204,16 @@ export class ActivityParentsComponent implements OnInit {
 
   }
 
-  addActivity(){
+  addActivity() {
 
-    let modalRef = this.modalService.open(AddActivitiesComponent,{size:"xl",backdrop:'static'})
-    modalRef.componentInstance.task  = this.task
+    let modalRef = this.modalService.open(AddActivitiesComponent, { size: "xl", backdrop: 'static' })
+    modalRef.componentInstance.task = this.task
 
+  }
+
+  getFilePath(value: string) {
+
+    return this.commonService.createImgPath(value);
   }
 
 }
