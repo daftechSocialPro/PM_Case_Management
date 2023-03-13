@@ -3,11 +3,12 @@ using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.Models.CaseModel;
+using System.Linq;
 
 namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
 {
 
-    public class CaseTypeService: ICaseTypeService
+    public class CaseTypeService : ICaseTypeService
     {
 
         private readonly DBContext _dbContext;
@@ -31,19 +32,21 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
                     TotlaPayment = caseTypeDto.TotalPayment,
                     Counter = caseTypeDto.Counter,
                     MeasurementUnit = Enum.Parse<TimeMeasurement>(caseTypeDto.MeasurementUnit),
-                    CaseForm = Enum.Parse<CaseForm>(caseTypeDto.CaseForm),
+                    CaseForm = string.IsNullOrEmpty(caseTypeDto.CaseForm) ? _dbContext.CaseTypes.Find(caseTypeDto.ParentCaseTypeId).CaseForm : Enum.Parse<CaseForm>(caseTypeDto.CaseForm),
                     Remark = caseTypeDto.Remark,
                     OrderNumber = caseTypeDto.OrderNumber,
-                    ParentCaseTypeId = null
-            };
-                
+                    ParentCaseTypeId = caseTypeDto.ParentCaseTypeId
+                };
+
                 if (caseTypeDto.ParentCaseTypeId != null)
                     caseType.ParentCaseTypeId = caseTypeDto.ParentCaseTypeId;
 
                 await _dbContext.AddAsync(caseType);
                 await _dbContext.SaveChangesAsync();
 
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
             }
         }
@@ -52,10 +55,11 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
         {
             try
             {
-                List<CaseType> caseTypes = await _dbContext.CaseTypes.Include(p => p.ParentCaseType).ToListAsync();
+                List<CaseType> caseTypes = await _dbContext.CaseTypes.Include(p => p.ParentCaseType).Where(x=>x.ParentCaseTypeId==null).ToListAsync();
                 List<CaseTypeGetDto> result = new();
 
-                foreach (CaseType caseType in caseTypes) { 
+                foreach (CaseType caseType in caseTypes)
+                {
                     result.Add(new CaseTypeGetDto
                     {
                         Id = caseType.Id,
@@ -67,20 +71,35 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
                         Remark = caseType.Remark,
                         RowStatus = caseType.RowStatus.ToString(),
                         TotalPayment = caseType.TotlaPayment,
+                        Children = _dbContext.CaseTypes.Where(x=>x.ParentCaseTypeId == caseType.Id).Select(y=> new CaseTypeGetDto
+                        {
+                            Id = y.Id,
+                            CaseTypeTitle = y.CaseTypeTitle,
+                            Code = y.Code,
+                            CreatedAt = y.CreatedAt.ToString(),
+                            CreatedBy = y.CreatedBy,
+                            MeasurementUnit = y.MeasurementUnit.ToString(),
+                            Remark = y.Remark,
+                            RowStatus = y.RowStatus.ToString(),
+                            TotalPayment = y.TotlaPayment,
+
+                        }).ToList()
                         //ParentCaseType = caseType.ParentCaseType
                     });
                 }
 
                 return result;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<List<SelectListDto>> GetAllByCaseForm(string caseForm )
+        public async Task<List<SelectListDto>> GetAllByCaseForm(string caseForm)
         {
             try
             {
-                List<CaseType> caseTypes = await _dbContext.CaseTypes.Include(p => p.ParentCaseType).Where(x=>x.CaseForm==Enum.Parse<CaseForm>(caseForm)).ToListAsync();
+                List<CaseType> caseTypes = await _dbContext.CaseTypes.Include(p => p.ParentCaseType).Where(x => x.CaseForm == Enum.Parse<CaseForm>(caseForm) && x.ParentCaseTypeId==null).ToListAsync();
                 List<SelectListDto> result = new();
 
                 foreach (CaseType caseType in caseTypes)
@@ -89,8 +108,8 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
                     {
                         Id = caseType.Id,
                         Name = caseType.CaseTypeTitle,
-                      
-                      
+
+
                     });
                 }
 
@@ -109,23 +128,35 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
             return await (from c in _dbContext.CaseTypes
                           select new SelectListDto
                           {
-                              Id= c.Id,
-                              Name= c.CaseTypeTitle
-                              
+                              Id = c.Id,
+                              Name = c.CaseTypeTitle
+
                           }).ToListAsync();
 
         }
-       public async Task<List<SelectListDto>> GetFileSettigs(Guid caseTypeId)
+        public async Task<List<SelectListDto>> GetFileSettigs(Guid caseTypeId)
         {
 
-            return await (from f in _dbContext.FileSettings.Where(x=>x.CaseTypeId == caseTypeId)
+            return await (from f in _dbContext.FileSettings.Where(x => x.CaseTypeId == caseTypeId)
                           select new SelectListDto
                           {
 
                               Id = f.Id,
                               Name = f.FileName
 
-                          } ).ToListAsync();
+                          }).ToListAsync();
+
+        }
+
+        public int GetChildOrder(Guid caseTypeId)
+        {
+
+            var childCases = _dbContext.CaseTypes.Where(x => x.ParentCaseTypeId == caseTypeId).OrderByDescending(x => x.OrderNumber).ToList();
+
+            if (!childCases.Any())
+                return 1;
+            else 
+            return (int)childCases.FirstOrDefault().OrderNumber+1;
 
         }
 

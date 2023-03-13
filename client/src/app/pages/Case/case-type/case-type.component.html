@@ -13,7 +13,82 @@
        <button class="btn btn-primary text-end mb-3" (click)="addCaseType()"> Add Case Type </button>
     </div>
     <section class="section profile">
-      <div class="card p-3"  >
+
+   <div class="card">
+      <p-table [value]="caseTypes" dataKey="Id" [tableStyle]="{'min-width': '60rem'}">
+         <ng-template pTemplate="header">
+             <tr>
+                 <th style="width: 5rem"></th>
+                 <th pSortableColumn="CaseTypeTitle">CaseTypeTitle <p-sortIcon field="CaseTypeTitle"></p-sortIcon></th>
+                 <th pSortableColumn="Remark">Remark <p-sortIcon field="Remark"></p-sortIcon></th>
+                 <th pSortableColumn="TotalPayment">TotalPayment <p-sortIcon field="TotalPayment"></p-sortIcon></th>
+                 <th pSortableColumn="MeasurementUnit">MeasurementUnit <p-sortIcon field="MeasurementUnit"></p-sortIcon></th>
+                 <th pSortableColumn="RowStatus">RowStatus <p-sortIcon field="RowStatus"></p-sortIcon></th>
+                 <th pSortableColumn="Code">Code <p-sortIcon field="Code"></p-sortIcon></th>
+                 <th>Action</th>
+             </tr>
+
+
+
+
+         </ng-template>
+         <ng-template pTemplate="body" let-caset let-expanded="expanded">
+             <tr>
+                 <td>
+                     <button type="button" pButton pRipple [pRowToggler]="caset" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                 </td>
+                 <td>{{caset.CaseTypeTitle}}</td>
+                 <td>{{caset.Remark}}</td>
+                 <td>{{caset.TotalPayment }}</td>
+                 <td>{{caset.MeasurementUnit }}</td>
+                 <td>{{caset.RowStatus }}</td>
+                 <td>{{caset.Code }}</td>
+                 <td><p-button class="p-button-rounded p-button-success mr-2" type="button" icon="pi pi-plus " (click)="AddChild(caset)"> </p-button></td>
+           </tr>
+         </ng-template>
+         <ng-template pTemplate="rowexpansion" let-caset>
+             <tr>
+                 <td colspan="7">
+                     <div class="p-3">
+                         <p-table [value]="caset.Children" dataKey="Id">
+                             <ng-template pTemplate="header">
+                                 <tr>
+                                    <th pSortableColumn="CaseTypeTitle">CaseTypeTitle <p-sortIcon field="CaseTypeTitle"></p-sortIcon></th>
+                                    <th pSortableColumn="Remark">Remark <p-sortIcon field="Remark"></p-sortIcon></th>
+                                    <th pSortableColumn="TotalPayment">TotalPayment <p-sortIcon field="TotalPayment"></p-sortIcon></th>
+                                    <th pSortableColumn="MeasurementUnit">MeasurementUnit <p-sortIcon field="MeasurementUnit"></p-sortIcon></th>
+                                    <th pSortableColumn="RowStatus">RowStatus <p-sortIcon field="RowStatus"></p-sortIcon></th>
+                                    <th pSortableColumn="Code">Code <p-sortIcon field="Code"></p-sortIcon></th>
+                                    <th>Action</th>
+                                     <th style="width: 4rem"></th>
+                                 </tr>
+                             </ng-template>
+                             <ng-template pTemplate="body" let-child>
+                                 <tr>
+                                    <td>{{child.CaseTypeTitle}}</td>
+                                    <td>{{child.Remark}}</td>
+                                    <td>{{child.TotalPayment }}</td>
+                                    <td>{{child.MeasurementUnit }}</td>
+                                    <td>{{child.RowStatus }}</td>
+                                    <td>{{child.Code }}</td>
+
+                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2" ></button>
+                                 </tr>
+                             </ng-template>
+                             <ng-template pTemplate="emptymessage">
+                                 <tr>
+                                     <td colspan="6">There are no Childs for this Case Type yet.</td>
+                                 </tr>
+                             </ng-template>
+                         </p-table>
+                     </div>
+                 </td>
+             </tr>
+         </ng-template>
+     </p-table>
+   </div>
+     
+      <!-- <div class="card p-3"  >
             <table class="table table-hover">
                <thead>
                   <tr>
@@ -46,11 +121,8 @@
             </table>
        
         
-      </div>
+      </div> -->
  
 
-
-        
-      
     </section>
  </main>

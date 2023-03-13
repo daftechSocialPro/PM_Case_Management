@@ -23,6 +23,11 @@ export class CaseService {
         return this.http.get<CaseTypeView[]>(this.BaseURI + "/type")
     }
 
+    getOrderNumber(caseTypeId:string){
+
+        return this.http.get<number>(this.BaseURI+"/GetChildOrder?caseTypeId="+caseTypeId)
+    }
+
     getSelectCasetType() {
         return this.http.get<SelectList[]>(this.BaseURI + "/typeSelectList")
     }
@@ -74,9 +79,7 @@ export class CaseService {
     //notification 
     getCasesNotification(employeeId: string) {
 
-
         return this.http.get<ICaseView[]>(this.BaseURI + "/getnotification?employeeId=" + employeeId)
-
 
     }
 

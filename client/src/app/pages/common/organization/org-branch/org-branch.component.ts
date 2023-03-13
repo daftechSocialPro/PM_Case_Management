@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IndividualConfig } from 'ngx-toastr';
@@ -13,6 +14,10 @@ import { UpdateBranchComponent } from './update-branch/update-branch.component';
   styleUrls: ['./org-branch.component.css'],
 })
 export class OrgBranchComponent implements OnInit {
+ 
+  selectedOrgBranch!: OrganizationBranch;
+
+
   branches: OrganizationBranch[] = [];
   toast!: toastPayload;
   branch!: OrganizationBranch;
@@ -21,7 +26,8 @@ export class OrgBranchComponent implements OnInit {
     private elementRef: ElementRef,
     private orgService: OrganizationService,
     private commonService: CommonService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private http : HttpClient
   ) {
     var s = document.createElement('script');
     s.type = 'text/javascript';
@@ -31,6 +37,9 @@ export class OrgBranchComponent implements OnInit {
 
   ngOnInit(): void {
     this.branchList();
+
+
+
   }
 
   branchList() {
@@ -74,4 +83,23 @@ export class OrgBranchComponent implements OnInit {
       this.branchList();
     });
   }
+}
+export interface Country {
+  name?: string;
+  code?: string;
+}
+
+export interface Representative {
+  name?: string;
+  image?: string;
+}
+
+export interface Customer {
+  id?: number;
+  name?: number;
+  country?: Country;
+  company?: string;
+  date?: string;
+  status?: string;
+  representative?: Representative;
 }

@@ -5,7 +5,7 @@ export interface CaseType {
     TotalPayment: number,
     Counter: number,
     MeasurementUnit: string,
-    CaseForm: string,
+    CaseForm?: string,
     Remark: string,
     CreatedBy: string,
     OrderNumber?: number,
@@ -23,6 +23,7 @@ export interface CaseTypeView {
     MeasurementUnit: string
     CreatedBy: string
     CreatedAt: string
+    Children : CaseTypeView[]
     //ParentCaseType?:string
 }
 

@@ -122,7 +122,10 @@ import { CompletedCasesComponent } from './pages/case/completed-cases/completed-
 import { ArchiveCaseActionComponent } from './pages/case/archivecase/archive-case-action/archive-case-action.component';
 
 import { LightgalleryModule } from 'lightgallery/angular';
-
+import {TableModule} from 'primeng/table';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import { AddCaseChildComponent } from './pages/case/case-type/add-case-child/add-case-child.component';
 
 @NgModule({
   declarations: [
@@ -233,6 +236,7 @@ import { LightgalleryModule } from 'lightgallery/angular';
     AddFolderComponent,
     CompletedCasesComponent,
     ArchiveCaseActionComponent,
+    AddCaseChildComponent,
     
   ],
   imports: [
@@ -244,6 +248,7 @@ import { LightgalleryModule } from 'lightgallery/angular';
     BrowserAnimationsModule,
     NgbModalModule,
     AutocompleteLibModule,
+    
     ToastrModule.forRoot({
       preventDuplicates: true,
     }),
@@ -251,7 +256,11 @@ import { LightgalleryModule } from 'lightgallery/angular';
     LightgalleryModule,
     GojsAngularModule,
     Angular2ImageGalleryModule,
-    HammerModule
+    HammerModule,
+    TableModule,
+    InputTextModule,
+    ButtonModule
+    
   ],
   providers: [
     {

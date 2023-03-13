@@ -372,7 +372,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
 
 
                                             }).ToList(),
-                                            OverAllProgress = activityProgress.Where(x=>x.ActivityId == e.ActivityId && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x=>x.ActualWorked) * 100 /e.Activity.Goal,
+                                           //OverAllProgress = activityProgress.Where(x=>x.ActivityId == e.ActivityId && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x=>x.ActualWorked) * 100 /e.Activity.Goal,
 
                                             ProgresscreatedAt = e.CreatedAt.ToString(),
                                             IsFinance = e.Activity.Plan.FinanceId == employeeId || e.Activity.Task.Plan.FinanceId == employeeId || e.Activity.ActivityParent.Task.Plan.FinanceId == employeeId ? true : false,
