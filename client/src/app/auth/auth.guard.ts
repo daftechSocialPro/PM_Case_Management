@@ -15,7 +15,20 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
     if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != "" ){
-      let roles = next.data['permittedRoles'] as Array<string>;
+      debugger
+      let roles = ['Super Admin',
+      'Employee Manager',
+      'PM Admin',
+      'Planner',
+     ' Plan Reporting',
+      'Case Admin',
+      'Director',
+      'Member',
+      'Secretery',
+      'Encoder']
+      
+      //next.data['permittedRoles'] as Array<string>;
+
       if(roles){
         if(this.service.roleMatch(roles)) return true;
         else{

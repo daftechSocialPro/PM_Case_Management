@@ -51,6 +51,9 @@ export class OrganizationService {
   OrgStructureCreate(OrgStructure: OrganizationalStructure) {
     return this.http.post(this.BaseURI + "/OrgStructure", OrgStructure)
   }
+  orgStructureUpdate(OrgStructure: OrganizationalStructure){
+    return this.http.put(this.BaseURI + "/OrgStructure", OrgStructure)
+  }
 
   getOrgStructureList() {
     return this.http.get<OrganizationalStructure[]>(this.BaseURI + "/OrgStructure")

@@ -81,7 +81,7 @@ export class UpdateStructureComponent {
       }
 
 
-      this.orgService.OrgStructureCreate(orgStruct).subscribe({
+      this.orgService.orgStructureUpdate(orgStruct).subscribe({
 
         next: (res) => {
 

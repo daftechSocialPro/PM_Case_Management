@@ -69,7 +69,7 @@ export class OrgBranchComponent implements OnInit {
     });
 
     modalRef.result.then((result) => {
-      this.branchList;
+      this.branchList();
     });
   }
 

@@ -15,7 +15,8 @@ export class SidebarComponent implements OnInit {
   Activties!: ActivityView[]
   constructor(private router : Router
     ,private pmService: PMService,
-    private userService: UserService
+    private userService: UserService,
+    
 ) {
     
   }
@@ -41,6 +42,14 @@ export class SidebarComponent implements OnInit {
       }
     })
   }
+
+  roleMatch (value : string[]){
+
+return this.userService.roleMatch(value)
+  }
+
+
+
 
 
 
