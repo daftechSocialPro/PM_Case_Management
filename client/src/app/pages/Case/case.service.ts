@@ -121,6 +121,7 @@ export class CaseService {
         
     }
 
+    //actions
     AddtoWaiting(caseHistoryId:string){
 
         return this.http.post(this.BaseURI+"/waiting?caseHistoryId="+caseHistoryId,{})
@@ -147,6 +148,7 @@ export class CaseService {
         return this.http.post<IAppointmentGet>(this.BaseURI+"/appointmetWithCalender",appointment)
     }
 
+    //
     getAppointment (employeeId:string){
 
         return this.http.get<IAppointmentGet[]>(this.BaseURI+"/appointmetWithCalender?employeeId="+employeeId)
@@ -157,6 +159,17 @@ export class CaseService {
         return this.http.get<IUnsentMessage[]>(this.BaseURI+"/CaseMessages")
     }
         
+    //get completed casses to archive 
+
+    getCompletedCases (){
+
+        return this.http.get<ICaseView[]>(this.BaseURI+"/completedList")
+    }
+    
+    archiveCase(archive:any){
+
+        return this.http.post(this.BaseURI+"/archive",archive)
+    }
         
 }
 

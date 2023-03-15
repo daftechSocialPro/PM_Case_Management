@@ -1,8 +1,10 @@
-﻿using PM_Case_Managemnt_API.Models.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using PM_Case_Managemnt_API.Models.Common;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PM_Case_Managemnt_API.Models.CaseModel
 { 
+    [Index(nameof(CaseNumber), IsUnique =true)]
     public class Case : CommonModel
     {
 

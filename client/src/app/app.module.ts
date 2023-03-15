@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -113,6 +113,12 @@ import { MakeAppointmentCaseComponent } from './pages/Case/case-detail/make-appo
 import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.component';
 import { ListOfMessagesComponent } from './pages/case/list-of-messages/list-of-messages.component';
 import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-appointments.component';
+import { ArchivecaseComponent } from './pages/case/archivecase/archivecase.component';
+import { Angular2ImageGalleryModule } from 'angular2-image-gallery';
+import { AddRowComponent } from './pages/common/archive-management/add-row/add-row.component';
+import { AddFolderComponent } from './pages/common/archive-management/add-folder/add-folder.component';
+import { CompletedCasesComponent } from './pages/case/completed-cases/completed-cases.component';
+import { ArchiveCaseActionComponent } from './pages/case/archivecase/archive-case-action/archive-case-action.component';
 import { GojsAngularModule } from 'gojs-angular';
 
 
@@ -224,6 +230,12 @@ import { GojsAngularModule } from 'gojs-angular';
 
     ListOfMessagesComponent,
     CaseAppointmentsComponent,
+    ArchivecaseComponent,
+    AddRowComponent,
+    AddFolderComponent,
+    CompletedCasesComponent,
+    ArchiveCaseActionComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -239,7 +251,9 @@ import { GojsAngularModule } from 'gojs-angular';
 
     }),
     NgbModule,
-   GojsAngularModule,
+    GojsAngularModule,
+    Angular2ImageGalleryModule,
+    HammerModule
   ],
   providers: [
     {

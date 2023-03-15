@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PM_Case_Managemnt_API.Data;
 
 #nullable disable
 
-namespace PMCaseManagemntAPI.Migrations
+namespace PMCaseManagemntAPI.Migrations.DB
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20230306072805_no shelfId folder")]
+    partial class noshelfIdfolder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -650,7 +653,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Property<string>("FolderName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Remark")
                         .HasColumnType("nvarchar(max)");
@@ -664,9 +667,6 @@ namespace PMCaseManagemntAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("RowId");
-
-                    b.HasIndex("FolderName", "RowId")
-                        .IsUnique();
 
                     b.ToTable("Folder");
                 });
@@ -861,7 +861,7 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Property<string>("RowNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RowStatus")
                         .HasColumnType("int");
@@ -872,9 +872,6 @@ namespace PMCaseManagemntAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ShelfId");
-
-                    b.HasIndex("RowNumber", "ShelfId")
-                        .IsUnique();
 
                     b.ToTable("Rows");
                 });
@@ -899,12 +896,9 @@ namespace PMCaseManagemntAPI.Migrations
 
                     b.Property<string>("ShelfNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ShelfNumber")
-                        .IsUnique();
 
                     b.ToTable("Shelf");
                 });
