@@ -9,29 +9,29 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate {
 
 
-  constructor(private router: Router,private service : UserService) {
+  constructor(private router: Router, private service: UserService) {
   }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != "" ){
-      
+    if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != "") {
+
       let roles = ['Super Admin',
-      'Employee Manager',
-      'PM Admin',
-      'Planner',
-     ' Plan Reporting',
-      'Case Admin',
-      'Director',
-      'Member',
-      'Secretery',
-      'Encoder']
-      
+        'Employee Manager',
+        'PM Admin',
+        'Planner',
+        'Plan Reporting',
+        'Case Admin',
+        'Director',
+        'Member',
+        'Secretery',
+        'Encoder']
+
       //next.data['permittedRoles'] as Array<string>;
 
-      if(roles){
-        if(this.service.roleMatch(roles)) return true;
-        else{
+      if (roles) {
+        if (this.service.roleMatch(roles)) return true;
+        else {
           this.router.navigate(['pages-login']);
           return false;
         }
@@ -44,8 +44,8 @@ export class AuthGuard implements CanActivate {
     }
 
   }
-  logout(){
-    sessionStorage.setItem('token',"")
+  logout() {
+    sessionStorage.setItem('token', "")
     window.location.reload()
   }
 }

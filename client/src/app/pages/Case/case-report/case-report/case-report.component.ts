@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CaseService } from '../../case.service';
 import { ICaseReport } from '../ICaseReport';
 
@@ -9,10 +10,21 @@ import { ICaseReport } from '../ICaseReport';
 })
 export class CaseReportComponent implements OnInit {
 
-  caseReports!: ICaseReport[]
-  selectedCaseReport !:ICaseReport 
-  constructor(private caseService: CaseService) {
 
+  data: any;
+
+  chartOptions: any;
+
+  subscription!: Subscription;
+
+  // config: AppConfig;
+
+
+
+
+  caseReports!: ICaseReport[]
+  selectedCaseReport !: ICaseReport
+  constructor(private caseService: CaseService) {
 
 
   }
@@ -26,14 +38,25 @@ export class CaseReportComponent implements OnInit {
         console.error(err)
       }
     })
+
+    this.caseService.getCaseReportChart().subscribe({
+      next: (res) => {
+
+        console.log(res)
+        this.data = res;
+
+      }, error: (err) => {
+        console.error(err)
+      }
+    })
   }
 
-  getChange(elapsTime:string){
+  getChange(elapsTime: string) {
 
 
-    var hours = Math.abs(Date.now() - new Date(elapsTime).getTime() ) / 36e5;
-   
-    return Math.round(hours) ;
+    var hours = Math.abs(Date.now() - new Date(elapsTime).getTime()) / 36e5;
+
+    return Math.round(hours);
   }
 
 

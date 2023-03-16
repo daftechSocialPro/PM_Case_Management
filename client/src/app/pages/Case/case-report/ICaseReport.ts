@@ -12,3 +12,8 @@ export interface ICaseReport {
     CaseCounter: number
     ElapsTime: number
 }
+
+export interface ICaseReportChart {
+    Name : string ; 
+    Value : number ; 
+}
