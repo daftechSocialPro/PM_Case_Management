@@ -40,7 +40,7 @@ namespace PM_Case_Managemnt_API.Services.Common
         }
         public async Task<List<OrganizationBranch>> GetOrganizationBranches()
         {
-            return await _dBContext.OrganizationBranches.Where(x => !x.IsHeadOffice ).Include(x => x.OrganizationProfile).ToListAsync();
+            return await _dBContext.OrganizationBranches.Include(x => x.OrganizationProfile).ToListAsync();
         }
 
         public async Task<List<SelectListDto>> getBranchSelectList()

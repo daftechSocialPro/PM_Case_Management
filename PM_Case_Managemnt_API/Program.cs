@@ -37,6 +37,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
+
+builder.Services.AddCors(policyBuilder =>
+    policyBuilder.AddDefaultPolicy(policy =>
+        policy.WithOrigins("*").AllowAnyHeader().AllowAnyHeader())
+);
+
+
 builder.Services.AddControllers().AddJsonOptions(
     options =>
     {
@@ -73,7 +81,6 @@ builder.Services.Configure<FormOptions>(o =>
 });
 
 
-builder.Services.AddCors();
 builder.Services.AddScoped<IOrganizationProfileService, OrganzationProfileService>();
 builder.Services.AddScoped<IOrgBranchService, OrgBranchService>();
 builder.Services.AddScoped<IOrgStructureService, OrgStructureService>();
@@ -103,6 +110,8 @@ builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IAppointmentWithCalenderService, AppointmentWithCalenderService>();
 builder.Services.AddScoped<IFilesInformationService, FilesInformationService>();
 builder.Services.AddScoped<ICaseProccessingService, CaseProccessingService>();
+builder.Services.AddScoped<ICaseReportService, CaserReportService>();
+
 builder.Services.AddScoped<ISMSHelper, SMSHelper>();
 
 //Jwt Authentication
@@ -134,9 +143,14 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
+app.UseCors(cors =>
+           cors.WithOrigins("*")
+           .AllowAnyHeader()
+           .AllowAnyMethod()
+           );
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PM_Case"));
@@ -144,12 +158,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(cors =>
-           cors.WithOrigins(builder.Configuration["ApplicationSettings:Client_URL"].ToString())
-           .AllowAnyHeader()
-           .AllowAnyMethod()
-
-           );
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
@@ -158,7 +166,7 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseAuthentication();
-
+app.UseDeveloperExceptionPage();
 app.MapControllers();
 
 app.Run();

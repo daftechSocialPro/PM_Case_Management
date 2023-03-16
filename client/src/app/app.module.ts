@@ -126,6 +126,7 @@ import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import { AddCaseChildComponent } from './pages/case/case-type/add-case-child/add-case-child.component';
+import { CaseReportComponent } from './pages/case/case-report/case-report/case-report.component';
 
 @NgModule({
   declarations: [
@@ -237,6 +238,7 @@ import { AddCaseChildComponent } from './pages/case/case-type/add-case-child/add
     CompletedCasesComponent,
     ArchiveCaseActionComponent,
     AddCaseChildComponent,
+    CaseReportComponent,
     
   ],
   imports: [
