@@ -45,14 +45,14 @@ namespace PM_Case_Managemnt_API.DTOS.PM
     {
         public Guid Id { get; set; }
         public string PlanName { get; set; }
-        public float PlanWeight { get; set; }
+        public float? PlanWeight { get; set; }
 
         public float RemainingWeight { get; set; }
         public float PlannedBudget { get; set; }
         public float RemainingBudget { get; set; }
-        public DateTime StartDate { get; set; }
+        public string StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public string EndDate { get; set; }
 
         public List<TaskVIewDto> Tasks { get; set; }
 
@@ -66,17 +66,25 @@ namespace PM_Case_Managemnt_API.DTOS.PM
 
         public float? TaskWeight { get; set; }
 
+        public float RemianingWeight { get; set; }
+
         public int NumberofActivities { get; set; }
+
+        public int NumberOfFinalized { get; set; }
+
+        public int NumberOfTerminated { get; set; }
 
         public int FinishedActivitiesNo { get; set; }
 
         public int TerminatedActivitiesNo { get; set; }
 
+        public int NumberOfMembers { get; set; }
+
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
 
-        public int NumberOfMembers { get; set; }
+     
 
         public List<SelectListDto> TaskMembers { get; set; }
         public List<TaskMemoDto> TaskMemos { get; set; }
@@ -86,6 +94,7 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public bool HasActivity { get; set; }
 
         public float PlannedBudget { get; set; }
+        public float RemainingBudget { get; set; }
 
 
     }

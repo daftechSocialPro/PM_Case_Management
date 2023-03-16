@@ -39,11 +39,11 @@ namespace PM_Case_Managemnt_API.Services.Common.RowService
             }
         }
 
-        public async Task<List<RowGetDto>> GetAll()
+        public async Task<List<RowGetDto>> GetAll( Guid shelfId)
         {
             try
             {
-                return (await _dbContext.Rows.Include(x => x.Shelf).Select(x => new RowGetDto()
+                return (await _dbContext.Rows.Where(x=>x.ShelfId == shelfId).Include(x => x.Shelf).Select(x => new RowGetDto()
                 {
                     Id = x.Id,
                     Remark = x.Remark,

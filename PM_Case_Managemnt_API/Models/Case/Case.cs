@@ -40,6 +40,10 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
 
         public bool SMSStatus { get; set; }
 
+        public Guid? FolderId { get; set; }
+
+        public virtual Folder Folder { get; set; }
+
      
         public virtual ICollection<CaseHistory> CaseHistories { get; set; }
 

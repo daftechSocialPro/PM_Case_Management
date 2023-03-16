@@ -31,7 +31,10 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
                 var folderName = Path.Combine("Assets", "Organization");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 214b25ca8e8fd3b60ff2a8562552775f2627198a
                     if (!Directory.Exists(pathToSave))
                         Directory.CreateDirectory(pathToSave);
 
@@ -100,7 +103,10 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
                     var folderName = Path.Combine("Assets", "Organization");
                     var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 214b25ca8e8fd3b60ff2a8562552775f2627198a
                     if (!Directory.Exists(pathToSave))
                         Directory.CreateDirectory(pathToSave);
 

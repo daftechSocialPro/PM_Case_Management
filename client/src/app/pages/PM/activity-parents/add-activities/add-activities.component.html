@@ -42,6 +42,7 @@
                                         <input type="number" class="form-control" id="PlannedBudget" placeholder="EndDate"
                                             formControlName="PlannedBudget">
                                         <label for="PlannedBudget">Planned Budget</label>
+                                        <small style="color: red;">Remaining Budget : {{task?.RemainingBudget}}</small>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -49,6 +50,7 @@
                                         <input type="number" class="form-control" id="Weight" placeholder="Weight"
                                             formControlName="Weight">
                                         <label for="Weight">Weight</label>
+                                        <small style="color: red;">Remaining Weight : {{task?.RemianingWeight}}</small>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -154,13 +156,13 @@
                             <h5 class="modal-title">Tips</h5>
                         </div>
 
-                        <div class="modal-body" *ngIf="task" style="background-color: #f6f9ff;">
+                        <div class="modal-body" *ngIf="task" >
                             <div class="card-title text-center">{{task.TaskName!}}</div>
                             <div class="text-center">
-                                <span> {{task.StartDate!}} - {{task.EndDate!}} </span> <br />
-                                <span> Task Budget : {{task.PlannedBudget!}} ETB</span> <br />
-                                <span> Remaining Task Budget : 50000 ETB</span> <br />
-                                <span>Remaining Task Weight :{{task.TaskWeight}} %</span>
+                                <span  class="card-title"> {{task.StartDate! | date:"MMMM d, YYYY"}} - {{task.EndDate! | date:"MMMM d, YYYY"}} </span> <br />
+                                <span class="card-title"> Task Budget : {{task.PlannedBudget!}} ETB</span> <br />
+                                <span  class="card-title"> Remaining Task Budget : {{task.RemainingBudget}} ETB</span> <br />
+                                <span class="card-title">Remaining Task Weight :{{task.RemianingWeight}} %</span>
                             </div>
                         </div>
 

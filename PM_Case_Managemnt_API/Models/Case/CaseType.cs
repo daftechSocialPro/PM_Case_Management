@@ -26,7 +26,7 @@ namespace PM_Case_Managemnt_API.Models.CaseModel
         public virtual CaseType ParentCaseType { get; set; } = null!;
         public int? OrderNumber { get; set; }
         public TimeMeasurement MeasurementUnit { get; set; }
-        public CaseForm CaseForm { get; set; }
+        public CaseForm? CaseForm { get; set; }
 
      
         public virtual ICollection<CaseType> Childrens { get; set; }

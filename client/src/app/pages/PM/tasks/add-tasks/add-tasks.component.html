@@ -27,6 +27,8 @@
                                         <input type="number" class="form-control" id="PlannedBudget" placeholder="PlannedBudget"
                                             formControlName="PlannedBudget">
                                         <label for="PlannedBudget">Planned Budget</label>
+
+                                        <small style="color: red;">Remaining Budget : {{plan.RemainingBudget}} ETB </small>
                                     </div>
                                 </div>
 
@@ -56,12 +58,14 @@
 
                         <div class="modal-body" *ngIf="plan" style="background-color: #f6f9ff;">
                             <div class="card-title text-center">{{plan.PlanName!}}</div>
-                            <!-- <div class="text-center">{{plan?.ProgramBudgetYear}}</div>  -->
-                            <div class="text-center">
-                               <span > Planned Budget : {{plan.PlannedBudget!}}</span> <br />
-                               <span > Remaining Budget : {{plan.RemainingBudget!}}</span> <br />
-                               <span > Remaining Weight : {{plan.RemainingBudget!}}</span>
-                            </div>
+                            <div *ngIf="plan.Tasks.length>0">
+                                <span>{{plan.StartDate|date:"MMMM d, YYYY"}}</span> - <span>{{plan.StartDate|date:"MMMM d, YYYY"}}</span>
+                             </div>
+                             <div class="text-center">
+                                <span class="card-title"> Planned Budget : {{plan.PlannedBudget!}} ETB</span> <br />
+                                <span class="card-title"> Remaining Budget : {{plan.RemainingBudget!}} ETB</span> <br />
+                                <span class="card-title"> Remaining Weight : {{plan.RemainingWeight!}} %</span>
+                             </div>
                          </div>
                     </div>
 

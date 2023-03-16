@@ -124,10 +124,10 @@
         <span>
             Activity Overall Performance
         </span>
-        : 25 %
+        : {{actView.OverAllProgress}} %
         <div class="progress mt-3">
             <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-                style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            [ngStyle]="applyStyles(actView.OverAllProgress)"     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <br />
         <i class="bi bi-calendar-check"></i>

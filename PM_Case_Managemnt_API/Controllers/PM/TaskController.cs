@@ -60,9 +60,9 @@ namespace PM_Case_Managemnt_API.Controllers.PM
         [HttpPost("TaskMemo")]
         public IActionResult AddTaskMemo(TaskMemoRequestDto taskMemo)
         {
+
             try
             {
-
                 var response = _taskService.AddTaskMemo(taskMemo);
                 return Ok(new { response });
             }

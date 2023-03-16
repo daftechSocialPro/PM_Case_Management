@@ -15,7 +15,7 @@
     <section class="section profile">
        <div class="row">
 
-         <div class="col-lg-6"*ngFor="let program of Programs" >
+         <div class="col-lg-6"*ngFor="let program of Programs" style="cursor: pointer;" (click)="getProjects(program.Id)" >
         
             <div class="card"  >
                <div class="card-header">{{program.ProgramName}}</div>
@@ -24,8 +24,9 @@
                      
                      {{program.ProgramBudgetYear}}
                   </h5>
+                 
 
-                  <table class="table table-hover">
+                  <table class="table table-bordered mt-2">
                      <thead>
                         <tr>
                            <th scope="col">#</th>
@@ -35,22 +36,19 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr>
-                           <th scope="row">1</th>
-                           <td>Brandon Jacob</td>
-                           <td>Designer</td>
+                        <tr *ngFor="let ps of program.ProgramStructure;let i = index">
+                           <th scope="row">{{i+1}}</th>
+                           <td>{{ps.StructureName}}</td>
+                           <td>{{ps.StructureHead}}</td>
                         
                         </tr>
-                        <tr>
-                           <th scope="row">2</th>
-                           <td>Brandon Jacob</td>
-                           <td>Designer</td>
-                        
-                        </tr>
+                  
                         
                      </tbody>
                   </table>
-                 <span class="card-title"> Planned Budegt : </span>{{program.ProgramPlannedBudget}} <br/>
+
+                  <span class="card-title"> Planned Budegt : {{program.ProgramPlannedBudget}} </span> <br/>
+              
                  {{program.Remark}}
                </div>
                <div class="card-footer"> Projects: {{program.NumberOfProjects}}</div>

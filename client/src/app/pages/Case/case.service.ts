@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { IAppointmentGet, IAppointmentWithCalander } from './case-detail/make-appointment-case/Iappointmentwithcalander';
+import { ICaseReport, ICaseReportChart } from './case-report/ICaseReport';
 import { CaseType, CaseTypeView, FileSettingView } from './case-type/casetype';
 import { ICaseView } from './encode-case/Icase';
 import { IUnsentMessage } from './list-of-messages/Imessage';
@@ -21,6 +22,11 @@ export class CaseService {
     }
     getCaseType() {
         return this.http.get<CaseTypeView[]>(this.BaseURI + "/type")
+    }
+
+    getOrderNumber(caseTypeId:string){
+
+        return this.http.get<number>(this.BaseURI+"/GetChildOrder?caseTypeId="+caseTypeId)
     }
 
     getSelectCasetType() {
@@ -74,9 +80,7 @@ export class CaseService {
     //notification 
     getCasesNotification(employeeId: string) {
 
-
         return this.http.get<ICaseView[]>(this.BaseURI + "/getnotification?employeeId=" + employeeId)
-
 
     }
 
@@ -169,6 +173,23 @@ export class CaseService {
     archiveCase(archive:any){
 
         return this.http.post(this.BaseURI+"/archive",archive)
+    }
+
+    getArchiveCases (){
+
+        return this.http.get<ICaseView[]>(this.BaseURI+"/getArchivedCases")
+    }
+
+
+    ///report 
+
+    getCaseReport (){
+
+        return this.http.get<ICaseReport[]>(this.BaseURI+"/CaseREport/GetCaseReport")
+    }
+
+    getCaseReportChart(){
+        return this.http.get<ICaseReportChart[]>(this.BaseURI+"/CaseReport/GetCasePieChart")
     }
         
 }

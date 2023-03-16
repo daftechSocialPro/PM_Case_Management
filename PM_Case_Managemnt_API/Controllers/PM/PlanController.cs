@@ -36,9 +36,9 @@ namespace PM_Case_Managemnt_API.Controllers.PM
 
         [HttpGet]
 
-        public async Task<List<PlanViewDto>> Getplan()
+        public async Task<List<PlanViewDto>> Getplan(Guid? programId)
         {
-            var response = await _planService.GetPlans();
+            var response = await _planService.GetPlans(programId);
             return response;
         }
 

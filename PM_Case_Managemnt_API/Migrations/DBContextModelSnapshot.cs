@@ -172,6 +172,9 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Property<Guid?>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("FolderId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsArchived")
                         .HasColumnType("bit");
 
@@ -210,6 +213,8 @@ namespace PMCaseManagemntAPI.Migrations
                     b.HasIndex("CaseTypeId");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("FolderId");
 
                     b.ToTable("Cases");
                 });
@@ -1830,11 +1835,17 @@ namespace PMCaseManagemntAPI.Migrations
                         .WithMany()
                         .HasForeignKey("EmployeeId");
 
+                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Folder", "Folder")
+                        .WithMany()
+                        .HasForeignKey("FolderId");
+
                     b.Navigation("Applicant");
 
                     b.Navigation("CaseType");
 
                     b.Navigation("Employee");
+
+                    b.Navigation("Folder");
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.CaseAttachment", b =>

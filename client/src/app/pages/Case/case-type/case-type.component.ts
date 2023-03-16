@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { CaseService } from '../case.service';
+import { AddCaseChildComponent } from './add-case-child/add-case-child.component';
 import { AddCaseTypeComponent } from './add-case-type/add-case-type.component';
 import { CaseTypeView } from './casetype';
 @Component({
@@ -10,7 +12,7 @@ import { CaseTypeView } from './casetype';
 })
 export class CaseTypeComponent implements OnInit {
 
-  caseTypes!: CaseTypeView[] 
+  caseTypes!: CaseTypeView[]
 
   constructor(private modalService: NgbModal, private caseService: CaseService) { }
 
@@ -21,7 +23,7 @@ export class CaseTypeComponent implements OnInit {
     this.caseService.getCaseType().subscribe({
       next: (res) => {
         this.caseTypes = res
-        console.log('res',res)
+        console.log('res', res)
 
       }, error: (err) => {
 
@@ -33,10 +35,20 @@ export class CaseTypeComponent implements OnInit {
   addCaseType() {
     let modalRef = this.modalService.open(AddCaseTypeComponent, { size: 'lg', backdrop: 'static' })
 
-modalRef.result.then(()=>{
-  this.getCaseTypes()
-})
+    modalRef.result.then(() => {
+      this.getCaseTypes()
+    })
 
+  }
+
+  AddChild(CaseType:CaseTypeView){
+
+    let modalRef = this.modalService.open(AddCaseChildComponent,{size:'lg',backdrop:'static'})
+    modalRef.componentInstance.CaseType = CaseType
+
+    modalRef.result.then(()=>{
+      this.getCaseTypes()
+    })
   }
 
 }

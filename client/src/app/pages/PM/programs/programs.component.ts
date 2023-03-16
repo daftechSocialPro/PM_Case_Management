@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddProgramsComponent } from './add-programs/add-programs.component';
 import { Program } from './Program';
@@ -13,7 +14,10 @@ export class ProgramsComponent implements OnInit {
 
 
   Programs: Program[] = []
-  constructor(private modalService: NgbModal, private programService: ProgramService) { }
+  constructor(
+    private router : Router ,
+    private modalService: NgbModal, 
+    private programService: ProgramService) { }
   ngOnInit(): void {
 
     this.listPrograms()
@@ -24,6 +28,8 @@ export class ProgramsComponent implements OnInit {
     this.programService.getPrograms().subscribe({
       next: (res) => {
         this.Programs = res
+
+        console.log('programs',res)
       },
       error: (err) => {
         console.error(err)
@@ -31,6 +37,12 @@ export class ProgramsComponent implements OnInit {
     })
   }
 
+
+  getProjects(programId: string ){
+
+    this.router.navigate(['plan',{programId:programId}])
+
+  }
 
 
   addProgram() {

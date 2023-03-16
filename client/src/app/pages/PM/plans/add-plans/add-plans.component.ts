@@ -51,10 +51,10 @@ export class AddPlansComponent implements OnInit {
       PlanName: ['', Validators.required],
       BudgetYearId: ['', Validators.required],
       StructureId: ['', Validators.required],
-      ProgramId: ['', Validators.required],
-      PlanWeight: [0, Validators.required],
+      ProgramId: ['', Validators.required,],
+      PlanWeight: [0, [Validators.required,Validators.max(this.program?.RemainingWeight)]],
       HasTask: [false, Validators.required],
-      PlandBudget: [0, Validators.required],
+      PlandBudget: [0, [Validators.required,Validators.max(this.program?.RemainingBudget)]],
       ProjectType: ['', Validators.required],
       Remark: ['']
 
@@ -188,7 +188,7 @@ export class AddPlansComponent implements OnInit {
         HasTask: this.planForm.value.HasTask,
         PlanName: this.planForm.value.PlanName,
         PlanWeight: this.planForm.value.PlanWeight,
-        PlandBudget: this.planForm.value.ProgramPlannedBudget,
+        PlandBudget: this.planForm.value.PlandBudget,
         ProgramId: this.planForm.value.ProgramId,
         ProjectType: this.planForm.value.ProjectType,
         Remark: this.planForm.value.Remark,
@@ -245,28 +245,55 @@ export class AddPlansComponent implements OnInit {
     })
   }
 
-  CheckBudget(budget: string) {
-
-    if (Number(budget) > this.program?.ProgramPlannedBudget) {
-
-      this.toast = {
-        message: "Plan budget greater than Remaining Budget  ",
-        title: 'Budget Error.',
-        type: 'error',
-        ic: {
-          timeOut: 2500,
-          closeButton: true,
-        } as IndividualConfig,
-      };
-      this.commonService.showToast(this.toast);
-    }
-
-    this.planForm.value.PlandBudget = this.program?.ProgramPlannedBudget
-
-
-  }
+  
   closeModal() {
     this.activeModal.close();
+  }
+
+
+
+  weightChange(weight:string){
+
+    if (this.program){
+      if ( Number(weight)>this.program.RemainingWeight){
+
+        this.toast = {
+          message: "Weight can not be greater than Remaining weight",
+          title: 'Form Validation.',
+          type: 'error',
+          ic: {
+            timeOut: 2500,
+            closeButton: true,
+          } as IndividualConfig,
+        };
+        this.commonService.showToast(this.toast);
+
+        this.planForm.controls['PlanWeight'].setValue('')
+      }
+    }
+  }
+
+
+  
+  budgetChange(budget:string){
+
+    if (this.program){
+      if ( Number(budget)>this.program.RemainingBudget){
+
+        this.toast = {
+          message: "Budget can not be greater than Remaining Budget",
+          title: 'Form Validation.',
+          type: 'error',
+          ic: {
+            timeOut: 2500,
+            closeButton: true,
+          } as IndividualConfig,
+        };
+        this.commonService.showToast(this.toast);
+
+        this.planForm.controls['PlandBudget'].setValue('')
+      }
+    }
   }
 
 } 

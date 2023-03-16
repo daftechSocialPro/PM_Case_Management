@@ -25,8 +25,6 @@ export class AddActivitiesComponent implements OnInit {
   user !: UserView;
   committees: SelectList[] = [];
   unitMeasurments: SelectList[] = [];
-
-
   toast!: toastPayload
 
 
@@ -46,14 +44,14 @@ export class AddActivitiesComponent implements OnInit {
       StartDate: ['', Validators.required],
       EndDate: ['', Validators.required],
       ActivityDescription: ['', Validators.required],
-      PlannedBudget: [0, Validators.required],
-      Weight: [0, Validators.required],
+      PlannedBudget: ['', [Validators.required,Validators.max(this.task?.RemainingBudget!)]],
+      Weight: ['', [Validators.required,Validators.max(this.task?.RemianingWeight!)]],
       ActivityType: [''],
       OfficeWork: [0, Validators.required],
       FieldWork: [0, Validators.required],
       UnitOfMeasurement: ['', Validators.required],
-      PreviousPerformance: [0, Validators.required],
-      Goal: [0, Validators.required],
+      PreviousPerformance: [0, [Validators.required,Validators.max(100),Validators.min(0)]],
+      Goal: [0,[Validators.required,Validators.max(100),Validators.min(0)]],
       WhomToAssign: [''],
       TeamId: [null],
       CommiteeId: [null],

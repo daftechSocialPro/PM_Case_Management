@@ -28,9 +28,9 @@ export interface PlanView {
     Director: string,
     StructureName: String,
     ProjectType: String,
-    NumberOfTask: String,
-    NumberOfActivities: String,
-    NumberOfTaskCompleted: String,
+    NumberOfTask: number,
+    NumberOfActivities: number,
+    NumberOfTaskCompleted: number,
     HasTask:Number,
 
 
@@ -40,10 +40,10 @@ export interface PlanView {
 export interface PlanSingleview {
     Id:String,
     PlanName:String,
-    PlanWeight:String,
-    RemainingWeight:String,
-    PlannedBudget:String,
-    RemainingBudget:String,
+    PlanWeight:number,
+    RemainingWeight:number,
+    PlannedBudget:number,
+    RemainingBudget:number,
     StartDate:Date,
     EndDate:Date
     Tasks :TaskView[]

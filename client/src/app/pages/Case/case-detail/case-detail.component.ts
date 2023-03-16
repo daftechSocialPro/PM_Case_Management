@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BeforeSlideDetail } from 'lightgallery/lg-events';
 import { IndividualConfig } from 'ngx-toastr';
 import { CommonService, toastPayload } from 'src/app/common/common.service';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
@@ -12,7 +13,7 @@ import { CompleteCaseComponent } from './complete-case/complete-case.component';
 import { MakeAppointmentCaseComponent } from './make-appointment-case/make-appointment-case.component';
 import { SendSmsComponent } from './send-sms/send-sms.component';
 import { TransferCaseComponent } from './transfer-case/transfer-case.component';
-
+import lgZoom from 'lightgallery/plugins/zoom';
 
 @Component({
   selector: 'app-case-detail',
@@ -21,7 +22,14 @@ import { TransferCaseComponent } from './transfer-case/transfer-case.component';
 })
 export class CaseDetailComponent implements OnInit {
 
-
+  settings = {
+    counter: false,
+    plugins: [lgZoom]
+  };
+  onBeforeSlide = (detail: BeforeSlideDetail): void => {
+    const { index, prevIndex } = detail;
+    console.log(index, prevIndex);
+  };
 
   caseHistoryId!: string
   user!: UserView
@@ -180,6 +188,11 @@ export class CaseDetailComponent implements OnInit {
       backdrop: 'static',
     });
     modalRef.componentInstance.historyId = this.caseHistoryId;
+  }
+
+  getImage (value:string){
+
+    return this.commonService.createImgPath(value)
   }
 
 

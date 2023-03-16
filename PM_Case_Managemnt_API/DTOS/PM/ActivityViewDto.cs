@@ -21,7 +21,7 @@ namespace PM_Case_Managemnt_API.DTOS.PM
 
         public List<MonthPerformanceViewDto>? MonthPerformance { get; set; } = null!;
 
-
+        public float OverAllProgress { get; set; }
         public string? ProgresscreatedAt { get; set; }
         public bool IsFinance { get; set; }
         public bool IsProjectManager { get; set; }
@@ -119,6 +119,17 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public Guid createdBy { get; set; }
 
     }
+
+    public class ActivityAttachmentDto
+    {
+
+        public string FilePath { get; set; }
+
+        public string FileType { get; set; }
+
+        public string ActivityDesctiption { get; set; }
+    }
+
 
 
 }

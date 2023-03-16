@@ -82,6 +82,13 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public string ? Position { get; set; }
         public bool? IsSMSSent { get; set; }
 
+
+        public string ? FolderName { get; set; }
+
+        public string ? RowNumber { get; set; }
+
+        public string ? ShelfNumber { get; set; }
+
         public List<SelectListDto> ? Attachments { get; set; } 
         
         public List<CaseDetailStructureDto>? CaseDetailStructures { get; set; }
@@ -107,5 +114,13 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public bool? SMSStatus { get; set; }
         public Guid CreatedBy { get; set; }
         public string? Remark { get; set; }
+    }
+
+
+    public class ArchivedCaseDto
+    {
+
+        public Guid CaseId { get; set; }
+        public Guid FolderId { get; set; }
     }
 }

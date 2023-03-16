@@ -190,6 +190,14 @@ namespace PM_Case_Managemnt_API.Controllers.PM
             }
         }
 
+        [HttpGet("getActivityAttachments")]
+        public async Task<List<ActivityAttachmentDto>> GetActivityAtachments(Guid taskId)
+        {
+           
+                return await _activityService.getAttachemnts(taskId);
+             
+          
+        }
 
     }
 }
