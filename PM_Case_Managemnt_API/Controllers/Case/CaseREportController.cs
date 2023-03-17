@@ -68,5 +68,37 @@ namespace PM_Case_Managemnt_API.Controllers.Case
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        [HttpGet("GetCaseEmployeePerformace")]
+
+        public async Task<IActionResult> GetCaseEmployeePerformace(string? key)
+        {
+            try
+            {
+                return Ok(await _caserReportService.GetCaseEmployeePerformace(key));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpGet("GetSMSReport")]
+
+        public async Task<IActionResult> GetSMSReport(string? startAt, string? endAt)
+        {
+
+            try
+            {
+
+                return Ok(await _caserReportService.GetSMSReport(startAt, endAt));
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        
     }
 }

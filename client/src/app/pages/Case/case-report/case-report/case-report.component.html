@@ -11,58 +11,71 @@
     </div>
 
     <section class="section profile">
-                        <div class="card p-2 col-4">
-                
-                
-                                <form [formGroup]="serachForm"  (submit)="Search()" >
-                                    <div class="d-flex justify-content-center ">
-                                        <div class="form-floating me-2">
-                                            <input type="text" class="form-control startDate" formControlName="startDate" id="startDate"
-                                                placeholder="startDate">
-                                            <label for="startDate">Start Date</label>
-                                        </div>
-                                        <div class="form-floating me-2">
-                                            <input type="text" class="form-control endDate" formControlName="endDate" id="endDate"
-                                                placeholder="endDate">
-                                            <label for="endDate">End Date</label>
-                                        </div>
-                    
-                    
-                                        <button pButton type="submit"  icon="pi pi-search"
-                                            class="p-button-text bg-success text-white"></button>
-                    
-                                    </div>
-                                </form>
-                    
-                    
+        <div class="card">
+
+        </div>
+
+        <div class="row">
+            <div class="col-8">
+
+
+
+                <div class="row">
+
+                    <div class="col-6">
+                        <div class="card">
+                            <p-chart type="doughnut" [data]="data" [style]="{'width': '100%'}">
+                            </p-chart>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-6">
+                        <div class="card">
+
+
+                            <p-chart type="doughnut" [data]="data2" [style]="{'width': '100%'}">
+                            </p-chart>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+            <div class="col-4">
+                <div class="card p-2">
+
+
+                    <form [formGroup]="serachForm" (submit)="Search()">
+                        <div class="d-flex justify-content-center ">
+                            <div class="form-floating me-2">
+                                <input type="text" class="form-control startDate" formControlName="startDate"
+                                    id="startDate" placeholder="startDate">
+                                <label for="startDate">Start Date</label>
                             </div>
-               
-                       
-              
-                                <div class="card col-8">
-                        
-                                        <div class="row">
-                                            
-                                           
-                                            <div class="col-5">
-                                                <p-chart type="doughnut" [data]="data" [style]="{'width': '100%'}">
-                                                </p-chart>
-                            
-                            
-                                            </div>
-                            
-                                            <div class="col-3">
-                                                <p-chart type="doughnut" [data]="data2" [style]="{'width': '100%'}">
-                                                </p-chart>
-                            
-                            
-                                            </div>
-                                           
-                                        </div>
-                            
-                                    </div>
-     
-       
+                            <div class="form-floating me-2">
+                                <input type="text" class="form-control endDate" formControlName="endDate" id="endDate"
+                                    placeholder="endDate">
+                                <label for="endDate">End Date</label>
+                            </div>
+
+
+                            <button pButton type="submit" icon="pi pi-search"
+                                class="p-button-text bg-success text-white"></button>
+
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
 
 
 

@@ -118,13 +118,13 @@
                                           class="bi bi-circle"></i><span>Case Report</span> </a></li>
                         <li *ngIf="roleMatch(['Super Admin','Director','Case Admin'])"> <a routerLink="/casedetailreport"> <i
                                           class="bi bi-circle"></i><span>Case Detail Report</span> </a> </li>
-                        <li *ngIf="roleMatch(['Super Admin','Director','Case Admin','Member','Secretery','Employee Manager','Encoder'])"> <a routerLink="/alerts"> <i
+                        <li *ngIf="roleMatch(['Super Admin','Director','Case Admin','Member','Secretery','Employee Manager','Encoder'])"> <a routerLink="/empperformance"> <i
                                           class="bi bi-circle"></i><span>Performance Report</span> </a>
 
 
                         </li>
 
-                        <li *ngIf="roleMatch(['Super Admin','Director','Case Admin','Secretery'])"> <a routerLink="/listmessages"> <i
+                        <li *ngIf="roleMatch(['Super Admin','Director','Case Admin','Secretery'])"> <a routerLink="/smsreport"> <i
                                           class="bi bi-circle"></i><span> SMS Report
                                           </span> </a></li>
 
