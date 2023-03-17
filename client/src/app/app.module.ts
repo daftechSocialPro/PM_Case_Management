@@ -127,10 +127,13 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import { AddCaseChildComponent } from './pages/case/case-type/add-case-child/add-case-child.component';
 import { CaseReportComponent } from './pages/case/case-report/case-report/case-report.component';
+import { CaseDetailReportComponent } from './pages/Case/case-report/case-detail-report/case-detail-report.component';
 
 import {ChartModule} from 'primeng/chart';
 import { EmployeePerformanceComponent } from './pages/case/case-report/employee-performance/employee-performance.component';
 import { SmsReportComponent } from './pages/case/case-report/sms-report/sms-report.component';
+//
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -244,6 +247,8 @@ import { SmsReportComponent } from './pages/case/case-report/sms-report/sms-repo
     CaseReportComponent,
     EmployeePerformanceComponent,
     SmsReportComponent,
+    CaseDetailReportComponent,
+   
     
   ],
   imports: [
