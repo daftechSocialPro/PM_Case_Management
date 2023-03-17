@@ -77,6 +77,26 @@ namespace PM_Case_Managemnt_API.DTOS.Case
     }
 
 
+    public class CaseDetailReportDto
+    {
+     public string CaseNumber { get; set; }
+     public string ApplicantName { get; set;}
+
+     public string LetterNumber { get; set;}
+
+     public string Subject { get; set; }    
+
+     public string CaseTypeTitle { get; set;}
+
+     public string CaseTypeStatus { get; set; }
+
+    public string PhoneNumber { get; set; }
+
+    public string Createdat { get; set; }
+
+    }
+
+
     public enum PerformanceStatus
     {
         OverPlan,

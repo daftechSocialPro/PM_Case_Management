@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { IAppointmentGet, IAppointmentWithCalander } from './case-detail/make-appointment-case/Iappointmentwithcalander';
+import { ICaseDetailReport } from './case-report/case-detail-report/Icasedetail';
 import { IEmployeePerformance } from './case-report/employee-performance/IEmployeePerformance';
 import { ICaseReport, ICaseReportChart } from './case-report/ICaseReport';
 import { ISMSReport } from './case-report/sms-report/ISMSReport';
@@ -206,6 +207,9 @@ export class CaseService {
     GetSMSReport (startAt?:string ,endAt?:string){
 
         return this.http.get<ISMSReport[]>(this.BaseURI+"/CaseReport/GetSMSReport?startAt="+startAt+"&endAt="+endAt)
+    }
+    GetCaseDetailReport(){
+        return this.http.get<ICaseDetailReport[]>(this.BaseURI+"/CaseReport/GetCaseDetail")
     }
         
 }

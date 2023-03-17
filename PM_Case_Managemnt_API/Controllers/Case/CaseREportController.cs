@@ -99,6 +99,19 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             }
         }
 
-        
+        [HttpGet("GetCaseDetail")]
+        public async Task<IActionResult> GetCaseDetail(string? key)
+        {
+
+            try
+            {
+                return Ok(await _caserReportService.GetCaseDetail(key));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
     }
 }

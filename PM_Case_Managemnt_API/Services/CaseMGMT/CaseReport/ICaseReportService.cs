@@ -13,5 +13,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
 
         public Task<List<SMSReportDto>> GetSMSReport(string? startAt, string? endAt);
 
+        public Task<List<CaseDetailReportDto>> GetCaseDetail(string key);
+
     }
 }

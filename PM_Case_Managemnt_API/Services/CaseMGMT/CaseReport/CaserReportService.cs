@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.Case;
 using PM_Case_Managemnt_API.DTOS.Common;
@@ -345,6 +346,48 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
             return AffairMessages;
         }
 
+
+        public async Task<List<CaseDetailReportDto>> GetCaseDetail(string key)
+        {
+
+            if (string.IsNullOrEmpty(key))
+            {
+                key = "";
+            }
+
+            var result = new List<CaseDetailReportDto>();
+            var affairs = _dbContext.Cases.Where(x => x.Applicant.ApplicantName.Contains(key)
+                                                 || x.CaseNumber.Contains(key)
+                                                 || x.LetterNumber.Contains(key)
+                                                 || x.Applicant.PhoneNumber.Contains(key))
+                                                 .Include(a => a.Applicant)
+                                                 .Include(a => a.Employee)
+                                                 .Include(a => a.CaseType)
+                                                 .Select(y => new CaseDetailReportDto
+                                                 {
+                                                     CaseNumber = y.CaseNumber,
+                                                     ApplicantName = y.Applicant.ApplicantName + y.Employee.FullName,
+                                                     LetterNumber = y.LetterNumber,
+                                                     Subject = y.LetterSubject,
+                                                     PhoneNumber = y.PhoneNumber2+"/"+y.Applicant.PhoneNumber+y.Employee.PhoneNumber,
+                                                     CaseTypeTitle = y.CaseType.CaseTypeTitle,
+                                                     CaseTypeStatus = y.AffairStatus.ToString(),
+                                                     Createdat = y.CreatedAt.ToString()
+
+                                                 })
+                                                 .ToList();
+
+            affairs.OrderByDescending(x => x.CaseNumber).ToList().ForEach(af =>
+            {
+                var afano = af.CaseNumber;
+            });
+
+
+
+            var result2 = affairs.OrderByDescending(x => x.CaseNumber).ToList();
+
+            return result2;
+        }
 
 
     }
