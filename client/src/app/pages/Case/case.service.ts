@@ -183,13 +183,18 @@ export class CaseService {
 
     ///report 
 
-    getCaseReport (){
+    GetCaseReport (startAt?:string, endAt?:string){
 
-        return this.http.get<ICaseReport[]>(this.BaseURI+"/CaseREport/GetCaseReport")
+        return this.http.get<ICaseReport[]>(this.BaseURI+"/CaseREport/GetCaseReport?startAt="+startAt+"&endAt="+endAt)
     }
 
-    getCaseReportChart(){
-        return this.http.get<ICaseReportChart[]>(this.BaseURI+"/CaseReport/GetCasePieChart")
+    GetCaseReportChart(startAt?:string, endAt?:string){
+        return this.http.get<ICaseReportChart>(this.BaseURI+"/CaseReport/GetCasePieChart?startAt="+startAt+"&endAt="+endAt)
+    }
+
+    GetCaseReportChartByStatus (startAt?:string, endAt?:string) {
+
+        return this.http.get<ICaseReportChart>(this.BaseURI+"/CaseReport/GetCasePieChartByStatus?startAt="+startAt+"&endAt="+endAt)
     }
         
 }
