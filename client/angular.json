@@ -32,7 +32,8 @@
             ],
             "scripts": [
               "src/assets/js/main.js",
-              "./node_modules/jquery/dist/jquery.min.js"
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/chart.js/dist/chart.js"
             ]            
           },
           "configurations": {

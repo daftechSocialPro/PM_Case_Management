@@ -129,6 +129,7 @@ import { AddCaseChildComponent } from './pages/case/case-type/add-case-child/add
 import { CaseReportComponent } from './pages/case/case-report/case-report/case-report.component';
 import { CaseDetailReportComponent } from './pages/Case/case-report/case-detail-report/case-detail-report.component';
 
+import {ChartModule} from 'primeng/chart';
 @NgModule({
   declarations: [
     AppComponent,
@@ -263,7 +264,8 @@ import { CaseDetailReportComponent } from './pages/Case/case-report/case-detail-
     HammerModule,
     TableModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    ChartModule
     
   ],
   providers: [
