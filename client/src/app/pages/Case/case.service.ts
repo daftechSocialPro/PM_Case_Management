@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { IAppointmentGet, IAppointmentWithCalander } from './case-detail/make-appointment-case/Iappointmentwithcalander';
+import { IEmployeePerformance } from './case-report/employee-performance/IEmployeePerformance';
 import { ICaseReport, ICaseReportChart } from './case-report/ICaseReport';
+import { ISMSReport } from './case-report/sms-report/ISMSReport';
 import { CaseType, CaseTypeView, FileSettingView } from './case-type/casetype';
 import { ICaseView } from './encode-case/Icase';
 import { IUnsentMessage } from './list-of-messages/Imessage';
@@ -195,6 +197,15 @@ export class CaseService {
     GetCaseReportChartByStatus (startAt?:string, endAt?:string) {
 
         return this.http.get<ICaseReportChart>(this.BaseURI+"/CaseReport/GetCasePieChartByStatus?startAt="+startAt+"&endAt="+endAt)
+    }
+
+    GetCaseEmployeePerformace(key: string){
+        return this.http.get<IEmployeePerformance[]>(this.BaseURI+"/CaseReport/GetCaseEmployeePerformace?key="+key)
+    }
+
+    GetSMSReport (startAt?:string ,endAt?:string){
+
+        return this.http.get<ISMSReport[]>(this.BaseURI+"/CaseReport/GetSMSReport?startAt="+startAt+"&endAt="+endAt)
     }
         
 }

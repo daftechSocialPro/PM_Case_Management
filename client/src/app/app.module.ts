@@ -129,6 +129,8 @@ import { AddCaseChildComponent } from './pages/case/case-type/add-case-child/add
 import { CaseReportComponent } from './pages/case/case-report/case-report/case-report.component';
 
 import {ChartModule} from 'primeng/chart';
+import { EmployeePerformanceComponent } from './pages/case/case-report/employee-performance/employee-performance.component';
+import { SmsReportComponent } from './pages/case/case-report/sms-report/sms-report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -240,6 +242,8 @@ import {ChartModule} from 'primeng/chart';
     ArchiveCaseActionComponent,
     AddCaseChildComponent,
     CaseReportComponent,
+    EmployeePerformanceComponent,
+    SmsReportComponent,
     
   ],
   imports: [

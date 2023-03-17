@@ -60,6 +60,8 @@ import { ListOfMessagesComponent } from './pages/case/list-of-messages/list-of-m
 import { ArchivecaseComponent } from './pages/case/archivecase/archivecase.component';
 import { CompletedCasesComponent } from './pages/case/completed-cases/completed-cases.component';
 import { CaseReportComponent } from './pages/case/case-report/case-report/case-report.component';
+import { EmployeePerformanceComponent } from './pages/case/case-report/employee-performance/employee-performance.component';
+import { SmsReportComponent } from './pages/case/case-report/sms-report/sms-report.component';
 
 
 
@@ -97,6 +99,8 @@ const routes: Routes = [
 
 //report 
 { path: 'casereport', canActivate:[AuthGuard],component: CaseReportComponent},
+{ path: 'empperformance', canActivate:[AuthGuard], component: EmployeePerformanceComponent },
+{ path: 'smsreport', canActivate:[AuthGuard], component : SmsReportComponent},
 
 
 
