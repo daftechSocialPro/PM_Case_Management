@@ -130,6 +130,7 @@ import { CaseReportComponent } from './pages/case/case-report/case-report/case-r
 import { CaseDetailReportComponent } from './pages/Case/case-report/case-detail-report/case-detail-report.component';
 
 import {ChartModule} from 'primeng/chart';
+import { DetailReportComponent } from './pages/Case/case-report/case-detail-report/detail-report/detail-report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -242,6 +243,7 @@ import {ChartModule} from 'primeng/chart';
     AddCaseChildComponent,
     CaseReportComponent,
     CaseDetailReportComponent,
+    DetailReportComponent,
     
   ],
   imports: [
