@@ -1,4 +1,6 @@
 ﻿using PM_Case_Managemnt_API.Models.CaseModel;
+using PM_Case_Managemnt_API.Models.Common;
+using PM_Case_Managemnt_API.Models.PM;
 using System.Data;
 
 namespace PM_Case_Managemnt_API.DTOS.Case
@@ -79,22 +81,62 @@ namespace PM_Case_Managemnt_API.DTOS.Case
 
     public class CaseDetailReportDto
     {
-     public string CaseNumber { get; set; }
-     public string ApplicantName { get; set;}
 
-     public string LetterNumber { get; set;}
+        public Guid Id { get; set; }
+        public string CaseNumber { get; set; }
+        public string ApplicantName { get; set; }
 
-     public string Subject { get; set; }    
+        public string LetterNumber { get; set; }
 
-     public string CaseTypeTitle { get; set;}
+        public string Subject { get; set; }
 
-     public string CaseTypeStatus { get; set; }
+        public string CaseTypeTitle { get; set; }
 
-    public string PhoneNumber { get; set; }
+        public string CaseTypeStatus { get; set; }
 
-    public string Createdat { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public string Createdat { get; set; }
+        public float CaseCounter { get; set; }
 
     }
+
+
+
+    public class CaseProgressReportDto
+    {
+        public string CaseTypeTitle { get; set; }
+        public string ApplicationDate { get; set; }
+        public string ApplicantName { get; set; }
+        public string CaseNumber { get; set; }
+        public string LetterNumber { get; set; }
+        public string LetterSubject { get; set; }
+
+        public List<CaseProgressReportHistoryDto> HistoryProgress { get; set; }
+
+
+
+    }
+
+    public class CaseProgressReportHistoryDto
+    {
+        public string FromEmployee { get; set; }
+        public string ToEmployee { get; set; }
+        public string CreatedDate { get; set; }
+        public string Seenat { get; set; }
+        public string Status { get; set; }
+        public string StatusDateTime { get; set; }
+        public string ShouldTake { get; set; }
+        public string ElapsedTime { get; set; }
+        public string ElapseTimeBasedOnSeenTime { get; set; }
+        public string EmployeeStatus { get; set; }
+
+    }
+
+
+
+
+
 
 
     public enum PerformanceStatus

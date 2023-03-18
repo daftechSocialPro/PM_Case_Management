@@ -365,12 +365,14 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                                                  .Include(a => a.CaseType)
                                                  .Select(y => new CaseDetailReportDto
                                                  {
+                                                     Id = y.Id,
                                                      CaseNumber = y.CaseNumber,
                                                      ApplicantName = y.Applicant.ApplicantName + y.Employee.FullName,
                                                      LetterNumber = y.LetterNumber,
                                                      Subject = y.LetterSubject,
-                                                     PhoneNumber = y.PhoneNumber2+"/"+y.Applicant.PhoneNumber+y.Employee.PhoneNumber,
+                                                     PhoneNumber = y.PhoneNumber2 + "/" + y.Applicant.PhoneNumber + y.Employee.PhoneNumber,
                                                      CaseTypeTitle = y.CaseType.CaseTypeTitle,
+                                                     CaseCounter = y.CaseType.Counter,
                                                      CaseTypeStatus = y.AffairStatus.ToString(),
                                                      Createdat = y.CreatedAt.ToString()
 
@@ -388,6 +390,84 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
 
             return result2;
         }
+
+
+        public async Task<CaseProgressReportDto> GetCaseProgress(Guid caseId)
+        {
+
+            var cases = _dbContext.Cases.Include(x => x.CaseType).Include(x => x.Employee).Include(x => x.Applicant).Where(x => x.Id == caseId);
+            var casetype = _dbContext.CaseTypes.Where(x => x.ParentCaseTypeId == cases.FirstOrDefault().CaseTypeId).ToList();
+            var result = await (from c in cases
+                                select new CaseProgressReportDto
+                                {
+                                    CaseNumber = c.CaseNumber,
+                                    CaseTypeTitle = c.CaseType.CaseTypeTitle,
+                                    ApplicationDate = c.CreatedAt.ToString(),
+                                    ApplicantName = c.Applicant.ApplicantName + c.Employee.FullName,
+                                    LetterNumber = c.LetterNumber,
+                                    LetterSubject = c.LetterSubject,
+                                    HistoryProgress = _dbContext.CaseHistories.Include(x => x.FromEmployee).Include(x => x.ToEmployee).Where(x => x.CaseId == caseId).Select(y => new CaseProgressReportHistoryDto
+                                    {
+                                        FromEmployee = y.FromEmployee.FullName,
+                                        ToEmployee = y.ToEmployee.FullName,
+                                        CreatedDate = y.CreatedAt.ToString(),
+                                        Seenat = y.SeenDateTime.ToString(),
+                                        StatusDateTime = y.AffairHistoryStatus.ToString() + " ( " + y.ReciverType + " )",
+                                        ShouldTake = y.AffairHistoryStatus == AffairHistoryStatus.Seen ? y.SeenDateTime.ToString() :
+                                                     y.AffairHistoryStatus == AffairHistoryStatus.Transfered ? y.TransferedDateTime.ToString() :
+                                                     y.AffairHistoryStatus == AffairHistoryStatus.Completed ? y.CompletedDateTime.ToString() :
+                                                     y.AffairHistoryStatus == AffairHistoryStatus.Revert ? y.RevertedAt.ToString() : "",
+                                        ElapsedTime = getElapsedTIme(y.childOrder, casetype),
+                                        ElapseTimeBasedOnSeenTime = "",
+                                        EmployeeStatus = ""
+
+
+                                    }).ToList()
+
+
+                                }).FirstOrDefaultAsync();
+
+            return result;
+
+
+        }
+
+
+
+
+
+      static  public string getElapsedTIme(int childOrder,List<CaseType> affairTypes)
+        {
+
+          
+
+            var co = (float)0;
+
+            foreach (var childaffair in affairTypes)
+            {
+                int childcount = childOrder;
+
+                if (childaffair.OrderNumber == childcount+1)
+                {
+                    var c = childaffair.Counter;
+                    co = childaffair.Counter;
+                    if (c >= 60)
+                    {
+                        c = c / 60;
+                        return c.ToString() + "Hr.";
+                    }
+                    else
+                    {
+                        return c.ToString() + "min";
+                    }
+
+                }
+            }
+            return "";
+        }
+
+
+
 
 
     }

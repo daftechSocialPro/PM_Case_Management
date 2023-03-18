@@ -57,7 +57,7 @@
                                 </th>
                                 <th pSortableColumn="CaseTypeStatus">Case Status<p-sortIcon field="CaseTypeStatus"></p-sortIcon>
                                 </th>
-                                <th pSortableColumn=""></th>
+                                <th pSortableColumn="">Action</th>
                             </tr>
 
 
@@ -95,11 +95,19 @@
                                 </td>
                                 <td>
                                     <span class="p-column-title">Case Type Status</span>
-                                    <span>{{caseD.CaseTypeStatus}}</span>
+                                    <span *ngIf="caseD.CaseTypeStatus=='Completed'" class="badge bg-success"
+                                    style="font-size: 12px">{{ caseD.CaseTypeStatus}}
+                                    {{getChange(caseD.Createdat)}} Hr.</span>
+                                <span *ngIf="getChange(caseD.Createdat) > caseD.CaseCounter"
+                                    class="badge bg-danger" style="font-size: 12px">{{ caseD.CaseTypeStatus}}
+                                    {{getChange(caseD.Createdat)}} Hr.</span>
+                                <span *ngIf="getChange(caseD.Createdat) <= caseD.CaseCounter"
+                                    class="badge bg-danger" style="font-size: 12px">{{ caseD.CaseTypeStatus}}
+                                    {{getChange(caseD.Createdat)}} Hr.</span>
                                 </td>
                                 <td>
                                     <span class="p-column-title">Action</span>
-                                    <button pButton pRipple class="p-button-rounded p-button-warning mr-2" (click)="detail()">...</button>
+                                    <button pButton pRipple class="p-button p-button-sm p-button-info mr-2 "  icon="pi pi-ellipsis-h" (click)="detail(caseD.Id)"></button>
 
                                 </td>
                             </tr>

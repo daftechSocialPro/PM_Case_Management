@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { IAppointmentGet, IAppointmentWithCalander } from './case-detail/make-appointment-case/Iappointmentwithcalander';
-import { ICaseDetailReport } from './case-report/case-detail-report/Icasedetail';
+import { ICaseDetailReport, ICaseProgressReport } from './case-report/case-detail-report/Icasedetail';
 import { IEmployeePerformance } from './case-report/employee-performance/IEmployeePerformance';
 import { ICaseReport, ICaseReportChart } from './case-report/ICaseReport';
 import { ISMSReport } from './case-report/sms-report/ISMSReport';
@@ -210,6 +210,10 @@ export class CaseService {
     }
     GetCaseDetailReport(){
         return this.http.get<ICaseDetailReport[]>(this.BaseURI+"/CaseReport/GetCaseDetail")
+    }
+    GetProgresReport (caseId:String){
+
+        return this.http.get<ICaseProgressReport> (this.BaseURI+"/CaseReport/GetCaseDetailProgress?caseId="+caseId)
     }
         
 }

@@ -214,6 +214,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                     Remark = "",
                     CaseId = selectedHistory.CaseId,
                     ReciverType = ReciverType.Orginal,
+                    childOrder = selectedHistory.childOrder += 1,
                 };
 
 
@@ -265,7 +266,9 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                     Remark = caseTransferDto.Remark,
                     CaseId = currentLastHistory.CaseId,
                     ReciverType = ReciverType.Orginal,
-                    CaseTypeId = currentLastHistory.CaseTypeId//must be change
+                    CaseTypeId = currentLastHistory.CaseTypeId,
+                    childOrder = currentLastHistory.childOrder+1
+                    //must be change
                 };
 
 

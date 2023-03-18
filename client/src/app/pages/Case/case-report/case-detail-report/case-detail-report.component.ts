@@ -36,7 +36,15 @@ export class CaseDetailReportComponent implements OnInit {
 
   }
 
-  detail() {
+  detail(caseId : string) {
     let modalRef = this.modalService.open(DetailReportComponent, { size: "xl", backdrop: "static" })
+    modalRef.componentInstance.CaseId = caseId
+  }
+
+  getChange(elapsTime: string) {
+    var hours = Math.abs(Date.now() - new Date(elapsTime).getTime()) / 36e5;
+   // alert(hours)
+    
+    return Math.round(hours);
   }
 }

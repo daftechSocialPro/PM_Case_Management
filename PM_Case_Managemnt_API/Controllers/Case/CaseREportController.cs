@@ -111,7 +111,28 @@ namespace PM_Case_Managemnt_API.Controllers.Case
             {
                 return StatusCode(500, "Internal Server Error");
             }
+
+
         }
+
+        [HttpGet("GetCaseDetailProgress")]
+        public async Task<IActionResult> GetCaseDetailProgress(Guid caseId)
+        {
+
+            try
+            {
+                return Ok(await _caserReportService.GetCaseProgress(caseId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+
+        }
+
+
+
 
     }
 }

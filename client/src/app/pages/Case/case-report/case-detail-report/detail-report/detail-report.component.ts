@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CaseService } from '../../../case.service';
+import { ICaseProgressReport } from '../Icasedetail';
 
 @Component({
   selector: 'app-detail-report',
@@ -7,14 +9,22 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./detail-report.component.css']
 })
 export class DetailReportComponent implements OnInit {
-  
-  constructor(private activeModal:NgbActiveModal){
-    
+
+  @Input() CaseId!: string
+  CaseDetialReport !: ICaseProgressReport
+  constructor(private activeModal: NgbActiveModal, private caseService: CaseService) {
+
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.caseService.GetProgresReport(this.CaseId).subscribe({
+      next: (res) => {
+        this.CaseDetialReport = res
+      }, error: (err) => {
+        console.error(err)
+      }
+    })
   }
-  closeModal(){
+  closeModal() {
     this.activeModal.close();
   }
 
