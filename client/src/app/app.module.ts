@@ -111,6 +111,7 @@ import { TransferCaseComponent } from './pages/Case/case-detail/transfer-case/tr
 import { CompleteCaseComponent } from './pages/Case/case-detail/complete-case/complete-case.component';
 import { MakeAppointmentCaseComponent } from './pages/Case/case-detail/make-appointment-case/make-appointment-case.component';
 import { SendSmsComponent } from './pages/Case/case-detail/send-sms/send-sms.component';
+import { GojsAngularModule } from 'gojs-angular';
 import { ListOfMessagesComponent } from './pages/case/list-of-messages/list-of-messages.component';
 import { CaseAppointmentsComponent } from './pages/case/case-appointments/case-appointments.component';
 import { ArchivecaseComponent } from './pages/case/archivecase/archivecase.component';
@@ -119,7 +120,6 @@ import { AddRowComponent } from './pages/common/archive-management/add-row/add-r
 import { AddFolderComponent } from './pages/common/archive-management/add-folder/add-folder.component';
 import { CompletedCasesComponent } from './pages/case/completed-cases/completed-cases.component';
 import { ArchiveCaseActionComponent } from './pages/case/archivecase/archive-case-action/archive-case-action.component';
-import { GojsAngularModule } from 'gojs-angular';
 
 import { LightgalleryModule } from 'lightgallery/angular';
 import {TableModule} from 'primeng/table';
@@ -127,11 +127,17 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import { AddCaseChildComponent } from './pages/case/case-type/add-case-child/add-case-child.component';
 import { CaseReportComponent } from './pages/case/case-report/case-report/case-report.component';
+import { CaseDetailReportComponent } from './pages/Case/case-report/case-detail-report/case-detail-report.component';
 
 import {ChartModule} from 'primeng/chart';
+import { EmployeePerformanceComponent } from './pages/case/case-report/employee-performance/employee-performance.component';
+import { SmsReportComponent } from './pages/case/case-report/sms-report/sms-report.component';
+import { DetailReportComponent } from './pages/Case/case-report/case-detail-report/detail-report/detail-report.component';
+import { CasedashboardComponent } from './pages/casedashboard/casedashboard.component';
+//
+
 @NgModule({
   declarations: [
-
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -232,9 +238,6 @@ import {ChartModule} from 'primeng/chart';
     CompleteCaseComponent,
     MakeAppointmentCaseComponent,
     SendSmsComponent,
-
-
-
     ListOfMessagesComponent,
     CaseAppointmentsComponent,
     ArchivecaseComponent,
@@ -244,12 +247,18 @@ import {ChartModule} from 'primeng/chart';
     ArchiveCaseActionComponent,
     AddCaseChildComponent,
     CaseReportComponent,
+    EmployeePerformanceComponent,
+    SmsReportComponent,
+    CaseDetailReportComponent,
+    DetailReportComponent,
+    CasedashboardComponent
+   
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,   
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -258,7 +267,6 @@ import {ChartModule} from 'primeng/chart';
     
     ToastrModule.forRoot({
       preventDuplicates: true,
-
     }),
     NgbModule,
     LightgalleryModule,

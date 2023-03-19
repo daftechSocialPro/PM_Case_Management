@@ -14,6 +14,14 @@ export interface ICaseReport {
 }
 
 export interface ICaseReportChart {
-    Name : string ; 
-    Value : number ; 
+    labels : string [] ; 
+    datasets : IDataSets[] ; 
 }
+
+export interface IDataSets {
+    data : number [] ; 
+    backgroundColor : string[] ; 
+    hoverBackgroundColor:string []
+}
+
+

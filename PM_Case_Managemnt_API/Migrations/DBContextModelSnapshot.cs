@@ -329,6 +329,9 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Property<DateTime?>("TransferedDateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("childOrder")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CaseId");
@@ -431,7 +434,7 @@ namespace PMCaseManagemntAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CaseForm")
+                    b.Property<int?>("CaseForm")
                         .HasColumnType("int");
 
                     b.Property<string>("CaseTypeTitle")

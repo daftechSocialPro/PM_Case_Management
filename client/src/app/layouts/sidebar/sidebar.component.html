@@ -29,8 +29,8 @@
                               class="bi bi-chevron-down ms-auto"></i> </a>
                   <ul id="forms-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
                         <li *ngIf="roleMatch(['Super Admin','Case Admin','Encoder','Director','Member','Secretery','Employee Manager'])">
-                              <a [ngClass]="getUrl()=='/dashboard'?'nav-link ':'nav-link collapsed'"
-                                    routerLink="/dashboard"> <i class="bi bi-circle"></i>
+                              <a [ngClass]="getUrl()=='/casedashboard'?'nav-link ':'nav-link collapsed'"
+                                    routerLink="/casedashboard"> <i class="bi bi-circle"></i>
                                     <span>Dashboard</span> </a>
                         </li>
                         <li *ngIf="roleMatch(['Super Admin','Case Admin','Encoder','Director','Member','Secretery','Employee Manager'])">
@@ -116,15 +116,15 @@
 
                         <li *ngIf="roleMatch(['Super Admin','Director','Case Admin'])"> <a routerLink="/casereport"> <i
                                           class="bi bi-circle"></i><span>Case Report</span> </a></li>
-                        <li *ngIf="roleMatch(['Super Admin','Director','Case Admin'])"> <a routerLink="/alerts"> <i
+                        <li *ngIf="roleMatch(['Super Admin','Director','Case Admin'])"> <a routerLink="/casedetailreport"> <i
                                           class="bi bi-circle"></i><span>Case Detail Report</span> </a> </li>
-                        <li *ngIf="roleMatch(['Super Admin','Director','Case Admin','Member','Secretery','Employee Manager','Encoder'])"> <a routerLink="/alerts"> <i
+                        <li *ngIf="roleMatch(['Super Admin','Director','Case Admin','Member','Secretery','Employee Manager','Encoder'])"> <a routerLink="/empperformance"> <i
                                           class="bi bi-circle"></i><span>Performance Report</span> </a>
 
 
                         </li>
 
-                        <li *ngIf="roleMatch(['Super Admin','Director','Case Admin','Secretery'])"> <a routerLink="/listmessages"> <i
+                        <li *ngIf="roleMatch(['Super Admin','Director','Case Admin','Secretery'])"> <a routerLink="/smsreport"> <i
                                           class="bi bi-circle"></i><span> SMS Report
                                           </span> </a></li>
 

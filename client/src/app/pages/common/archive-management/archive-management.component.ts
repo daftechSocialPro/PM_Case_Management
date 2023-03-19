@@ -90,8 +90,6 @@ export class ArchiveManagementComponent implements OnInit {
 
     this.commonService.getFolder(rowId).subscribe({
       next:(res)=>{
-
-        console.log(res)
         this.folders = res
       },error:(err)=>{
         console.error(err)

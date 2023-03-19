@@ -179,6 +179,21 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
             }
         }
 
+        [HttpGet("GetEmployeesById")]
+
+        public async Task<IActionResult> GetEmployeesById(Guid employeeId)
+        {
+            try
+            {
+                return Ok(await _employeeService.GetEmployeesById(employeeId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
+
 
     }
 

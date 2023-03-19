@@ -13,6 +13,7 @@ export interface Employee {
     BranchId: string;
     Remark: string
     RowStatus: Number;
+    Roles?:string[]
 
 
 

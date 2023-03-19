@@ -26,6 +26,8 @@ namespace PM_Case_Managemnt_API.DTOS.Common
 
         public string? Remark { get; set; }
         public int RowStatus { get; set; }
+        
+        public string ? Password { get; set; }
 
 
     }
