@@ -63,6 +63,7 @@ import { CaseReportComponent } from './pages/case/case-report/case-report/case-r
 import { EmployeePerformanceComponent } from './pages/case/case-report/employee-performance/employee-performance.component';
 import { SmsReportComponent } from './pages/case/case-report/sms-report/sms-report.component';
 import { CaseDetailReportComponent } from './pages/Case/case-report/case-detail-report/case-detail-report.component';
+import { CasedashboardComponent } from './pages/casedashboard/casedashboard.component';
 
 
 
@@ -102,12 +103,9 @@ const routes: Routes = [
 { path: 'casereport', canActivate:[AuthGuard],component: CaseReportComponent},
 { path: 'empperformance', canActivate:[AuthGuard], component: EmployeePerformanceComponent },
 { path: 'smsreport', canActivate:[AuthGuard], component : SmsReportComponent},
-
-
-
-
-
 { path: 'casedetailreport', canActivate:[AuthGuard],component: CaseDetailReportComponent},
+{ path: 'user-profile',canActivate:[AuthGuard], component: UsersProfileComponent },
+{ path: 'casedashboard',canActivate:[AuthGuard], component: CasedashboardComponent },
 
 
   { path: 'alerts', component: AlertsComponent },
@@ -140,7 +138,7 @@ const routes: Routes = [
   { path: 'pages-faemploye', component: PagesFaqComponent },
   { path: 'pages-login', component: PagesLoginComponent },
   { path: 'pages-register', component: PagesRegisterComponent },
-  { path: 'user-profile', component: UsersProfileComponent },
+  
 ];
 
 @NgModule({

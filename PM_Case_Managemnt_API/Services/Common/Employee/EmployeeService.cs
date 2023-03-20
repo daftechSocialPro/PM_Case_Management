@@ -101,6 +101,30 @@ namespace PM_Case_Managemnt_API.Services.Common
             return k;
         }
 
+        public async Task<EmployeeDto> GetEmployeesById(Guid employeeId)
+        {
+            
+            var k = await (from e in _dBContext.Employees.Include(x => x.OrganizationalStructure.OrganizationBranch).Where(x=>x.Id==employeeId)
+
+                           select new EmployeeDto
+                           {
+                               Id = e.Id,
+                               Photo = e.Photo,
+                               Title = e.Title,
+                               FullName = e.FullName,
+                               Gender = e.Gender.ToString(),
+                               PhoneNumber = e.PhoneNumber,
+                               Position = e.Position.ToString(),
+                               StructureName = e.OrganizationalStructure.StructureName,
+                               BranchId = e.OrganizationalStructure.OrganizationBranch.Name,
+                               StructureId = e.OrganizationalStructureId.ToString(),
+                               Remark = e.Remark
+
+                           }).FirstOrDefaultAsync();
+
+            return k;
+        }
+
         public async Task<List<SelectListDto>> GetEmployeesSelectList()
         {
             var EmployeeSelectList = await (from e in _dBContext.Employees

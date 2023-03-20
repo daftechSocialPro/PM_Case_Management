@@ -133,7 +133,23 @@ namespace PM_Case_Managemnt_API.DTOS.Case
 
     }
 
+    public class TopAffairsViewmodel
+    {
+        public string ApplicantName { get; set; }
+        public string AffairNumber { get; set; }
+        public string Subject { get; set; }
+        public string Structure { get; set; }
+        public string Employee { get; set; }
+        public double Elapstime { get; set; }
+        public double Level { get; set; }
+        public DateTime CreatedDateTime { get; set; }
+    }
 
+    public class DashboardDto
+    {
+        public List<TopAffairsViewmodel> pendingReports { get; set; }
+        public List<TopAffairsViewmodel> completedReports { get; set; }
+    }
 
 
 

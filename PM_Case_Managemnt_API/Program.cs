@@ -22,6 +22,7 @@ using PM_Case_Managemnt_API.Services.CaseService.CaseTypes;
 using PM_Case_Managemnt_API.Services.CaseService.Encode;
 using PM_Case_Managemnt_API.Services.CaseService.FileSettings;
 using PM_Case_Managemnt_API.Services.Common;
+using PM_Case_Managemnt_API.Services.Common.Dashoboard;
 using PM_Case_Managemnt_API.Services.Common.FolderService;
 using PM_Case_Managemnt_API.Services.Common.RowService;
 using PM_Case_Managemnt_API.Services.Common.ShelfService;
@@ -111,6 +112,7 @@ builder.Services.AddScoped<IAppointmentWithCalenderService, AppointmentWithCalen
 builder.Services.AddScoped<IFilesInformationService, FilesInformationService>();
 builder.Services.AddScoped<ICaseProccessingService, CaseProccessingService>();
 builder.Services.AddScoped<ICaseReportService, CaserReportService>();
+builder.Services.AddScoped<IDashboardService,DashboardService>(); 
 
 builder.Services.AddScoped<ISMSHelper, SMSHelper>();
 

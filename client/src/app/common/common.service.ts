@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IndividualConfig, ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { IFolder, IRow, IShelf } from '../pages/common/archive-management/Iarchive';
+import { Employee } from '../pages/common/organization/employee/employee';
 
 export interface toastPayload {
   message: string;
@@ -107,7 +108,7 @@ export class CommonService {
     return this.http.get<IFolder[]>(this.baseUrl + "/archive/folder/filtered?rowId=" + rowId)
   }
 
-  
+
 
 
 

@@ -133,6 +133,7 @@ import {ChartModule} from 'primeng/chart';
 import { EmployeePerformanceComponent } from './pages/case/case-report/employee-performance/employee-performance.component';
 import { SmsReportComponent } from './pages/case/case-report/sms-report/sms-report.component';
 import { DetailReportComponent } from './pages/Case/case-report/case-detail-report/detail-report/detail-report.component';
+import { CasedashboardComponent } from './pages/casedashboard/casedashboard.component';
 //
 
 @NgModule({
@@ -249,7 +250,8 @@ import { DetailReportComponent } from './pages/Case/case-report/case-detail-repo
     EmployeePerformanceComponent,
     SmsReportComponent,
     CaseDetailReportComponent,
-    DetailReportComponent
+    DetailReportComponent,
+    CasedashboardComponent
    
     
   ],
