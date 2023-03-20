@@ -73,15 +73,29 @@
 
                         </div>
 
-                        <!-- <div class="modal-body" *ngIf="program">
+                         <div class="modal-body" *ngIf="caseState">
                              
-                           <div class="card-title text-center">{{program.ProgramName!}}</div>
-                           <div class="text-center">{{program.ProgramBudgetYear!}}</div> 
-                           <span> Planned Budget : {{program.ProgramPlannedBudget!}}</span> <br/>
-                           <span> Remaining Budget : {{program.ProgramPlannedBudget!}}</span> 
+                           <div class="card-title text-center">Current State :</div>
+                           <div class="text-center">{{caseState.CurrentState!}}</div> 
+
+                           <div class="card-title text-center">Needed Documents :</div>
+                           <div class="text-center">
+                            
+                            <span *ngFor="let doc of caseState.NeededDocuments">{{doc}}</span>
+
+
+                        
+                        
+                        
+                        </div> 
+
+
+                           <div class="card-title text-center">Next State :</div>
+                           <div class="text-center">{{caseState.NextState!}}</div> 
+                         
                             
                           
-                        </div> -->
+                        </div>
                     </div>
 
                 </div>

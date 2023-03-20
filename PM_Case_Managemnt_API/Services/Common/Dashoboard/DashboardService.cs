@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.DTOS.Case;
+using System.Text;
+using PM_Case_Managemnt_API.Models.Common;
+
 
 namespace PM_Case_Managemnt_API.Services.Common.Dashoboard
 {
@@ -9,6 +12,7 @@ namespace PM_Case_Managemnt_API.Services.Common.Dashoboard
     {
 
         private readonly DBContext _dBContext;
+        private Random rnd = new Random();
         public DashboardService(DBContext context)
         {
             _dBContext = context;
@@ -78,6 +82,9 @@ namespace PM_Case_Managemnt_API.Services.Common.Dashoboard
             DashboardDto dashboard = new DashboardDto();
             dashboard.pendingReports = report;
 
+
+
+
             allAffairps = _dBContext.Cases
                 .Include(a => a.CaseType)
                  .Include(a => a.Applicant)
@@ -132,8 +139,75 @@ namespace PM_Case_Managemnt_API.Services.Common.Dashoboard
 
             dashboard.completedReports = report;
 
+
+            var Chart = new CaseReportChartDto();
+
+            Chart.labels = new List<string>() { "LateProgress", "completed"};
+            Chart.datasets = new List<DataSets>();
+
+            var datas = new DataSets();
+
+            datas.data = new List<int>() { dashboard.pendingReports.Count(), dashboard.completedReports.Count()};
+            datas.hoverBackgroundColor = new List<string>() { "#fe5e2b", "#2cb436" };
+            datas.backgroundColor = new List<string>() { "#fe5e2b", "#2cb436" };
+
+            Chart.datasets.Add(datas);
+
+
+            dashboard.chart = Chart;
+
+
+
+
+
             return dashboard;
 
         }
+
+
+
+        public async Task<barChartDto> GetMonthlyReport()
+        {
+
+            barChartDto barChart = new barChartDto();
+            barChart.labels = new List<string>() { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "sep", "Oct", "Nov", "Dec" };
+            barChart.datasets = new List<barChartDetailDto>();
+
+
+
+            var allAffairs = _dBContext.Cases.Include(x=>x.CaseType).Where(x => x.CreatedAt.Year == DateTime.Now.Year).ToList();
+            var allAffairTypes = _dBContext.CaseTypes.Where(x => x.RowStatus == RowStatus.Active && x.ParentCaseTypeId == null && x.CaseForm == CaseForm.Outside).ToList();
+            var monthList = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            foreach (var affairType in allAffairTypes)
+            {
+
+
+                barChartDetailDto dataset = new barChartDetailDto
+                {
+                    type = "bar",
+                    label = affairType.CaseTypeTitle,
+                    backgroundColor = String.Format("#{0:X6}", rnd.Next(0x1000000))
+                };
+
+                dataset.data = new List<int>();
+
+                foreach (var month in monthList)
+                {
+
+                    dataset.data.Add(
+                        allAffairs.Count(x => x.CaseTypeId == affairType.Id && x.CreatedAt.Month == month && x.CaseType.ParentCaseTypeId == null));
+
+                 
+                }
+                barChart.datasets.Add(dataset);
+
+
+            }
+
+            return barChart;
+
+        }
+
+
+        }
     }
-}

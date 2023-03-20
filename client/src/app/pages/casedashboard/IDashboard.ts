@@ -1,7 +1,10 @@
+import { ICaseReportChart } from "../case/case-report/ICaseReport";
+
 export interface IDashboardDto{
 
     pendingReports : IDashboardView[]
     completedReports :IDashboardView[]
+    chart: ICaseReportChart;
 }
 
 export interface IDashboardView{
@@ -17,3 +20,19 @@ export interface IDashboardView{
 
 }
 
+
+export interface barChartDto
+{
+
+   labels :string[]
+   datasets :barChartDetailDto[]
+}
+
+export interface barChartDetailDto
+{
+
+     type : string
+     label :string
+     backgroundColor :string
+     data : number[]
+}

@@ -30,7 +30,7 @@ export class PagesLoginComponent implements OnInit {
       this.userService.login(this.loginForm.value).subscribe({
         next: (res) => {
           sessionStorage.setItem('token', res.token);
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/casedashboard');
         },
         error: (err) => {
           if (err.status == 400){

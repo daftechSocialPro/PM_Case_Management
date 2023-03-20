@@ -7,6 +7,7 @@ using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
 using PM_Case_Managemnt_API.Services.CaseMGMT.CaseForwardService;
 using PM_Case_Managemnt_API.Services.CaseMGMT.History;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PM_Case_Managemnt_API.Services.CaseMGMT
 {
@@ -257,7 +258,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                     Id = Guid.NewGuid(),
                     CreatedAt = DateTime.Now,
                     CreatedBy = UserId,
-                    
+
                     RowStatus = RowStatus.Active,
                     FromEmployeeId = caseTransferDto.FromEmployeeId,
                     FromStructureId = currEmp.OrganizationalStructureId,
@@ -267,7 +268,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                     CaseId = currentLastHistory.CaseId,
                     ReciverType = ReciverType.Orginal,
                     CaseTypeId = currentLastHistory.CaseTypeId,
-                    childOrder = currentLastHistory.childOrder+1
+                    childOrder = currentLastHistory.childOrder + 1
                     //must be change
                 };
 
@@ -281,7 +282,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                 string toStructure = _dbContext.OrganizationalStructures.Find(newHistory.ToStructureId).StructureName;
 
 
-                string message = name + "\nበጉዳይ ቁጥር፡" + currentCase.CaseNumber + "\nየተመዘገበ ጉዳዮ ለ " + toStructure + " ተላልፏል\nየቢሮ ቁጥር:" ;
+                string message = name + "\nበጉዳይ ቁጥር፡" + currentCase.CaseNumber + "\nየተመዘገበ ጉዳዮ ለ " + toStructure + " ተላልፏል\nየቢሮ ቁጥር:";
 
                 await _smshelper.SendSmsForCase(message, newHistory.CaseId, newHistory.Id, UserId.ToString(), MessageFrom.Transfer);
             }
@@ -368,7 +369,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
 
                                                }).ToList();
 
-            List<CaseDetailStructureDto> caseDetailstructures = _dbContext.CaseHistories.Include(x=>x.FromEmployee).Include(x=>x.FromStructure).Where(x => x.CaseId == currentHistry.CaseId).OrderByDescending(x=>x.CreatedAt).Select(x => new CaseDetailStructureDto
+            List<CaseDetailStructureDto> caseDetailstructures = _dbContext.CaseHistories.Include(x => x.FromEmployee).Include(x => x.FromStructure).Where(x => x.CaseId == currentHistry.CaseId).OrderByDescending(x => x.CreatedAt).Select(x => new CaseDetailStructureDto
             {
                 FromEmployee = x.FromEmployee.FullName,
                 FormStructure = x.FromStructure.StructureName,
@@ -398,7 +399,8 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                 ToStructure = currentHistry.ToStructure.StructureName,
                 AffairHistoryStatus = currentHistry.AffairHistoryStatus.ToString(),
                 Attachments = attachments,
-                CaseDetailStructures= caseDetailstructures
+                CaseTypeId = currentHistry.Case.CaseTypeId.ToString(),
+                CaseDetailStructures = caseDetailstructures
 
             };
 
@@ -426,12 +428,59 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
             _dbContext.Entry(cases).Property(x => x.FolderId).IsModified = true;
             _dbContext.Entry(cases).Property(x => x.IsArchived).IsModified = true;
 
-           await  _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
-            return 1; 
+            return 1;
+        }
+
+
+        public async Task<CaseState> GetCaseState(Guid CaseTypeId, Guid caseHistoryId)
+        { 
+
+            var childCaseType = await _dbContext.CaseTypes.Where(x => x.ParentCaseTypeId == CaseTypeId).ToListAsync();
+            CaseState caseState = new CaseState();
+
+            int childcount = _dbContext.CaseHistories.Find(caseHistoryId).childOrder + 1;
+            foreach (var childaffair in childCaseType)
+            {
+                
+
+              
+                if (childaffair.OrderNumber == childcount)
+                {
+                    caseState.CurrentState = childaffair.CaseTypeTitle;
+
+                    caseState.NeededDocuments = new List<string>();
+
+                    var files = await _dbContext.FileSettings.Where(x => x.CaseTypeId == childaffair.Id).ToListAsync();
+
+                    foreach (var file in files)
+                    {
+                        caseState.NeededDocuments.Add(file.FileName);
+                    }
+                }
+
+                if (childaffair.OrderNumber == childcount + 1)
+                {
+
+                    caseState.NextState = childaffair.CaseTypeTitle;
+                }
+            }
+
+            return caseState;
         }
 
 
 
+
+    }
+
+    public class CaseState
+    {
+        public string CurrentState { get; set; }
+        public string NextState { get; set; }
+
+        public List<string> NeededDocuments { get; set; }
     }
 }
+

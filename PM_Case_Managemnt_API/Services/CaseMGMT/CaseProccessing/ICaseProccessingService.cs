@@ -17,5 +17,6 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
 
 
         public Task<int> ArchiveCase(ArchivedCaseDto archivedCaseDto);
+        public Task<CaseState> GetCaseState(Guid CaseTypeId, Guid caseHistoryId);
     }
 }

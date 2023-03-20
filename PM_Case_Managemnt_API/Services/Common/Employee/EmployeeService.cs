@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.Common;
+using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
 
 
@@ -179,18 +180,40 @@ namespace PM_Case_Managemnt_API.Services.Common
         public async Task<List<SelectListDto>> GetEmployeeByStrucutreSelectList(Guid StructureId)
         {
 
+            var affairs = _dBContext.Cases.Where(x=>x.AffairStatus!= AffairStatus.Completed && x.AffairStatus!=AffairStatus.Encoded).ToList();
+            int workLoad = 0;
+
+         
 
             List<SelectListDto> employees = await (from e in _dBContext.Employees.Where(x => x.OrganizationalStructureId == StructureId)
                                                   
                                    select new SelectListDto
                                    {
                                        Id = e.Id,
-                                       Name =$"{e.FullName} ( {e.Position } ) "
+                                       Name = $"{e.FullName} ( {e.Position} )"
                                    }).ToListAsync();
+            foreach(var emp in employees)
+            {
+                foreach (var affair in affairs)
+                {
+                    var maxChild = _dBContext.CaseHistories.Where(x=>x.CaseId == affair.Id).FirstOrDefault().childOrder;
+                    workLoad += _dBContext.CaseHistories.Count(y => y.ToEmployeeId == emp.Id && (y.childOrder == maxChild) && y.CaseId == affair.Id);
+                }
+                emp.Name += " ( " + workLoad.ToString() + " Total Tasks )";
+
+            }
+
+
+
+
+
+
             return employees;
 
 
         }
+
+         
 
     }
 }

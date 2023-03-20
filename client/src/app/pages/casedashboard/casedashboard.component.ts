@@ -12,6 +12,7 @@ declare const $: any
 export class CasedashboardComponent implements OnInit {
   serachForm!: FormGroup
   dashboardDtos! :IDashboardDto
+ 
 
   stackedData:any
   stackedOptions:any
@@ -48,70 +49,8 @@ export class CasedashboardComponent implements OnInit {
       },
     })
     this.getDashboardReport(this.serachForm.value.startDate, this.serachForm.value.endDate)
-    
+    this.getBarChart();
 
-
-    
-    this.stackedData = {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','sep','Oct','Nov','Dec'],
-      datasets: [{
-          type: 'bar',
-          label: 'Dataset 1',
-          backgroundColor: '#42A5F5',
-          data: [
-              50,
-              25,
-              12,
-              48,
-              90,
-              76,
-              42,
-              48,
-              90,
-              76,
-              42,
-              11
-
-          ]
-      }, {
-          type: 'bar',
-          label: 'Dataset 2',
-          backgroundColor: '#66BB6A',
-          data: [
-              21,
-              84,
-              24,
-              75,
-              37,
-              65,
-              34,
-              48,
-              90,
-              76,
-              42,
-              11,
-
-          ]
-      }, {
-          type: 'bar',
-          label: 'Dataset 3',
-          backgroundColor: '#FFA726',
-          data: [
-              41,
-              52,
-              24,
-              74,
-              23,
-              21,
-              32,
-              48,
-              90,
-              76,
-              42,
-              11
-          ]
-      }]
-  };
 
   this.stackedOptions = {
     plugins: {
@@ -168,6 +107,16 @@ export class CasedashboardComponent implements OnInit {
 
   }
 
+  getBarChart (){
+    this.orgService.getDashboardLineChart().subscribe({
+      next:(res)=>{
+        this.stackedData = res 
+      },error:(err)=>{
+        console.error(err)
+      }
+
+    })
+  }
   
   Search() {
 

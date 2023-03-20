@@ -29,6 +29,7 @@ export interface ICaseView{
     FolderName ?: string 
     RowNumber ?: string 
     ShelfNumber ?: string 
+    CaseTypeId? : string 
     
 } 
 export interface CaseDetailStructures{

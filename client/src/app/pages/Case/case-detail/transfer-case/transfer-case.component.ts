@@ -9,6 +9,7 @@ import { OrganizationService } from 'src/app/pages/common/organization/organizat
 import { UserView } from 'src/app/pages/pages-login/user';
 import { UserService } from 'src/app/pages/pages-login/user.service';
 import { CaseService } from '../../case.service';
+import { ICaseState } from './IcaseState';
 
 @Component({
   selector: 'app-transfer-case',
@@ -19,6 +20,7 @@ export class TransferCaseComponent implements OnInit {
 
   @Input() historyId!: string
   @Input() CaseTypeName!:string
+  @Input() CaseTypeId ! : string
   user!: UserView
   transferForm!: FormGroup
   toast !: toastPayload
@@ -26,6 +28,8 @@ export class TransferCaseComponent implements OnInit {
   Structures !: SelectList[]
   Employees !: SelectList[]
   Documents: any
+
+  caseState ! : ICaseState
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -47,9 +51,21 @@ export class TransferCaseComponent implements OnInit {
 
     this.user = this.userService.getCurrentUser()
     this.getBranches()
-
+    this.getCaseState()
   }
 
+  getCaseState (){
+
+    this.caseService.GetCaseState(this.CaseTypeId,this.historyId).subscribe({
+      next:(res)=>{
+      this.caseState = res 
+
+      }
+      ,error:(err)=>{
+        console.error(err)
+      }
+    })
+  }
 
   getBranches() {
     this.organizationService.getOrgBranchSelectList().subscribe({

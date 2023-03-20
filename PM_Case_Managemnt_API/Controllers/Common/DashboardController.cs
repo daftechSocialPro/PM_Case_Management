@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PM_Case_Managemnt_API.Data;
+using PM_Case_Managemnt_API.DTOS.Case;
 using PM_Case_Managemnt_API.Services.CaseMGMT;
 using PM_Case_Managemnt_API.Services.Common.Dashoboard;
 
@@ -35,5 +36,24 @@ namespace PM_Case_Managemnt_API.Controllers.Common
             }
 
         }
+
+        [HttpGet("GetMonthlyReportBarChart")]
+
+        public async Task<IActionResult> GetMonthlyReportBarChart()
+        {
+
+            try
+            {
+                return Ok(await _dashboardService.GetMonthlyReport());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
+
+       
+
     }
 }

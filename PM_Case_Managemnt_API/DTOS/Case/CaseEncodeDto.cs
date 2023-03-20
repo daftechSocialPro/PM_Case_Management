@@ -81,8 +81,8 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public string? AffairHistoryStatus { get; set; }
         public string ? Position { get; set; }
         public bool? IsSMSSent { get; set; }
-
-
+        public string? CaseTypeId { get; set; }
+ 
         public string ? FolderName { get; set; }
 
         public string ? RowNumber { get; set; }

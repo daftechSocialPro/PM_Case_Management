@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IDashboardDto } from '../../casedashboard/IDashboard';
+import { barChartDto, IDashboardDto } from '../../casedashboard/IDashboard';
 import { SelectList } from '../common';
 import { UnitMeasurment } from '../unit-measurement/unit-measurment';
 import { Employee } from './employee/employee';
@@ -122,6 +122,12 @@ export class OrganizationService {
 
     return this.http.get<IDashboardDto>(this.BaseURI+"/Dashboard/GetDashboardCaseReport?startAt="+startAt+"&endAt="+endAt)
   }
+
+  getDashboardLineChart(){
+
+    return this.http.get<barChartDto>(this.BaseURI+"/Dashboard/GetMonthlyReportBarChart")
+  }
+  
   
 
 }

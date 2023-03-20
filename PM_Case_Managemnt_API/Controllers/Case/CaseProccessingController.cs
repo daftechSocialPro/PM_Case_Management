@@ -224,7 +224,21 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         }
 
+        [HttpGet("GetCaseState")]
+        public async Task<IActionResult> GetCaseState(Guid CaseTypeId, Guid caseHistoryId)
+        {
+            try
+            {
+                ;
+                return Ok(await _caseProcessingService.GetCaseState(CaseTypeId, caseHistoryId));
 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
 
 
 

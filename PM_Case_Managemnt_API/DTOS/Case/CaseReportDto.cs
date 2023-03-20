@@ -1,4 +1,5 @@
-﻿using PM_Case_Managemnt_API.Models.CaseModel;
+﻿using Microsoft.Data.SqlClient.DataClassification;
+using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
 using PM_Case_Managemnt_API.Models.PM;
 using System.Data;
@@ -149,7 +150,28 @@ namespace PM_Case_Managemnt_API.DTOS.Case
     {
         public List<TopAffairsViewmodel> pendingReports { get; set; }
         public List<TopAffairsViewmodel> completedReports { get; set; }
+
+        public CaseReportChartDto chart { get; set; }
     }
+
+
+    public class barChartDto
+    {
+
+        public List<string> labels { get; set; }
+        public List<barChartDetailDto> datasets { get; set; }
+    }
+
+    public class barChartDetailDto
+    {
+
+        public string type { get; set; }
+        public string label { get; set; }
+        public string backgroundColor { get; set; }
+
+        public List<int> data { get; set; }
+    }
+
 
 
 

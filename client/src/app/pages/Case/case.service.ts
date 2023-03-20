@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { IAppointmentGet, IAppointmentWithCalander } from './case-detail/make-appointment-case/Iappointmentwithcalander';
+import { ICaseState } from './case-detail/transfer-case/IcaseState';
 import { ICaseDetailReport, ICaseProgressReport } from './case-report/case-detail-report/Icasedetail';
 import { IEmployeePerformance } from './case-report/employee-performance/IEmployeePerformance';
 import { ICaseReport, ICaseReportChart } from './case-report/ICaseReport';
@@ -214,6 +215,13 @@ export class CaseService {
     GetProgresReport (caseId:String){
 
         return this.http.get<ICaseProgressReport> (this.BaseURI+"/CaseReport/GetCaseDetailProgress?caseId="+caseId)
+    }
+
+//get crurrent state in transfer 
+    GetCaseState(CaseTypeId:string, historyId:string){
+
+        return this.http.get<ICaseState> (this.BaseURI+"/GetCaseState?caseTypeId="+CaseTypeId+'&caseHistoryId='+historyId)
+
     }
         
 }
