@@ -470,16 +470,27 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
             return caseState;
         }
 
+        public async Task<bool> Ispermitted(Guid employeeId, Guid caseId)
+        {
+            var caseIDD = _dbContext.CaseHistories.Find(caseId).CaseId;
+            var employee = _dbContext.CaseHistories.Where(x => x.CaseId == caseIDD).OrderByDescending(z => z.childOrder).FirstOrDefault().ToEmployeeId;
+            if (employeeId.ToString().ToLower() == employee.ToString().ToLower())
+            {
+                return true;
+            }
+            return false; 
 
+        }
 
 
     }
+
+  
 
     public class CaseState
     {
         public string CurrentState { get; set; }
         public string NextState { get; set; }
-
         public List<string> NeededDocuments { get; set; }
     }
 }

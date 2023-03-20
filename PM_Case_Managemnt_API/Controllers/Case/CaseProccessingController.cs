@@ -240,6 +240,25 @@ namespace PM_Case_Managemnt_API.Controllers.Case
 
         }
 
+        [HttpGet("Ispermitted")]
+        public async Task<IActionResult> Ispermitted(Guid employeeId, Guid caseId)
+        {
+            try
+            {
+                
+                return Ok(await _caseProcessingService.Ispermitted(employeeId, caseId));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
+
+        
+
+
 
 
     }
