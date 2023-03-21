@@ -145,10 +145,12 @@
                                 <span *ngIf="caserep.CaseStatus=='Completed'" class="badge bg-success"
                                     style="font-size: 12px">{{ caserep.CaseStatus}}
                                     {{getChange(caserep.CreatedDateTime)}} Hr.</span>
-                                <span *ngIf="getChange(caserep.CreatedDateTime) > caserep.CaseCounter"
+                                <span
+                                    *ngIf="caserep.CaseStatus!='Completed'&& getChange(caserep.CreatedDateTime) > caserep.CaseCounter"
                                     class="badge bg-danger" style="font-size: 12px">{{ caserep.CaseStatus}}
                                     {{getChange(caserep.CreatedDateTime)}} Hr.</span>
-                                <span *ngIf="getChange(caserep.CreatedDateTime) <= caserep.CaseCounter"
+                                <span
+                                    *ngIf="caserep.CaseStatus!='Completed'&& getChange(caserep.CreatedDateTime) <= caserep.CaseCounter"
                                     class="badge bg-danger" style="font-size: 12px">{{ caserep.CaseStatus}}
                                     {{getChange(caserep.CreatedDateTime)}} Hr.</span>
 
