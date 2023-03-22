@@ -417,12 +417,24 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                                                      y.AffairHistoryStatus == AffairHistoryStatus.Transfered ? y.TransferedDateTime.ToString() :
                                                      y.AffairHistoryStatus == AffairHistoryStatus.Completed ? y.CompletedDateTime.ToString() :
                                                      y.AffairHistoryStatus == AffairHistoryStatus.Revert ? y.RevertedAt.ToString() : "",
-                                        ElapsedTime = getElapsedTIme(y.childOrder, casetype),
-                                        ElapseTimeBasedOnSeenTime = "",
+                                        ElapsedTime = getElapsedTime(y.CreatedAt,
+
+                                         y.AffairHistoryStatus == AffairHistoryStatus.Seen ? y.SeenDateTime :
+                                                     y.AffairHistoryStatus == AffairHistoryStatus.Transfered ? y.TransferedDateTime :
+                                                     y.AffairHistoryStatus == AffairHistoryStatus.Completed ? y.CompletedDateTime :
+                                                     y.AffairHistoryStatus == AffairHistoryStatus.Revert ? y.RevertedAt : DateTime.Now
+                                        ),
+                                        ElapseTimeBasedOnSeenTime = getElapsedTime(y.SeenDateTime,
+
+                                         y.AffairHistoryStatus == AffairHistoryStatus.Seen ? y.SeenDateTime :
+                                                     y.AffairHistoryStatus == AffairHistoryStatus.Transfered ? y.TransferedDateTime :
+                                                     y.AffairHistoryStatus == AffairHistoryStatus.Completed ? y.CompletedDateTime :
+                                                     y.AffairHistoryStatus == AffairHistoryStatus.Revert ? y.RevertedAt : DateTime.Now
+                                        ),
                                         EmployeeStatus = ""
 
 
-                                    }).ToList()
+                                    }).OrderByDescending(x => x.CreatedDate).ToList()
 
 
                                 }).FirstOrDefaultAsync();
@@ -436,34 +448,66 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
 
 
 
-      static  public string getElapsedTIme(int childOrder,List<CaseType> affairTypes)
+        //static  public string getElapsedTIme(int childOrder,List<CaseType> affairTypes)
+        //  {
+
+
+
+        //      var co = (float)0;
+
+        //      foreach (var childaffair in affairTypes)
+        //      {
+        //          int childcount = childOrder;
+
+        //          if (childaffair.OrderNumber == childcount+1)
+        //          {
+        //              var c = childaffair.Counter;
+        //              co = childaffair.Counter;
+        //              if (c >= 60)
+        //              {
+        //                  c = c / 60;
+        //                  return c.ToString() + "Hr.";
+        //              }
+        //              else
+        //              {
+        //                  return c.ToString() + "min";
+        //              }
+
+        //          }
+        //      }
+        //      return "";
+        //  }
+
+        static public string getElapsedTime(DateTime? historyCreatedTime, DateTime? ActionTake)
         {
-
-          
-
-            var co = (float)0;
-
-            foreach (var childaffair in affairTypes)
+            if (historyCreatedTime.HasValue)
             {
-                int childcount = childOrder;
+                int hourDifference = 0;
 
-                if (childaffair.OrderNumber == childcount+1)
+                TimeSpan? timeDifference = ActionTake - historyCreatedTime;
+
+                hourDifference = (int)timeDifference?.TotalMinutes;
+
+                if (hourDifference > 60)
                 {
-                    var c = childaffair.Counter;
-                    co = childaffair.Counter;
-                    if (c >= 60)
-                    {
-                        c = c / 60;
-                        return c.ToString() + "Hr.";
-                    }
-                    else
-                    {
-                        return c.ToString() + "min";
-                    }
+                    double hours = (double)hourDifference / 60;
+
+                    return hours.ToString("F2") + " Hr.";
 
                 }
+                else
+                {
+                    return hourDifference + " Min.";
+                }
             }
-            return "";
+            else
+            {
+                return "";
+            }
+
+
+           
+
         }
 
 
