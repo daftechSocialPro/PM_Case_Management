@@ -83,7 +83,7 @@
             <th scope="col">{{caseHis.ToEmployee}}</th>
             <th scope="col">{{caseHis.CreatedDate | date:'fullDate'}}</th>
             <th scope="col">{{caseHis.Seenat | date:'fullDate'}}</th>
-            <th scope="col"><span [class]="caseHis.StatusDateTime=='Completed ( Orginal )'?'badge bg-success':'badge bg-danger'">{{caseHis.StatusDateTime }}</span></th>
+            <th scope="col">{{caseHis.StatusDateTime }}</th>
             <th scope="col">{{caseHis.ShouldTake | date:'fullDate' }} </th>             
             <th scope="col">{{caseHis.ElapsedTime}}</th>
             <th scope="col">{{caseHis.ElapseTimeBasedOnSeenTime}}</th>

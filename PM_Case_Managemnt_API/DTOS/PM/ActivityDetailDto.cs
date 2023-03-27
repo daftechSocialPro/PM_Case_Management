@@ -14,6 +14,7 @@ namespace PM_Case_Managemnt_API.DTOS.PM
      
     public class SubActivityDetailDto
     {
+        public Guid CreatedBy { get; set; }
         public string SubActivityDesctiption { get; set; } = null!;
         public string StartDate { get; set; } = null!;
         public string EndDate { get; set; } = null!;
@@ -28,7 +29,8 @@ namespace PM_Case_Managemnt_API.DTOS.PM
         public Guid? TeamId { get; set; }
 
         public Guid? CommiteeId { get; set; }
-
-        public string[] Employees { get; set; }
+        public Guid? PlanId { get; set; }
+        public Guid? TaskId { get; set; }
+        public string[] Employees { get; set; } = null!;
     }
 }

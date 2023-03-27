@@ -136,7 +136,6 @@ namespace PM_Case_Managemnt_API.DTOS.Case
 
     public class TopAffairsViewmodel
     {
-        public string CaseTypeTitle { get; set; }
         public string ApplicantName { get; set; }
         public string AffairNumber { get; set; }
         public string Subject { get; set; }

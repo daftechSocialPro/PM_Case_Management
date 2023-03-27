@@ -26,6 +26,7 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
 
         public async Task<int> AddActivityDetails(ActivityDetailDto activityDetail)
         {
+
             ActivityParent activityParent = new ActivityParent();
             activityParent.Id = Guid.NewGuid();
             activityParent.CreatedAt = DateTime.Now;
@@ -129,6 +130,107 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
                     _dBContext.SaveChanges();
                 }
             }
+            return 1;
+        }
+
+
+
+        public async Task<int> AddSubActivity(SubActivityDetailDto activityDetail)
+        {
+            PM_Case_Managemnt_API.Models.PM.Activity activity = new PM_Case_Managemnt_API.Models.PM.Activity();
+            activity.Id = Guid.NewGuid();
+            activity.CreatedAt = DateTime.Now;
+            activity.CreatedBy = activityDetail.CreatedBy;
+            activity.ActivityDescription = activityDetail.SubActivityDesctiption;
+            activity.ActivityType = (ActivityType)activityDetail.ActivityType;
+            activity.Begining = activityDetail.PreviousPerformance;
+            if (activityDetail.CommiteeId != null)
+            {
+                activity.CommiteeId = activityDetail.CommiteeId;
+            }
+            activity.FieldWork = activityDetail.FieldWork;
+            activity.Goal = activityDetail.Goal;
+            activity.OfficeWork = activityDetail.OfficeWork;
+            activity.PlanedBudget = activityDetail.PlannedBudget;
+            activity.UnitOfMeasurementId = activityDetail.UnitOfMeasurement;
+            activity.Weight = activityDetail.Weight;
+            if(activityDetail.PlanId != null)
+            {
+                activity.PlanId = activityDetail.PlanId;
+            }
+            else if(activityDetail.TaskId != null)
+            {
+                activity.TaskId = activityDetail.TaskId;
+            }
+
+            if (!string.IsNullOrEmpty(activityDetail.StartDate))
+            {
+                string[] startDate = activityDetail.StartDate.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
+                DateTime ShouldStartPeriod = Convert.ToDateTime(XAPI.EthiopicDateTime.GetGregorianDate(Int32.Parse(startDate[0]), Int32.Parse(startDate[1]), Int32.Parse(startDate[2])));
+                activity.ShouldStat = ShouldStartPeriod;
+            }
+
+            if (!string.IsNullOrEmpty(activityDetail.EndDate))
+            {
+
+                string[] endDate = activityDetail.EndDate.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
+                DateTime ShouldEnd = Convert.ToDateTime(XAPI.EthiopicDateTime.GetGregorianDate(Int32.Parse(endDate[0]), Int32.Parse(endDate[1]), Int32.Parse(endDate[2])));
+                activity.ShouldEnd = ShouldEnd;
+            }
+            await _dBContext.Activities.AddAsync(activity);
+            await _dBContext.SaveChangesAsync();
+            if (activityDetail.Employees != null)
+            {
+                foreach (var employee in activityDetail.Employees)
+                {
+                    if (!string.IsNullOrEmpty(employee))
+                    {
+                        EmployeesAssignedForActivities EAFA = new EmployeesAssignedForActivities
+                        {
+                            CreatedAt = DateTime.Now,
+                            CreatedBy = activityDetail.CreatedBy,
+                            RowStatus = RowStatus.Active,
+                            Id = Guid.NewGuid(),
+
+                            ActivityId = activity.Id,
+                            EmployeeId = Guid.Parse(employee),
+                        };
+                        await _dBContext.EmployeesAssignedForActivities.AddAsync(EAFA);
+                        await _dBContext.SaveChangesAsync();
+                    }
+                }
+            }
+
+
+
+            if (activityDetail.PlanId != Guid.Empty)
+            {
+                var plan = await _dBContext.Plans.FirstOrDefaultAsync(x => x.Id.Equals(activityDetail.PlanId));
+                if(plan != null)
+                {
+                    plan.PeriodStartAt = activity.ShouldStat;
+                    plan.PeriodEndAt = activity.ShouldEnd;
+                }
+            }
+            else if (activityDetail.TaskId != Guid.Empty)
+            {
+                var Task = await _dBContext.Tasks.FirstOrDefaultAsync(x => x.Id.Equals(activityDetail.TaskId));
+                if (Task != null)
+                {
+                    var plan = await _dBContext.Plans.FirstOrDefaultAsync(x => x.Id.Equals(Task.PlanId));
+
+                    Task.ShouldStartPeriod = activity.ShouldStat;
+                    Task.ShouldEnd = activity.ShouldEnd;
+                    Task.Weight = activity.Weight;
+                    if(plan != null)
+                    {
+                        var tasks = await _dBContext.Tasks.Where(x => x.PlanId == plan.Id).ToListAsync();
+                        plan.PeriodStartAt = tasks.Min(x => x.ShouldStartPeriod);
+                        plan.PeriodEndAt = tasks.Max(x => x.ShouldEnd);
+                    }
+                }
+            }
+            _dBContext.SaveChanges();
             return 1;
         }
 
@@ -454,7 +556,10 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
         {
 
 
-            var response = await (from x in _dBContext.ProgressAttachments.Include(x => x.ActivityProgress.Activity.ActivityParent).Where(x => x.ActivityProgress.Activity.TaskId == taskId || x.ActivityProgress.Activity.ActivityParent.TaskId == taskId)
+            var response = await (from x in _dBContext.ProgressAttachments.Include(x => x.ActivityProgress.Activity.ActivityParent).
+                                  Where(x => x.ActivityProgress.Activity.TaskId == taskId ||
+                                         x.ActivityProgress.Activity.PlanId == taskId
+                                  || x.ActivityProgress.Activity.ActivityParent.TaskId == taskId)
                                   select new ActivityAttachmentDto
                                   {
                                       ActivityDesctiption = x.ActivityProgress.Activity.ActivityDescription,

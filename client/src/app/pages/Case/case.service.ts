@@ -223,12 +223,6 @@ export class CaseService {
         return this.http.get<ICaseState> (this.BaseURI+"/GetCaseState?caseTypeId="+CaseTypeId+'&caseHistoryId='+historyId)
 
     }
-
-    IsPermitted( employeeId:string, caseId:string){
-
-        return this.http.get<boolean> (this.BaseURI+"/Ispermitted?employeeId="+employeeId+'&caseId='+caseId)
-
-    }
         
 }
 
