@@ -43,7 +43,7 @@
         </div>
         <div class="d-flex justify-content-center ">
 
-            <div class="card col-8 me-2 p-2">
+            <div class="card col-8 me-2">
                 <h5>Case Types to month Ratio</h5>
                 <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
             </div>
@@ -80,22 +80,16 @@
                                 </div>
 
                             </ng-template>
-                            <ng-template pTemplate="header" >
-                                <tr >
+                            <ng-template pTemplate="header">
+                                <tr>
 
 
                                     <th pSortableColumn="ApplicantName">Case Number <p-sortIcon field="ApplicantName">
                                         </p-sortIcon>
                                     </th>
-                                 
-
-                                    
                                     <th pSortableColumn="AffairNumber">Applicant Name<p-sortIcon field="AffairNumber">
                                         </p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="CaseTypeTitle">Case Type Title<p-sortIcon field="CaseTypeTitle">
-                                    </p-sortIcon>
-                                </th>
                                     <th pSortableColumn="Subject">Subject <p-sortIcon field="Subject"></p-sortIcon>
                                     </th>
                                     <th pSortableColumn="Structure">Structure<p-sortIcon field="Structure"></p-sortIcon>
@@ -105,7 +99,8 @@
                                     </th>
                                     <th pSortableColumn="Elapstime">Elapstime<p-sortIcon field="Elapstime"></p-sortIcon>
                                     </th>
-                                    
+                                    <th pSortableColumn="Level">Level <p-sortIcon field="Level"></p-sortIcon>
+                                    </th>
                                     <th pSortableColumn="CreatedDateTime">Created Date Time <p-sortIcon
                                             field="CreatedDateTime"></p-sortIcon>
                                     </th>
@@ -119,7 +114,7 @@
 
                             </ng-template>
                             <ng-template pTemplate="body" let-dash>
-                                <tr [pSelectableRow]="dash" class="text-danger" >
+                                <tr [pSelectableRow]="dash">
                                     <td>
                                         <span class="p-column-title">Case Number</span>
                                         {{dash.AffairNumber}}
@@ -128,10 +123,6 @@
                                         <span class="p-column-title">Applicant Name</span>
                                         <span>{{dash.ApplicantName}}</span>
                                     </td>
-                                    <td>
-                                        <span class="p-column-title">Case Type Title</span>
-                                        <span>{{dash.CaseTypeTitle}}</span>
-                                    </td>
 
                                     <td>
                                         <span class="p-column-title">Subject</span>
@@ -139,7 +130,7 @@
                                     </td>
                                     <td>
                                         <span class="p-column-title">Structure</span>
-                                        <span>{{dash.Structure}}</span>
+                                        <span>{{dash.CaseTypeTitle}}</span>
                                     </td>
                                     <td>
                                         <span class="p-column-title">Employee</span>
@@ -147,12 +138,12 @@
                                     </td>
                                     <td>
                                         <span class="p-column-title">Elapstime</span>
-                                        <span class="bg-danger text-white p-1" style="border-radius: 2px;">{{dash.Elapstime}}</span>
+                                        <span>{{dash.Elapstime}}</span>
                                     </td>
-                                    <!-- <td>
+                                    <td>
                                         <span class="p-column-title">Level</span>
                                         <span>{{dash.Message}}</span>
-                                    </td> -->
+                                    </td>
                                     <td>
                                         <span class="p-column-title">CreatedDateTime</span>
                                         <span>{{dash.CreatedDateTime|date:"fullDate"}}</span>
@@ -208,9 +199,6 @@
                                     <th pSortableColumn="AffairNumber">Applicant Name<p-sortIcon field="AffairNumber">
                                         </p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="CaseTypeTitle">Case Type Title<p-sortIcon field="CaseTypeTitle">
-                                    </p-sortIcon>
-                                </th>
                                     <th pSortableColumn="Subject">Subject <p-sortIcon field="Subject"></p-sortIcon>
                                     </th>
                                     <th pSortableColumn="Structure">Structure<p-sortIcon field="Structure"></p-sortIcon>
@@ -220,7 +208,8 @@
                                     </th>
                                     <th pSortableColumn="Elapstime">Elapstime<p-sortIcon field="Elapstime"></p-sortIcon>
                                     </th>
-                                    
+                                    <th pSortableColumn="Level">Level <p-sortIcon field="Level"></p-sortIcon>
+                                    </th>
                                     <th pSortableColumn="CreatedDateTime">Created Date Time <p-sortIcon
                                             field="CreatedDateTime"></p-sortIcon>
                                     </th>
@@ -243,19 +232,14 @@
                                         <span class="p-column-title">Applicant Name</span>
                                         <span>{{dash.ApplicantName}}</span>
                                     </td>
-                                    <td>
-                                        <span class="p-column-title">Case Type Title</span>
-                                        <span>{{dash.CaseTypeTitle}}</span>
-                                    </td>
 
-                                    
                                     <td>
                                         <span class="p-column-title">Subject</span>
                                         <span>{{dash.Subject}}</span>
                                     </td>
                                     <td>
                                         <span class="p-column-title">Structure</span>
-                                        <span>{{dash.Structure}}</span>
+                                        <span>{{dash.CaseTypeTitle}}</span>
                                     </td>
                                     <td>
                                         <span class="p-column-title">Employee</span>
@@ -263,15 +247,15 @@
                                     </td>
                                     <td>
                                         <span class="p-column-title">Elapstime</span>
-                                        <span class="bg-success text-white p-1" style="border-radius: 2px;">{{dash.Elapstime}}</span>
+                                        <span>{{dash.Elapstime}}</span>
                                     </td>
-                                    <!-- <td>
+                                    <td>
                                         <span class="p-column-title">Level</span>
                                         <span>{{dash.Message}}</span>
-                                    </td> -->
+                                    </td>
                                     <td>
                                         <span class="p-column-title">CreatedDateTime</span>
-                                        <span>{{dash.CreatedDateTime|date:"fullDate"}}</span>
+                                        <span>{{dash.CreatedDateTime}}</span>
                                     </td>
 
 

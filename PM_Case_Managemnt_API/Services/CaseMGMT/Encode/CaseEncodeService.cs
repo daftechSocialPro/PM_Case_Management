@@ -125,7 +125,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                      Id = x.Id,
                      CaseTypeName = x.Case.CaseType.CaseTypeTitle,
                      CaseNumber = x.Case.CaseNumber,
-                     CreatedAt = x.CreatedAt.ToString(),
+                     CreatedAt = x.Case.CreatedAt.ToString(),
                      ApplicantName = x.Case.Applicant.ApplicantName,
                      ApplicantPhoneNo = x.Case.Applicant.PhoneNumber,
                      EmployeeName = x.Case.Employee.FullName,
@@ -140,9 +140,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                      SecreateryNeeded = x.SecreateryNeeded,
                      IsConfirmedBySeretery = x.IsConfirmedBySeretery,
                      Position = user.Position.ToString(),
-                     AffairHistoryStatus = x.AffairHistoryStatus.ToString(),
-                      
-
+                     AffairHistoryStatus = x.AffairHistoryStatus.ToString()
 
                  }).ToListAsync();
             }
@@ -153,7 +151,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
                     Id = x.Id,
                     CaseTypeName = x.Case.CaseType.CaseTypeTitle,
                     CaseNumber = x.Case.CaseNumber,
-                    CreatedAt = x.CreatedAt.ToString(),
+                    CreatedAt = x.Case.CreatedAt.ToString(),
                     ApplicantName = x.Case.Applicant.ApplicantName,
                     ApplicantPhoneNo = x.Case.Applicant.PhoneNumber,
                     EmployeeName = x.Case.Employee.FullName,
@@ -172,7 +170,7 @@ namespace PM_Case_Managemnt_API.Services.CaseService.Encode
 
                 }).ToListAsync(); ;
             }
-            return notfications.OrderByDescending(x=>x.CreatedAt).ToList();
+            return notfications;
         }
 
 

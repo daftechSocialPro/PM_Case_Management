@@ -89,8 +89,6 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
 
         public string ? ShelfNumber { get; set; }
 
-
-
         public List<SelectListDto> ? Attachments { get; set; } 
         
         public List<CaseDetailStructureDto>? CaseDetailStructures { get; set; }

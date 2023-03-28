@@ -56,10 +56,13 @@ export class PlansComponent implements OnInit {
   }
 
   tasks(plan: PlanView) {
-
     const planId = plan ? plan.Id : null
-    this.router.navigate(['task', { planId: planId }])
-
+    if(plan.HasTask){
+      this.router.navigate(['task', { planId: planId }]);
+    }
+    else{
+      this.router.navigate(['activityparent',{parentId:planId,requestFrom:'PLAN'}])
+    }
   }
 
   applyStyles(act: number, completed: number) {

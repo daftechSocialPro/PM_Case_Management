@@ -21,7 +21,7 @@
                      <div>
                         <h4>{{act.Name}}</h4>
                         <p>Needs Approval</p>
-                        <span class="badge bg-danger text-white">{{act.ProgresscreatedAt| date:'fullDate'}}</span>
+                        <p>{{act.ProgresscreatedAt| date:'fullDate'}}</p>
                      </div>
                   </li>
                   <li>
@@ -49,7 +49,7 @@
                       <div>
                          <h4>{{case.CaseNumber}} (Needs Action)</h4>
                          <p>{{case.CaseTypeName}}</p>
-                         <p class="badge bg-danger text-white">{{case.CreatedAt | date:'fullDate'}}</p>
+                         <p>{{case.CreatedAt | date:'fullDate'}}</p>
                       </div>
                    </a>
                 </li>
