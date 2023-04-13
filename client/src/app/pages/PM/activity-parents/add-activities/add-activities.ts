@@ -10,6 +10,7 @@ export interface ActivityDetailDto {
 }
 
 export interface SubActivityDetailDto {
+
     SubActivityDesctiption:string,
     StartDate:string,
     EndDate :string,
@@ -23,9 +24,8 @@ export interface SubActivityDetailDto {
     Goal:number,
     TeamId:string,
     CommiteeId:string,
-    PlanId?:string,
-    TaskId?:string,
     Employees :string[]
+
 }
 
     

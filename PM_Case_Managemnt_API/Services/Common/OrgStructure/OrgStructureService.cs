@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using PM_Case_Managemnt_API.Data;
 using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.Models.Common;
+using System.Dynamic;
 
 namespace PM_Case_Managemnt_API.Services.Common
 {
@@ -98,6 +100,94 @@ namespace PM_Case_Managemnt_API.Services.Common
             _dBContext.Entry(orgStructure2).State = EntityState.Modified;
             await _dBContext.SaveChangesAsync();
             return 1;
+
+        }
+
+
+        public async Task<List<DiagramDto>> getDIagram(Guid? BranchId)
+        {
+
+            var orgStructures = _dBContext.OrganizationalStructures.Include(x => x.ParentStructure).ToList();
+            var employess = _dBContext.Employees.ToList();
+            var childs = new List<DiagramDto>();
+
+            var parentStructure = orgStructures.FirstOrDefault(x => x.ParentStructureId == null);
+
+            var DiagramDro = new DiagramDto()
+            {
+                data = new
+                {
+                    name = parentStructure.StructureName,
+                    weight = "  ( " + Decimal.Round((decimal)(parentStructure.Weight), 2) + "% ",
+                    head = employess.FirstOrDefault(x => x.OrganizationalStructureId == parentStructure.Id && x.Position == Position.Director)?.Title + " " +
+                                       employess.FirstOrDefault(x => x.OrganizationalStructureId == parentStructure.Id && x.Position == Position.Director)?.FullName
+
+                },
+                label = parentStructure.StructureName,
+                expanded = true,
+                type = "organization",
+                styleClass = "bg-success text-white",
+                id = parentStructure.Id,
+                order = parentStructure.Order,
+                children = new List<DiagramDto>()
+          
+            };
+
+            childs.Add(DiagramDro);
+
+            var remainingStractures = orgStructures.Where(x => x.ParentStructureId != null).OrderBy(x => x.Order).Select(x => x.ParentStructureId).Distinct();
+
+            foreach (var items in remainingStractures)
+            {
+                var children = orgStructures.Where(x => x.ParentStructureId == items).Select(x => new DiagramDto
+                {
+                    data = new
+                    {
+                        name = x.StructureName,
+                        weight = "  ( " + Decimal.Round((decimal)((x.Weight / x.ParentStructure.Weight) * 100), 2) + "% of " + Decimal.Round((decimal)x.ParentStructure.Weight, 2) + " ) ",
+                        head = employess.FirstOrDefault(x => x.OrganizationalStructureId == x.Id && x.Position == Position.Director)?.Title + " " +
+                                       employess.FirstOrDefault(x => x.OrganizationalStructureId == x.Id && x.Position == Position.Director)?.FullName
+
+                    },
+
+                    label = x.StructureName,
+                    expanded = true,
+                    type = "organization",
+                    styleClass = x.Order % 2 == 1 ? "bg-secondary text-white" : "bg-success text-white",
+                    id = x.Id,
+                    parentId = x.ParentStructureId,
+                    order = x.Order,
+                    children = new List<DiagramDto>()
+                }).ToList();
+
+
+                childs.AddRange(children);
+
+
+            }
+            for (var j = childs.Max(x => x.order); j >= 0; j--)
+            {
+                var childList = childs.Where(x => x.order == j).ToList();
+                foreach (var item in childList)
+                {
+
+                    var org = childs.FirstOrDefault(x => x.id == item.parentId);
+
+                    if (org != null)
+                    {
+                        org.children.Add(item);
+                    }
+
+
+                }
+            }
+            List<DiagramDto> result = new List<DiagramDto>();
+
+            if (childs.Any())
+            {
+                result.Add(childs[0]);
+            }
+            return result;           
 
         }
 

@@ -8,7 +8,6 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
     public interface IActivityService
     {
         public Task<int> AddActivityDetails(ActivityDetailDto activityDetail);
-        public Task<int> AddSubActivity(SubActivityDetailDto subActivity);
 
         public Task<int> AddTargetActivities(ActivityTargetDivisionDto targetDivisions);
 

@@ -96,7 +96,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                     _dbContext.Entry(caseToAssign).Property(x => x.AffairStatus).IsModified = true;
 
                     await _dbContext.CaseHistories.AddAsync(startupHistory);
-                    //await _dbContext.SaveChangesAsync();
+                    await _dbContext.SaveChangesAsync();
 
                     foreach (var row in caseAssignDto.ForwardedToStructureId)
                     {
@@ -253,6 +253,13 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                 _dbContext.Entry(currentLastHistory).Property(c => c.AffairHistoryStatus).IsModified = true;
                 _dbContext.Entry(currentLastHistory).Property(c => c.TransferedDateTime).IsModified = true;
 
+                var toEmployee = caseTransferDto.ToEmployeeId == Guid.Empty || caseTransferDto.ToEmployeeId == null ?
+       _dbContext.Employees.FirstOrDefault(
+           e =>
+               e.OrganizationalStructureId == caseTransferDto.ToStructureId &&
+               e.Position == Position.Director).Id : caseTransferDto.ToEmployeeId;
+
+
                 var newHistory = new CaseHistory
                 {
                     Id = Guid.NewGuid(),
@@ -262,7 +269,7 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                     RowStatus = RowStatus.Active,
                     FromEmployeeId = caseTransferDto.FromEmployeeId,
                     FromStructureId = currEmp.OrganizationalStructureId,
-                    ToEmployeeId = caseTransferDto.ToEmployeeId,
+                    ToEmployeeId = toEmployee,
                     ToStructureId = caseTransferDto.ToStructureId,
                     Remark = caseTransferDto.Remark,
                     CaseId = currentLastHistory.CaseId,
@@ -367,7 +374,11 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
                                                    Id = x.Id,
                                                    Name = x.FilePath
 
+
                                                }).ToList();
+
+            attachments.AddRange((from x in _dbContext.FilesInformations.Where(x => x.CaseId == currentHistry.CaseId)
+                             select new SelectListDto { Id = x.Id, Name = x.FilePath, Photo  = x.FileDescription }).ToList());
 
             List<CaseDetailStructureDto> caseDetailstructures = _dbContext.CaseHistories.Include(x => x.FromEmployee).Include(x => x.FromStructure).Where(x => x.CaseId == currentHistry.CaseId).OrderByDescending(x => x.CreatedAt).Select(x => new CaseDetailStructureDto
             {
@@ -470,16 +481,27 @@ namespace PM_Case_Managemnt_API.Services.CaseMGMT
             return caseState;
         }
 
+        public async Task<bool> Ispermitted(Guid employeeId, Guid caseId)
+        {
+            var caseIDD = _dbContext.CaseHistories.Find(caseId).CaseId;
+            var employee = _dbContext.CaseHistories.Where(x => x.CaseId == caseIDD && x.ReciverType==ReciverType.Orginal ).OrderByDescending(z => z.childOrder).FirstOrDefault().ToEmployeeId;
+            if (employeeId.ToString().ToLower() == employee.ToString().ToLower())
+            {
+                return true;
+            }
+            return false; 
 
+        }
 
 
     }
+
+  
 
     public class CaseState
     {
         public string CurrentState { get; set; }
         public string NextState { get; set; }
-
         public List<string> NeededDocuments { get; set; }
     }
 }

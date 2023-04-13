@@ -24,6 +24,7 @@ namespace PM_Case_Managemnt_API.Services.Common.Dashoboard
                  .Include(a => a.CaseType)
                  .Include(a => a.Applicant)
                 .Include(a => a.CaseHistories)
+                            .Include(a => a.Employee.OrganizationalStructure)
                 .Where(a =>
                 a.CreatedAt.Month == DateTime.Now.Month);
             allAffairps = allAffairps.Where(x => x.AffairStatus != AffairStatus.Completed);
@@ -37,10 +38,11 @@ namespace PM_Case_Managemnt_API.Services.Common.Dashoboard
             foreach (var affair in allAffairps.ToList())
             {
                 var eachReport = new TopAffairsViewmodel();
+                eachReport.CaseTypeTitle = affair.CaseType.CaseTypeTitle;
                 eachReport.AffairNumber = affair.CaseNumber;
                 eachReport.ApplicantName = affair.Applicant?.ApplicantName;
                 eachReport.Subject = affair.LetterSubject;
-                var firstOrDefault = affair.CaseHistories.OrderByDescending(x => x.CreatedAt)
+                var firstOrDefault = _dBContext.CaseHistories.Include(x=>x.ToStructure).Where(x=>x.CaseId==affair.Id).OrderByDescending(x => x.CreatedAt)
                     .FirstOrDefault();
                 if (firstOrDefault != null)
                     eachReport.Structure = _dBContext.OrganizationalStructures.Find(firstOrDefault
@@ -98,10 +100,11 @@ namespace PM_Case_Managemnt_API.Services.Common.Dashoboard
             foreach (var affair in allAffairps.ToList())
             {
                 var eachReport = new TopAffairsViewmodel();
+                eachReport.CaseTypeTitle = affair.CaseType.CaseTypeTitle;
                 eachReport.AffairNumber = affair.CaseNumber;
                 eachReport.ApplicantName = affair.Applicant != null ? affair.Applicant.ApplicantName : affair.Employee.FullName;
                 eachReport.Subject = affair.LetterSubject;
-                var firstOrDefault = affair.CaseHistories.OrderByDescending(x => x.CreatedAt)
+                var firstOrDefault = _dBContext.CaseHistories.Include(x => x.ToStructure).Where(x => x.CaseId == affair.Id).OrderByDescending(x => x.CreatedAt)
                     .FirstOrDefault();
                 if (firstOrDefault != null)
                     eachReport.Structure = _dBContext.OrganizationalStructures.Find(firstOrDefault

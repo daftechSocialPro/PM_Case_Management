@@ -25,12 +25,17 @@ export interface ICaseView{
     AffairHistoryStatus :string,
     Attachments:SelectList[],  
     CaseDetailStructures:CaseDetailStructures[],
+    IssueStatus : string
     
+    Remark ?: string,
+    AssignedTo?:string,
+    AssignedBy?:string,
+
     FolderName ?: string 
     RowNumber ?: string 
     ShelfNumber ?: string 
     CaseTypeId? : string 
-    
+    IssueAction?:boolean
 } 
 export interface CaseDetailStructures{
 
@@ -39,3 +44,4 @@ export interface CaseDetailStructures{
     FormStructure :string
     SeenDate :string
 }
+

@@ -36,22 +36,6 @@ namespace PM_Case_Managemnt_API.Controllers.PM
             }
         }
 
-
-        [HttpPost("AddSubActivity")]
-        public IActionResult AddSubActivity([FromBody] SubActivityDetailDto subActivity)
-        {
-            try
-            {
-                var response = _activityService.AddSubActivity(subActivity);
-                return Ok(new { response });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal Server Error : {ex}");
-            }
-        }
-
-
         [HttpPost("targetDivision")]
         public IActionResult AddTargetDivisionActivity(ActivityTargetDivisionDto activityTarget)
         {

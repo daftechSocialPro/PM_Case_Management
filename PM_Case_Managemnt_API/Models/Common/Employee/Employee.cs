@@ -14,18 +14,15 @@ namespace PM_Case_Managemnt_API.Models.Common
 
         public string PhoneNumber { get; set; } = null!;
 
-
-
-        public string ? UserName { get; set; }
-
-        public string ? Password { get; set; }
-
         public virtual OrganizationalStructure OrganizationalStructure { get; set; } = null!;
 
         public Guid OrganizationalStructureId { get; set; }
 
         public Position Position { get; set; }
 
+
+        public string ? UserName { get; set; }
+        public string ? Password { get; set; }
     }
 
     public enum Gender

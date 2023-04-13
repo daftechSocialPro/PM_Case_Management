@@ -20,4 +20,30 @@ namespace PM_Case_Managemnt_API.DTOS.Common
 
         public int RowStatus { get; set; }
     }
+
+
+
+    public  class DiagramDto
+    {
+
+       public string? label { get; set; }
+       public dynamic data { get; set; }
+  
+        public List<DiagramDto> children { get; set; }
+   
+        public bool expanded { get; set; }
+
+        public string? type { get; set; }
+
+        public string? styleClass { get; set; }
+
+        public Guid ? id { get; set; }
+
+        public Guid? parentId { get; set; }
+
+        public int order { get; set; }
+
+
+
+    }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TreeNode } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { barChartDto, IDashboardDto } from '../../casedashboard/IDashboard';
 import { SelectList } from '../common';
@@ -128,6 +129,10 @@ export class OrganizationService {
     return this.http.get<barChartDto>(this.BaseURI+"/Dashboard/GetMonthlyReportBarChart")
   }
   
+
+  getOrgStructureDiagram(){
+    return this.http.get<TreeNode[]>(this.BaseURI+"/OrgStructure/orgdiagram")
+  }
   
 
 }

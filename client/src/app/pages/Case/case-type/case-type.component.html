@@ -39,8 +39,8 @@
                  </td>
                  <td>{{caset.CaseTypeTitle}}</td>
                  <td>{{caset.Remark}}</td>
-                 <td>{{caset.TotalPayment }}</td>
-                 <td>{{caset.MeasurementUnit }}</td>
+                 <td>{{caset.TotalPayment }} ETB</td>
+                 <td>{{caset.Counter }} {{caset.MeasurementUnit }}</td>
                  <td>{{caset.RowStatus }}</td>
                  <td>{{caset.Code }}</td>
                  <td><p-button class="p-button-rounded p-button-success mr-2" type="button" icon="pi pi-plus " (click)="AddChild(caset)"> </p-button></td>
@@ -67,8 +67,8 @@
                                  <tr>
                                     <td>{{child.CaseTypeTitle}}</td>
                                     <td>{{child.Remark}}</td>
-                                    <td>{{child.TotalPayment }}</td>
-                                    <td>{{child.MeasurementUnit }}</td>
+                                    <td>{{child.TotalPayment }} ETB</td>
+                                    <td> {{child.Counter }} {{child.MeasurementUnit }}</td>
                                     <td>{{child.RowStatus }}</td>
                                     <td>{{child.Code }}</td>
 

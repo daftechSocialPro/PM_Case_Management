@@ -112,8 +112,8 @@ builder.Services.AddScoped<IAppointmentWithCalenderService, AppointmentWithCalen
 builder.Services.AddScoped<IFilesInformationService, FilesInformationService>();
 builder.Services.AddScoped<ICaseProccessingService, CaseProccessingService>();
 builder.Services.AddScoped<ICaseReportService, CaserReportService>();
-builder.Services.AddScoped<IDashboardService,DashboardService>(); 
-
+builder.Services.AddScoped<IDashboardService,DashboardService>();
+builder.Services.AddScoped<ICaseIssueService, CaseIssueService>();
 builder.Services.AddScoped<ISMSHelper, SMSHelper>();
 
 //Jwt Authentication

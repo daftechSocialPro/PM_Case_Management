@@ -56,13 +56,9 @@ export class TasksComponent implements OnInit {
   }
 
   TaskDetail(task : TaskView ){
+    
     const taskId = task ? task.Id :null
-    if(!task.HasActivity){
-      this.router.navigate(['activityparent',{parentId:taskId,requestFrom:'TASK'}])
-    }
-    else{
-      this.router.navigate(['activityparent',{parentId:taskId,requestFrom:'ACTIVITY'}])
-    }
+    this.router.navigate(['activityparent',{taskId}])
   }
   hh(value:string){
 

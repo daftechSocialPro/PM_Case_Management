@@ -98,10 +98,10 @@
                                     <span *ngIf="caseD.CaseTypeStatus=='Completed'" class="badge bg-success"
                                     style="font-size: 12px">{{ caseD.CaseTypeStatus}}
                                     {{getChange(caseD.Createdat)}} Hr.</span>
-                                <span *ngIf="getChange(caseD.Createdat) > caseD.CaseCounter"
+                                <span *ngIf="caseD.CaseTypeStatus!='Completed'&&getChange(caseD.Createdat) > caseD.CaseCounter"
                                     class="badge bg-danger" style="font-size: 12px">{{ caseD.CaseTypeStatus}}
                                     {{getChange(caseD.Createdat)}} Hr.</span>
-                                <span *ngIf="getChange(caseD.Createdat) <= caseD.CaseCounter"
+                                <span *ngIf="caseD.CaseTypeStatus!='Completed'&&getChange(caseD.Createdat) <= caseD.CaseCounter"
                                     class="badge bg-danger" style="font-size: 12px">{{ caseD.CaseTypeStatus}}
                                     {{getChange(caseD.Createdat)}} Hr.</span>
                                 </td>

@@ -5,22 +5,22 @@
 namespace PMCaseManagemntAPI.Migrations.DB
 {
     /// <inheritdoc />
-    public partial class usernameandpassword : Migration
+    public partial class caseIssue : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Password",
-                table: "Employees",
-                type: "nvarchar(max)",
-                nullable: true);
+            //migrationBuilder.AddColumn<string>(
+            //    name: "Password",
+            //    table: "Employees",
+            //    type: "nvarchar(max)",
+            //    nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "UserName",
-                table: "Employees",
-                type: "nvarchar(max)",
-                nullable: true);
+            //migrationBuilder.AddColumn<string>(
+            //    name: "UserName",
+            //    table: "Employees",
+            //    type: "nvarchar(max)",
+            //    nullable: true);
         }
 
         /// <inheritdoc />

@@ -36,6 +36,8 @@ export class CaseDetailComponent implements OnInit {
   caseDetail!: ICaseView
   toast !: toastPayload
 
+  permitted :boolean =false;;
+
 
   constructor(
     private caseService: CaseService,
@@ -51,7 +53,17 @@ export class CaseDetailComponent implements OnInit {
     this.user = this.userService.getCurrentUser()
     this.caseHistoryId = this.router.snapshot.paramMap.get('historyId')!
     this.getCaseDetail()
-  
+    this.IsPermitedApi()
+  }
+  IsPermitedApi(){
+    this.caseService.IsPermitted(this.user.EmployeeId, this.caseHistoryId).subscribe({
+      next:(res)=>{
+        this.permitted= res ;
+      },error:(err)=>{
+        console.log(err)
+      
+      }
+    })
   }
 
   getCaseDetail() {
@@ -195,6 +207,8 @@ export class CaseDetailComponent implements OnInit {
 
     return this.commonService.createImgPath(value)
   }
+
+
 
 
 }

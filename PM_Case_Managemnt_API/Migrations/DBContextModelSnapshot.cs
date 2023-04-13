@@ -22,6 +22,57 @@ namespace PMCaseManagemntAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("PM_Case_Managemnt_API.Models.Case.CaseIssue", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AssignedByEmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AssignedToEmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AssignedToStructureId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CaseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ForwardedToEmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("IssueStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Remark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RowStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignedByEmployeeId");
+
+                    b.HasIndex("AssignedToEmployeeId");
+
+                    b.HasIndex("AssignedToStructureId");
+
+                    b.HasIndex("CaseId");
+
+                    b.HasIndex("ForwardedToEmployeeId");
+
+                    b.ToTable("CaseIssues");
+                });
+
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.Applicant", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1788,6 +1839,45 @@ namespace PMCaseManagemntAPI.Migrations
                     b.HasIndex("TaskMemoId");
 
                     b.ToTable("TaskMemoReplies");
+                });
+
+            modelBuilder.Entity("PM_Case_Managemnt_API.Models.Case.CaseIssue", b =>
+                {
+                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "AssignedByEmployee")
+                        .WithMany()
+                        .HasForeignKey("AssignedByEmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "AssignedToEmployee")
+                        .WithMany()
+                        .HasForeignKey("AssignedToEmployeeId");
+
+                    b.HasOne("PM_Case_Managemnt_API.Models.Common.OrganizationalStructure", "AssignedToStructure")
+                        .WithMany()
+                        .HasForeignKey("AssignedToStructureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PM_Case_Managemnt_API.Models.CaseModel.Case", "Case")
+                        .WithMany()
+                        .HasForeignKey("CaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PM_Case_Managemnt_API.Models.Common.Employee", "ForwardedToEmployee")
+                        .WithMany()
+                        .HasForeignKey("ForwardedToEmployeeId");
+
+                    b.Navigation("AssignedByEmployee");
+
+                    b.Navigation("AssignedToEmployee");
+
+                    b.Navigation("AssignedToStructure");
+
+                    b.Navigation("Case");
+
+                    b.Navigation("ForwardedToEmployee");
                 });
 
             modelBuilder.Entity("PM_Case_Managemnt_API.Models.CaseModel.Appointement", b =>

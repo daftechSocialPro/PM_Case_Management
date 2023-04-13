@@ -71,5 +71,18 @@ namespace PM_Case_Managemnt_API.Controllers.Common.Organization
                 return StatusCode(500, $"Internal Server Error : {ex}");
             }
         }
+
+        [HttpGet("orgdiagram")]
+        public async Task<IActionResult> GetOrganizationDiaram(Guid? BranchId)
+        {
+            try
+            {
+                return Ok(await _orgStructureService.getDIagram(BranchId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }

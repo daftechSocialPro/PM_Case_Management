@@ -71,7 +71,7 @@ namespace PM_Case_Managemnt_API.Helpers
             try
             {
                 //reciver = "0937637310";
-                ApplicationUser user = await _authenticationContext.ApplicationUsers.Where(x => x.Id.Equals(UserId)).FirstAsync();
+                ApplicationUser user = await _authenticationContext.ApplicationUsers.Where(x => x.Id.ToLower().Equals(UserId.ToLower())).FirstAsync();
                 Employee employee = _dbContext.Employees.Include(x => x.OrganizationalStructure.OrganizationBranch.OrganizationProfile).FirstOrDefault(x => x.Id == user.EmployeesId);
                 if (orgId != null)
                     employee = _dbContext.Employees.Include(x => x.OrganizationalStructure).FirstOrDefault(x => x.OrganizationalStructureId == orgId);

@@ -9,7 +9,7 @@ import { IEmployeePerformance } from './case-report/employee-performance/IEmploy
 import { ICaseReport, ICaseReportChart } from './case-report/ICaseReport';
 import { ISMSReport } from './case-report/sms-report/ISMSReport';
 import { CaseType, CaseTypeView, FileSettingView } from './case-type/casetype';
-import { ICaseView } from './encode-case/Icase';
+import {  ICaseView } from './encode-case/Icase';
 import { IUnsentMessage } from './list-of-messages/Imessage';
 
 
@@ -28,9 +28,9 @@ export class CaseService {
         return this.http.get<CaseTypeView[]>(this.BaseURI + "/type")
     }
 
-    getOrderNumber(caseTypeId:string){
+    getOrderNumber(caseTypeId: string) {
 
-        return this.http.get<number>(this.BaseURI+"/GetChildOrder?caseTypeId="+caseTypeId)
+        return this.http.get<number>(this.BaseURI + "/GetChildOrder?caseTypeId=" + caseTypeId)
     }
 
     getSelectCasetType() {
@@ -77,15 +77,12 @@ export class CaseService {
         return this.http.get<ICaseView[]>(this.BaseURI + "/encoding?userId=" + userId)
 
     }
-    getMyCaseList (employeeId: string ){
-
-        return this.http.get<ICaseView[]>(this.BaseURI+"/mycaseList?employeeId="+employeeId)
+    getMyCaseList(employeeId: string) {
+        return this.http.get<ICaseView[]>(this.BaseURI + "/mycaseList?employeeId=" + employeeId)
     }
     //notification 
     getCasesNotification(employeeId: string) {
-
         return this.http.get<ICaseView[]>(this.BaseURI + "/getnotification?employeeId=" + employeeId)
-
     }
 
 
@@ -97,7 +94,6 @@ export class CaseService {
             }),
             'responseType': 'text' as 'json'
         }
-
         return this.http.get<string>(this.BaseURI + "/getCaseNumber", HTTPOptions)
     }
 
@@ -107,123 +103,141 @@ export class CaseService {
     assignCase(assigncase: any) {
         return this.http.post(this.BaseURI + "/assign", assigncase)
     }
+    raiseIssue (raiseIssue:any){
+        return this.http.post(this.BaseURI + "/CaseIssue", raiseIssue)
+    }
+
+    getAllIssue (empId : string){
+        return this.http.get<ICaseView[]>(this.BaseURI + "/CaseIssue?employeeId="+empId)
+    }
+
+    takeActionIssueCase (caseActionDto:any){
+
+        return this.http.post(this.BaseURI+"/CaseIssue/takeAction",caseActionDto)
+    }
 
 
 
 
     //casetransaction 
 
-    ConfirmTransaction (confirmtracactionDto : any){
-        return this.http.put(this.BaseURI+"/confirm",confirmtracactionDto)
-   
+    ConfirmTransaction(confirmtracactionDto: any) {
+        return this.http.put(this.BaseURI + "/confirm", confirmtracactionDto)
+
     }
-    GetCaseHistories (EmployeeId : string ,CaseHistoryId:string){
-        
+    GetCaseHistories(EmployeeId: string, CaseHistoryId: string) {
 
-     return this.http.get<ICaseView[]>(this.BaseURI+"/getHistories?EmployeeId="+EmployeeId+"&CaseHistoryId="+CaseHistoryId)
+
+        return this.http.get<ICaseView[]>(this.BaseURI + "/getHistories?EmployeeId=" + EmployeeId + "&CaseHistoryId=" + CaseHistoryId)
     }
 
-    GetCaseDetail (EmployeeId : string ,CaseHistoryId:string){
+    GetCaseDetail(EmployeeId: string, CaseHistoryId: string) {
 
-        return this.http.get<ICaseView>(this.BaseURI+"/getCaseDetail?EmployeeId="+EmployeeId+"&CaseHistoryId="+CaseHistoryId)
-        
+        return this.http.get<ICaseView>(this.BaseURI + "/getCaseDetail?EmployeeId=" + EmployeeId + "&CaseHistoryId=" + CaseHistoryId)
+
     }
 
     //actions
-    AddtoWaiting(caseHistoryId:string){
+    AddtoWaiting(caseHistoryId: string) {
 
-        return this.http.post(this.BaseURI+"/waiting?caseHistoryId="+caseHistoryId,{})
+        return this.http.post(this.BaseURI + "/waiting?caseHistoryId=" + caseHistoryId, {})
     }
-    CompleteCase(completecasedto : any ){
+    CompleteCase(completecasedto: any) {
 
-        return this.http.post (this.BaseURI+"/complete",completecasedto)
+        return this.http.post(this.BaseURI + "/complete", completecasedto)
     }
-    RevertCase (reveertcasedto:any){
+    RevertCase(reveertcasedto: any) {
 
-        return this.http.post (this.BaseURI+"/revert",reveertcasedto)
+        return this.http.post(this.BaseURI + "/revert", reveertcasedto)
     }
-        
-    SendSms (smscasedto:any){
 
-        return this.http.post(this.BaseURI+"/sendSms",smscasedto)
-    }
-    TransferCase(transferCaseDto:FormData){
-        
-        return this.http.post(this.BaseURI+"/transfer",transferCaseDto)
-    }
-    AppointCase (appointment: IAppointmentWithCalander){
+    SendSms(smscasedto: any) {
 
-        return this.http.post<IAppointmentGet>(this.BaseURI+"/appointmetWithCalender",appointment)
+        return this.http.post(this.BaseURI + "/sendSms", smscasedto)
+    }
+    TransferCase(transferCaseDto: FormData) {
+
+        return this.http.post(this.BaseURI + "/transfer", transferCaseDto)
+    }
+    AppointCase(appointment: IAppointmentWithCalander) {
+
+        return this.http.post<IAppointmentGet>(this.BaseURI + "/appointmetWithCalender", appointment)
     }
 
     //
-    getAppointment (employeeId:string){
-
-        return this.http.get<IAppointmentGet[]>(this.BaseURI+"/appointmetWithCalender?employeeId="+employeeId)
+    getAppointment(employeeId: string) {
+        return this.http.get<IAppointmentGet[]>(this.BaseURI + "/appointmetWithCalender?employeeId=" + employeeId)
     }
 
-    getMessages(){
-
-        return this.http.get<IUnsentMessage[]>(this.BaseURI+"/CaseMessages")
+    getMessages() {
+        return this.http.get<IUnsentMessage[]>(this.BaseURI + "/CaseMessages")
     }
-        
+
     //get completed casses to archive 
 
-    getCompletedCases (){
+    getCompletedCases() {
 
-        return this.http.get<ICaseView[]>(this.BaseURI+"/completedList")
-    }
-    
-    archiveCase(archive:any){
-
-        return this.http.post(this.BaseURI+"/archive",archive)
+        return this.http.get<ICaseView[]>(this.BaseURI + "/completedList")
     }
 
-    getArchiveCases (){
+    archiveCase(archive: any) {
 
-        return this.http.get<ICaseView[]>(this.BaseURI+"/getArchivedCases")
+        return this.http.post(this.BaseURI + "/archive", archive)
+    }
+
+    getArchiveCases() {
+
+        return this.http.get<ICaseView[]>(this.BaseURI + "/getArchivedCases")
     }
 
 
     ///report 
 
-    GetCaseReport (startAt?:string, endAt?:string){
+    GetCaseReport(startAt?: string, endAt?: string) {
 
-        return this.http.get<ICaseReport[]>(this.BaseURI+"/CaseREport/GetCaseReport?startAt="+startAt+"&endAt="+endAt)
+        return this.http.get<ICaseReport[]>(this.BaseURI + "/CaseREport/GetCaseReport?startAt=" + startAt + "&endAt=" + endAt)
     }
 
-    GetCaseReportChart(startAt?:string, endAt?:string){
-        return this.http.get<ICaseReportChart>(this.BaseURI+"/CaseReport/GetCasePieChart?startAt="+startAt+"&endAt="+endAt)
+    GetCaseReportChart(startAt?: string, endAt?: string) {
+        return this.http.get<ICaseReportChart>(this.BaseURI + "/CaseReport/GetCasePieChart?startAt=" + startAt + "&endAt=" + endAt)
     }
 
-    GetCaseReportChartByStatus (startAt?:string, endAt?:string) {
+    GetCaseReportChartByStatus(startAt?: string, endAt?: string) {
 
-        return this.http.get<ICaseReportChart>(this.BaseURI+"/CaseReport/GetCasePieChartByStatus?startAt="+startAt+"&endAt="+endAt)
+        return this.http.get<ICaseReportChart>(this.BaseURI + "/CaseReport/GetCasePieChartByStatus?startAt=" + startAt + "&endAt=" + endAt)
     }
 
-    GetCaseEmployeePerformace(key: string){
-        return this.http.get<IEmployeePerformance[]>(this.BaseURI+"/CaseReport/GetCaseEmployeePerformace?key="+key)
+    GetCaseEmployeePerformace(key: string) {
+        return this.http.get<IEmployeePerformance[]>(this.BaseURI + "/CaseReport/GetCaseEmployeePerformace?key=" + key)
     }
 
-    GetSMSReport (startAt?:string ,endAt?:string){
-
-        return this.http.get<ISMSReport[]>(this.BaseURI+"/CaseReport/GetSMSReport?startAt="+startAt+"&endAt="+endAt)
-    }
-    GetCaseDetailReport(){
-        return this.http.get<ICaseDetailReport[]>(this.BaseURI+"/CaseReport/GetCaseDetail")
-    }
-    GetProgresReport (caseId:String){
-
-        return this.http.get<ICaseProgressReport> (this.BaseURI+"/CaseReport/GetCaseDetailProgress?caseId="+caseId)
+    GetSMSReport(startAt?: string, endAt?: string) {
+        return this.http.get<ISMSReport[]>(this.BaseURI + "/CaseReport/GetSMSReport?startAt=" + startAt + "&endAt=" + endAt)
     }
 
-//get crurrent state in transfer 
-    GetCaseState(CaseTypeId:string, historyId:string){
-
-        return this.http.get<ICaseState> (this.BaseURI+"/GetCaseState?caseTypeId="+CaseTypeId+'&caseHistoryId='+historyId)
-
+    GetCaseDetailReport() {
+        return this.http.get<ICaseDetailReport[]>(this.BaseURI + "/CaseReport/GetCaseDetail")
     }
-        
+
+
+    GetProgresReport(caseId: String) {
+        return this.http.get<ICaseProgressReport>(this.BaseURI + "/CaseReport/GetCaseDetailProgress?caseId=" + caseId)
+    }
+
+    //get crurrent state in transfer 
+    GetCaseState(CaseTypeId: string, historyId: string) {
+        return this.http.get<ICaseState>(this.BaseURI + "/GetCaseState?caseTypeId=" + CaseTypeId + '&caseHistoryId=' + historyId)
+    }
+
+    IsPermitted(employeeId: string, caseId: string) {
+        return this.http.get<boolean>(this.BaseURI + "/Ispermitted?employeeId=" + employeeId + '&caseId=' + caseId)
+    }
+
+    GetNotCompletedCases() {
+        return this.http.get<ICaseView[]>(this.BaseURI + "/CaseIssue/getNotCompletedCases")
+    }
+
+
 }
 
 

@@ -23,6 +23,7 @@ export interface CaseTypeView {
     MeasurementUnit: string
     CreatedBy: string
     CreatedAt: string
+    Counter:number
     Children : CaseTypeView[]
     //ParentCaseType?:string
 }

@@ -25,9 +25,13 @@
                {{plan.PlanName}}
             </div>
             <div  style="text-align: right!important;">
-               <span *ngIf="plan.HasTask" class="badge bg-success" >Has Task</span> <span *ngIf="!plan.HasTask" class="badge bg-danger" >Has No Task</span></div>   
+               <span *ngIf="plan.HasTask" class="badge bg-success" >Has Task</span> <span *ngIf="!plan.HasTask" class="badge bg-danger" >Has No Task</span></div>
+                
           </div>
-           </div>
+                      
+                    
+                  
+                    </div>
                <div class="card-body" style="background-color: #f6f9ff !important;">
                   <h5 class="card-title ">
                      <div class="row">
@@ -41,6 +45,9 @@
                      </div>
                   </h5>
 
+
+
+
                   <div class="text-center" style="color: #798eb3;">
                      <span class="card-title"> Planned Budegt :</span>
                      {{plan.PlandBudget}} ETB &nbsp;
@@ -52,7 +59,13 @@
                      {{plan.ProjectManager}} - Project Manager <br />
                      {{plan.Director}} - Director <br />
                      {{plan.FinanceManager }} - Finance
+
                   </div>
+
+
+
+
+
                </div>
                <div class="card-footer">
 

@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   activites!: ActivityView[]
   user!: UserView
   assignedCases !: ICaseView[]
+  issuedCases ! : ICaseView[]
 
   constructor(@Inject(DOCUMENT) private document: Document,
    private authGuard: AuthGuard, 
@@ -35,6 +36,21 @@ export class HeaderComponent implements OnInit {
     this.getActivityForApproval()
 
     this.getAssignedCases()
+    this.getIssuedCases()
+  }
+
+  getIssuedCases (){
+
+    this.caseService.getAllIssue(this.user.EmployeeId).subscribe({
+      next:(res)=>{
+
+        console.log(res)
+        this.issuedCases = res 
+
+      },error:(err)=>{
+        console.error(err)
+      }
+    })
   }
 
   getAssignedCases(){

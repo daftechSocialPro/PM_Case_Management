@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Compile Include="Models\Case\CaseForward.cs" />
+    <Compile Include="Models\Case\CaseIssue.cs" />
     <Compile Include="Models\Case\CaseMessages.cs" />
     <Compile Include="Models\Case\Applicant.cs" />
     <Compile Include="Models\Case\Appointement.cs" />
@@ -77,6 +78,7 @@
     <Folder Include="Assets\ActivityDocuments\" />
     <Folder Include="Assets\Organization\" />
     <Folder Include="Models\Auth\" />
+    <Folder Include="Assets\" />
   </ItemGroup>
 
   <ItemGroup>

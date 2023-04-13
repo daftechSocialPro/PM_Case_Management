@@ -20,8 +20,6 @@ declare const $: any
 export class AddActivitiesComponent implements OnInit {
 
   @Input() task!: TaskView;
-  @Input() requestFrom!: string;
-  @Input() requestFromId!: string;
   activityForm!: FormGroup;
   selectedEmployee: SelectList[] = [];
   user !: UserView;
@@ -41,6 +39,8 @@ export class AddActivitiesComponent implements OnInit {
   ) {
 
     this.activityForm = this.formBuilder.group({
+
+      
       StartDate: ['', Validators.required],
       EndDate: ['', Validators.required],
       ActivityDescription: ['', Validators.required],
@@ -115,17 +115,11 @@ export class AddActivitiesComponent implements OnInit {
   }
 
   submit() {
-    if(this.requestFrom == "PLAN" || this.requestFrom == "TASK"){
-        this.addSubActivity()
-    }
-    else{
-          this.addActivityParent()
-    }
-  }
 
-  addSubActivity(){
     if (this.activityForm.valid) {
-      let actvityP: SubActivityDetailDto = {
+
+      let actvityP: SubActivityDetailDto []= [{
+
         SubActivityDesctiption: this.activityForm.value.ActivityDescription,
         StartDate: this.activityForm.value.StartDate,
         EndDate: this.activityForm.value.EndDate,
@@ -140,81 +134,19 @@ export class AddActivitiesComponent implements OnInit {
         TeamId: this.activityForm.value.TeamId,
         CommiteeId: this.activityForm.value.CommiteeId,
         Employees: this.activityForm.value.AssignedEmployee
-      }
-      if(this.requestFrom == "PLAN"){
-        actvityP.PlanId = this.requestFromId;
-      }
-      else if(this.requestFrom == "TASK"){
-        actvityP.TaskId = this.requestFromId;
-      }
 
-      this.pmService.addSubActivity(actvityP).subscribe({
-        next: (res) => {
-          this.toast = {
-            message: ' Activity Successfully Created',
-            title: 'Successfully Created.',
-            type: 'success',
-            ic: {
-              timeOut: 2500,
-              closeButton: true,
-            } as IndividualConfig,
-          };
-          this.commonService.showToast(this.toast);
-          this.closeModal()
-        }, error: (err) => {
-          this.toast = {
-            message: err.message,
-            title: 'Something went wrong.',
-            type: 'error',
-            ic: {
-              timeOut: 2500,
-              closeButton: true,
-            } as IndividualConfig,
-          };
-          this.commonService.showToast(this.toast);
-          console.error(err)
-        }
-      })
-    }
-  }
-
-  addActivityParent(){
-    if (this.activityForm.valid) {
-      let actvityP: SubActivityDetailDto = {
-        SubActivityDesctiption: this.activityForm.value.ActivityDescription,
-        StartDate: this.activityForm.value.StartDate,
-        EndDate: this.activityForm.value.EndDate,
-        PlannedBudget: this.activityForm.value.PlannedBudget,
-        Weight: this.activityForm.value.Weight,
-        ActivityType: this.activityForm.value.ActivityType,
-        OfficeWork: this.activityForm.value.ActivityType == 0 ? this.activityForm.value.OfficeWork : this.activityForm.value.ActivityType == 1 ? 100 : 0,
-        FieldWork: this.activityForm.value.ActivityType == 0 ? this.activityForm.value.FieldWork : this.activityForm.value.ActivityType == 2 ? 100 : 0,
-        UnitOfMeasurement: this.activityForm.value.UnitOfMeasurement,
-        PreviousPerformance: this.activityForm.value.PreviousPerformance,
-        Goal: this.activityForm.value.Goal,
-        TeamId: this.activityForm.value.TeamId,
-        CommiteeId: this.activityForm.value.CommiteeId,
-        Employees: this.activityForm.value.AssignedEmployee
-      }
-
-      if(this.requestFrom == "Plan"){
-        actvityP.PlanId = this.requestFromId;
-      }
-      else if(this.requestFrom == "Task"){
-        actvityP.TaskId = this.requestFromId;
-      }
-
-      let activityList : SubActivityDetailDto[] = [];
-      activityList.push(actvityP);
+      }]
 
       let addActivityDto: ActivityDetailDto = {
         ActivityDescription: this.activityForm.value.ActivityDescription,
         HasActivity: false,
         TaskId: this.task.Id!,
         CreatedBy: this.user.UserID,
-        ActivityDetails: activityList
+        ActivityDetails: actvityP
       }
       console.log("activity detail", addActivityDto)
+
+
       this.pmService.addActivityParent(addActivityDto).subscribe({
         next: (res) => {
           this.toast = {
@@ -239,14 +171,15 @@ export class AddActivitiesComponent implements OnInit {
             } as IndividualConfig,
           };
           this.commonService.showToast(this.toast);
+
           console.error(err)
         }
       })
+
     }
+
+
   }
-
-
-
 
   closeModal() {
     this.activeModal.close()

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using PM_Case_Managemnt_API.Models.Case;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
 using PM_Case_Managemnt_API.Models.PM;
@@ -53,6 +53,7 @@ namespace PM_Case_Managemnt_API.Data
         public DbSet<Appointement> Appointements { get; set; }
         public DbSet<AppointementWithCalender> AppointementWithCalender { get; set; }
         public DbSet<Case> Cases { get; set; }
+        public DbSet<CaseIssue> CaseIssues { get; set; }
         public DbSet<CaseAttachment> CaseAttachments { get; set; }
         public DbSet<CaseHistory> CaseHistories { get; set; }
         public DbSet<CaseHistoryAttachment> CaseHistoryAttachments { get; set; }

@@ -36,6 +36,8 @@ export class TaskService {
   }
 
   addTaskMemos(taskMemo: any) {
+
+    
     return this.http.post(this.BaseURI + "/TaskMemo", taskMemo)
   }
 

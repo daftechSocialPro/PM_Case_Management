@@ -12,6 +12,8 @@ namespace PM_Case_Managemnt_API.Services.Common
 
         public Task<List<SelectListDto>> getParentStrucctureSelectList(Guid branchId);
 
+        public Task<List<DiagramDto>> getDIagram(Guid? BranchId);
+
 
     }
 }

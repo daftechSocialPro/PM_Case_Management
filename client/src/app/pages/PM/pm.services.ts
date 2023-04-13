@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
-import { ActivityDetailDto, SubActivityDetailDto } from './activity-parents/add-activities/add-activities';
+import { ActivityDetailDto } from './activity-parents/add-activities/add-activities';
 import { ComiteeAdd, CommiteeAddEmployeeView, CommitteeView } from './comittes/committee';
 import { IActivityAttachment } from './tasks/Iactivity';
 import { ActivityTargetDivisionDto, ActivityView, ApprovalProgressDto, ViewProgressDto } from './view-activties/activityview';
@@ -53,11 +53,6 @@ export class PMService {
     addActivityParent(activity: ActivityDetailDto) {
         return this.http.post(this.BaseURI + "/Activity", activity)
     }
-
-    addSubActivity(activity: SubActivityDetailDto) {
-        return this.http.post(this.BaseURI + "/Activity/AddSubActivity", activity)
-    }
-
     addActivityTargetDivision(activityDto: ActivityTargetDivisionDto) {
 
         return this.http.post(this.BaseURI + "/Activity/targetDivision", activityDto)
@@ -79,9 +74,9 @@ export class PMService {
     }
 
     getActivityForApproval(empId: string) {
+
         return this.http.get<ActivityView[]>(this.BaseURI + "/Activity/forApproval?employeeId=" + empId)
     }
-
 
     approveProgress(approvalProgressDto:ApprovalProgressDto){
         return this.http.post(this.BaseURI+"/Activity/approve",approvalProgressDto)
@@ -89,7 +84,9 @@ export class PMService {
 
     
   getActivityAttachments (taskId : string ){
+
     return this.http.get<IActivityAttachment[]>(this.BaseURI+"/Activity/getActivityAttachments?taskId="+taskId)
+    
   }
 
 }

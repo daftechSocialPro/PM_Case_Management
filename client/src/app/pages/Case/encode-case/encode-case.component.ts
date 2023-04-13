@@ -6,6 +6,7 @@ import { CaseService } from '../case.service';
 import { AddCaseComponent } from './add-case/add-case.component';
 import { ICaseView } from './Icase';
 import { AssignCaseComponent } from './assign-case/assign-case.component';
+import { RaiseIssueComponent } from './raise-issue/raise-issue.component';
 
 @Component({
   selector: 'app-encode-case',
@@ -47,6 +48,8 @@ export class EncodeCaseComponent implements OnInit {
       this.getEnocdedCases()
     })
   }
+
+  
 
 
 }

@@ -70,6 +70,8 @@ namespace PM_Case_Managemnt_API.Services.CaseService.CaseTypes
                         MeasurementUnit = caseType.MeasurementUnit.ToString(),
                         Remark = caseType.Remark,
                         RowStatus = caseType.RowStatus.ToString(),
+                        Counter = caseType.Counter,
+
                         TotalPayment = caseType.TotlaPayment,
                         Children = _dbContext.CaseTypes.Where(x=>x.ParentCaseTypeId == caseType.Id).Select(y=> new CaseTypeGetDto
                         {

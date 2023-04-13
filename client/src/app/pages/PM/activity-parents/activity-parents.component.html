@@ -14,9 +14,13 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title d-flex justify-content-between">
-                    {{task.TaskName}}
-                    <button class="btn btn-primary text-end" *ngIf="requestFrom == 'ACTIVITY'" (click)="addActivity()"> Add Activity </button>
-                    <button class="btn btn-primary text-end" *ngIf="requestFrom != 'ACTIVITY' && task.ActivityViewDtos && task.ActivityViewDtos.length == 0" (click)="addActivity()"> Add Activity </button>
+                    {{this.task.TaskName}}
+
+
+
+                    <button class="btn btn-primary text-end" (click)="addActivity()"> Add Activity </button>
+
+
                 </div>
             </div>
             <div class="card-body">
@@ -26,7 +30,7 @@
                         <img style="width: 40px;margin:10px; cursor: pointer;" data-bs-toggle="tooltip"
                             data-bs-placement="top" title={{emp.Name}} *ngFor="let emp of task.TaskMembers"
                             [src]="getImage(emp.Photo!)" alt="Profile" class="rounded-circle">
-                        <hr/>
+                        <hr />
                         <h5 class="card-title">Description</h5>
                         <textarea class="form-control" rows="3" #taskMemoDesc (change)="taskMemo(taskMemoDesc.value)"
                             [disabled]="!isUserTaskMember">{{!isUserTaskMember? "You are not a member to this task":"" }}</textarea>
@@ -34,6 +38,8 @@
                             <button type="button" *ngIf="isUserTaskMember" type="submit"
                                 class="btn btn-success mt-2 text-right">Save</button>
                         </div>
+
+
 
                         <div class="accordion mt-2">
                             <div class="accordion-item">

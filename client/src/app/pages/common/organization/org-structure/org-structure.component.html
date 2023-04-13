@@ -55,13 +55,21 @@
           </table>
         </div>
       </div>
-      <gojs-diagram
-        #myDiag
-        [initDiagram]="initDiagram"
-        [modelData]="diagramModelData"
-        [nodeDataArray]="familyData"
-        [divClassName]="diagramDivClassName"
-      ></gojs-diagram>
+      <div class="card flex justify-content-center p-2">
+        <p-organizationChart [value]="data">
+          
+                <ng-template let-node pTemplate="organization">
+                    <div class="p-2 text-center">
+                        
+                        <div class="font-bold">{{ node.data.name }}</div>
+                        <div>{{node.data.weight}}</div>
+                        <div>{{ node.data.head }}</div>
+                    </div>
+                </ng-template>   
+      
+          
+        </p-organizationChart>
+      </div>
     </div>
   </section>
 </main>

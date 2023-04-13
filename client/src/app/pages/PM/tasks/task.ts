@@ -2,13 +2,16 @@ import { SelectList } from "../../common/common"
 import { ActivityView } from "../view-activties/activityview"
 
 export interface Task {
+
     TaskDescription: String,
     HasActvity: Boolean,
     PlannedBudget: Number,
     PlanId: String,
+
 }
 
 export interface TaskView {
+
     Id?: String
     TaskName?: String
     TaskWeight?: number
@@ -22,17 +25,23 @@ export interface TaskView {
     HasActivity?: Boolean
     PlannedBudget?: number
     RemainingBudget?: number
+
     NumberOfFinalized?: number
+
     NumberOfTerminated?: number
+
+
     TaskMembers?: SelectList[]
     TaskMemos?: TaskMemoView[]
     ActivityViewDtos?: ActivityView[]
-}
 
+}
 export interface TaskMembers {
-    Employee: SelectList[];
-    TaskId: String;
-    RequestFrom: String;
+
+
+    Employee: SelectList[]
+    TaskId: String
+
 }
 
 

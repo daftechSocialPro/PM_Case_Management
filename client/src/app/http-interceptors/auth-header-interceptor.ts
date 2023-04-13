@@ -13,7 +13,7 @@ export class AuthHeaderIneterceptor implements HttpInterceptor {
 
 
         this.spinnerService.requestStarted();
-        console.log("herllo")
+        //console.log("herllo")
         return this.handler(next, request);
     }
     handler(next: any, request: any) {

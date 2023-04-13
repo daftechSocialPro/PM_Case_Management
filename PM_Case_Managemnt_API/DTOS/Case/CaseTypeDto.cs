@@ -31,7 +31,7 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public string MeasurementUnit { get; set; }
         public Guid CreatedBy { get; set; }
         public string CreatedAt { get; set; }
-
+        public float Counter { get; set; }
         public ICollection<CaseTypeGetDto>? Children {get;set;}
         //public Guid? ParentCaseTypeId { get; set; }
        // public virtual CaseType ParentCaseType { get; set; } = null!;

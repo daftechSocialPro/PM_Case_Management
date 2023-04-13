@@ -64,6 +64,8 @@ import { EmployeePerformanceComponent } from './pages/case/case-report/employee-
 import { SmsReportComponent } from './pages/case/case-report/sms-report/sms-report.component';
 import { CaseDetailReportComponent } from './pages/Case/case-report/case-detail-report/case-detail-report.component';
 import { CasedashboardComponent } from './pages/casedashboard/casedashboard.component';
+import { RaiseIssueComponent } from './pages/case/encode-case/raise-issue/raise-issue.component';
+import { IssuedCaseComponent } from './pages/case/issued-case/issued-case.component';
 
 
 
@@ -71,41 +73,47 @@ const routes: Routes = [
 
 
   { path: '', canActivate: [AuthGuard], component: DashboardComponent },
-  { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
-  { path: 'orgprofile', canActivate: [AuthGuard], component: OrgProfileComponent },
-  { path: 'orgbranch', canActivate: [AuthGuard], component: OrgBranchComponent },
-  { path: 'orgstructure', canActivate: [AuthGuard], component: OrgStructureComponent },
-  { path: 'budgetyear', canActivate: [AuthGuard], component: BudgetYearComponent },
-  { path: 'employee', canActivate: [AuthGuard], component: EmployeeComponent },
-  { path: 'unitmeasurment', canActivate: [AuthGuard], component: UnitMeasurementComponent },
-  { path: 'archive', canActivate: [AuthGuard], component: ArchiveManagementComponent },
-  { path: 'usermanagement', canActivate: [AuthGuard], component: UserManagementComponent },
-  { path: 'program', canActivate:[AuthGuard],component:ProgramsComponent},
-  { path: 'plan', canActivate:[AuthGuard],component:PlansComponent},
-  { path: 'task',canActivate:[AuthGuard],component:TasksComponent},  
-  { path: 'activityparent', canActivate:[AuthGuard],component:ActivityParentsComponent},
-  { path: 'encodecase' ,canActivate:[AuthGuard],component : EncodeCaseComponent},
-  { path: 'comittee' ,canActivate : [AuthGuard],component: ComittesComponent},
-  { path: 'assignedactivities' , canActivate:[AuthGuard], component: AssignedActivitiesComponent },
-  { path: 'casetype' ,canActivate:[AuthGuard],component : CaseTypeComponent},
-  { path: 'filesetting' ,canActivate:[AuthGuard],component : FileSettingComponent},
-  { path: 'actForApproval' ,canActivate:[AuthGuard],component : ActivityforapprovalComponent},
-  { path: 'mycaselist', canActivate:[AuthGuard], component:MyCaseListComponent},
-  { path: 'casedetail',canActivate:[AuthGuard],component:CaseDetailComponent},
-  { path: 'caseHistory',canActivate:[AuthGuard],component:CaseHistoryComponent},
-  
-  { path: 'caseappointments',canActivate:[AuthGuard],component:CaseAppointmentsComponent},
-  { path: 'listmessages',canActivate:[AuthGuard],component:ListOfMessagesComponent},
-  { path: 'completedCases', canActivate:[AuthGuard],component: CompletedCasesComponent},
-  { path: 'archivecase', canActivate:[AuthGuard],component: ArchivecaseComponent},
+ // { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
+  { path: 'orgprofile', canActivate: [AuthGuard], component: OrgProfileComponent,data:{permittedRoles : ['Super Admin','Employee Manager']} },
+  { path: 'orgbranch', canActivate: [AuthGuard], component: OrgBranchComponent,data:{permittedRoles : ['Super Admin','Employee Manager']}  },
+  { path: 'orgstructure', canActivate: [AuthGuard], component: OrgStructureComponent ,data:{permittedRoles : ['Super Admin','Employee Manager']}  },
+  { path: 'budgetyear', canActivate: [AuthGuard], component: BudgetYearComponent,data:{permittedRoles : ['Super Admin','Case Admin','PM Admin']} },
+  { path: 'employee', canActivate: [AuthGuard], component: EmployeeComponent ,data:{permittedRoles : ['Super Admin','Employee Manager']}  },
+  { path: 'unitmeasurment', canActivate: [AuthGuard], component: UnitMeasurementComponent,data:{permittedRoles : ['Super Admin']} },
+  { path: 'archive', canActivate: [AuthGuard], component: ArchiveManagementComponent,data :{permittedRoles:['Super Admin','Case Admin','PM Admin'] }},
 
+  { path: 'usermanagement', canActivate: [AuthGuard], component: UserManagementComponent,data:{permittedRoles : ['Super Admin','Employee Manager']} },
+  { path: 'program', canActivate:[AuthGuard],component:ProgramsComponent,data:{permittedRoles: ['Super Admin']}},
+  { path: 'plan', canActivate:[AuthGuard],component:PlansComponent,data:{permittedRoles: ['Super Admin']}},
+  { path: 'task',canActivate:[AuthGuard],component:TasksComponent,data:{permittedRoles: ['Super Admin']}},  
+  { path: 'activityparent', canActivate:[AuthGuard],component:ActivityParentsComponent},
+  { path: 'encodecase' ,canActivate:[AuthGuard],component : EncodeCaseComponent,data:{permittedRoles : ['Super Admin','Case Admin','Encoder']}},
+  { path: 'issuedcase' ,canActivate:[AuthGuard],component : IssuedCaseComponent ,data:{permittedRoles : ['Super Admin','Case Admin','Encoder','Director']}},
+  
+  { path: 'comittee' ,canActivate : [AuthGuard],component: ComittesComponent,data:{permittedRoles : ['Super Admin']}},
+  { path: 'assignedactivities' , canActivate:[AuthGuard], component: AssignedActivitiesComponent },
+  { path: 'casetype' ,canActivate:[AuthGuard],component : CaseTypeComponent,data:{permittedRoles : ['Super Admin','Case Admin']}},
+  { path: 'filesetting' ,canActivate:[AuthGuard],component : FileSettingComponent,data:{permittedRoles : ['Super Admin','Case Admin']}},
+  { path: 'actForApproval' ,canActivate:[AuthGuard],component : ActivityforapprovalComponent},
+  { path: 'mycaselist', canActivate:[AuthGuard], component:MyCaseListComponent,data:{permittedRoles:['Super Admin','Case Admin','Encoder','Director','Member','Secretery','Employee Manager']}},
+  { path: 'casedetail',canActivate:[AuthGuard],component:CaseDetailComponent,data:{permittedRoles : ['Super Admin','Case Admin','Encoder','Director','Member','Secretery','Employee Manager']}},
+  { path: 'caseHistory',canActivate:[AuthGuard],component:CaseHistoryComponent,data:{permittedRoles : ['Super Admin','Case Admin','Encoder','Director','Member','Secretery','Employee Manager']}},
+  
+  { path: 'caseappointments',canActivate:[AuthGuard],component:CaseAppointmentsComponent,data:{permittedRoles : ['Super Admin','Case Admin','Encoder','Director','Member','Secretery','Employee Manager']}},
+  { path: 'listmessages',canActivate:[AuthGuard],component:ListOfMessagesComponent,data:{permittedRoles : ['Super Admin','Director','Case Admin']}},
+  { path: 'completedCases', canActivate:[AuthGuard],component: CompletedCasesComponent,data:{permittedRoles : ['Super Admin','Case Admin','Director']}},
+  { path: 'archivecase', canActivate:[AuthGuard],component: ArchivecaseComponent, data : {permittedRoles:['Super Admin','Case Admin','Director']}},
+
+
+
+  
 //report 
-{ path: 'casereport', canActivate:[AuthGuard],component: CaseReportComponent},
-{ path: 'empperformance', canActivate:[AuthGuard], component: EmployeePerformanceComponent },
-{ path: 'smsreport', canActivate:[AuthGuard], component : SmsReportComponent},
-{ path: 'casedetailreport', canActivate:[AuthGuard],component: CaseDetailReportComponent},
+{ path: 'casereport', canActivate:[AuthGuard],component: CaseReportComponent,data:{permittedRoles : ['Super Admin','Director','Case Admin']}},
+{ path: 'empperformance', canActivate:[AuthGuard], component: EmployeePerformanceComponent,data:{permittedROels : ['Super Admin','Director','Case Admin','Member','Secretery','Employee Manager','Encoder']} },
+{ path: 'smsreport', canActivate:[AuthGuard], component : SmsReportComponent,data : {permittedRoles:['Super Admin','Director','Case Admin','Secretery']}},
+{ path: 'casedetailreport', canActivate:[AuthGuard],component: CaseDetailReportComponent,data:{permittedRoles : ['Super Admin','Director','Case Admin']}},
 { path: 'user-profile',canActivate:[AuthGuard], component: UsersProfileComponent },
-{ path: 'casedashboard',canActivate:[AuthGuard], component: CasedashboardComponent },
+{ path: 'casedashboard',canActivate:[AuthGuard], component: CasedashboardComponent,data:{permittedRoles:['Super Admin','Case Admin','Encoder','Director','Member','Secretery','Employee Manager']} },
 
 
   { path: 'alerts', component: AlertsComponent },

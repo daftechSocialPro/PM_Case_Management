@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PM_Case_Managemnt_API.DTOS.Common;
+using PM_Case_Managemnt_API.Models.Case;
 using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
 
@@ -34,8 +35,21 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public Guid? AssignedToEmployeeId { get; set; }
         public Guid AssignedToStructureId { get; set; }
         public Guid[]? ForwardedToStructureId { get; set; }
+        public string ? Remark { get; set; }
 
        
+
+    }
+    public class CaseIssueDto
+    {
+        public Guid CaseId { get; set; }
+        public Guid AssignedByEmployeeId { get; set; }
+        public Guid? AssignedToEmployeeId { get; set; }
+        public Guid AssignedToStructureId { get; set; }
+        public Guid? ForwardedToStructureId { get; set; }
+        public string? Remark { get; set; }
+
+
 
     }
     public class CaseEncodePostDto
@@ -89,6 +103,14 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
 
         public string ? ShelfNumber { get; set; }
 
+        public string  ? Remark { get; set; }
+
+        public string? IssueStatus { get; set; }
+        public string ? AssignedTo { get; set; }
+        public string? AssignedBy { get; set; }
+
+        public bool IssueAction { get; set; }
+        
         public List<SelectListDto> ? Attachments { get; set; } 
         
         public List<CaseDetailStructureDto>? CaseDetailStructures { get; set; }
@@ -100,7 +122,14 @@ namespace PM_Case_Managemnt_API.DTOS.CaseDto
         public string FormStructure { get; set; }
         public string SeenDate { get; set; }
     }
+    public class CaseIssueActionDto
+    { 
+        
+        public Guid issueCaseId { get; set; }
+        public string action { get; set; }
+         
 
+    }
     public class CaseEncodeBaseDto
     {
         public Guid? ApplicantId { get; set; }

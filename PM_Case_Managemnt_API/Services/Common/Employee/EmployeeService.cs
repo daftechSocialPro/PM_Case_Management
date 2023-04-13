@@ -196,7 +196,7 @@ namespace PM_Case_Managemnt_API.Services.Common
             {
                 foreach (var affair in affairs)
                 {
-                    var maxChild = _dBContext.CaseHistories.Where(x=>x.CaseId == affair.Id).FirstOrDefault().childOrder;
+                    var maxChild = _dBContext.CaseHistories.Where(x=>x.CaseId == affair.Id).OrderByDescending(z => z.childOrder).FirstOrDefault().childOrder;
                     workLoad += _dBContext.CaseHistories.Count(y => y.ToEmployeeId == emp.Id && (y.childOrder == maxChild) && y.CaseId == affair.Id);
                 }
                 emp.Name += " ( " + workLoad.ToString() + " Total Tasks )";
