@@ -43,13 +43,23 @@ namespace PM_Case_Managemnt_API.Services.PM.Program
                               ProgramName = p.ProgramName,
                               ProgramBudgetYear = p.ProgramBudgetYear.Name + " ( " + p.ProgramBudgetYear.FromYear + " - " + p.ProgramBudgetYear.ToYear + " )",
                               NumberOfProjects =  _dBContext.Plans.Where(x=>x.ProgramId == p.Id).Count() , //must be seen
-                              ProgramStructure =  _dBContext.Plans.Include(x=>x.Structure).Where(x=>x.ProgramId == p.Id).Select(x=> new ProgramStructureDto {
-                              
-                              StructureName=x.Structure.StructureName,
-                              StructureHead = _dBContext.Employees.Where(y=>y.OrganizationalStructureId == x.StructureId && y.Position == Position.Director ).FirstOrDefault().FullName
-                              
-                              
-                              }).ToList(),
+                              ProgramStructure = _dBContext.Plans
+    .Include(x => x.Structure)
+    .Where(x => x.ProgramId == p.Id)
+    .Select(x => new ProgramStructureDto
+    {
+        StructureName = x.Structure.StructureName + "( "+ _dBContext.Employees.Where(y => y.OrganizationalStructureId == x.StructureId && y.Position == Position.Director).FirstOrDefault().FullName +" )",
+        //StructureHead = 
+    })
+    .GroupBy(x => x.StructureName)
+    .Select(g => new ProgramStructureDto
+    {
+        StructureName = g.Key,
+        StructureHead = g.Count().ToString() + " Projects"
+
+
+    })
+    .ToList(),
                               ProgramPlannedBudget = p.ProgramPlannedBudget,
                               Remark = p.Remark
 

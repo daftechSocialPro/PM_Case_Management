@@ -27,6 +27,7 @@
     "angular2-image-gallery": "^15.0.0",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.2.1",
+    "core-js": "^3.30.0",
     "dropify": "^0.2.2",
     "ethiopian-date": "^0.0.6",
     "gojs": "^2.3.3",

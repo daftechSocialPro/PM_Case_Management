@@ -1,4 +1,5 @@
-﻿using PM_Case_Managemnt_API.DTOS.Common;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using PM_Case_Managemnt_API.DTOS.Common;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PM_Case_Managemnt_API.DTOS.PM
@@ -117,20 +118,21 @@ namespace PM_Case_Managemnt_API.DTOS.PM
     {
         public SelectListDto[] Employee { get; set; }
         public Guid TaskId { get; set; }
+        public string RequestFrom { get; set; } = null!;
     }
 
     public class TaskMemoDto 
         {
-        public SelectListDto Employee { get; set; }
-        public string  Description { get; set; }
-
+        public SelectListDto Employee { get; set; } = null!;
+        public string Description { get; set; } = null!;
         public DateTime DateTime { get; set; }
     }
     public class TaskMemoRequestDto
     {
-      public Guid   EmployeeId { get; set; }
-      public string Description { get; set; }
-      public Guid TaskId { get; set; }
+        public Guid EmployeeId { get; set; }
+        public string Description { get; set; } = null!;
+        public Guid TaskId { get; set; }
+        public string RequestFrom { get; set; } = null!;
     }
 
 

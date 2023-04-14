@@ -7,7 +7,7 @@ import { UserService } from '../../pages-login/user.service';
 
 import { ActivityTargetComponent } from './activity-target/activity-target.component';
 
-import { ActivityView } from './activityview';
+import { ActivityView, MonthPerformanceView } from './activityview';
 import { AddProgressComponent } from './add-progress/add-progress.component';
 import { ViewProgressComponent } from './view-progress/view-progress.component';
 
@@ -58,31 +58,58 @@ export class ViewActivtiesComponent implements OnInit {
     modalRef.componentInstance.activity = this.actView
   }
 
-  AddProgress(){
-    let modalRef = this.modalService.open(AddProgressComponent,{size:'lg',backdrop:'static'})
-    modalRef.componentInstance.activity =this.actView
-    modalRef.componentInstance.ProgressStatus="0"
+  AddProgress() {
+    let modalRef = this.modalService.open(AddProgressComponent, { size: 'lg', backdrop: 'static' })
+    modalRef.componentInstance.activity = this.actView
+    modalRef.componentInstance.ProgressStatus = "0"
   }
-  FinalizeProgress(){
-    let modalRef = this.modalService.open(AddProgressComponent,{size:'lg',backdrop:'static'})
-    modalRef.componentInstance.activity =this.actView
-    modalRef.componentInstance.ProgressStatus="1"
+  FinalizeProgress() {
+    let modalRef = this.modalService.open(AddProgressComponent, { size: 'lg', backdrop: 'static' })
+    modalRef.componentInstance.activity = this.actView
+    modalRef.componentInstance.ProgressStatus = "1"
   }
 
-  ViewProgress(){
+  ViewProgress() {
 
-    let modalRef = this.modalService.open(ViewProgressComponent,{size:'xl',backdrop:'static'})
+    let modalRef = this.modalService.open(ViewProgressComponent, { size: 'xl', backdrop: 'static' })
     modalRef.componentInstance.activity = this.actView
 
   }
 
-  applyStyles(value: number){
+  applyStyles(value: number) {
 
     let percentage = value
     const styles = { 'width': percentage + "%" };
     return styles;
   }
 
+
+  getUpTo(index: number, list: MonthPerformanceView[]) {
+
+    let actualNumber = 0
+    let upToNumber = 0
+    let total = 0
+    list = list.sort((a, b) => a.Order - b.Order).slice(0, index + 1);
+
+    list.map((item, index) => {
+      actualNumber += item.Actual
+      upToNumber += item.Planned
+
+    })
+
+    if (upToNumber != 0) {
+
+      total = (actualNumber / upToNumber) * 100
+    }
+    else {
+      total = 0
+    }
+
+    return total;
+
+
+
+  }
 
 
 

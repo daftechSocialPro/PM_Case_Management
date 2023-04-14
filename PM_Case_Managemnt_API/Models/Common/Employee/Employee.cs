@@ -21,8 +21,8 @@ namespace PM_Case_Managemnt_API.Models.Common
         public Position Position { get; set; }
 
 
-        public string ? UserName { get; set; }
-        public string ? Password { get; set; }
+        public string UserName { get; set; }
+        public string  Password { get; set; }
     }
 
     public enum Gender

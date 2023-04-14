@@ -2,7 +2,7 @@
 using PM_Case_Managemnt_API.DTOS.CaseDto;
 using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.Models.CaseModel;
-using PMCaseManagemntAPI.Migrations.DB;
+
 
 namespace PM_Case_Managemnt_API.Services.CaseMGMT
 {

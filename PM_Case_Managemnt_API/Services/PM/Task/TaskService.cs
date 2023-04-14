@@ -5,6 +5,8 @@ using PM_Case_Managemnt_API.DTOS.PM;
 using PM_Case_Managemnt_API.Models.Common;
 using PM_Case_Managemnt_API.Models.PM;
 using System.Net.Sockets;
+using System.Numerics;
+using System.Threading.Tasks;
 
 namespace PM_Case_Managemnt_API.Services.PM
 {
@@ -37,145 +39,303 @@ namespace PM_Case_Managemnt_API.Services.PM
         }
 
         public async Task<int> AddTaskMemo(TaskMemoRequestDto taskMemo)
-
-
         {
-
             var taskMemo1 = new TaskMemo
             {
                 Id = Guid.NewGuid(),
                 CreatedAt = DateTime.Now,
                 EmployeeId = taskMemo.EmployeeId,
-                TaskId = taskMemo.TaskId,
                 Description = taskMemo.Description,
-
-
-
             };
-
+            if (taskMemo.RequestFrom == "PLAN")
+            {
+                taskMemo1.PlanId = taskMemo.TaskId;
+            }
+            else
+            {
+                taskMemo1.TaskId = taskMemo.TaskId;
+            }
             await _dBContext.AddAsync(taskMemo1);
             await _dBContext.SaveChangesAsync();
             return 1;
-
         }
 
         public async Task<TaskVIewDto> GetSingleTask(Guid taskId)
         {
 
-            var task = _dBContext.Tasks.Where(x => x.Id == taskId).ToList();
+            var task = await _dBContext.Tasks.FirstOrDefaultAsync(x => x.Id == taskId);
 
-            var taskMembers = (from t in _dBContext.TaskMembers.Include(x => x.Employee).Where(x => x.TaskId == taskId)
+            if (task != null)
+            {
 
-                               select new SelectListDto
-                               {
-                                   Id = t.Id,
-                                   Name = t.Employee.FullName,
-                                   Photo = t.Employee.Photo,
-                                   EmployeeId = t.EmployeeId.ToString()
-                               }).ToList();
+                var taskMembers = (from t in _dBContext.TaskMembers.Include(x => x.Employee).Where(x => x.TaskId == task.Id)
+                                   select new SelectListDto
+                                   {
+                                       Id = t.Id,
+                                       Name = t.Employee.FullName,
+                                       Photo = t.Employee.Photo,
+                                       EmployeeId = t.EmployeeId.ToString()
+                                   }).ToList();
 
-            var taskMemos = (from t in _dBContext.TaskMemos.Include(x => x.Employee).Where(x => x.TaskId == taskId)
-                             select new TaskMemoDto
-                             {
-                                 Employee = new SelectListDto
+
+
+                var taskMemos = (from t in _dBContext.TaskMemos.Include(x => x.Employee).Where(x => x.TaskId == taskId)
+                                 select new TaskMemoDto
                                  {
-                                     Id = t.EmployeeId,
-                                     Name = t.Employee.FullName,
-                                     Photo = t.Employee.Photo,
-                                 },
-                                 DateTime = t.CreatedAt,
-                                 Description = t.Description
+                                     Employee = new SelectListDto
+                                     {
+                                         Id = t.EmployeeId,
+                                         Name = t.Employee.FullName,
+                                         Photo = t.Employee.Photo,
+                                     },
+                                     DateTime = t.CreatedAt,
+                                     Description = t.Description
 
-                             }).ToList();
-            var activityProgress = _dBContext.ActivityProgresses;
+                                 }).ToList();
 
-            var activityViewDtos = (from a in _dBContext.ActivityParents.Where(x => x.TaskId == taskId)
-                                    join e in _dBContext.Activities.Include(x => x.UnitOfMeasurement) on a.Id equals e.ActivityParentId
-                                    // join ae in _dBContext.EmployeesAssignedForActivities.Include(x=>x.Employee) on e.Id equals ae.ActivityId
-                                    select new ActivityViewDto
-                                    {
-                                        Id = e.Id,
-                                        Name = e.ActivityDescription,
-                                        PlannedBudget = e.PlanedBudget,
-                                        ActivityType = e.ActivityType.ToString(),
-                                        Weight = e.Weight,
-                                        Begining = e.Begining,
-                                        Target = e.Goal,
-                                        UnitOfMeasurment = e.UnitOfMeasurement.Name,
-                                        OverAllPerformance = 0,
-                                        StartDate = e.ShouldStat.ToString(),
-                                        EndDate = e.ShouldEnd.ToString(),
-                                        Members = _dBContext.EmployeesAssignedForActivities.Include(x => x.Employee).Where(x => x.ActivityId == e.Id).Select(y => new SelectListDto
+
+                var activityProgress = _dBContext.ActivityProgresses;
+
+                var activityViewDtos = new List<ActivityViewDto>();
+
+                if (task.HasActivityParent)
+                {
+                    activityViewDtos = (from a in _dBContext.ActivityParents.Where(x => x.TaskId == taskId)
+                                        join e in _dBContext.Activities.Include(x => x.UnitOfMeasurement) on a.Id equals e.ActivityParentId
+                                        // join ae in _dBContext.EmployeesAssignedForActivities.Include(x=>x.Employee) on e.Id equals ae.ActivityId
+                                        select new ActivityViewDto
                                         {
-                                            Id = y.Id,
-                                            Name = y.Employee.FullName,
-                                            Photo = y.Employee.Photo,
-                                            EmployeeId = y.EmployeeId.ToString(),
+                                            Id = e.Id,
+                                            Name = e.ActivityDescription,
+                                            PlannedBudget = e.PlanedBudget,
+                                            ActivityType = e.ActivityType.ToString(),
+                                            Weight = e.Weight,
+                                            Begining = e.Begining,
+                                            Target = e.Goal,
+                                            UnitOfMeasurment = e.UnitOfMeasurement.Name,
+                                            OverAllPerformance = 0,
+                                            StartDate = e.ShouldStat.ToString(),
+                                            EndDate = e.ShouldEnd.ToString(),
+                                            Members = _dBContext.EmployeesAssignedForActivities.Include(x => x.Employee).Where(x => x.ActivityId == e.Id).Select(y => new SelectListDto
+                                            {
+                                                Id = y.Id,
+                                                Name = y.Employee.FullName,
+                                                Photo = y.Employee.Photo,
+                                                EmployeeId = y.EmployeeId.ToString(),
 
-                                        }).ToList(),
-                                        MonthPerformance = _dBContext.ActivityTargetDivisions.Where(x => x.ActivityId == e.Id).OrderBy(x => x.Order).Select(y => new MonthPerformanceViewDto
+                                            }).ToList(),
+                                            MonthPerformance = _dBContext.ActivityTargetDivisions.Where(x => x.ActivityId == e.Id).OrderBy(x => x.Order).Select(y => new MonthPerformanceViewDto
+                                            {
+                                                Id = y.Id,
+                                                Order = y.Order,
+                                                Planned = y.Target,
+                                                Actual = activityProgress.Where(x => x.QuarterId == y.Id).Sum(x => x.ActualWorked),
+                                                Percentage = y.Target != 0 ? (activityProgress.Where(x => x.QuarterId == y.Id && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) / y.Target) * 100 : 0
+
+                                            }).ToList(),
+                                            OverAllProgress = activityProgress.Where(x => x.ActivityId == e.Id && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) * 100 / e.Goal,
+
+
+                                        }
+                                  ).ToList();
+                }
+                else
+                {
+                    activityViewDtos = (from e in _dBContext.Activities.Include(x => x.UnitOfMeasurement)
+                                        where e.TaskId == task.Id
+                                        // join ae in _dBContext.EmployeesAssignedForActivities.Include(x=>x.Employee) on e.Id equals ae.ActivityId
+                                        select new ActivityViewDto
                                         {
-                                            Id = y.Id,
-                                            Order = y.Order,
-                                            Planned = y.Target,
-                                            Actual = activityProgress.Where(x => x.QuarterId == y.Id).Sum(x => x.ActualWorked),
-                                            Percentage = y.Target!=0? (activityProgress.Where(x => x.QuarterId == y.Id && x.IsApprovedByDirector==approvalStatus.approved &&x.IsApprovedByFinance==approvalStatus.approved &&x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) / y.Target) * 100:0
+                                            Id = e.Id,
+                                            Name = e.ActivityDescription,
+                                            PlannedBudget = e.PlanedBudget,
+                                            ActivityType = e.ActivityType.ToString(),
+                                            Weight = e.Weight,
+                                            Begining = e.Begining,
+                                            Target = e.Goal,
+                                            UnitOfMeasurment = e.UnitOfMeasurement.Name,
+                                            OverAllPerformance = 0,
+                                            StartDate = e.ShouldStat.ToString(),
+                                            EndDate = e.ShouldEnd.ToString(),
+                                            Members = _dBContext.EmployeesAssignedForActivities.Include(x => x.Employee).Where(x => x.ActivityId == e.Id).Select(y => new SelectListDto
+                                            {
+                                                Id = y.Id,
+                                                Name = y.Employee.FullName,
+                                                Photo = y.Employee.Photo,
+                                                EmployeeId = y.EmployeeId.ToString(),
 
-                                        }).ToList(),
-                                           OverAllProgress = activityProgress.Where(x => x.ActivityId == e.Id && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) * 100 / e.Goal,
+                                            }).ToList(),
+                                            MonthPerformance = _dBContext.ActivityTargetDivisions.Where(x => x.ActivityId == e.Id).OrderBy(x => x.Order).Select(y => new MonthPerformanceViewDto
+                                            {
+                                                Id = y.Id,
+                                                Order = y.Order,
+                                                Planned = y.Target,
+                                                Actual = activityProgress.Where(x => x.QuarterId == y.Id).Sum(x => x.ActualWorked),
+                                                Percentage = y.Target != 0 ? (activityProgress.Where(x => x.QuarterId == y.Id && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) / y.Target) * 100 : 0
+
+                                            }).ToList(),
+                                            OverAllProgress = activityProgress.Where(x => x.ActivityId == e.Id && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) * 100 / e.Goal,
 
 
-                                    }
-                                    ).ToList();
+                                        }
+                                          ).ToList();
+                }
 
 
-          
 
-            return (from t in task
-                    select new TaskVIewDto
+
+
+
+                return new TaskVIewDto
+                {
+
+                    Id = task.Id,
+                    TaskName = task.TaskDescription,
+                    TaskMembers = taskMembers,
+                    TaskMemos = taskMemos,
+                    PlannedBudget = task.PlanedBudget,
+                    RemainingBudget = task.PlanedBudget - activityViewDtos.Sum(x => x.PlannedBudget),
+                    ActivityViewDtos = activityViewDtos,
+                    TaskWeight = activityViewDtos.Sum(x => x.Weight),
+                    RemianingWeight = 100 - activityViewDtos.Sum(x => x.Weight),
+                    NumberofActivities = _dBContext.Activities.Include(x => x.ActivityParent).Count(x => x.TaskId == task.Id || x.ActivityParent.TaskId == task.Id)
+                };
+            }
+            else
+            {
+                var plan = await _dBContext.Plans.FirstOrDefaultAsync(x => x.Id == taskId);
+
+                if (plan != null)
+                {
+                    var taskMembers = (from t in _dBContext.TaskMembers.Include(x => x.Employee).Where(x => x.PlanId == plan.Id)
+                                       select new SelectListDto
+                                       {
+                                           Id = t.Id,
+                                           Name = t.Employee.FullName,
+                                           Photo = t.Employee.Photo,
+                                           EmployeeId = t.EmployeeId.ToString()
+                                       }).ToList();
+
+
+
+                    var taskMemos = (from t in _dBContext.TaskMemos.Include(x => x.Employee).Where(x => x.PlanId == plan.Id)
+                                     select new TaskMemoDto
+                                     {
+                                         Employee = new SelectListDto
+                                         {
+                                             Id = t.EmployeeId,
+                                             Name = t.Employee.FullName,
+                                             Photo = t.Employee.Photo,
+                                         },
+                                         DateTime = t.CreatedAt,
+                                         Description = t.Description
+
+                                     }).ToList();
+
+
+                    var activityProgress = _dBContext.ActivityProgresses;
+
+                    var activityViewDtos = (from e in _dBContext.Activities.Include(x => x.UnitOfMeasurement)
+                                            where e.PlanId == plan.Id
+                                            // join ae in _dBContext.EmployeesAssignedForActivities.Include(x=>x.Employee) on e.Id equals ae.ActivityId
+                                            select new ActivityViewDto
+                                            {
+                                                Id = e.Id,
+                                                Name = e.ActivityDescription,
+                                                PlannedBudget = e.PlanedBudget,
+                                                ActivityType = e.ActivityType.ToString(),
+                                                Weight = e.Weight,
+                                                Begining = e.Begining,
+                                                Target = e.Goal,
+                                                UnitOfMeasurment = e.UnitOfMeasurement.Name,
+                                                OverAllPerformance = 0,
+                                                StartDate = e.ShouldStat.ToString(),
+                                                EndDate = e.ShouldEnd.ToString(),
+                                                Members = _dBContext.EmployeesAssignedForActivities.Include(x => x.Employee).Where(x => x.ActivityId == e.Id).Select(y => new SelectListDto
+                                                {
+                                                    Id = y.Id,
+                                                    Name = y.Employee.FullName,
+                                                    Photo = y.Employee.Photo,
+                                                    EmployeeId = y.EmployeeId.ToString(),
+
+                                                }).ToList(),
+                                                MonthPerformance = _dBContext.ActivityTargetDivisions.Where(x => x.ActivityId == e.Id).OrderBy(x => x.Order).Select(y => new MonthPerformanceViewDto
+                                                {
+                                                    Id = y.Id,
+                                                    Order = y.Order,
+                                                    Planned = y.Target,
+                                                    Actual = activityProgress.Where(x => x.QuarterId == y.Id).Sum(x => x.ActualWorked),
+                                                    Percentage = y.Target != 0 ? (activityProgress.Where(x => x.QuarterId == y.Id && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) / y.Target) * 100 : 0
+
+                                                }).ToList(),
+                                                OverAllProgress = activityProgress.Where(x => x.ActivityId == e.Id && x.IsApprovedByDirector == approvalStatus.approved && x.IsApprovedByFinance == approvalStatus.approved && x.IsApprovedByManager == approvalStatus.approved).Sum(x => x.ActualWorked) * 100 / e.Goal,
+
+
+                                            }
+                                            ).ToList();
+
+                    return new TaskVIewDto
                     {
 
-                        Id = t.Id,
-                        TaskName = t.TaskDescription,
+                        Id = plan.Id,
+                        TaskName = plan.PlanName,
                         TaskMembers = taskMembers,
                         TaskMemos = taskMemos,
-                        PlannedBudget = t.PlanedBudget,
-                        RemainingBudget = t.PlanedBudget - activityViewDtos.Sum(x => x.PlannedBudget),
+                        PlannedBudget = plan.PlandBudget,
+                        RemainingBudget = plan.PlandBudget - activityViewDtos.Sum(x => x.PlannedBudget),
                         ActivityViewDtos = activityViewDtos,
                         TaskWeight = activityViewDtos.Sum(x => x.Weight),
                         RemianingWeight = 100 - activityViewDtos.Sum(x => x.Weight),
-                        NumberofActivities =  _dBContext.Activities.Include(x=>x.ActivityParent).Count(x=>x.TaskId == t.Id || x.ActivityParent.TaskId== t.Id )
+                        NumberofActivities = activityViewDtos.Count()
+                    };
+                }
 
-
-
-
-                    }).FirstOrDefault();
-
-
+            }
+            return new TaskVIewDto();
 
         }
-
         public async Task<int> AddTaskMemebers(TaskMembersDto taskMembers)
         {
-            foreach (var e in taskMembers.Employee)
+            if (taskMembers.RequestFrom == "PLAN")
             {
-                var taskMemebers1 = new TaskMembers
+                foreach (var e in taskMembers.Employee)
                 {
-                    Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.Now,
-                    EmployeeId = e.Id,
-                    TaskId = taskMembers.TaskId
-                };
-                await _dBContext.AddAsync(taskMemebers1);
-                await _dBContext.SaveChangesAsync();
+                    var taskMemebers1 = new TaskMembers
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.Now,
+                        EmployeeId = e.Id,
+                        PlanId = taskMembers.TaskId
+                    };
+                    await _dBContext.AddAsync(taskMemebers1);
+                    await _dBContext.SaveChangesAsync();
+                }
             }
-
-            // await _dBContext.AddAsync(taskMemebers1);
+            else
+            {
+                foreach (var e in taskMembers.Employee)
+                {
+                    var taskMemebers1 = new TaskMembers
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.Now,
+                        EmployeeId = e.Id,
+                        TaskId = taskMembers.TaskId
+                    };
+                    await _dBContext.AddAsync(taskMemebers1);
+                    await _dBContext.SaveChangesAsync();
+                }
+            }
+         
             return 1;
         }
         public async Task<List<SelectListDto>> GetEmployeesNoTaskMembersSelectList(Guid taskId)
         {
-            var taskMembers = _dBContext.TaskMembers.Where(x => x.TaskId == taskId).Select(x => x.EmployeeId).ToList();
+            var taskMembers = _dBContext.TaskMembers.Where(x =>
+            (x.TaskId != Guid.Empty && x.TaskId == taskId) ||
+            (x.PlanId != Guid.Empty && x.PlanId == taskId) ||
+            (x.ActivityParentId != Guid.Empty && x.ActivityParentId == taskId)
+            ).Select(x => x.EmployeeId).ToList();
 
             var EmployeeSelectList = await (from e in _dBContext.Employees
                                             where !(taskMembers.Contains(e.Id))

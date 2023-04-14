@@ -66,14 +66,15 @@ import { CaseDetailReportComponent } from './pages/Case/case-report/case-detail-
 import { CasedashboardComponent } from './pages/casedashboard/casedashboard.component';
 import { RaiseIssueComponent } from './pages/case/encode-case/raise-issue/raise-issue.component';
 import { IssuedCaseComponent } from './pages/case/issued-case/issued-case.component';
+import { PmDashboardComponent } from './pages/pm/pm-dashboard/pm-dashboard.component';
 
 
 
 const routes: Routes = [
 
 
-  { path: '', canActivate: [AuthGuard], component: DashboardComponent },
- // { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
+  { path: '', canActivate: [AuthGuard], component: PagesLoginComponent },
+  { path: 'pmdashboard', canActivate: [AuthGuard], component: PmDashboardComponent,data:{permittedRoles : ['Super Admin','Director','Employee Manager']} },
   { path: 'orgprofile', canActivate: [AuthGuard], component: OrgProfileComponent,data:{permittedRoles : ['Super Admin','Employee Manager']} },
   { path: 'orgbranch', canActivate: [AuthGuard], component: OrgBranchComponent,data:{permittedRoles : ['Super Admin','Employee Manager']}  },
   { path: 'orgstructure', canActivate: [AuthGuard], component: OrgStructureComponent ,data:{permittedRoles : ['Super Admin','Employee Manager']}  },
@@ -83,14 +84,14 @@ const routes: Routes = [
   { path: 'archive', canActivate: [AuthGuard], component: ArchiveManagementComponent,data :{permittedRoles:['Super Admin','Case Admin','PM Admin'] }},
 
   { path: 'usermanagement', canActivate: [AuthGuard], component: UserManagementComponent,data:{permittedRoles : ['Super Admin','Employee Manager']} },
-  { path: 'program', canActivate:[AuthGuard],component:ProgramsComponent,data:{permittedRoles: ['Super Admin']}},
-  { path: 'plan', canActivate:[AuthGuard],component:PlansComponent,data:{permittedRoles: ['Super Admin']}},
-  { path: 'task',canActivate:[AuthGuard],component:TasksComponent,data:{permittedRoles: ['Super Admin']}},  
+  { path: 'program', canActivate:[AuthGuard],component:ProgramsComponent,data:{permittedRoles: ['Super Admin','Director']}},
+  { path: 'plan', canActivate:[AuthGuard],component:PlansComponent,data:{permittedRoles: ['Super Admin','Director']}},
+  { path: 'task',canActivate:[AuthGuard],component:TasksComponent,data:{permittedRoles: ['Super Admin','Director']}},  
   { path: 'activityparent', canActivate:[AuthGuard],component:ActivityParentsComponent},
   { path: 'encodecase' ,canActivate:[AuthGuard],component : EncodeCaseComponent,data:{permittedRoles : ['Super Admin','Case Admin','Encoder']}},
   { path: 'issuedcase' ,canActivate:[AuthGuard],component : IssuedCaseComponent ,data:{permittedRoles : ['Super Admin','Case Admin','Encoder','Director']}},
   
-  { path: 'comittee' ,canActivate : [AuthGuard],component: ComittesComponent,data:{permittedRoles : ['Super Admin']}},
+  { path: 'comittee' ,canActivate : [AuthGuard],component: ComittesComponent,data:{permittedRoles : ['Super Admin','Director']}},
   { path: 'assignedactivities' , canActivate:[AuthGuard], component: AssignedActivitiesComponent },
   { path: 'casetype' ,canActivate:[AuthGuard],component : CaseTypeComponent,data:{permittedRoles : ['Super Admin','Case Admin']}},
   { path: 'filesetting' ,canActivate:[AuthGuard],component : FileSettingComponent,data:{permittedRoles : ['Super Admin','Case Admin']}},
@@ -145,7 +146,7 @@ const routes: Routes = [
   { path: 'pages-error404', component: PagesError404Component },
   { path: 'pages-faemploye', component: PagesFaqComponent },
   { path: 'pages-login', component: PagesLoginComponent },
-  { path: 'pages-register', component: PagesRegisterComponent },
+  { path: 'pages-register', component: PagesRegisterComponent }
   
 ];
 
