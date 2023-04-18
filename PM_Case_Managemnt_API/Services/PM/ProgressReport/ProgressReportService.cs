@@ -346,8 +346,866 @@ namespace PM_Case_Managemnt_API.Services.PM.ProgressReport
            
         }
 
+        public async Task<PlanReportDetailDto> StructureReportByProgram(string BudgetYear, string ProgramId, string ReportBy)
+        {
+            PlanReportDetailDto planReportDetailDto = new PlanReportDetailDto();
+            try
+            {
 
-      
+               
+                if (BudgetYear != null)
+                {
+                    var MonthDeclarator = new List<ActivityTargetDivisionReport>();
+                    List<QuarterMonth> qm = new List<QuarterMonth>();
+                    List<ProgramWithStructure> progWithStructure = new List<ProgramWithStructure>();
+                    Guid newProgram = Guid.Parse(ProgramId);
+                    var StrucsinProg = _dBContext.Plans.Where(x => x.ProgramId == newProgram).Select(x => x.StructureId).Distinct();
+                    var Structures = _dBContext.OrganizationalStructures.Where(x => StrucsinProg.Contains(x.Id)).ToList();
+                    foreach (var stItems in Structures)
+                    {
+                        ProgramWithStructure progwithStu = new ProgramWithStructure();
+                        progwithStu.StrutureName = stItems.StructureName;
+                        progwithStu.StructurePlans = new List<StructurePlan>();
+                        var plansinStruc = _dBContext.Plans
+                            .Include(x=>x.Tasks).ThenInclude(x=>x.ActivitiesParents).ThenInclude(x=>x.Activities).ThenInclude(x => x.UnitOfMeasurement)
+                            .Include(x => x.Tasks).ThenInclude(x => x.Activities).ThenInclude(x => x.UnitOfMeasurement)
+                            .Include(x => x.Activities).ThenInclude(x=>x.UnitOfMeasurement)
+                            .Include(x => x.Tasks).ThenInclude(x => x.ActivitiesParents).ThenInclude(x => x.Activities).ThenInclude(x => x.ActivityTargetDivisions)
+                            .Include(x => x.Tasks).ThenInclude(x => x.Activities).ThenInclude(x => x.ActivityTargetDivisions)
+                            .Include(x => x.Activities).ThenInclude(x => x.ActivityTargetDivisions)
+                            .Where(x => x.StructureId == stItems.Id && x.ProgramId == newProgram).ToList().OrderBy(x => x.CreatedAt);
+                        foreach (var Plitems in plansinStruc)
+                        {
+                            StructurePlan StrPlan = new StructurePlan();
+                            StrPlan.PlanName = Plitems.PlanName;
+                            if (Plitems.HasTask)
+                            {
+                                StrPlan.PlanTasks = new List<PlanTask>();
+                                foreach (var taskPl in Plitems.Tasks.OrderBy(x => x.CreatedAt))
+                                {
+                                    PlanTask pT = new PlanTask();
+                                    pT.TaskName = taskPl.TaskDescription;
+                                    if (taskPl.HasActivityParent)
+                                    {
+                                        pT.TaskActivities = new List<TaskActivity>();
+                                        var ActInTask = taskPl.ActivitiesParents.ToList().OrderBy(x => x.CreatedAt);
+                                        foreach (var parentAct in ActInTask)
+                                        {
+                                            TaskActivity taskActivity = new TaskActivity();
+                                            taskActivity.ActivityName = parentAct.ActivityParentDescription;
+                                            if (parentAct.HasActivity)
+                                            {
+                                                taskActivity.ActSubActivity = new List<ActSubActivity>();
+                                                foreach (var subActs in parentAct.Activities.OrderBy(x => x.CreatedAt))
+                                                {
+                                                    ActSubActivity actSub = new ActSubActivity();
+                                                    actSub.SubActivityDescription = subActs.ActivityDescription;
+                                                    if (actSub != null)
+                                                    {
+                                                        actSub.Weight = subActs.Weight;
+                                                        actSub.Target = subActs.Goal;
+                                                        actSub.UnitOfMeasurement = subActs.UnitOfMeasurement.Name;
+                                                        actSub.subActivityTargetDivision = new List<ActivityTargetDivisionReport>();
+                                                        foreach (var tp in subActs.ActivityTargetDivisions)
+                                                        {
+                                                            ActivityTargetDivisionReport PTar = new ActivityTargetDivisionReport();
+                                                            PTar.Order = tp.Order;
+                                                            PTar.TargetValue = tp.Target;
+                                                            actSub.subActivityTargetDivision.Add(PTar);
+                                                            if (!MonthDeclarator.Where(x => x.Order == tp.Order).Any())
+                                                            {
+                                                                MonthDeclarator.Add(PTar);
+                                                            }
+
+                                                        }
+                                                    }
+
+                                                    taskActivity.ActSubActivity.Add(actSub);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                taskActivity.ActivityTargetDivision = new List<ActivityTargetDivisionReport>();
+                                                var PActTarDiv = parentAct.Activities.FirstOrDefault();
+                                                if (PActTarDiv != null)
+                                                {
+                                                    taskActivity.Weight = PActTarDiv.Weight;
+                                                    taskActivity.UnitOfMeasurement = PActTarDiv.UnitOfMeasurement.Name;
+                                                    taskActivity.Target = PActTarDiv.Goal;
+                                                    foreach (var tp in PActTarDiv.ActivityTargetDivisions)
+                                                    {
+                                                        ActivityTargetDivisionReport PTar = new ActivityTargetDivisionReport();
+                                                        PTar.Order = tp.Order;
+                                                        PTar.TargetValue = tp.Target;
+                                                        taskActivity.ActivityTargetDivision.Add(PTar);
+                                                        if (!MonthDeclarator.Where(x => x.Order == tp.Order).Any())
+                                                        {
+                                                            MonthDeclarator.Add(PTar);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            pT.TaskActivities.Add(taskActivity);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        pT.TaskTargetDivision = new List<ActivityTargetDivisionReport>();
+                                        var tasTarDiv = taskPl.Activities.FirstOrDefault();
+                                        if (tasTarDiv != null)
+                                        {
+                                            pT.Weight = tasTarDiv.Weight;
+                                            pT.UnitOfMeasurement = tasTarDiv.UnitOfMeasurement.Name;
+                                            pT.Target = tasTarDiv.Goal;
+                                            foreach (var tp in tasTarDiv.ActivityTargetDivisions)
+                                            {
+                                                ActivityTargetDivisionReport PTar = new ActivityTargetDivisionReport();
+                                                PTar.Order = tp.Order;
+                                                PTar.TargetValue = tp.Target;
+                                                pT.TaskTargetDivision.Add(PTar);
+                                                if (!MonthDeclarator.Where(x => x.Order == tp.Order).Any())
+                                                {
+                                                    MonthDeclarator.Add(PTar);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    StrPlan.PlanTasks.Add(pT);
+                                }
+                            }
+                            else
+                            {
+                                StrPlan.PlanTargetDivision = new List<ActivityTargetDivisionReport>();
+                                var targetDiv = Plitems.Activities.FirstOrDefault();
+                                if (targetDiv != null)
+                                {
+                                    StrPlan.Weight = targetDiv.Weight;
+                                    StrPlan.UnitOfMeasurement = targetDiv.UnitOfMeasurement.Name;
+                                    StrPlan.Target = targetDiv.Goal;
+                                    foreach (var tP in targetDiv.ActivityTargetDivisions)
+                                    {
+
+                                        ActivityTargetDivisionReport PTar = new ActivityTargetDivisionReport();
+                                        PTar.Order = tP.Order;
+                                        PTar.TargetValue = tP.Target;
+                                        StrPlan.PlanTargetDivision.Add(PTar);
+                                        if (!MonthDeclarator.Where(x => x.Order == tP.Order).Any())
+                                        {
+                                            MonthDeclarator.Add(PTar);
+                                        }
+                                    }
+                                }
+                            }
+
+                            progwithStu.StructurePlans.Add(StrPlan);
+                        }
+
+                        progWithStructure.Add(progwithStu);
+                    }
+
+              
+                    if (MonthDeclarator.Any())
+                    {
+                        if (ReportBy == "Quarter")
+                        {
+                            MonthDeclarator = new List<ActivityTargetDivisionReport>();
+                            int j = 0;
+                            for (int i = 0; i < 4; i++)
+                            {
+                                j = j + 3;
+                                foreach (var stu in progWithStructure)
+                                {
+                                    foreach (var progs in stu.StructurePlans)
+                                    {
+                                        if (progs.PlanTargetDivision != null)
+                                        {
+                                            var newMonth = progs.PlanTargetDivision.Where(x => x.Order <= j && x.MonthName == null);
+                                            ActivityTargetDivisionReport planProgram = new ActivityTargetDivisionReport();
+                                            planProgram.Order = i + 1;
+                                            planProgram.MonthName = "Quarter" + " " + planProgram.Order;
+                                            planProgram.TargetValue = newMonth.Sum(x => x.TargetValue);
+                                            progs.PlanTargetDivision.Add(planProgram);
+                                            progs.PlanTargetDivision.RemoveRange(0, newMonth.Count());
+                                            if (!MonthDeclarator.Where(x => x.Order == planProgram.Order).Any())
+                                            {
+                                                MonthDeclarator.Add(planProgram);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            foreach (var task in progs.PlanTasks)
+                                            {
+                                                if (task.TaskTargetDivision != null)
+                                                {
+                                                    var newMonthTask = task.TaskTargetDivision.Where(x => x.Order <= j && x.MonthName == null);
+                                                    ActivityTargetDivisionReport taskProg = new ActivityTargetDivisionReport();
+                                                    taskProg.Order = i + 1;
+                                                    taskProg.MonthName = "Quarter" + " " + taskProg.Order;
+                                                    taskProg.TargetValue = newMonthTask.Sum(x => x.TargetValue);
+                                                    task.TaskTargetDivision.Add(taskProg);
+                                                    task.TaskTargetDivision.RemoveRange(0, newMonthTask.Count());
+                                                    if (!MonthDeclarator.Where(x => x.Order == taskProg.Order).Any())
+                                                    {
+                                                        MonthDeclarator.Add(taskProg);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    foreach (var activ in task.TaskActivities)
+                                                    {
+                                                        if (activ.ActivityTargetDivision != null)
+                                                        {
+                                                            var newMonthAct = activ.ActivityTargetDivision.Where(x => x.Order <= j && x.MonthName == null);
+                                                            ActivityTargetDivisionReport taskProg = new ActivityTargetDivisionReport();
+                                                            taskProg.Order = i + 1;
+                                                            taskProg.MonthName = "Quarter" + " " + taskProg.Order;
+                                                            taskProg.TargetValue = newMonthAct.Sum(x => x.TargetValue);
+                                                            activ.ActivityTargetDivision.Add(taskProg);
+                                                            activ.ActivityTargetDivision.RemoveRange(0, newMonthAct.Count());
+                                                            if (!MonthDeclarator.Where(x => x.Order == taskProg.Order).Any())
+                                                            {
+                                                                MonthDeclarator.Add(taskProg);
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            foreach (var subAct in activ.ActSubActivity)
+                                                            {
+                                                                if (subAct.subActivityTargetDivision != null)
+                                                                {
+                                                                    var newMonthSAct = subAct.subActivityTargetDivision.Where(x => x.Order <= j && x.MonthName == null);
+                                                                    ActivityTargetDivisionReport taskProg = new ActivityTargetDivisionReport();
+                                                                    taskProg.Order = i + 1;
+                                                                    taskProg.MonthName = "Quarter" + " " + taskProg.Order;
+                                                                    taskProg.TargetValue = newMonthSAct.Sum(x => x.TargetValue);
+                                                                    subAct.subActivityTargetDivision.Add(taskProg);
+                                                                    subAct.subActivityTargetDivision.RemoveRange(0, newMonthSAct.Count());
+                                                                    if (!MonthDeclarator.Where(x => x.Order == taskProg.Order).Any())
+                                                                    {
+                                                                        MonthDeclarator.Add(taskProg);
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        }
+
+                                    }
+                                }
+                            }
+                         
+                        }
+                        else
+                        {
+                            int newI = 0;
+                            for (int i = 1; i <= MonthDeclarator.Count(); i++)
+                            {
+                                int h = 0;
+                                if (i >= 7)
+                                {
+                                    h = i - 6;
+                                }
+
+                                else
+                                {
+                                    h = i + 6;
+                                }
+
+                                System.Globalization.DateTimeFormatInfo mfi = new
+                                    System.Globalization.DateTimeFormatInfo();
+                                string strMonthName = mfi.GetMonthName(h).ToString();
+                                MonthDeclarator.Find(x => x.Order == i);
+                                MonthDeclarator[newI].MonthName = strMonthName;
+                                newI++;
+                            }
+                        }
+
+
+                    }
+
+
+                    planReportDetailDto.MonthCounts = MonthDeclarator.ToList();
+                    planReportDetailDto.ProgramWithStructure = progWithStructure.ToList();
+                }
+
+                return planReportDetailDto;
+            
+
+
+            }
+            catch (Exception e)
+            {
+                return planReportDetailDto;
+            }
+
+
+        }
+
+        public async Task<PlannedReport> PlanReports(string BudgetYea, Guid selectStructureId, string ReportBy)
+        {
+
+            PlannedReport plannedReport = new PlannedReport();
+
+            try
+            {
+
+                var BudgetYear = _dBContext.BudgetYears.Single(x => x.Year.ToString() == BudgetYea);
+
+                var allPlans = _dBContext.Plans
+                      .Include(x => x.Tasks).ThenInclude(x => x.ActivitiesParents).ThenInclude(x => x.Activities).ThenInclude(x => x.UnitOfMeasurement)
+                                 .Include(x => x.Tasks).ThenInclude(x => x.Activities).ThenInclude(x => x.UnitOfMeasurement)
+                                 .Include(x => x.Activities).ThenInclude(x => x.UnitOfMeasurement)
+                                 .Include(x => x.Tasks).ThenInclude(x => x.ActivitiesParents).ThenInclude(x => x.Activities).ThenInclude(x => x.ActivityTargetDivisions)
+                                 .Include(x => x.Tasks).ThenInclude(x => x.Activities).ThenInclude(x => x.ActivityTargetDivisions)
+                                 .Include(x => x.Activities).ThenInclude(x => x.ActivityTargetDivisions)
+
+                     .Where(x => x.StructureId == selectStructureId && x.BudgetYearId == BudgetYear.Id).OrderBy(c => c.CreatedAt).ToList();
+
+                List<PlansLst> plansLsts = new List<PlansLst>();
+
+                List<QuarterMonth> QuarterMonth = new List<QuarterMonth>();
+
+                foreach (var plansItems in allPlans)
+                {
+                    PlansLst plns = new PlansLst();
+                    plns.PlanName = plansItems.PlanName;
+                    plns.Weight = plansItems.PlanWeight;
+                    plns.PlRemark = plansItems.Remark;
+                    plns.HasTask = plansItems.HasTask;
+                    if (plansItems.HasTask)
+                    {
+                        List<TaskLst> taskLsts = new List<TaskLst>();
+
+                        var Taskes = plansItems.Tasks.OrderBy(x => x.CreatedAt);
+                        foreach (var taskItems in Taskes)
+                        {
+                            TaskLst taskLst = new TaskLst();
+                            taskLst.TaskDescription = taskItems.TaskDescription;
+                            taskLst.TaskWeight = taskItems.Weight;
+                            taskLst.TRemark = taskItems.Remark;
+                            taskLst.HasActParent = taskItems.HasActivityParent;
+
+                            if (taskItems.HasActivityParent)
+                            {
+
+                                List<ActParentLst> actparentlsts = new List<ActParentLst>();
+                                foreach (var actparent in taskItems.ActivitiesParents)
+                                {
+                                    ActParentLst actparentlst = new ActParentLst();
+                                    actparentlst.ActParentDescription = actparent.ActivityParentDescription;
+                                    actparentlst.ActParentWeight = actparent.Weight;
+                                    actparentlst.ActpRemark = actparent.Remark;
+                                    if (actparent.Activities!=null)
+                                    {
+
+                                        List<ActivityLst> activityLsts = new List<ActivityLst>();
+                                        foreach (var ActItems in actparent.Activities.Where(x => x.ActivityTargetDivisions != null))
+                                        {
+                                            ActivityLst lst = new ActivityLst();
+                                            lst.ActivityDescription = ActItems.ActivityDescription;
+                                            lst.Begining = ActItems.Begining;
+                                            lst.MeasurementUnit = ActItems.UnitOfMeasurement.Name.ToString();
+                                            lst.Target = ActItems.Goal;
+                                            lst.Weight = ActItems.Weight;
+                                            lst.Remark = ActItems.Remark;
+                                            List<PlanOcc> planOccs = new List<PlanOcc>();
+
+                                            var byQuarter = ActItems.ActivityTargetDivisions.OrderBy(x => x.Order).ToList();
+                                            if (!QuarterMonth.Any())
+                                            {
+
+                                                int value = ReportBy == reporttype.Quarter.ToString() ? 4 : 12;
+                                                if (ReportBy == reporttype.Quarter.ToString())
+                                                {
+                                                    for (int i = 0; i < 4; i++)
+                                                    {
+                                                        var quar = _dBContext.QuarterSettings.Single(x => x.QuarterOrder == i);
+
+
+                                                        if (quar.StartMonth > 4)
+                                                        {
+                                                            quar.StartMonth = quar.StartMonth - 4;
+                                                        }
+
+                                                        else
+                                                        {
+                                                            quar.StartMonth = quar.StartMonth + 8;
+                                                        }
+
+
+                                                        if (quar.EndMonth > 4)
+                                                        {
+                                                            quar.EndMonth = quar.EndMonth - 4;
+                                                        }
+
+                                                        else
+                                                        {
+                                                            quar.EndMonth = quar.EndMonth + 8;
+                                                        }
+
+
+
+                                                        System.Globalization.DateTimeFormatInfo mfi = new
+                                                            System.Globalization.DateTimeFormatInfo();
+                                                        string fromG = mfi.GetMonthName(quar.StartMonth).ToString();
+
+                                                        string toG = mfi.GetMonthName(quar.EndMonth).ToString();
+
+
+
+
+                                                        QuarterMonth quarterMonths = new QuarterMonth();
+                                                        quarterMonths.MonthName = "Quarter" + (i + 1);
+                                                        QuarterMonth.Add(quarterMonths);
+                                                    }
+                                                    plannedReport.pMINT = 4;
+                                                }
+                                                else
+                                                {
+                                                    for (int i = 1; i <= 12; i++)
+                                                    {
+                                                        int k = 0;
+                                                        if (i >= 7)
+                                                        {
+                                                            k = i - 6;
+                                                        }
+
+                                                        else
+                                                        {
+                                                            k = i + 6;
+                                                        }
+
+                                                        System.Globalization.DateTimeFormatInfo mfi = new
+                                                            System.Globalization.DateTimeFormatInfo();
+                                                        string strMonthName = mfi.GetMonthName(k).ToString();
+                                                        QuarterMonth quarterMonths = new QuarterMonth();
+                                                        quarterMonths.MonthName = strMonthName;
+                                                        QuarterMonth.Add(quarterMonths);
+                                                    }
+                                                    plannedReport.pMINT = 12;
+                                                }
+
+                                                plannedReport.planDuration = QuarterMonth;
+                                            }
+
+                                            if (ReportBy == reporttype.Quarter.ToString())
+                                            {
+
+                                                for (int i = 0; i < 12; i += 3)
+                                                {
+
+                                                    PlanOcc planO = new PlanOcc();
+                                                    planO.PlanTarget = byQuarter[i].Target + byQuarter[i + 1].Target + byQuarter[i + 2].Target;
+                                                    planOccs.Add(planO);
+                                                }
+
+
+                                            }
+                                            else
+                                            {
+                                                foreach (var itemQ in byQuarter)
+                                                {
+                                                    var progresslist = ActItems.ActProgress.Where(x => x.QuarterId == itemQ.Id).ToList();
+                                                    PlanOcc planO = new PlanOcc();
+                                                    planO.PlanTarget = itemQ.Target;
+                                                    planOccs.Add(planO);
+                                                }
+                                            }
+                                            lst.Plans = planOccs;
+                                            activityLsts.Add(lst);
+                                        }
+                                        actparentlst.activityLsts = activityLsts;
+                                        actparentlsts.Add(actparentlst);
+                                    }
+                                    else if (actparent.Activities.Any() && actparent.Activities.FirstOrDefault().targetDivision != null)
+                                    {
+                                        List<PlanOcc> planoccPlan = new List<PlanOcc>();
+                                        var Pocu = actparent.Activities.FirstOrDefault();
+                                        if (Pocu != null)
+                                        {
+                                            actparentlst.Target = Pocu.Goal;
+                                            actparentlst.ActualWorked = Pocu.ActualWorked;
+                                            actparentlst.MeasurementUnit = Pocu.UnitOfMeasurement.Name;
+                                            actparentlst.Begining = Pocu.Begining;
+                                            var byQuarter = Pocu.ActivityTargetDivisions.OrderBy(x => x.Order).ToList();
+                                            if (!QuarterMonth.Any())
+                                            {
+
+                                                int value = ReportBy == reporttype.Quarter.ToString() ? 4 : 12;
+                                                if (ReportBy == reporttype.Quarter.ToString())
+                                                {
+                                                    for (int i = 0; i < 4; i++)
+                                                    {
+                                                        var quar = _dBContext.QuarterSettings.Single(x => x.QuarterOrder == i);
+
+
+                                                        if (quar.StartMonth > 4)
+                                                        {
+                                                            quar.StartMonth = quar.StartMonth - 4;
+                                                        }
+
+                                                        else
+                                                        {
+                                                            quar.StartMonth = quar.StartMonth + 8;
+                                                        }
+
+
+                                                        if (quar.EndMonth > 4)
+                                                        {
+                                                            quar.EndMonth = quar.EndMonth - 4;
+                                                        }
+
+                                                        else
+                                                        {
+                                                            quar.EndMonth = quar.EndMonth + 8;
+                                                        }
+
+
+
+                                                        System.Globalization.DateTimeFormatInfo mfi = new
+                                                            System.Globalization.DateTimeFormatInfo();
+                                                        string fromG = mfi.GetMonthName(quar.StartMonth).ToString();
+
+                                                        string toG = mfi.GetMonthName(quar.EndMonth).ToString();
+
+
+
+
+                                                        QuarterMonth quarterMonths = new QuarterMonth();
+                                                        quarterMonths.MonthName = "Quarter" + (i + 1);
+                                                        QuarterMonth.Add(quarterMonths);
+                                                    }
+                                                    plannedReport.pMINT = 4;
+                                                }
+                                                else
+                                                {
+                                                    for (int i = 1; i <= 12; i++)
+                                                    {
+                                                        int k = 0;
+                                                        if (i >= 7)
+                                                        {
+                                                            k = i - 6;
+                                                        }
+
+                                                        else
+                                                        {
+                                                            k = i + 6;
+                                                        }
+
+                                                        System.Globalization.DateTimeFormatInfo mfi = new
+                                                            System.Globalization.DateTimeFormatInfo();
+                                                        string strMonthName = mfi.GetMonthName(k).ToString();
+                                                        //int fromG = XAPI.EthiopicDateTime.GetGregorianMonth(9, k, 1984);
+                                                        //DateTime date = new DateTime(1984, fromG, 9);
+                                                        QuarterMonth quarterMonths = new QuarterMonth();
+                                                        quarterMonths.MonthName = strMonthName;
+                                                        QuarterMonth.Add(quarterMonths);
+                                                    }
+                                                    plannedReport.pMINT = 12;
+                                                }
+                                                plannedReport.planDuration = QuarterMonth;
+                                            }
+                                            if (ReportBy == reporttype.Quarter.ToString())
+                                            {
+
+                                                for (int i = 0; i < 12; i += 3)
+                                                {
+
+                                                    PlanOcc planO = new PlanOcc();
+                                                    planO.PlanTarget = byQuarter[i].Target + byQuarter[i + 1].Target + byQuarter[i + 2].Target;
+                                                    planoccPlan.Add(planO);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                foreach (var itemQ in byQuarter)
+                                                {
+                                                    var progresslist = Pocu.ActProgress.Where(x => x.QuarterId == itemQ.Id).ToList();
+                                                    PlanOcc planO = new PlanOcc();
+                                                    planO.PlanTarget = itemQ.Target;
+                                                    planoccPlan.Add(planO);
+                                                }
+                                            }
+                                            actparentlst.ActDivisions = planoccPlan;
+
+                                        }
+
+                                        // actparentlst.Add(plns);
+
+                                        actparentlsts.Add(actparentlst);
+                                    }
+
+                                }
+                                taskLst.ActParentLst = actparentlsts;
+                                taskLsts.Add(taskLst);
+
+                            }
+                            else if (taskItems.Activities.Any() && taskItems.Activities.FirstOrDefault().ActivityTargetDivisions != null)
+                            {
+
+                                var Acti = taskItems.Activities.FirstOrDefault();
+                                if (Acti != null)
+                                {
+                                    taskLst.Begining = Acti.Begining;
+                                    taskLst.MeasurementUnit = Acti.UnitOfMeasurement.Name;
+                                    taskLst.Target = Acti.Goal;
+                                    List<PlanOcc> planOccs = new List<PlanOcc>();
+                                    var byQuarter = Acti.ActivityTargetDivisions.OrderBy(x => x.Order).ToList();
+                                    if (!QuarterMonth.Any())
+                                    {
+
+                                        int value = ReportBy == reporttype.Quarter.ToString() ? 4 : 12;
+                                        if (ReportBy == reporttype.Quarter.ToString())
+                                        {
+                                            for (int i = 0; i < 4; i++)
+                                            {
+                                                var quar = _dBContext.QuarterSettings.Single(x => x.QuarterOrder == i);
+
+                                                if (quar.StartMonth > 4)
+                                                {
+                                                    quar.StartMonth = quar.StartMonth - 4;
+                                                }
+
+                                                else
+                                                {
+                                                    quar.StartMonth = quar.StartMonth + 8;
+                                                }
+
+
+                                                if (quar.EndMonth > 4)
+                                                {
+                                                    quar.EndMonth = quar.EndMonth - 4;
+                                                }
+
+                                                else
+                                                {
+                                                    quar.EndMonth = quar.EndMonth + 8;
+                                                }
+
+
+
+                                                System.Globalization.DateTimeFormatInfo mfi = new
+                                                    System.Globalization.DateTimeFormatInfo();
+                                                string fromG = mfi.GetMonthName(quar.StartMonth).ToString();
+
+                                                string toG = mfi.GetMonthName(quar.EndMonth).ToString();
+
+
+
+
+                                                QuarterMonth quarterMonths = new QuarterMonth();
+                                                quarterMonths.MonthName = "Quarter" + (i + 1);
+                                                QuarterMonth.Add(quarterMonths);
+                                            }
+                                            plannedReport.pMINT = 4;
+                                        }
+                                        else
+                                        {
+                                            for (int i = 1; i <= 12; i++)
+                                            {
+                                                int k = 0;
+                                                if (i >= 7)
+                                                {
+                                                    k = i - 6;
+                                                }
+
+                                                else
+                                                {
+                                                    k = i + 6;
+                                                }
+
+                                                System.Globalization.DateTimeFormatInfo mfi = new
+                                                    System.Globalization.DateTimeFormatInfo();
+                                                string strMonthName = mfi.GetMonthName(k).ToString();
+                                                //int fromG = XAPI.EthiopicDateTime.GetGregorianMonth(9, k, 1984);
+                                                //DateTime date = new DateTime(1984, fromG, 9);
+                                                QuarterMonth quarterMonths = new QuarterMonth();
+                                                quarterMonths.MonthName = strMonthName;
+                                                QuarterMonth.Add(quarterMonths);
+                                            }
+                                            plannedReport.pMINT = 12;
+                                        }
+                                       plannedReport.planDuration = QuarterMonth;
+                                    }
+                                    if (ReportBy == reporttype.Quarter.ToString())
+                                    {
+
+                                        for (int i = 0; i < 12; i += 3)
+                                        {
+
+                                            PlanOcc planO = new PlanOcc();
+                                            planO.PlanTarget = byQuarter[i].Target + byQuarter[i + 1].Target + byQuarter[i + 2].Target;
+                                            planOccs.Add(planO);
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        foreach (var itemQ in byQuarter)
+                                        {
+                                            var progresslist = Acti.ActProgress.Where(x => x.QuarterId == itemQ.Id).ToList();
+                                            PlanOcc planO = new PlanOcc();
+                                            planO.PlanTarget = itemQ.Target;
+                                            planOccs.Add(planO);
+                                        }
+                                    }
+                                    taskLst.TaskDivisions = planOccs;
+                                    taskLsts.Add(taskLst);
+                                }
+                            }
+                        }
+                        plns.taskLsts = taskLsts;
+                        plansLsts.Add(plns);
+                    }
+                    else if (plansItems.Activities.Any() && plansItems.Activities.FirstOrDefault().ActivityTargetDivisions != null)
+                    {
+
+                        List<PlanOcc> planoccPlan = new List<PlanOcc>();
+                        var Pocu = plansItems.Activities.FirstOrDefault();
+                        if (Pocu != null)
+                        {
+                            plns.Target = Pocu.Goal;
+                            plns.ActualWorked = Pocu.ActualWorked;
+                            plns.MeasurementUnit = Pocu.UnitOfMeasurement.Name;
+                            plns.Begining = Pocu.Begining;
+                            var byQuarter = Pocu.ActivityTargetDivisions.OrderBy(x => x.Order).ToList();
+                            if (!QuarterMonth.Any())
+                            {
+
+                                int value = ReportBy == reporttype.Quarter.ToString() ? 4 : 12;
+                                if (ReportBy == reporttype.Quarter.ToString())
+                                {
+                                    for (int i = 0; i < 4; i++)
+                                    {
+                                        var quar = _dBContext.QuarterSettings.Single(x => x.QuarterOrder == i);
+                                        //DateTime fromG = Convert.ToDateTime(XAPI.EthiopicDateTime.GetGregorianDate(9, quar.StartMonth, 1984));
+                                        //DateTime toG = Convert.ToDateTime(XAPI.EthiopicDateTime.GetGregorianDate(9, quar.EndMonth, 1984));
+
+
+                                        if (quar.StartMonth > 4)
+                                        {
+                                            quar.StartMonth = quar.StartMonth - 4;
+                                        }
+
+                                        else
+                                        {
+                                            quar.StartMonth = quar.StartMonth + 8;
+                                        }
+
+
+                                        if (quar.EndMonth > 4)
+                                        {
+                                            quar.EndMonth = quar.EndMonth - 4;
+                                        }
+
+                                        else
+                                        {
+                                            quar.EndMonth = quar.EndMonth + 8;
+                                        }
+
+
+
+                                        System.Globalization.DateTimeFormatInfo mfi = new
+                                            System.Globalization.DateTimeFormatInfo();
+                                        string fromG = mfi.GetMonthName(quar.StartMonth).ToString();
+
+                                        string toG = mfi.GetMonthName(quar.EndMonth).ToString();
+
+
+
+
+                                        QuarterMonth quarterMonths = new QuarterMonth();
+                                        quarterMonths.MonthName = "Quarter " + (i + 1);
+                                        QuarterMonth.Add(quarterMonths);
+                                    }
+                                    plannedReport.pMINT = 4;
+                                }
+                                else
+                                {
+                                    for (int i = 1; i <= 12; i++)
+                                    {
+                                        int k = 0;
+                                        if (i >= 7)
+                                        {
+                                            k = i - 6;
+                                        }
+
+                                        else
+                                        {
+                                            k = i + 6;
+                                        }
+
+                                        System.Globalization.DateTimeFormatInfo mfi = new
+                                            System.Globalization.DateTimeFormatInfo();
+                                        string strMonthName = mfi.GetMonthName(k).ToString();
+                                        //int fromG = XAPI.EthiopicDateTime.GetGregorianMonth(9, k, 1984);
+                                        //DateTime date = new DateTime(1984, fromG, 9);
+                                        QuarterMonth quarterMonths = new QuarterMonth();
+                                        quarterMonths.MonthName = strMonthName;
+                                        QuarterMonth.Add(quarterMonths);
+                                    }
+                                    plannedReport.pMINT = 12;
+                                }
+                                plannedReport.planDuration = QuarterMonth;
+                            }
+                            if (ReportBy == reporttype.Quarter.ToString())
+                            {
+
+                                for (int i = 0; i < 12; i += 3)
+                                {
+
+                                    PlanOcc planO = new PlanOcc();
+                                    planO.PlanTarget = byQuarter[i].Target + byQuarter[i + 1].Target + byQuarter[i + 2].Target;
+                                    planoccPlan.Add(planO);
+                                }
+                            }
+                            else
+                            {
+                                foreach (var itemQ in byQuarter)
+                                {
+                                    var progresslist = Pocu.ActProgress.Where(x => x.QuarterId == itemQ.Id).ToList();
+                                    PlanOcc planO = new PlanOcc();
+                                    planO.PlanTarget = itemQ.Target;
+                                    planoccPlan.Add(planO);
+                                }
+                            }
+                            plns.PlanDivision = planoccPlan;
+
+                        }
+
+                        plansLsts.Add(plns);
+                    }
+                }
+
+                plannedReport.PlansLst = plansLsts;
+
+                return plannedReport;
+            }
+            catch (Exception e)
+            {
+                return plannedReport;
+            }
+            
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public float GetContribution(Guid structureId,float weight, Guid budetyearId)
         {
@@ -528,6 +1386,168 @@ namespace PM_Case_Managemnt_API.Services.PM.ProgressReport
             public float fisicalValue { get; set; }
             public float FinancialValue { get; set; }
 
+        }
+
+
+        //structure
+
+        public class PlanReportDetailDto
+        {
+            public List<ProgramWithStructure> ProgramWithStructure { get; set; }
+            public List<ActivityTargetDivisionReport> MonthCounts { get; set; }
+        }
+        public class ProgramWithStructure
+        {
+            public string StrutureName { get; set; }
+            public List<StructurePlan> StructurePlans { get; set; }
+        }
+
+        public class StructurePlan
+        {
+            public string PlanName { get; set; }
+            public float? Weight { get; set; }
+
+            public string UnitOfMeasurement { get; set; }
+
+            public float? Target { get; set; }
+            public List<PlanTask> PlanTasks { get; set; }
+            public List<ActivityTargetDivisionReport> PlanTargetDivision { get; set; }
+        }
+
+        public class PlanTask
+        {
+            public string TaskName { get; set; }
+            public float? Weight { get; set; }
+
+            public string UnitOfMeasurement { get; set; }
+
+            public float? Target { get; set; }
+
+            public List<TaskActivity> TaskActivities { get; set; }
+            public List<ActivityTargetDivisionReport> TaskTargetDivision { get; set; }
+        }
+
+        public class TaskActivity
+        {
+            public string ActivityName { get; set; }
+            public float? Weight { get; set; }
+
+            public string UnitOfMeasurement { get; set; }
+
+            public float? Target { get; set; }
+            public List<ActSubActivity> ActSubActivity { get; set; }
+
+            public List<ActivityTargetDivisionReport> ActivityTargetDivision { get; set; }
+
+        }
+
+        public class ActSubActivity
+        {
+            public string SubActivityDescription { get; set; }
+            public float Weight { get; set; }
+
+            public string UnitOfMeasurement { get; set; }
+
+            public float Target { get; set; }
+
+            public List<ActivityTargetDivisionReport> subActivityTargetDivision { get; set; }
+        }
+
+        public class ActivityTargetDivisionReport
+        {
+            public int Order { get; set; }
+            public string MonthName { get; set; }
+            public float TargetValue { get; set; }
+        }
+public class QuarterMonth
+{
+    public string MonthName { get; set; }
+
+
+}
+        // planned report 
+
+
+
+        public class PlannedReport
+        {
+           public List<PlansLst> PlansLst { get; set; }
+           public int pMINT { get; set; }
+           public   List<QuarterMonth> planDuration { get; set; }
+        }
+        public class PlansLst
+        {
+            public string PlanName { get; set; }
+            public float Weight { get; set; }
+            public string PlRemark { get; set; }
+            public bool HasTask { get; set; }
+            public float? Begining { get; set; }
+            public float? Target { get; set; }
+            public float? ActualWorked { get; set; }
+            public float? Progress { get; set; }
+            public string MeasurementUnit { get; set; }
+
+            public List<TaskLst> taskLsts { get; set; }
+            public List<PlanOcc> PlanDivision { get; set; }
+        }
+
+        public class TaskLst
+        {
+            public string TaskDescription { get; set; }
+            public float? TaskWeight { get; set; }
+            public string TRemark { get; set; }
+            public bool HasActParent { get; set; }
+            public float? Begining { get; set; }
+            public float? Target { get; set; }
+            public float? ActualWorked { get; set; }
+            public string MeasurementUnit { get; set; }
+            public float? Progress { get; set; }
+            public List<ActParentLst> ActParentLst { get; set; }
+            public List<PlanOcc> TaskDivisions { get; set; }
+        }
+
+        public class ActParentLst
+        {
+            public string ActParentDescription { get; set; }
+            public float? ActParentWeight { get; set; }
+            public string ActpRemark { get; set; }
+            public string MeasurementUnit { get; set; }
+
+            public float? Begining { get; set; }
+            public float? Target { get; set; }
+            public float? ActualWorked { get; set; }
+            public float? Progress { get; set; }
+            public List<ActivityLst> activityLsts { get; set; }
+            public List<PlanOcc> ActDivisions { get; set; }
+        }
+        public class ActivityLst
+        {
+            public string ActivityDescription { get; set; }
+            public float Weight { get; set; }
+            public string MeasurementUnit { get; set; }
+
+            public float Begining { get; set; }
+            public float Target { get; set; }
+
+            public string Remark { get; set; }
+
+            public float ActualWorked { get; set; }
+            public float Progress { get; set; }
+
+            public List<PlanOcc> Plans { get; set; }
+        }
+
+        public class PlanOcc
+        {
+            public float PlanTarget { get; set; }
+            public float ActualWorked { get; set; }
+            public float Percentile { get; set; }
+        }
+
+        public enum reporttype
+        {
+            Quarter,
+            Monthly
         }
     }
 }

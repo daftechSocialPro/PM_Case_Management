@@ -124,8 +124,15 @@
                               routerLink="/programbudgetreport"> <i
                                           class="bi bi-circle"></i><span>Program Budget Report</span>
                               </a></li>
-                        <li *ngIf="roleMatch(['Super Admin','PM Admin','Director'])"> <a routerLink="/alerts"> <i
+                        <li *ngIf="roleMatch(['Super Admin','PM Admin','Director'])"> <a 
+                              [ngClass]="getUrl()=='/planreportdetail'?'nav-link ':'nav-link collapsed'"
+                              routerLink="/planreportdetail"> <i
                                           class="bi bi-circle"></i><span>Plan Report Detail</span> </a>
+                        </li>
+                        <li *ngIf="roleMatch(['Super Admin','PM Admin','Director'])"> <a 
+                              [ngClass]="getUrl()=='/plannedreport'?'nav-link ':'nav-link collapsed'"
+                              routerLink="/plannedreport"> <i
+                                          class="bi bi-circle"></i><span>Planned Report </span> </a>
                         </li>
                         <!-- <li *ngIf="roleMatch(['Super Admin','PM Admin','Director'])"> <a routerLink="/alerts"> <i
                                           class="bi bi-circle"></i><span>Planned Report (GANT)</span>

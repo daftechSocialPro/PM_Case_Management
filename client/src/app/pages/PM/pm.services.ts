@@ -9,6 +9,8 @@ import { ComiteeAdd, CommiteeAddEmployeeView, CommitteeView } from './comittes/c
 import { IPlanReportByProgramDto } from './progress-report/program-budget-report/program-budget-report';
 import { IActivityAttachment } from './tasks/Iactivity';
 import { ActivityTargetDivisionDto, ActivityView, ApprovalProgressDto, ViewProgressDto } from './view-activties/activityview';
+import { IPlanReportDetailDto } from './progress-report/plan-report-today/IplanReportDetai';
+import { IPlannedReport } from './progress-report/planned-report/planned-report';
 
 
 @Injectable({
@@ -103,5 +105,23 @@ export class PMService {
 
     return this.http.get<IPlanReportByProgramDto>(this.BaseURI+"/ProgressReport/ProgramBudgetReport?BudgetYear="+BudgetYear+"&ReportBy="+ReportBy)
   }
+
+  getProgramSelectList (){
+
+    return this.http.get<SelectList[]>(this.BaseURI+"/Program/selectlist")
+  }
+
+  getPlanDetailReport (BudgetYear:string ,ReportBy :string ,ProgramId:string ){
+
+    return this.http.get<IPlanReportDetailDto>(this.BaseURI+"/ProgressReport/plandetailreport?BudgetYear="+BudgetYear+"&ReportBy="+ReportBy+"&ProgramId="+ProgramId)
+  }
+
+  getPlannedReport (BudgetYear:string ,ReportBy :string ,selectStructureId:string){
+
+    return this.http.get<IPlannedReport>(this.BaseURI+"/ProgressReport/plannedreport?BudgetYea="+BudgetYear+"&ReportBy="+ReportBy+"&selectStructureId="+selectStructureId)
+  
+}
+
+  
 
 }

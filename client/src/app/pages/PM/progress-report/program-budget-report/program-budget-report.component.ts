@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PMService } from '../../pm.services';
 import { IPlanReportByProgramDto } from './program-budget-report';
 
@@ -20,7 +20,7 @@ export class ProgramBudgetReportComponent implements OnInit {
   ngOnInit(): void {
 
     this.serachForm = this.formBuilder.group({
-      BudgetYear: [''],
+      BudgetYear: ['',Validators.required],
       ReportBy: ['Quarter']
     })
 

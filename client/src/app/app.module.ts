@@ -142,6 +142,8 @@ import { IssuedCaseComponent } from './pages/case/issued-case/issued-case.compon
 import { PmDashboardComponent } from './pages/pm/pm-dashboard/pm-dashboard.component';
 import { DirectorLevelPerformanceComponent } from './pages/PM/progress-report/director-level-performance/director-level-performance.component';
 import { ProgramBudgetReportComponent } from './pages/PM/progress-report/program-budget-report/program-budget-report.component';
+import { PlanReportTodayComponent } from './pages/pm/progress-report/plan-report-today/plan-report-today.component';
+import { PlannedReportComponent } from './pages/pm/progress-report/planned-report/planned-report.component';
 
 @NgModule({
   declarations: [
@@ -263,7 +265,9 @@ import { ProgramBudgetReportComponent } from './pages/PM/progress-report/program
     IssuedCaseComponent,
     PmDashboardComponent,
     DirectorLevelPerformanceComponent,
-    ProgramBudgetReportComponent
+    ProgramBudgetReportComponent,
+    PlanReportTodayComponent,
+    PlannedReportComponent
    
     
   ],

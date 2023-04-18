@@ -41,5 +41,31 @@ namespace PM_Case_Managemnt_API.Controllers.PM
                 return StatusCode(500, "Internal Server Error");
             }
         }
+        [HttpGet("plandetailreport")]
+        public async Task<IActionResult> PlanDetailReport(string BudgetYear, string ProgramId, string ReportBy)
+        {
+            try
+            {
+                return Ok(await _progressReportService.StructureReportByProgram(BudgetYear, ProgramId, ReportBy));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpGet("plannedreport")]
+        public async Task<IActionResult> plannedreport(string BudgetYea, Guid selectStructureId, string ReportBy)
+        {
+            try
+            {
+                return Ok(await _progressReportService.PlanReports(BudgetYea, selectStructureId, ReportBy));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+       
     }
 }

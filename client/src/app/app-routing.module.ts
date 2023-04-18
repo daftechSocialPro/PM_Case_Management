@@ -69,15 +69,18 @@ import { IssuedCaseComponent } from './pages/case/issued-case/issued-case.compon
 import { PmDashboardComponent } from './pages/pm/pm-dashboard/pm-dashboard.component';
 import { DirectorLevelPerformanceComponent } from './pages/PM/progress-report/director-level-performance/director-level-performance.component';
 import { ProgramBudgetReportComponent } from './pages/PM/progress-report/program-budget-report/program-budget-report.component';
+import { PlanReportTodayComponent } from './pages/pm/progress-report/plan-report-today/plan-report-today.component';
+import { PlannedReportComponent } from './pages/pm/progress-report/planned-report/planned-report.component';
 
 
 
 const routes: Routes = [
 
 
-  { path: '', canActivate: [AuthGuard], component: DashboardComponent },
- // { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
+  { path: '', canActivate: [AuthGuard], component: PmDashboardComponent,data:{permittedRoles : ['Super Admin','Director','Employee Manager']} },
+  { path: 'pmdashboard', canActivate: [AuthGuard], component: PmDashboardComponent,data:{permittedRoles : ['Super Admin','Director','Employee Manager']} },
   { path: 'orgprofile', canActivate: [AuthGuard], component: OrgProfileComponent,data:{permittedRoles : ['Super Admin','Employee Manager']} },
+  { path: 'orgbranch', canActivate: [AuthGuard], component: OrgBranchComponent,data:{permittedRoles : ['Super Admin','Employee Manager']}  },
   { path: 'orgstructure', canActivate: [AuthGuard], component: OrgStructureComponent ,data:{permittedRoles : ['Super Admin','Employee Manager']}  },
   { path: 'budgetyear', canActivate: [AuthGuard], component: BudgetYearComponent,data:{permittedRoles : ['Super Admin','Case Admin','PM Admin']} },
   { path: 'employee', canActivate: [AuthGuard], component: EmployeeComponent ,data:{permittedRoles : ['Super Admin','Employee Manager']}  },
@@ -121,6 +124,8 @@ const routes: Routes = [
 //Pm report 
 { path: 'directorlevelperformance',canActivate:[AuthGuard], component: DirectorLevelPerformanceComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
 { path: 'programbudgetreport',canActivate:[AuthGuard], component: ProgramBudgetReportComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
+{ path: 'planreportdetail',canActivate:[AuthGuard], component: PlanReportTodayComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
+{ path: 'plannedreport',canActivate:[AuthGuard], component: PlannedReportComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
 
 
 

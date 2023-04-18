@@ -50,6 +50,7 @@
     <Compile Include="Models\PM\Plan.cs" />
     <Compile Include="Models\PM\Programs.cs" />
     <Compile Include="Models\PM\ProgressAttachment.cs" />
+    <Compile Include="Models\PM\QuarterSetting.cs" />
     <Compile Include="Models\PM\Task.cs" />
     <Compile Include="Models\PM\TaskMembers.cs" />
     <Compile Include="Models\PM\TaskMemo.cs" />

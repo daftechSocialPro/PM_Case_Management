@@ -37,7 +37,7 @@
                             </div>
 
 
-                            <button pButton type="submit" icon="pi pi-search"
+                            <button pButton type="submit" [disabled]="!serachForm.valid" icon="pi pi-search"
                                 class="p-button-text bg-success text-white"></button>
 
                         </div>
@@ -62,16 +62,16 @@
                         <th [attr.colspan]="cnt">Budet Plan</th>
                     </tr>
                     <tr>
-                        <td>Unit Measurment</td>
-                        <td>GB</td>
-                        <td>Total Expence</td>
+                        <th>Unit Measurment</th>
+                        <th>GB</th>
+                        <th>Total Expence</th>
 
 
-                        <td *ngFor="let items of PlanReportByProgramDto?.MonthCounts">{{items.MonthName}}</td>
+                        <th *ngFor="let items of PlanReportByProgramDto?.MonthCounts">{{items.MonthName}}</th>
 
 
 
-                        <td *ngFor="let items of PlanReportByProgramDto?.MonthCounts">{{items.MonthName}}</td>
+                        <th *ngFor="let items of PlanReportByProgramDto?.MonthCounts">{{items.MonthName}}</th>
 
 
 
@@ -104,6 +104,55 @@
                   </tbody>
                   
             </table>
+            <!-- <p-table [value]="PlanReportByProgramDto?.ProgramViewModels!" styleClass="p-datatable-gridlines " [tableStyle]="{ 'min-width': '50rem' }">
+                <ng-template pTemplate="caption"> Plan Report Detail </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th rowspan="2">No</th>
+                        <th rowspan="2">Program Detail</th>
+                        <th colspan="3">BudgetYear Plan</th>
+                        <th [attr.colspan]="cnt">Fiscal Plan</th>
+                        <th [attr.colspan]="cnt">Budet Plan</th>
+                    </tr>
+                    <tr>
+                        <td>Unit Measurment</td>
+                        <td>GB</td>
+                        <td>Total Expence</td>          
+                        <td *ngFor="let items of PlanReportByProgramDto?.MonthCounts">{{items.MonthName}}</td>       
+            
+            
+                        <td *ngFor="let items of PlanReportByProgramDto?.MonthCounts">{{items.MonthName}}</td>
+            
+            
+            
+            
+                    </tr>
+                  
+                </ng-template>
+                <ng-template pTemplate="body" let-ProgRow>
+                    <tr class="table-success" >
+                        <td></td>
+                        <td>{{ProgRow.ProgramName}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td *ngFor="let month of PlanReportByProgramDto?.MonthCounts"></td>
+                        <td *ngFor="let month of PlanReportByProgramDto?.MonthCounts"></td>
+                      </tr>
+                     
+                          <tr class="table-offo"  *ngFor="let planRow of ProgRow?.ProgramPlanViewModels; let v=index">
+                          
+                        <td class="text-left">{{v+1}}</td>
+                        <td>{{planRow.PlanNAme}}</td>
+                        <td>{{planRow.MeasurementUnit}}</td>
+                        <td>{{planRow.TotalGoal}}</td>
+                        <td>{{planRow.TotalBirr}}</td>
+                        <td *ngFor="let plO of planRow?.FiscalPlanPrograms">{{plO.fisicalValue}}</td>
+                        <td *ngFor="let plO of planRow?.FiscalPlanPrograms">{{plO.fisicalValue}}</td>
+                      </tr> 
+                </ng-template>
+                <ng-template pTemplate="summary"> Plan Report Detail </ng-template>
+            </p-table> -->
         </div>
 
     </section>

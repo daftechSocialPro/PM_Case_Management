@@ -81,6 +81,8 @@ namespace PM_Case_Managemnt_API.Data
         public DbSet<TaskMemo> TaskMemos { get; set; }
         public DbSet<TaskMemoReply> TaskMemoReplies { get; set; }
 
+        public DbSet<QuarterSetting> QuarterSettings { get; set; }
+
 
 
     }
