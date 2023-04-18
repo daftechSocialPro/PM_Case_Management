@@ -2,6 +2,13 @@
 {
     public class OrganizationalStructure :CommonModel
     {
+
+        public OrganizationalStructure()
+        {
+
+          //  EmployeesCollection = new HashSet<Employee>();
+            SubTask = new HashSet<OrganizationalStructure>();
+        }
         public virtual OrganizationBranch OrganizationBranch { get; set; } = null!;
 
         public Guid OrganizationBranchId { get; set; }
@@ -15,7 +22,7 @@
         public int Order { get; set; }
 
         public float Weight { get; set; }
-
+        public ICollection<OrganizationalStructure> SubTask { get; set; }
 
     }
 }

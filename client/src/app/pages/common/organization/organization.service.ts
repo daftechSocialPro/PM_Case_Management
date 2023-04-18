@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { barChartDto, IDashboardDto } from '../../casedashboard/IDashboard';
+import { IPMDashboard } from '../../PM/pm.dashboard';
 import { SelectList } from '../common';
 import { UnitMeasurment } from '../unit-measurement/unit-measurment';
 import { Employee } from './employee/employee';
@@ -124,6 +125,15 @@ export class OrganizationService {
     return this.http.get<IDashboardDto>(this.BaseURI+"/Dashboard/GetDashboardCaseReport?startAt="+startAt+"&endAt="+endAt)
   }
 
+  getPmDashboardReport (empId:string){
+
+    return this.http.get<IPMDashboard>(this.BaseURI+"/Dashboard/GetPMDashboardDto?empId="+empId)
+  }
+
+  GetPMBarchart(empId:string){
+    return this.http.get<any>(this.BaseURI+"/Dashboard/GetPMBarchart?empId="+empId)
+  }
+
   getDashboardLineChart(){
 
     return this.http.get<barChartDto>(this.BaseURI+"/Dashboard/GetMonthlyReportBarChart")
@@ -133,6 +143,8 @@ export class OrganizationService {
   getOrgStructureDiagram(){
     return this.http.get<TreeNode[]>(this.BaseURI+"/OrgStructure/orgdiagram")
   }
+
+
   
 
 }

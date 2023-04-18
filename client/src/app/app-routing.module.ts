@@ -67,13 +67,15 @@ import { CasedashboardComponent } from './pages/casedashboard/casedashboard.comp
 import { RaiseIssueComponent } from './pages/case/encode-case/raise-issue/raise-issue.component';
 import { IssuedCaseComponent } from './pages/case/issued-case/issued-case.component';
 import { PmDashboardComponent } from './pages/pm/pm-dashboard/pm-dashboard.component';
+import { DirectorLevelPerformanceComponent } from './pages/PM/progress-report/director-level-performance/director-level-performance.component';
+import { ProgramBudgetReportComponent } from './pages/PM/progress-report/program-budget-report/program-budget-report.component';
 
 
 
 const routes: Routes = [
 
 
-  { path: '', canActivate: [AuthGuard], component: PagesLoginComponent },
+  { path: '', canActivate: [AuthGuard], component: PmDashboardComponent,data:{permittedRoles : ['Super Admin','Director','Employee Manager']} },
   { path: 'pmdashboard', canActivate: [AuthGuard], component: PmDashboardComponent,data:{permittedRoles : ['Super Admin','Director','Employee Manager']} },
   { path: 'orgprofile', canActivate: [AuthGuard], component: OrgProfileComponent,data:{permittedRoles : ['Super Admin','Employee Manager']} },
   { path: 'orgbranch', canActivate: [AuthGuard], component: OrgBranchComponent,data:{permittedRoles : ['Super Admin','Employee Manager']}  },
@@ -115,6 +117,12 @@ const routes: Routes = [
 { path: 'casedetailreport', canActivate:[AuthGuard],component: CaseDetailReportComponent,data:{permittedRoles : ['Super Admin','Director','Case Admin']}},
 { path: 'user-profile',canActivate:[AuthGuard], component: UsersProfileComponent },
 { path: 'casedashboard',canActivate:[AuthGuard], component: CasedashboardComponent,data:{permittedRoles:['Super Admin','Case Admin','Encoder','Director','Member','Secretery','Employee Manager']} },
+
+
+//Pm report 
+{ path: 'directorlevelperformance',canActivate:[AuthGuard], component: DirectorLevelPerformanceComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
+{ path: 'programbudgetreport',canActivate:[AuthGuard], component: ProgramBudgetReportComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
+
 
 
   { path: 'alerts', component: AlertsComponent },

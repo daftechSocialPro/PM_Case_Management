@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TreeNode } from 'primeng/api';
 
 import { environment } from 'src/environments/environment';
 import { SelectList } from '../common/common';
 import { ActivityDetailDto, SubActivityDetailDto } from './activity-parents/add-activities/add-activities';
 import { ComiteeAdd, CommiteeAddEmployeeView, CommitteeView } from './comittes/committee';
+import { IPlanReportByProgramDto } from './progress-report/program-budget-report/program-budget-report';
 import { IActivityAttachment } from './tasks/Iactivity';
 import { ActivityTargetDivisionDto, ActivityView, ApprovalProgressDto, ViewProgressDto } from './view-activties/activityview';
 
@@ -90,6 +92,16 @@ export class PMService {
     
   getActivityAttachments (taskId : string ){
     return this.http.get<IActivityAttachment[]>(this.BaseURI+"/Activity/getActivityAttachments?taskId="+taskId)
+  }
+
+  //report 
+  getDirectorLevelPerformance (BranchId?:string){
+
+    return this.http.get<TreeNode[]>(this.BaseURI+"/ProgressReport/DirectorLevelPerformance")
+  }
+  getProgramBudegtReport (BudgetYear:string , ReportBy :string){
+
+    return this.http.get<IPlanReportByProgramDto>(this.BaseURI+"/ProgressReport/ProgramBudgetReport?BudgetYear="+BudgetYear+"&ReportBy="+ReportBy)
   }
 
 }

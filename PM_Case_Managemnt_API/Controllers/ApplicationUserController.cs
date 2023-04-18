@@ -77,40 +77,47 @@ namespace PM_Case_Managemnt_API.Controllers
         public async Task<IActionResult> Login(LoginModel model)
         {
 
-
-            var user = await _userManager.FindByNameAsync(model.UserName);
-            if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect." });
-            Employee emp = _dbcontext.Employees.Find(user.EmployeesId);
-            string empPhoto = "";
-            if (emp != null) 
-                empPhoto = emp.Photo;
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            try
             {
-                //Get role assigned to the user
-                var role = await _userManager.GetRolesAsync(user);
-                IdentityOptions _options = new IdentityOptions();
 
-                var tokenDescriptor = new SecurityTokenDescriptor
+                var user = await _userManager.FindByNameAsync(model.UserName);
+                if (user == null)
+                    return BadRequest(new { message = "Username or password is incorrect." });
+                Employee emp = _dbcontext.Employees.Find(user.EmployeesId);
+                string empPhoto = "";
+                if (emp != null)
+                    empPhoto = emp.Photo;
+                if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
                 {
-                    Subject = new ClaimsIdentity(new Claim[]
+                    //Get role assigned to the user
+                    var role = await _userManager.GetRolesAsync(user);
+                    IdentityOptions _options = new IdentityOptions();
+
+                    var tokenDescriptor = new SecurityTokenDescriptor
                     {
+                        Subject = new ClaimsIdentity(new Claim[]
+                        {
                         new Claim("UserID",user.Id.ToString()),
                         new Claim("FullName",user.FullName),
                         new Claim("EmployeeId",user.EmployeesId.ToString()),
                         new Claim("Photo",empPhoto),
                         new Claim(_options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault())
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
-                };
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                var token = tokenHandler.WriteToken(securityToken);
-                return Ok(new { token });
+                        }),
+                        Expires = DateTime.UtcNow.AddDays(1),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                    };
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                    var token = tokenHandler.WriteToken(securityToken);
+                    return Ok(new { token });
+                }
+                else
+                    return BadRequest(new { message = "Username or password is incorrect." });
             }
-            else
+            catch (Exception e)
+            {
                 return BadRequest(new { message = "Username or password is incorrect." });
+            }
         }
 
 

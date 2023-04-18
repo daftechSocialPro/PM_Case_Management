@@ -12,9 +12,9 @@
                   class="bi bi-search"></i> </a></li>
          <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"> <i class="bi bi-bell"></i> <span
-                  class="badge bg-primary badge-number">{{activites.length}}</span> </a>
+                  class="badge bg-primary badge-number">{{activites?.length}}</span> </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-               <li class="dropdown-header"> You have {{activites.length}} new notifications <a
+               <li class="dropdown-header"> You have {{activites?.length}} new notifications <a
                      href="/actForApproval"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                </li>
 
@@ -28,7 +28,7 @@
                      <div>
                         <h4>{{act.Name}}</h4>
                         <p>Needs Approval</p>
-                        <span class="badge bg-danger text-white">{{act.ProgresscreatedAt| date:'fullDate'}}</span>
+                        <span class="badge bg-danger text-white">{{act?.ProgresscreatedAt| date:'fullDate'}}</span>
                      </div>
                   </li>
                   <li>
@@ -44,9 +44,9 @@
          </li>
          <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"> <i class="bi bi-chat-left-text"></i> <span
-                  class="badge bg-success badge-number">{{assignedCases.length}}</span> </a>
+                  class="badge bg-success badge-number">{{assignedCases?.length}}</span> </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-               <li class="dropdown-header"> You have {{assignedCases.length}} Assigned Cases <a href="/mycaselist"><span
+               <li class="dropdown-header"> You have {{assignedCases?.length}} Assigned Cases <a href="/mycaselist"><span
                         class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a></li>
                <li>
                   <hr class="dropdown-divider">
@@ -75,9 +75,9 @@
 
          <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"> <i class="bi bi-chat-square-quote"></i>
-               <span class="badge bg-danger badge-number">{{issuedCases.length}}</span> </a>
+               <span class="badge bg-danger badge-number">{{issuedCases?.length}}</span> </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-               <li class="dropdown-header"> You have {{issuedCases.length}} Issued Cases <a href="/issuedcase"><span
+               <li class="dropdown-header"> You have {{issuedCases?.length}} Issued Cases <a href="/issuedcase"><span
                         class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a></li>
                <li>
                   <hr class="dropdown-divider">

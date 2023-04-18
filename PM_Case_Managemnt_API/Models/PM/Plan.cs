@@ -11,7 +11,7 @@ namespace PM_Case_Managemnt_API.Models.PM
             Tasks = new HashSet<Task>();
             TaskMemos = new HashSet<TaskMemo>();
             TaskMember = new HashSet<TaskMembers>();
-           // Activities = new HashSet<Activity>();
+           Activities = new HashSet<Activity>();
         }
 
         public string PlanName { get; set; } = null!;
@@ -44,8 +44,8 @@ namespace PM_Case_Managemnt_API.Models.PM
      
         public ICollection<TaskMembers> TaskMember { get; set; }
 
-     
-        public  List<Activity> Activities { get; set; }
+
+        public ICollection<Activity> Activities { get; set; }
 
     }
 
