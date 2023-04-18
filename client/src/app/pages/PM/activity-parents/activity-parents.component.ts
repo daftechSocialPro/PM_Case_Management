@@ -24,13 +24,15 @@ export class ActivityParentsComponent implements OnInit {
 
   @ViewChild('taskMemoDesc') taskMemoDesc!: ElementRef
   task: TaskView = {};
-  taskId: string = "";
+  parentId: string = "";
+  requestFrom: string = "";
   Employees: SelectList[] = [];
   selectedEmployee: SelectList[] = [];
   user!: UserView;
   isUserTaskMember: boolean = false;
   toast!: toastPayload
   attachments !: IActivityAttachment[]
+
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,
@@ -43,7 +45,8 @@ export class ActivityParentsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.taskId = this.route.snapshot.paramMap.get('taskId')!
+    this.parentId = this.route.snapshot.paramMap.get('parentId')!
+    this.requestFrom = this.route.snapshot.paramMap.get('requestFrom')!
     this.getSingleTask();
     this.ListofEmployees();
     this.user = this.userService.getCurrentUser();
@@ -52,16 +55,13 @@ export class ActivityParentsComponent implements OnInit {
   }
 
   getDateDiff(startDate: string) {
-
-
     var date = this.commonService.getDataDiff(startDate, new Date().toString())
     return date.day + " days " + date.hour + " hours " + date.minute + " minutes a go "
-
   }
 
   getAttachments() {
 
-    this.pmService.getActivityAttachments(this.taskId).subscribe({
+    this.pmService.getActivityAttachments(this.parentId).subscribe({
       next: (res) => {
         this.attachments = res
         console.log('attachments', res)
@@ -74,7 +74,7 @@ export class ActivityParentsComponent implements OnInit {
 
   ListofEmployees() {
 
-    this.taskService.getEmployeeNoTaskMembers(this.taskId).subscribe({
+    this.taskService.getEmployeeNoTaskMembers(this.parentId).subscribe({
       next: (res) => {
         this.Employees = res
       }
@@ -89,13 +89,10 @@ export class ActivityParentsComponent implements OnInit {
 
   getSingleTask() {
 
-    this.taskService.getSingleTask(this.taskId).subscribe({
+    this.taskService.getSingleTask(this.parentId).subscribe({
       next: (res) => {
         this.task = res
         this.selectedEmployee = []
-
-
-
         if (this.task.TaskMembers!.find(x => x.EmployeeId?.toLowerCase() == this.user.EmployeeId.toLowerCase())) {
           this.isUserTaskMember = true;
         }
@@ -107,14 +104,12 @@ export class ActivityParentsComponent implements OnInit {
   }
 
   selectEmployee(event: SelectList) {
-
     this.selectedEmployee.push(event)
     this.Employees = this.Employees.filter(x => x.Id != event.Id)
 
   }
 
   removeSelected(emp: SelectList) {
-
     this.selectedEmployee = this.selectedEmployee.filter(x => x.Id != emp.Id)
     this.Employees.push(emp)
 
@@ -125,7 +120,8 @@ export class ActivityParentsComponent implements OnInit {
 
     let taskMembers: TaskMembers = {
       Employee: this.selectedEmployee,
-      TaskId: this.taskId
+      TaskId: this.parentId,
+      RequestFrom: this.requestFrom
     }
 
     this.taskService.addTaskMembers(taskMembers).subscribe({
@@ -168,8 +164,8 @@ export class ActivityParentsComponent implements OnInit {
     let taskMemo: any = {
       EmployeeId: this.user.EmployeeId,
       Description: value,
-      TaskId: this.taskId
-
+      TaskId: this.parentId,
+      RequestFrom: this.requestFrom,
     }
 
     return this.taskService.addTaskMemos(taskMemo).subscribe({
@@ -205,10 +201,10 @@ export class ActivityParentsComponent implements OnInit {
   }
 
   addActivity() {
-
     let modalRef = this.modalService.open(AddActivitiesComponent, { size: "xl", backdrop: 'static' })
     modalRef.componentInstance.task = this.task
-
+    modalRef.componentInstance.requestFrom = this.requestFrom;
+    modalRef.componentInstance.requestFromId = this.parentId;
   }
 
   getFilePath(value: string) {

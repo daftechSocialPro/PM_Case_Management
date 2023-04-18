@@ -1,33 +1,43 @@
 <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item" *ngIf="roleMatch(['Super Admin'])">
+            <li class="nav-item" *ngIf="roleMatch(['Super Admin','Director'])">
                   <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#"> <i
                               class="bi bi-menu-button-wide"></i><span>Project Managment</span><i
                               class="bi bi-chevron-down ms-auto"></i> </a>
                   <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li *ngIf="roleMatch(['Super Admin'])"> <a
-                                    [ngClass]="getUrl()=='/dashboard'?'nav-link ':'nav-link collapsed'"
-                                    routerLink="/dashboard"> <i class="bi bi-circle"></i>
+                        <li *ngIf="roleMatch(['Super Admin','Director'])"> <a
+                                    [ngClass]="getUrl()=='/pmdashboard'?'nav-link ':'nav-link collapsed'"
+                                    routerLink="/pmdashboard"> <i class="bi bi-circle"></i>
                                     <span>Dashboard</span> </a></li>
-                        <li *ngIf="roleMatch(['Super Admin'])"> <a routerLink="/program"> <i
+                        <li *ngIf="roleMatch(['Super Admin','Director'])"> <a
+                              
+                              [ngClass]="getUrl()=='/program'?'nav-link ':'nav-link collapsed'"
+                              routerLink="/program"> <i
                                           class="bi bi-circle"></i><span>Programs</span> </a></li>
-                        <li *ngIf="roleMatch(['Super Admin'])"> <a routerLink="/plan"> <i
+                        <li *ngIf="roleMatch(['Super Admin','Director'])"> <a 
+                              
+                              [ngClass]="getUrl()=='/plan'?'nav-link ':'nav-link collapsed'"
+                              routerLink="/plan"> <i
                                           class="bi bi-circle"></i><span>Projects</span> </a></li>
-                        <li *ngIf="roleMatch(['Super Admin'])"> <a routerLink="/assignedactivities"> <i
+                        <li *ngIf="roleMatch(['Super Admin','Director'])"> <a
+                              [ngClass]="getUrl()=='/assignedactivities'?'nav-link ':'nav-link collapsed'"
+                              routerLink="/assignedactivities"> <i
                                           class="bi bi-circle"></i><span>Assigned Activities
                                           <span class="badge bg-success">{{this.Activties.length}}</span></span> </a>
                         </li>
-                        <li *ngIf="roleMatch(['Super Admin'])"> <a routerLink="/comittee"> <i
+                        <li *ngIf="roleMatch(['Super Admin','Director'])"> <a
+                              [ngClass]="getUrl()=='/comittee'?'nav-link ':'nav-link collapsed'"
+                              routerLink="/comittee"> <i
                                           class="bi bi-circle"></i><span>Committees</span> </a></li>
 
                   </ul>
             </li>
             <li *ngIf="roleMatch(['Super Admin','Case Admin','Encoder','Director','Member','Secretery','Employee Manager'])" class="nav-item">
-                  <a class="nav-link collapse" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#"> <i
+                  <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#"> <i
                               class="bi bi-journal-text"></i><span>Case Managment</span><i
                               class="bi bi-chevron-down ms-auto"></i> </a>
-                  <ul id="forms-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
+                  <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li *ngIf="roleMatch(['Super Admin','Case Admin','Encoder','Director','Member','Secretery','Employee Manager'])">
                               <a [ngClass]="getUrl()=='/casedashboard'?'nav-link ':'nav-link collapsed'"
                                     routerLink="/casedashboard"> <i class="bi bi-circle"></i>

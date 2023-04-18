@@ -21,7 +21,7 @@ export class CasedashboardComponent implements OnInit {
     $('#startDate').calendarsPicker({
       calendar: $.calendars.instance('ethiopian', 'am'),
       onSelect: (date: any) => {
-        debugger
+        
 
         if (date) {
 

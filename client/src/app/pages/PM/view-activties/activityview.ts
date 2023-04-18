@@ -28,9 +28,9 @@ export interface MonthPerformanceView {
     Id: string;
     Order: number,
     MonthName: string,
-    Planned: Number,
-    Actual: Number,
-    Percentage: Number
+    Planned: number,
+    Actual: number,
+    Percentage: number
 }
 
 

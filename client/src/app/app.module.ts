@@ -139,6 +139,7 @@ import { CasedashboardComponent } from './pages/casedashboard/casedashboard.comp
 import { OrganizationChartModule } from 'primeng/organizationchart';
 import { RaiseIssueComponent } from './pages/case/encode-case/raise-issue/raise-issue.component';
 import { IssuedCaseComponent } from './pages/case/issued-case/issued-case.component';
+import { PmDashboardComponent } from './pages/pm/pm-dashboard/pm-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -257,7 +258,8 @@ import { IssuedCaseComponent } from './pages/case/issued-case/issued-case.compon
     DetailReportComponent,
     CasedashboardComponent,
     RaiseIssueComponent,
-    IssuedCaseComponent
+    IssuedCaseComponent,
+    PmDashboardComponent
    
     
   ],
