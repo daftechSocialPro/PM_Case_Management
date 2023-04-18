@@ -53,7 +53,39 @@ namespace PM_Case_Managemnt_API.Controllers.Common
 
         }
 
-       
+        [HttpGet("GetPMDashboardDto")]
+        public async Task<IActionResult> GetPMDashboardDto(Guid empId)
+        {
+            try
+            {
+                return Ok(await _dashboardService.GetPMDashboardDto(empId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+
+        }
+
+        [HttpGet("GetPMBarchart")]
+        public async Task<IActionResult> GetPMBarchart(Guid empId)
+        {
+            try
+            {
+                return Ok(await _dashboardService.BudgetYearVsContribution(empId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+
+        }
+
+
+
+
 
     }
 }

@@ -3,6 +3,7 @@ using PM_Case_Managemnt_API.Models.CaseModel;
 using PM_Case_Managemnt_API.Models.Common;
 using PM_Case_Managemnt_API.Models.PM;
 using System.Data;
+using static PM_Case_Managemnt_API.Services.Common.Dashoboard.DashboardService;
 
 namespace PM_Case_Managemnt_API.DTOS.Case
 {
@@ -173,7 +174,26 @@ namespace PM_Case_Managemnt_API.DTOS.Case
         public List<int> data { get; set; }
     }
 
+    public class PMDashboardDto
+    {
 
+        public int CountPrograms { get; set; }
+
+        public float CountBudget { get; set; }
+
+        public float? CountUsedBudget { get; set; }
+
+        public int TotalProjects { get; set; }
+
+        public float TotalContribution { get; set; }
+
+        public int BudgetYear { get; set; }
+
+      public List<ProjectList> ProjectLists { get; set; }
+      public List<AboutToExpireProjects> AboutToExpireProjects { get; set; }
+
+
+    }
 
 
 

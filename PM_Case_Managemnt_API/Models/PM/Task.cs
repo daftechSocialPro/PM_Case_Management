@@ -14,7 +14,7 @@ namespace PM_Case_Managemnt_API.Models.PM
             TaskMemos = new HashSet<TaskMemo>();
             TaskMember = new HashSet<TaskMembers>();
             ActivitiesParents = new HashSet<ActivityParent>();
-            Activities = new HashSet<Activity>();
+           // Activities = new HashSet<Activity>();
         }
 
         public Guid? PlanId { get; set; }

@@ -31,6 +31,7 @@ using PM_Case_Managemnt_API.Services.PM.Activity;
 using PM_Case_Managemnt_API.Services.PM.Commite;
 using PM_Case_Managemnt_API.Services.PM.Plan;
 using PM_Case_Managemnt_API.Services.PM.Program;
+using PM_Case_Managemnt_API.Services.PM.ProgressReport;
 using System.Text;
 using System.Threading.RateLimiting;
 
@@ -115,6 +116,7 @@ builder.Services.AddScoped<ICaseReportService, CaserReportService>();
 builder.Services.AddScoped<IDashboardService,DashboardService>();
 builder.Services.AddScoped<ICaseIssueService, CaseIssueService>();
 builder.Services.AddScoped<ISMSHelper, SMSHelper>();
+builder.Services.AddScoped<IProgressReportService, ProgressReportService>();
 
 //Jwt Authentication
 
