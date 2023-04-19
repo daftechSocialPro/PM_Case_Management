@@ -348,6 +348,54 @@ namespace PM_Case_Managemnt_API.Services.PM
             return EmployeeSelectList;
         }
 
+        public async Task<List<SelectListDto>> GetTasksSelectList(Guid PlanId)
+        {
+
+            return await _dBContext.Tasks.Where(x => x.PlanId == PlanId).
+                Select(x => new SelectListDto { Id = x.Id, Name = x.TaskDescription }).ToListAsync();
+        }
+
+
+        public async Task<List<SelectListDto>> GetActivitieParentsSelectList(Guid TaskId)
+        {
+            return await _dBContext.ActivityParents.Where(x=>x.TaskId==TaskId).Select(x=> new SelectListDto
+            {
+                Id= x.Id,
+                Name = x.ActivityParentDescription
+            }).ToListAsync();
+        }
+
+        public async Task<List<SelectListDto>> GetActivitiesSelectList(Guid? planId, Guid? taskId, Guid? actParentId)
+        {
+
+            if (planId != null)
+            {
+                return await _dBContext.Activities.Where(x => x.PlanId == planId)
+             .Select(x => new SelectListDto
+             {
+                 Id = x.Id,
+                 Name = x.ActivityDescription
+             }).ToListAsync();
+
+            }
+            if (taskId != null )
+            {
+                return await _dBContext.Activities.Where(x => x.TaskId == taskId)
+             .Select(x => new SelectListDto
+             {
+                 Id = x.Id,
+                 Name = x.ActivityDescription
+             }).ToListAsync();
+
+            }
+            return await _dBContext.Activities.Where(x=>x.ActivityParentId == actParentId)
+                .Select(x=> new SelectListDto
+                {
+                    Id = x.Id,
+                    Name = x.ActivityDescription
+                }).ToListAsync() ;
+        }
+
 
 
 

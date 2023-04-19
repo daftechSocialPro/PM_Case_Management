@@ -19,6 +19,12 @@ namespace PM_Case_Managemnt_API.Services.PM
         public Task<List<SelectListDto>> GetEmployeesNoTaskMembersSelectList(Guid taskId);
 
 
+        public Task<List<SelectListDto>> GetTasksSelectList(Guid PlanId);
+
+        public Task<List<SelectListDto>> GetActivitieParentsSelectList(Guid TaskId);
+        public Task<List<SelectListDto>> GetActivitiesSelectList(Guid? planId, Guid? taskId, Guid? actParentId);
+
+
 
 
     }

@@ -144,6 +144,7 @@ import { DirectorLevelPerformanceComponent } from './pages/PM/progress-report/di
 import { ProgramBudgetReportComponent } from './pages/PM/progress-report/program-budget-report/program-budget-report.component';
 import { PlanReportTodayComponent } from './pages/pm/progress-report/plan-report-today/plan-report-today.component';
 import { PlannedReportComponent } from './pages/pm/progress-report/planned-report/planned-report.component';
+import { ProgressReportComponent } from './pages/pm/progress-report/progress-report/progress-report.component';
 
 @NgModule({
   declarations: [
@@ -267,7 +268,8 @@ import { PlannedReportComponent } from './pages/pm/progress-report/planned-repor
     DirectorLevelPerformanceComponent,
     ProgramBudgetReportComponent,
     PlanReportTodayComponent,
-    PlannedReportComponent
+    PlannedReportComponent,
+    ProgressReportComponent
    
     
   ],

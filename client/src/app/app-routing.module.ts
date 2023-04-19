@@ -71,6 +71,7 @@ import { DirectorLevelPerformanceComponent } from './pages/PM/progress-report/di
 import { ProgramBudgetReportComponent } from './pages/PM/progress-report/program-budget-report/program-budget-report.component';
 import { PlanReportTodayComponent } from './pages/pm/progress-report/plan-report-today/plan-report-today.component';
 import { PlannedReportComponent } from './pages/pm/progress-report/planned-report/planned-report.component';
+import { ProgressReportComponent } from './pages/pm/progress-report/progress-report/progress-report.component';
 
 
 
@@ -126,6 +127,7 @@ const routes: Routes = [
 { path: 'programbudgetreport',canActivate:[AuthGuard], component: ProgramBudgetReportComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
 { path: 'planreportdetail',canActivate:[AuthGuard], component: PlanReportTodayComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
 { path: 'plannedreport',canActivate:[AuthGuard], component: PlannedReportComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
+{ path: 'progressreport',canActivate:[AuthGuard], component: ProgressReportComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
 
 
 

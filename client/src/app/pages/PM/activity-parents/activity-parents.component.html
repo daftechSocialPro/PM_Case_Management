@@ -16,7 +16,10 @@
                 <div class="card-title d-flex justify-content-between">
                     {{task.TaskName}}
                     <button class="btn btn-primary text-end" *ngIf="requestFrom == 'ACTIVITY'" (click)="addActivity()"> Add Activity </button>
+                   
+                   
                     <button class="btn btn-primary text-end" *ngIf="requestFrom != 'ACTIVITY' && task.ActivityViewDtos && task.ActivityViewDtos.length == 0" (click)="addActivity()"> Add Activity </button>
+                
                 </div>
             </div>
             <div class="card-body">

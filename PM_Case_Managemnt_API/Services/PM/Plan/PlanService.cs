@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PM_Case_Managemnt_API.Data;
+using PM_Case_Managemnt_API.DTOS.Common;
 using PM_Case_Managemnt_API.DTOS.PM;
 using PM_Case_Managemnt_API.Models.PM;
 
@@ -130,6 +131,20 @@ namespace PM_Case_Managemnt_API.Services.PM.Plan
 
 
         }
+
+        public async Task<List<SelectListDto>> GetPlansSelectList(Guid ProgramId)
+        {
+
+
+            return await _dBContext.Plans.Where(x => x.ProgramId == ProgramId).Select(x => new SelectListDto
+            {
+                Name = x.PlanName,
+                Id = x.Id
+            }).ToListAsync();
+
+
+        }
+
 
 
     }

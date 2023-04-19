@@ -50,5 +50,22 @@ namespace PM_Case_Managemnt_API.Controllers.PM
 
             return response;
         }
+
+
+        [HttpGet("getByProgramIdSelectList")]
+
+        public async Task<IActionResult> GetBYPromgramIdSelectList(Guid ProgramId)
+        {
+            try
+            {
+                return Ok(await _planService.GetPlansSelectList(ProgramId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+
     }
 }

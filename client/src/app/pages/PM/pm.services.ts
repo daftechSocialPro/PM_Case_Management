@@ -122,6 +122,27 @@ export class PMService {
   
 }
 
-  
+
+getByProgramIdSelectList(ProgramId:string){
+    return this.http.get<SelectList[]>(this.BaseURI+"/Plan/getByProgramIdSelectList?ProgramId="+ProgramId)
+
+}
+getByTaskIdSelectList(planId:string){
+
+    return this.http.get<SelectList[]>(this.BaseURI+"/Task/getByTaskIdSelectList?planId="+planId)
+}
+getActivitieParentsSelectList(taskId:string){
+
+    return this.http.get<SelectList[]>(this.BaseURI+"/Task/GetActivitieParentsSelectList?taskId="+taskId)
+}
+GetActivitiesSelectList(planId?:string,taskId?:string , actParentId?:string){
+    debugger
+    if (planId)
+    return this.http.get<SelectList[]>(this.BaseURI+"/Task/GetActivitiesSelectList?planId="+planId)
+    if (taskId)
+    return this.http.get<SelectList[]>(this.BaseURI+"/Task/GetActivitiesSelectList?taskId="+taskId)
+
+    return this.http.get<SelectList[]>(this.BaseURI+"/Task/GetActivitiesSelectList?actParentId="+actParentId)
+}
 
 }

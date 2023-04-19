@@ -65,6 +65,8 @@ namespace PM_Case_Managemnt_API.Models.PM
         public virtual Task Task { get; set; } = null!;
         public Guid? ActivityParentId { get; set; }
         public virtual ActivityParent ActivityParent { get; set; } = null!;
+
+
         public ICollection<ActivityProgress> ActProgress { get; set; }
         public ICollection<EmployeesAssignedForActivities> AssignedEmploye { get; set; }
         public ICollection<ActivityTargetDivision> ActivityTargetDivisions { get; set; }

@@ -137,7 +137,9 @@
                         <!-- <li *ngIf="roleMatch(['Super Admin','PM Admin','Director'])"> <a routerLink="/alerts"> <i
                                           class="bi bi-circle"></i><span>Planned Report (GANT)</span>
                               </a></li> -->
-                        <li *ngIf="roleMatch(['Super Admin','PM Admin','Director'])"> <a routerLink="/alerts"> <i
+                        <li *ngIf="roleMatch(['Super Admin','PM Admin','Director'])"> <a 
+                              [ngClass]="getUrl()=='/progressreport'?'nav-link ':'nav-link collapsed'"
+                              routerLink="/progressreport"> <i
                                           class="bi bi-circle"></i><span>Progress Report</span> </a></li>
                         <li *ngIf="roleMatch(['Super Admin','PM Admin','Director'])"> <a routerLink="/alerts"> <i
                                           class="bi bi-circle"></i><span>Progress Report By

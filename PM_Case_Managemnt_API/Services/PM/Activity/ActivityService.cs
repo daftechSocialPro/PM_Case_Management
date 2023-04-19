@@ -27,15 +27,26 @@ namespace PM_Case_Managemnt_API.Services.PM.Activity
         public async Task<int> AddActivityDetails(ActivityDetailDto activityDetail)
         {
 
-            ActivityParent activityParent = new ActivityParent();
-            activityParent.Id = Guid.NewGuid();
-            activityParent.CreatedAt = DateTime.Now;
-            activityParent.CreatedBy = activityDetail.CreatedBy;
-            activityParent.ActivityParentDescription = activityDetail.ActivityDescription;
-            activityParent.HasActivity = activityDetail.HasActivity;
-            activityParent.TaskId = activityDetail.TaskId;
-            await _dBContext.AddAsync(activityParent);
 
+            var actparent = _dBContext.ActivityParents.Where(x => x.TaskId == activityDetail.TaskId).FirstOrDefault();
+            
+
+
+            ActivityParent activityParent = new ActivityParent();
+
+            if (actparent != null)
+            {
+                activityParent = actparent;
+            }
+            else {
+                activityParent.Id = Guid.NewGuid();
+                activityParent.CreatedAt = DateTime.Now;
+                activityParent.CreatedBy = activityDetail.CreatedBy;
+                activityParent.ActivityParentDescription = activityDetail.ActivityDescription;
+                activityParent.HasActivity = activityDetail.HasActivity;
+                activityParent.TaskId = activityDetail.TaskId;
+                await _dBContext.AddAsync(activityParent);
+            }
 
             foreach (var item in activityDetail.ActivityDetails)
             {

@@ -116,14 +116,14 @@
                                 </ng-container>
 
 
-                                <!-- <ng-container *ngIf="planRow.PlanTargetDivision != null">
+                                <ng-container *ngIf="planRow.PlanTargetDivision == null">
                                     <td></td>
                                     <td></td>
                                     <td></td>
 
                                     <td *ngFor="let items of planReportDetail?.MonthCounts"></td>
 
-                                </ng-container> -->
+                                </ng-container> 
 
 
                             </tr>
@@ -142,12 +142,12 @@
                                         <td *ngFor="let plO of taskRow.TaskTargetDivision">{{plO.TargetValue}}</td>
                                     </ng-container>
 
-                                    <!-- <ng-container *ngIf="taskRow?.TaskTargetDivision == null">
+                                    <ng-container *ngIf="taskRow?.TaskTargetDivision == null">
                                         <td></td>
                                         <td></td>
                                         <td></td>
                                         <td *ngFor="let items of planReportDetail?.MonthCounts"></td>
-                                    </ng-container> -->
+                                    </ng-container>
 
 
                                 </tr>
@@ -168,12 +168,12 @@
                                             </td>
                                         </ng-container>
 
-                                        <!-- <ng-container *ngIf="actRow?.ActivityTargetDivision == null">
+                                        <ng-container *ngIf="actRow?.ActivityTargetDivision == null">
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td *ngFor="let items of planReportDetail?.MonthCounts"></td>
-                                        </ng-container> -->
+                                        </ng-container>
 
                                     </tr>
 
