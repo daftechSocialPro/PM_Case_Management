@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SelectList } from 'src/app/pages/common/common';
-import { OrganizationService } from 'src/app/pages/common/organization/organization.service';
+
 import { PMService } from '../../pm.services';
-import { IPlannedReport } from '../planned-report/planned-report';
+
+import { FilterationCriteria } from './Iprogress-report';
+import { UserView } from 'src/app/pages/pages-login/user';
+import { UserService } from 'src/app/pages/pages-login/user.service';
+import { CommonService } from 'src/app/common/common.service';
 
 @Component({
   selector: 'app-progress-report',
@@ -13,8 +17,8 @@ import { IPlannedReport } from '../planned-report/planned-report';
 export class ProgressReportComponent implements OnInit {
 
   serachForm!: FormGroup
-  plannedreport  !: IPlannedReport
-
+  progressReport  !: any
+  user !: UserView
   cnt: number = 0
   programs !: SelectList[]
   plans !: SelectList[]
@@ -26,7 +30,8 @@ export class ProgressReportComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private pmService: PMService,
-    private orgService: OrganizationService) {
+    private commonService: CommonService,
+    private userService : UserService) {
 
   }
 
@@ -37,7 +42,8 @@ export class ProgressReportComponent implements OnInit {
       programId: ['', Validators.required],
       planId: ['', Validators.required],
       taskId: [''],
-      activityId: [''],
+      actParentId : [null],
+      activityId: [null],
       ReportBy: ['Quarter']
     })
 
@@ -52,15 +58,29 @@ export class ProgressReportComponent implements OnInit {
       }
     })
 
+    this.user = this.userService.getCurrentUser()
+
 
   }
 
   Search() {
 
-    this.pmService.getPlannedReport(this.serachForm.value.BudgetYear, this.serachForm.value.ReportBy, this.serachForm.value.selectStructureId).subscribe({
+    let filterationCriteria : FilterationCriteria ={
+      budgetYear : this.serachForm.value.BudgetYear,
+      empId : this.user.EmployeeId,
+      planId : this.serachForm.value.planId,
+      taskId: this.serachForm.value.taskId,
+      actId : this.serachForm.value.activityId,
+      actParentId : this.serachForm.value.actParentId,
+      reporttype : this.serachForm.value.ReportBy
+    }
+
+    this.pmService.GetProgressReport(filterationCriteria).subscribe({
       next: (res) => {
-        this.plannedreport = res
-        this.cnt = this.plannedreport?.pMINT
+
+        console.log("progress report ",res)
+        this.progressReport = res
+        this.cnt = this.progressReport?.planDuration
 
       }, error: (err) => {
         console.error(err)
@@ -120,5 +140,20 @@ export class ProgressReportComponent implements OnInit {
 
     })
   }
+  range(length: number) {
+    return Array.from({ length }, (_, i) => i);
+  }
+
+  getImage (value : string){
+
+    return this.commonService.createImgPath(value)
+  }
+  applyStyles(act: number) {
+
+    //let percentage = (completed / act) * 100
+    const styles = { 'width': act + "%" };
+    return styles;
+  }
+
 
 }

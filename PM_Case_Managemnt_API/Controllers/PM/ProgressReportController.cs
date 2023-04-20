@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PM_Case_Managemnt_API.Services.PM;
 using PM_Case_Managemnt_API.Services.PM.ProgressReport;
+using static PM_Case_Managemnt_API.Services.PM.ProgressReport.ProgressReportService;
 
 namespace PM_Case_Managemnt_API.Controllers.PM
 {
@@ -66,6 +67,35 @@ namespace PM_Case_Managemnt_API.Controllers.PM
                 return StatusCode(500, "Internal Server Error");
             }
         }
-       
+
+        [HttpPost("GetProgressReport")]
+        public async Task<IActionResult> ProgressReport(FilterationCriteria filterationCriteria)
+        {
+            try
+            {
+                return Ok(await _progressReportService.ProgresssReport(filterationCriteria));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+
+        [HttpGet("GetProgressReportByStructure")]
+        public async Task<IActionResult> GetProgressReportByStructure(int BudgetYea, Guid selectStructureId, string ReportBy)
+        {
+            try
+            {
+                return Ok(await _progressReportService.GetProgressByStructure(BudgetYea, selectStructureId, ReportBy));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+
+
+
+        }
     }
-}
+    }

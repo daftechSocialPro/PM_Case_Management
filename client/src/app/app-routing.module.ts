@@ -72,6 +72,9 @@ import { ProgramBudgetReportComponent } from './pages/PM/progress-report/program
 import { PlanReportTodayComponent } from './pages/pm/progress-report/plan-report-today/plan-report-today.component';
 import { PlannedReportComponent } from './pages/pm/progress-report/planned-report/planned-report.component';
 import { ProgressReportComponent } from './pages/pm/progress-report/progress-report/progress-report.component';
+import { ProgressReportBystructureComponent } from './pages/pm/progress-report/progress-report-bystructure/progress-report-bystructure.component';
+import { PerformanceReportComponent } from './pages/pm/progress-report/performance-report/performance-report.component';
+import { EstimatedCoastComponent } from './pages/pm/progress-report/estimated-coast/estimated-coast.component';
 
 
 
@@ -129,6 +132,12 @@ const routes: Routes = [
 { path: 'plannedreport',canActivate:[AuthGuard], component: PlannedReportComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
 { path: 'progressreport',canActivate:[AuthGuard], component: ProgressReportComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
 
+
+{ path: 'progressreportbystructure',canActivate:[AuthGuard], component: ProgressReportBystructureComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
+
+{ path: 'performancereport',canActivate:[AuthGuard], component: PerformanceReportComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
+
+{ path: 'estimatedcoast',canActivate:[AuthGuard], component: EstimatedCoastComponent ,data:{permittedRoles:['Super Admin','PM Admin','Director']} },
 
 
   { path: 'alerts', component: AlertsComponent },

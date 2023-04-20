@@ -11,6 +11,8 @@ import { IActivityAttachment } from './tasks/Iactivity';
 import { ActivityTargetDivisionDto, ActivityView, ApprovalProgressDto, ViewProgressDto } from './view-activties/activityview';
 import { IPlanReportDetailDto } from './progress-report/plan-report-today/IplanReportDetai';
 import { IPlannedReport } from './progress-report/planned-report/planned-report';
+import { FilterationCriteria } from './progress-report/progress-report/Iprogress-report';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -136,7 +138,7 @@ getActivitieParentsSelectList(taskId:string){
     return this.http.get<SelectList[]>(this.BaseURI+"/Task/GetActivitieParentsSelectList?taskId="+taskId)
 }
 GetActivitiesSelectList(planId?:string,taskId?:string , actParentId?:string){
-    debugger
+    
     if (planId)
     return this.http.get<SelectList[]>(this.BaseURI+"/Task/GetActivitiesSelectList?planId="+planId)
     if (taskId)
@@ -145,4 +147,13 @@ GetActivitiesSelectList(planId?:string,taskId?:string , actParentId?:string){
     return this.http.get<SelectList[]>(this.BaseURI+"/Task/GetActivitiesSelectList?actParentId="+actParentId)
 }
 
+GetProgressReport( filterationCriteria:FilterationCriteria){
+
+    return this.http.post<any>(this.BaseURI+"/ProgressReport/GetProgressReport",filterationCriteria)
+
+}
+GetProgressReportByStructure(BudgetYear:string ,ReportBy :string ,selectStructureId:string){
+    return this.http.get<any>(this.BaseURI+"/ProgressReport/GetProgressReportByStructure?BudgetYea="+BudgetYear+"&ReportBy="+ReportBy+"&selectStructureId="+selectStructureId)
+    
+}
 }

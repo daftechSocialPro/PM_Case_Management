@@ -12,6 +12,9 @@ namespace PM_Case_Managemnt_API.Services.PM.ProgressReport
         public Task<PlanReportDetailDto> StructureReportByProgram(string BudgetYear, string ProgramId, string ReportBy);
 
         public Task<PlannedReport> PlanReports(string BudgetYea, Guid selectStructureId, string ReportBy);
+        public Task<ProgresseReport> ProgresssReport(FilterationCriteria filterationCriteria);
+
+        public Task<ProgresseReportByStructure> GetProgressByStructure(int BudgetYea, Guid selectStructureId, string ReportBy);
 
 
     }
