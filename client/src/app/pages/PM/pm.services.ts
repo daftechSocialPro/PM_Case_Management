@@ -156,4 +156,19 @@ GetProgressReportByStructure(BudgetYear:string ,ReportBy :string ,selectStructur
     return this.http.get<any>(this.BaseURI+"/ProgressReport/GetProgressReportByStructure?BudgetYea="+BudgetYear+"&ReportBy="+ReportBy+"&selectStructureId="+selectStructureId)
     
 }
+
+GetPerformanceReport( filterationCriteria:FilterationCriteria){
+
+    return this.http.post<any>(this.BaseURI+"/ProgressReport/GetPerformanceReport",filterationCriteria)
+
+}
+
+GetActivityProgress(activityId:string ){
+
+    return this.http.get<any>(this.BaseURI+"/ProgressReport/GetActivityProgress?activityId="+activityId)
+}
+
+GetEstimatedCost(structureId:string, budegtYear:string){
+    return this.http.get<any>(this.BaseURI+"/ProgressReport/GetEstimatedCost?structureId="+structureId+"&budegtYear="+budegtYear)
+}
 }

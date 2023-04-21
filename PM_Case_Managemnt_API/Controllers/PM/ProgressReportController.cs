@@ -97,5 +97,43 @@ namespace PM_Case_Managemnt_API.Controllers.PM
 
 
         }
+        [HttpPost("GetPerformanceReport")]
+        public async Task<IActionResult> GetPerformanceReport(FilterationCriteria filterationCriteria)
+        {
+            try
+            {
+                return Ok(await _progressReportService.PerformanceReports(filterationCriteria));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        
+        [HttpGet("GetActivityProgress")]
+        public async Task<IActionResult> GetActivityProgress(Guid activityId)
+        {
+            try
+            {
+                return Ok(await _progressReportService.GetActivityProgress(activityId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        [HttpGet("GetEstimatedCost")]
+        public async Task<IActionResult> GetEstimatedCost(Guid structureId, int budegtYear)
+        {
+            try
+            {
+                return Ok(await _progressReportService.GetEstimatedCost(structureId, budegtYear));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
     }
     }

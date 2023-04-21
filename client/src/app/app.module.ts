@@ -148,6 +148,8 @@ import { ProgressReportComponent } from './pages/pm/progress-report/progress-rep
 import { EstimatedCoastComponent } from './pages/pm/progress-report/estimated-coast/estimated-coast.component';
 import { PerformanceReportComponent } from './pages/pm/progress-report/performance-report/performance-report.component';
 import { ProgressReportBystructureComponent } from './pages/pm/progress-report/progress-report-bystructure/progress-report-bystructure.component';
+import { GetActivityProgressComponent } from './pages/PM/progress-report/performance-report/get-activity-progress/get-activity-progress.component';
+import { ShowonmapComponent } from './pages/PM/progress-report/performance-report/showonmap/showonmap.component';
 
 @NgModule({
   declarations: [
@@ -275,7 +277,9 @@ import { ProgressReportBystructureComponent } from './pages/pm/progress-report/p
     ProgressReportComponent,
     EstimatedCoastComponent,
     PerformanceReportComponent,
-    ProgressReportBystructureComponent
+    ProgressReportBystructureComponent,
+    GetActivityProgressComponent,
+    ShowonmapComponent
    
     
   ],

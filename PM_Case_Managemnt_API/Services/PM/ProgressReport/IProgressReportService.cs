@@ -16,6 +16,12 @@ namespace PM_Case_Managemnt_API.Services.PM.ProgressReport
 
         public Task<ProgresseReportByStructure> GetProgressByStructure(int BudgetYea, Guid selectStructureId, string ReportBy);
 
+        public Task<PerfomanceReport> PerformanceReports(FilterationCriteria filterationCriteria);
+
+        public Task<List<ActivityProgressViewModel>> GetActivityProgress(Guid? activityId);
+
+        public Task<List<EstimatedCostDto>> GetEstimatedCost(Guid structureId, int budegtYear);
+
 
     }
 }

@@ -81,6 +81,7 @@
     <Folder Include="Assets\Organization\" />
     <Folder Include="Assets\Organization\" />
     <Folder Include="Models\Auth\" />
+    <Folder Include="Assets\" />
   </ItemGroup>
 
   <ItemGroup>
