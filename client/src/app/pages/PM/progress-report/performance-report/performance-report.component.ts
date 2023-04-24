@@ -7,6 +7,8 @@ import { PMService } from '../../pm.services';
 import { FilterationCriteria } from '../progress-report/Iprogress-report';
 import { GetActivityProgressComponent } from './get-activity-progress/get-activity-progress.component';
 declare const $: any
+import * as XLSX from 'xlsx';
+
 @Component({
   selector: 'app-performance-report',
   templateUrl: './performance-report.component.html',
@@ -87,6 +89,14 @@ export class PerformanceReportComponent implements OnInit {
     })
 
 
+  }
+
+
+  exportTableToExcel(table: HTMLElement, fileName: string): void {
+    const worksheet = XLSX.utils.table_to_sheet(table);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, fileName + '.xlsx');
   }
 
   Search() {

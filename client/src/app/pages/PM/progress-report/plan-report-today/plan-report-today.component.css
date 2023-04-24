@@ -1,51 +1,23 @@
-.table-responsive {
-    overflow-x: auto;
-  }
-  
+.card{
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+th {
+  background-color: #f2f2f2;
+}
+@media screen and (max-width: 600px) {
   table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-    border-collapse: collapse;
+    font-size: 12px;
   }
-  
-  th,
-  td {
-    padding: 0.75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
+  th, td {
+    padding: 5px;
   }
-  
-  thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-  }
-  
-  .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-  
-  @media (max-width: 575.98px) {
-    table {
-      display: block;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    th,
-    td {
-      white-space: nowrap;
-    }
-    tbody {
-      display: table-row-group;
-    }
-    tbody tr {
-      display: table-row;
-      border-top: none;
-    }
-    tbody td {
-      display: table-cell;
-      border-top: none;
-    }
-  }
-  
+}

@@ -73,10 +73,10 @@
             </div>
         </div>
 
-
-
+        <button *ngIf="plannedreport?.PlansLst" (click)="exportTableToExcel(tableElement, 'Planned Report')"  type="button" class="btn btn-secondary m-2">
+            <i class="bi bi-file-earmark-excel me-1"></i> Export Report to Excel</button> 
         <div class="card">
-            <table id="table" class="table table-centered table-hover mb-0 table-bordered">
+            <table #tableElement class="table table-bordered table-responsive">
 
                 <thead class="thead-light">
                     <tr>

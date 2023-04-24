@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PMService } from '../../pm.services';
 import { SelectList } from 'src/app/pages/common/common';
 import { IPlanReportDetailDto } from './IplanReportDetai';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-plan-report-today',
@@ -39,6 +40,13 @@ export class PlanReportTodayComponent implements OnInit {
 
   }
 
+  exportTableToExcel(table: HTMLElement, fileName: string): void {
+    const worksheet = XLSX.utils.table_to_sheet(table);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, fileName + '.xlsx');
+  }
+  
   Search() {
 
     this.pmService.getPlanDetailReport(this.serachForm.value.BudgetYear, this.serachForm.value.ReportBy,this.serachForm.value.ProgramId).subscribe({

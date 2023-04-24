@@ -5,6 +5,7 @@ import { PMService } from '../../pm.services';
 import { IPlanReportDetailDto } from '../plan-report-today/IplanReportDetai';
 import { OrganizationService } from 'src/app/pages/common/organization/organization.service';
 import { IPlannedReport } from './planned-report';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-planned-report',
@@ -56,6 +57,14 @@ export class PlannedReportComponent implements OnInit {
 
 
   }
+
+  exportTableToExcel(table: HTMLElement, fileName: string): void {
+    const worksheet = XLSX.utils.table_to_sheet(table);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, fileName + '.xlsx');
+  }
+  
 
   Search() {
 

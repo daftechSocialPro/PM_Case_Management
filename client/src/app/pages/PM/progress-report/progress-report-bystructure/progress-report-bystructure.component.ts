@@ -5,6 +5,7 @@ import { PMService } from '../../pm.services';
 import { IPlanReportDetailDto } from '../plan-report-today/IplanReportDetai';
 import { OrganizationService } from 'src/app/pages/common/organization/organization.service';
 import { IPlannedReport } from '../planned-report/planned-report';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-progress-report-bystructure',
@@ -57,6 +58,15 @@ export class ProgressReportBystructureComponent implements OnInit {
 
   }
 
+
+  exportTableToExcel(table: HTMLElement, fileName: string): void {
+    const worksheet = XLSX.utils.table_to_sheet(table);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, fileName + '.xlsx');
+  }
+
+  
   Search() {
 
     this.pmService.GetProgressReportByStructure(this.serachForm.value.BudgetYear, this.serachForm.value.ReportBy, this.serachForm.value.selectStructureId).subscribe({

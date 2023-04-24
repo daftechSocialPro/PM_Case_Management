@@ -126,11 +126,11 @@
 
 
 
-        <div class="card" >
-
-
-            <table id="table" class="table table-bordered table-centered table-hover mb-0 ">
-
+     
+        <button *ngIf="progressReport?.AllActivities" (click)="exportTableToExcel(tableElement, 'Progress Report')"  type="button" class="btn btn-secondary m-2">
+            <i class="bi bi-file-earmark-excel me-1"></i> Export Report to Excel</button> 
+        <div class="card">
+            <table #tableElement class="table table-bordered table-responsive">
                 <thead class="thead-light  ">
                     <tr>
                         <th rowspan="2">#</th>

@@ -8,6 +8,7 @@ import { FilterationCriteria } from './Iprogress-report';
 import { UserView } from 'src/app/pages/pages-login/user';
 import { UserService } from 'src/app/pages/pages-login/user.service';
 import { CommonService } from 'src/app/common/common.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-progress-report',
@@ -62,6 +63,14 @@ export class ProgressReportComponent implements OnInit {
 
 
   }
+
+  
+exportTableToExcel(table: HTMLElement, fileName: string): void {
+  const worksheet = XLSX.utils.table_to_sheet(table);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+  XLSX.writeFile(workbook, fileName + '.xlsx');
+}
 
   Search() {
 
