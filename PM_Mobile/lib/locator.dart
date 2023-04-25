@@ -1,6 +1,7 @@
 
 import 'package:daf_project1/services/api.dart';
 import 'package:daf_project1/services/file_picker.dart';
+import 'package:daf_project1/services/mac_getter.dart';
 import 'package:daf_project1/services/shared_preferences.dart';
 import 'package:daf_project1/viewmodels/login_viewmodel.dart';
 import 'package:daf_project1/viewmodels/tasks_viewmodel.dart';
@@ -17,5 +18,6 @@ void setupLocator() {
   locator.registerLazySingleton<FilePickerUtil>(() => FilePickerUtil());
   locator.registerSingleton<SharedPreferencesUtil>(SharedPreferencesUtil());
   locator.registerLazySingleton<Api>(() => Api());
-  locator.registerLazySingleton(() => LoginViewModel(locator<Api>()));
+  locator.registerLazySingleton<MacGetter>(() => MacGetter());
 }
+

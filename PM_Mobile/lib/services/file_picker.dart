@@ -17,7 +17,7 @@ class FilePickerUtil{
     }
   }
 
-  Future<List<File?>?> getFiles() async{
+  Future<List<File?>> getFiles() async{
     FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
     if(result != null) {
       List<File?> files = result.paths.map((path){
@@ -27,6 +27,7 @@ class FilePickerUtil{
       }).toList();
       return files;
     } else {
+      return [];
       // User canceled the picker
     }
 

@@ -1,6 +1,9 @@
+import 'package:daf_project1/services/mac_getter.dart';
 import 'package:daf_project1/services/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+
+import '../locator.dart';
 
 class SettingsViewModel extends ChangeNotifier{
 
@@ -17,6 +20,8 @@ class SettingsViewModel extends ChangeNotifier{
   set ipAddress(String value) {
     _ipAddress = value;
   }
+
+  String? get macAddress => locator<MacGetter>().macAddress;
 
   SettingsViewModel(preferencesUtil){
     _preferencesUtil = preferencesUtil;

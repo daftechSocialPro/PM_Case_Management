@@ -1,24 +1,34 @@
 
+import 'package:daf_project1/models/activity.dart';
 import 'package:daf_project1/ui/widgets/custom_divider.dart';
 import 'package:daf_project1/ui/widgets/custom_list_tile.dart';
 import 'package:daf_project1/ui/widgets/description_item.dart';
 import 'package:daf_project1/ui/widgets/primary_button.dart';
 import 'package:daf_project1/ui/widgets/progress_indicator.dart';
-import 'package:daf_project1/viewmodels/login_viewmodel.dart';
-import 'package:daf_project1/models/coordinator_activity.dart';
+import 'package:daf_project1/viewmodels/activities_viewmodel.dart';
 import 'package:daf_project1/viewmodels/tasks_viewmodel.dart';
+import 'package:daf_project1/viewmodels/ui_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CoordinatorActivityDetailPage extends StatelessWidget {
   int activityIndex;
   int taskIndex;
-  CoordinatorActivityDetailPage({required this.activityIndex,required this.taskIndex, Key? key}) : super(key: key);
+  bool isCoordinator;
+  CoordinatorActivityDetailPage({required this.isCoordinator, required this.activityIndex,required this.taskIndex, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    TasksViewModel tasksViewModel = Provider.of<TasksViewModel>(context, listen:  false);
-    CoordinatorActivity activity = tasksViewModel.tasks[taskIndex].activities[activityIndex];
+    var viewModel = isCoordinator ? Provider.of<ActivitiesViewModel>(context, listen: false) : Provider.of<TasksViewModel>(context, listen:  false);
+    Activity activity;
+    if(isCoordinator){
+      activity = (viewModel as ActivitiesViewModel).activities[activityIndex];
+
+    }
+    else{
+      activity = (viewModel as TasksViewModel).tasks[taskIndex].notAssignedActivities[activityIndex];
+
+    }
     String detail = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum consequat nisl vel pretium. Eget egestas purus viverra accumsan in nisl nisi scelerisque. Tellus rutrum tellus pellentesque eu tincidunt tortor.";
 
     return Scaffold(
@@ -35,7 +45,7 @@ class CoordinatorActivityDetailPage extends StatelessWidget {
             children: [
               Center(
                   child: CustomProgressIndicator(
-                      label: "Progress So far", percentile: activity.actualWorked)),
+                      label: "Progress So far", percentile: activity.percentage)),
               SizedBox(
                 height: 64,
               ),
@@ -43,7 +53,7 @@ class CoordinatorActivityDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  DescriptionItem(label: activity.description,detail: detail,),
+                  DescriptionItem(tag: activity.id,label: activity.description,detail: detail,),
                   CustomDivider(),
                   CustomListTile(
                     leading: Icon(Icons.money),
@@ -74,7 +84,7 @@ class CoordinatorActivityDetailPage extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: PrimaryButton(
                         onPressed: () => {
-                          Navigator.pushNamed(context, "/report_history", arguments: [taskIndex,activityIndex])
+                          Navigator.pushNamed(context, "/report_history", arguments: activity)
                         },
                         buttonText: "Report history",
                         buttonState: ButtonState.idle)),

@@ -1,7 +1,7 @@
 import 'package:daf_project1/ui/widgets/custom_input_field.dart';
 import 'package:daf_project1/ui/widgets/primary_button.dart';
-import 'package:daf_project1/viewmodels/login_viewmodel.dart';
 import 'package:daf_project1/viewmodels/settings_viewmodel.dart';
+import 'package:daf_project1/viewmodels/ui_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +21,6 @@ class SettingsPage extends StatelessWidget {
               label: "IpAddress",
               errorMsg: '',
               controller: settingsViewModel.ipAddressController),
-          // todo: Change TextEditingController
           CustomInputField(
               label: "Publish name",
               errorMsg: '',
@@ -31,7 +30,7 @@ class SettingsPage extends StatelessWidget {
               isNumber: true,
               errorMsg: '',
               controller: settingsViewModel.portNumberController),
-          // todo: change TextEditingController
+          SelectableText("Your Phone Id: ${settingsViewModel.macAddress??""}"),
           SizedBox(height: 20,),
           PrimaryButton(
             onPressed: () {
@@ -41,6 +40,7 @@ class SettingsPage extends StatelessWidget {
             buttonText: 'Save',
             buttonState: ButtonState.idle,
           ),
+
         ],),
     );
   }

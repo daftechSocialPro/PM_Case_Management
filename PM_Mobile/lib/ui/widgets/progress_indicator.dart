@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CustomProgressIndicator extends StatelessWidget {
-  late String label;
-  late double percentile;
+  late final String label;
+  late final double percentile;
   CustomProgressIndicator({required this.label, required this.percentile, Key? key}) : super(key: key);
 
   @override

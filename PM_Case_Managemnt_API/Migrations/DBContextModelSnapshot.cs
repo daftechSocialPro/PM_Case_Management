@@ -664,6 +664,10 @@ namespace PMCaseManagemntAPI.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<string>("MobileUsersMacaddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("OrganizationalStructureId")
                         .HasColumnType("uniqueidentifier");
 

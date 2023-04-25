@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 
 class CustomListTile extends StatelessWidget {
-  Widget? leading;
-  Widget? trailing;
-  Widget title;
+  final Widget? leading;
+  final Widget? trailing;
+  final Widget title;
   CustomListTile({required this.title, this.leading, this.trailing, Key? key}) : super(key: key);
 
   @override

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'custom_subtitle.dart';
 
 class DownloadItem extends StatelessWidget {
-  VoidCallback onPressed;
-  String fileName;
-  String label;
-  bool isFileExist;
+  final VoidCallback onPressed;
+  final String fileName;
+  final String label;
+  final bool isFileExist;
 
   DownloadItem({required this.isFileExist, required this.label, required this.onPressed, required this.fileName, Key? key}) : super(key: key);
 
@@ -15,13 +15,15 @@ class DownloadItem extends StatelessWidget {
     return  Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SubtitleText(this.label),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-          IconButton(onPressed: this.onPressed, icon: Icon(isFileExist ? Icons.download : Icons.error_outline, color: Theme.of(context).primaryColor,)),
-          Text(fileName.substring(fileName.length > 25 ? fileName.length - 25: 0),)
-        ],),
+        Expanded(child: SubtitleText(this.label)),
+        Expanded(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+            IconButton(onPressed: this.onPressed, icon: Icon(isFileExist ? Icons.open_in_new_outlined : Icons.error_outline, color: Theme.of(context).primaryColor,)),
+            Expanded(child: Text(fileName.substring(fileName.length > 20 ? fileName.length - 20 : 0), overflow: TextOverflow.ellipsis,))
+          ],),
+        ),
       ],
     );
   }

@@ -1,15 +1,16 @@
 
-import 'package:daf_project1/viewmodels/login_viewmodel.dart';
+import 'package:daf_project1/viewmodels/ui_state.dart';
 import 'package:flutter/material.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String buttonText;
   final ButtonState buttonState;
-  CustomOutlinedButton({required this.onPressed,required this.buttonText,required this.buttonState});
+  CustomOutlinedButton({required this.onPressed,required this.buttonText,this.buttonState = ButtonState.idle});
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return  Container(
       padding: EdgeInsets.only(top: 3, left: 3),
       child: OutlinedButton(
@@ -23,9 +24,9 @@ class CustomOutlinedButton extends StatelessWidget {
         )
             : Text(
           buttonText,
-          style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 18),
+          style: theme.textTheme.button!.copyWith(
+            color: theme.primaryColor
+          ),
         ),
       ),
     );

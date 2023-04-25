@@ -83,13 +83,13 @@
                                     placeholder="Month">
                                 <label for="Month">Month</label>
                             </div>
-
-                            <div   class="form-floating me-2">
-                                <input type="text" [disabled]="filterBY != '3'" class="form-control startDate" formControlName="FromDate"
+                           
+                            <div  [ngStyle]="{'display': filterBY === '3' ? 'block' : 'none'}"  class="form-floating me-2">
+                                <input type="text"  class="form-control startDate" formControlName="FromDate"
                                     id="startDate" placeholder="startDate">
                                 <label for="startDate">Start Date</label>
                             </div>
-                            <div   class="form-floating me-2">
+                            <div  [ngStyle]="{'display': filterBY === '3' ? 'block' : 'none'}"  class="form-floating me-2">
                                 <input type="text" class="form-control endDate" formControlName="ToDate" id="endDate"
                                     placeholder="endDate">
                                 <label for="endDate">End Date</label>

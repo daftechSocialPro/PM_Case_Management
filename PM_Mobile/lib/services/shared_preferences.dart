@@ -14,41 +14,36 @@ class SharedPreferencesUtil{
     initPreference();
   }
   setPublishName(String publishName){
-    print("Saving publishName.....");
     _preferences!.setString("publishName", publishName);
-    print("PublishName from preference: ${getPublishName()}");
 
   }
   setIpAddress(String ipAddress){
-      print("Saving ipAddress.....");
       _preferences!.setString("ipAddress", ipAddress);
-      print("IpAddress from preference: ${getIpAddress()}");
-      print("PortNumber from preference: ${getPortNumber()}");
+
 
   }
 
   setPortNumber(int port){
-    print("Saving port number....");
     _preferences!.setInt("portNumber", port);
   }
 
   String getIpAddress(){
     if(_preferences != null){
-      return _preferences!.getString('ipAddress') ?? "localhost";
+      return _preferences!.getString('ipAddress') ?? "197.156.93.75";
     }
     return "";
 
   }
   String getPublishName(){
     if(_preferences != null){
-      return  _preferences!.getString('publishName') ?? "";
+      return  _preferences!.getString('publishName') ?? "IPDCS_WC_LATEST";
     }
     return "";
 
   }
   int getPortNumber(){
     if(_preferences != null){
-      return _preferences!.getInt('portNumber') ?? 0;
+      return _preferences!.getInt('portNumber') ?? 80;
     }
 
     return 0;

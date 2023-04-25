@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class DescriptionItem extends StatelessWidget {
   String label;
   String detail;
-  DescriptionItem({required this.label , required this.detail, Key? key}) : super(key: key);
+  String tag;
+  DescriptionItem({required this.tag, required this.label , required this.detail, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,9 @@ class DescriptionItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Text("$label",style: CustomStyles.activityTitle(context),),
+          Hero(
+              tag: tag,
+              child: Text("$label",style: CustomStyles.activityTitle(context),)),
           SizedBox(height: 8,),
           Text("$detail")
         ],

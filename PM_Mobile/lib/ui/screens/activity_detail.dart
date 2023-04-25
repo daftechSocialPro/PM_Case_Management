@@ -1,25 +1,24 @@
-import 'package:daf_project1/models/iactivity.dart';
-import 'package:daf_project1/models/my_activity.dart';
+import 'package:daf_project1/models/activity.dart';
 import 'package:daf_project1/ui/widgets/custom_divider.dart';
 import 'package:daf_project1/ui/widgets/custom_list_tile.dart';
 import 'package:daf_project1/ui/widgets/description_item.dart';
 import 'package:daf_project1/ui/widgets/primary_button.dart';
 import 'package:daf_project1/ui/widgets/progress_indicator.dart';
-import 'package:daf_project1/viewmodels/activities_viewmodel.dart';
-import 'package:daf_project1/viewmodels/login_viewmodel.dart';
-import 'package:daf_project1/models/coordinator_activity.dart';
+import 'package:daf_project1/viewmodels/tasks_viewmodel.dart';
+import 'package:daf_project1/viewmodels/ui_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ActivityDetailPage extends StatelessWidget {
   int activityIndex;
-  ActivityDetailPage({required this.activityIndex, Key? key}) : super(key: key);
+  int taskIndex;
+  ActivityDetailPage({required this.taskIndex,required this.activityIndex, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    MyActivity activity =
-        Provider.of<ActivitiesViewModel>(context, listen: false)
-            .activities[activityIndex];
+    Activity activity =
+        Provider.of<TasksViewModel>(context, listen: false)
+            .tasks[taskIndex].assignedActivities[activityIndex];
     String detail =
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum consequat nisl vel pretium. Eget egestas purus viverra accumsan in nisl nisi scelerisque. Tellus rutrum tellus pellentesque eu tincidunt tortor.";
     return Scaffold(
@@ -28,7 +27,7 @@ class ActivityDetailPage extends StatelessWidget {
         actions: [
           Padding(
               padding: EdgeInsets.only(right: 16.0),
-              child: buildPopUpMenuButton()),
+              child: buildPopUpMenuButton(activity)),
         ],
       ),
       body: SingleChildScrollView(
@@ -41,7 +40,7 @@ class ActivityDetailPage extends StatelessWidget {
             children: [
               Center(
                   child: CustomProgressIndicator(
-                      label: "Progress So far", percentile: activity.progress)),
+                      label: "Progress So far", percentile: activity.percentage)),
               SizedBox(
                 height: 64,
               ),
@@ -50,6 +49,7 @@ class ActivityDetailPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   DescriptionItem(
+                    tag: activity.id,
                     label: activity.description,
                     detail: detail,
                   ),
@@ -76,7 +76,7 @@ class ActivityDetailPage extends StatelessWidget {
                   ),
                   CustomListTile(
                     title: Text("Received at"),
-                    trailing: Text("81%"),
+                    trailing: Text("${activity.beginning.toStringAsFixed(3)}"),
                   ),
                   // CustomListTile(title: Text("May 26, 2021 - Jan 7, 2021"))
                 ],
@@ -88,7 +88,7 @@ class ActivityDetailPage extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: PrimaryButton(
                         onPressed: () =>
-                            {Navigator.pushNamed(context, "/add_progress")},
+                            {Navigator.pushNamed(context, "/add_progress",  arguments: [activity.id, false, activity.targetDivisions])},
                         buttonText:"Add Progress",
                         buttonState: ButtonState.idle)),
               )
@@ -99,15 +99,16 @@ class ActivityDetailPage extends StatelessWidget {
     );
   }
 
-  Widget buildPopUpMenuButton() {
+  Widget buildPopUpMenuButton(Activity activity) {
     return PopupMenuButton<int>(
       itemBuilder: (context) => [
         PopupMenuItem(
           value: 1,
           child: TextButton(
             onPressed: () {
+              Navigator.pop(context);
               Navigator.pushNamed(context,'/add_progress',
-              arguments: true);
+              arguments: [activity.id, true, activity.targetDivisions]);
             },
             child: Text("Finalize"),
           ),
@@ -116,9 +117,10 @@ class ActivityDetailPage extends StatelessWidget {
           value: 2,
           child: TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/terminate_activity');
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/terminate_activity', arguments: activity.id);
             },
-            child: Text("Terminate"),
+            child: Text("Termination Req"),
           ),
         ),
         PopupMenuItem(
@@ -126,6 +128,7 @@ class ActivityDetailPage extends StatelessWidget {
           child: TextButton(
             onPressed: () {
               Navigator.pop(context);
+              Navigator.pushNamed(context, "/report_history", arguments: activity);
             },
             child: Text("Report History"),
           ),

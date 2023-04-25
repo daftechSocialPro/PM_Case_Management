@@ -1,28 +1,26 @@
 import 'package:daf_project1/ui/widgets/custom_subtitle.dart';
 import 'package:flutter/material.dart';
 
-class DropDownDemo extends StatelessWidget {
-
+class DropDown extends StatelessWidget {
+  final Function onItemPressed;
+  final List<String> dropDownItems;
+  final String label;
+  DropDown({required this.onItemPressed, required this.label, required this.dropDownItems});
 
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       //elevation: 5,
       style: TextStyle(color: Colors.black),
-      items: <String>[
-        'Quarter 1',
-        'Quarter 2',
-        'Quarter 3',
-        'Quarter 4',
-      ].map<DropdownMenuItem<String>>((String value) {
+      items:dropDownItems.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
         );
       }).toList(),
-      hint: SubtitleText("Please select a quarter",),
+      hint: SubtitleText(label,),
       onChanged: (String? value) {
-
+          onItemPressed(value);
       },
     );
   }

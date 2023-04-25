@@ -4,24 +4,22 @@ import 'package:flutter/material.dart';
 import '../../locator.dart';
 
 class AddFileButton extends StatelessWidget {
-  FilePickerUtil filePickerUtil = locator<
-      FilePickerUtil>();
-
-  String label;
-  bool selectMultipleFiles;
-  AddFileButton({required this.label, required this.selectMultipleFiles, Key? key}) : super(key: key);
+  VoidCallback onPressed;
+  final String label;
+  final bool showIcon;
+  AddFileButton({this.showIcon = true, required this.onPressed, required this.label, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return  OutlinedButton(
-        onPressed: () async{
-          selectMultipleFiles ? filePickerUtil.getFiles() : filePickerUtil.getFile();
-        },
+        onPressed: onPressed,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.attach_file),
-            Text(label),
+            this.showIcon ? Icon(Icons.attach_file) : Container(),
+            Flexible(
+                fit: FlexFit.loose,
+                child: Text(label, overflow: TextOverflow.ellipsis,)),
           ],
         ));
   }
