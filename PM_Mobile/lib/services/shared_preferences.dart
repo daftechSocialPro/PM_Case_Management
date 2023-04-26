@@ -29,21 +29,21 @@ class SharedPreferencesUtil{
 
   String getIpAddress(){
     if(_preferences != null){
-      return _preferences!.getString('ipAddress') ?? "197.156.93.75";
+      return _preferences!.getString('ipAddress') ?? "192.168.0.15";
     }
     return "";
 
   }
   String getPublishName(){
     if(_preferences != null){
-      return  _preferences!.getString('publishName') ?? "IPDCS_WC_LATEST";
+      return  _preferences!.getString('publishName') ?? "";
     }
     return "";
 
   }
   int getPortNumber(){
     if(_preferences != null){
-      return _preferences!.getInt('portNumber') ?? 80;
+      return _preferences!.getInt('portNumber') ?? 7250;
     }
 
     return 0;

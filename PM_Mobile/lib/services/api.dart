@@ -49,27 +49,31 @@ class Api {
     return _apiBaseHelper.buildRelativeImagePath();
   }
   Future<Employee?> login(String username, String password) async {
-    String? deviceId = locator<MacGetter>().macAddress;
-    String relativePath = "login?UserName=$username&Password=$password&DeviceId=$deviceId";
-    Map<String, dynamic> jsonMap = await _apiBaseHelper.get(relativePath,) as Map<String, dynamic>;
+  String? deviceId = locator<MacGetter>().macAddress;
+  String relativePath =
+      "login?UserName=$username&Password=$password&DeviceId=$deviceId";
+  try {
+    Map<String, dynamic> jsonMap =
+        await _apiBaseHelper.get(relativePath) as Map<String, dynamic>;
     Employee employee = Employee.fromJson(jsonMap);
+    employee.username = username;
+    employee.password = password;
+    employee.userId = employee.id;
+
     this._user = employee;
-    var emp= employee;
-    emp.username= username;
-    emp.password= password;
-    emp.userId=employee.id;
-    
 
-DatabaseHelper ? _dbHelper = DatabaseHelper.instanse;
-  var x = await _dbHelper.fetchUser();
-   if (x.isEmpty){
-     
+    DatabaseHelper? _dbHelper = DatabaseHelper.instanse;
+    var users = await _dbHelper.fetchUser();
+    if (users.isEmpty) {
       await _dbHelper.insertUser(employee);
-   }
-
+    }
 
     return employee;
+  } catch (e) {
+    print('Error occurred: $e');
+    return null;
   }
+}
 
   logOut() {
     this._user = null;

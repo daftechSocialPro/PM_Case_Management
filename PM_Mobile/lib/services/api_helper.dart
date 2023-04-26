@@ -22,7 +22,7 @@ class ApiBaseHelper {
     int _port = preferencesUtil.getPortNumber();
     String _publishName = preferencesUtil.getPublishName();
     print("IpAddress: $_ipAddress");
-    return "http://$_ipAddress:$_port/$_publishName/mobileuser/";
+    return _publishName!="" ?"http://$_ipAddress:$_port/$_publishName/api/PmForMobile/":"http://$_ipAddress:$_port/api/PmForMobile/";
   }
 
   String buildRelativeImagePath() {
@@ -31,7 +31,7 @@ class ApiBaseHelper {
     int _port = preferencesUtil.getPortNumber();
     String _publishName = preferencesUtil.getPublishName();
     print("IpAddress: $_ipAddress");
-    return "http://$_ipAddress:$_port/$_publishName/content/EmployeePic/";
+    return "http://$_ipAddress:$_port";
   }
 
   String buildRelativeFilePath(){
@@ -40,7 +40,7 @@ class ApiBaseHelper {
     int _port = preferencesUtil.getPortNumber();
     String _publishName = preferencesUtil.getPublishName();
     print("IpAddress: $_ipAddress");
-    return "http://$_ipAddress:$_port/$_publishName/Content/ProgressAttachments/";
+    return "http://$_ipAddress:$_port";
   }
 
   Future<dynamic> get(String url, {bool isRelative = true}) async {

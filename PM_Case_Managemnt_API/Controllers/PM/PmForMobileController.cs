@@ -570,141 +570,154 @@ namespace PM_Case_Managemnt_API.Controllers.PM
         //         }
         //     }
 
+        [HttpGet]
+        
+        [Route("get-cordinating-activity")]
 
-        //     [Route("get-cordinating-activity")]
+        public IActionResult getCordinatingAactivity(Guid employeeId)
+        {
+            var employee = _db.Employees.Find(employeeId);
+            var activities = _db.Activities.
+                Include(x=>x.ActivityParent).ThenInclude(x=>x.Task).ThenInclude(x=>x.Plan)
+                .Include(x=>x.Task).ThenInclude(x=>x.Plan)
+                .Include(x=>x.Plan)
+                .Include(x=>x.Commitee).ThenInclude(x=>x.Employees).
+                Include(x=>x.AssignedEmploye).
+                Include(x=>x.ActProgress).
+                Where(x => 
+                (x.ActivityParentId != null ? x.ActivityParent.Task.Plan.ProjectManagerId :
+                x.TaskId != null ? x.Task.Plan.ProjectManagerId : x.Plan.ProjectManagerId) == employeeId || 
+                (x.ActivityParentId != null ? x.ActivityParent.Task.Plan.FinanceId :
+                x.TaskId != null ? x.Task.Plan.FinanceId : x.Plan.FinanceId) == employeeId || 
+                ((x.ActivityParentId != null ? x.ActivityParent.Task.Plan.StructureId : x.TaskId != null ? x.Task.Plan.StructureId : x.Plan.StructureId) == employee.OrganizationalStructureId && employee.Position == Position.Director)).ToList();
 
-        //     public IHttpActionResult getCordinatingAactivity(Guid employeeId)
-        //     {
-        //         var employee = _db.Employees.Find(employeeId);
-        //         var activities = _db.Activities.Where(x => (x.ActivityParentId != null ? x.ActivityParent.Task.Plan.ProjectCordinatorId : x.TaskId != null ? x.Task.Plan.ProjectCordinatorId : x.Plan.ProjectCordinatorId) == employeeId || (x.ActivityParentId != null ? x.ActivityParent.Task.Plan.FinanceId : x.TaskId != null ? x.Task.Plan.FinanceId : x.Plan.FinanceId) == employeeId || ((x.ActivityParentId != null ? x.ActivityParent.Task.Plan.StructureId : x.TaskId != null ? x.Task.Plan.StructureId : x.Plan.StructureId) == employee.StructureId && employee.EmployeeMemberShipLevel == EmployeeMemberShipLevel.Head)).ToList();
-
-        //         var empheadstruct = _db.Employees.Where(x => x.StructureId == employee.StructureId && x.EmployeeMemberShipLevel == EmployeeMemberShipLevel.Head).FirstOrDefault();
-
-
-        //         var ActVm = new List<ActivityViewModel>();
-        //         foreach (var a in activities)
-        //         {
-        //             ActivityViewModel act = new ActivityViewModel();
-        //             act.ProgramName = a.ActivityParentId != null ? (a.ActivityParent.Task.Plan.ProgramId != null ? a.ActivityParent.Task.Plan.Program.ProgramName : "-------------") : a.TaskId != null ? (a.Task.Plan.ProgramId != null ? a.Task.Plan.Program.ProgramName : "-----------") : (a.Plan.ProgramId != null ? a.Plan.Program.ProgramName : "------------");
-        //             act.PlanName = a.ActivityParentId != null ? a.ActivityParent.Task.Plan.PlanName : a.TaskId != null ? a.Task.Plan.PlanName : a.Plan.PlanName;
-        //             act.TaskName = a.ActivityParentId != null ? a.ActivityParent.Task.TaskDescription : a.TaskId != null ? a.Task.TaskDescription : "--------";
-        //             act.ActivityName = a.ActivityParentId != null ? a.ActivityParent.ActivityParentDescription : a.ActivityDescription;
-        //             act.TaskId = (a.ActivityParentId != null ? a.ActivityParentId : a.TaskId != null ? a.TaskId : a.PlanId).ToString();
-        //             act.ActivityId = a.Id;
-        //             act.ShouldStart = a.ShouldStat;
-        //             act.ShouldEnd = a.ShouldEnd;
-        //             act.ActualEnd = a.ActualEnd;
-        //             act.ActualStart = a.ActualStart;
-        //             act.PlannedBudget = a.PlanedBudget;
-        //             act.ActualBudget = a.ActualBudget;
-        //             act.ActualWorked = a.ActualWorked;
-        //             if (a.CommiteeId != null)
-        //             {
-        //                 act.comitteeName = a.Commitee.CommiteeName;
-
-        //                 act.commiteemember = new List<TaskMemberVm>();
-
-        //                 foreach (var comitemem in a.Commitee.employee)
-        //                 {
-        //                     TaskMemberVm cmember = new TaskMemberVm();
-        //                     cmember.EmployeeId = comitemem.EmployeeId.ToString();
-        //                     cmember.EmployeeName = comitemem.Employee.HREmployeeNameTitle.HREmployeeNameTitleName + " " + comitemem.Employee.EmployeeFullName;
-        //                     cmember.ImagePath = comitemem.Employee.Image;
-
-        //                     act.commiteemember.Add(cmember);
-        //                 }
+            var empheadstruct = _db.Employees.Where(x => x.OrganizationalStructureId == employee.OrganizationalStructureId && x.Position == Position.Director).FirstOrDefault();
 
 
-        //             }
+            var ActVm = new List<ActivityViewModel>();
+            foreach (var a in activities)
+            {
+                ActivityViewModel act = new ActivityViewModel();
+                act.ProgramName = a.ActivityParentId != null ? (a.ActivityParent.Task.Plan.ProgramId != null ? a.ActivityParent.Task.Plan.Program.ProgramName : "-------------") : a.TaskId != null ? (a.Task.Plan.ProgramId != null ? a.Task.Plan.Program.ProgramName : "-----------") : (a.Plan.ProgramId != null ? a.Plan.Program.ProgramName : "------------");
+                act.PlanName = a.ActivityParentId != null ? a.ActivityParent.Task.Plan.PlanName : a.TaskId != null ? a.Task.Plan.PlanName : a.Plan.PlanName;
+                act.TaskName = a.ActivityParentId != null ? a.ActivityParent.Task.TaskDescription : a.TaskId != null ? a.Task.TaskDescription : "--------";
+                act.ActivityName = a.ActivityParentId != null ? a.ActivityParent.ActivityParentDescription : a.ActivityDescription;
+                act.TaskId = (a.ActivityParentId != null ? a.ActivityParentId : a.TaskId != null ? a.TaskId : a.PlanId).ToString();
+                act.ActivityId = a.Id;
+                act.ShouldStart = a.ShouldStat;
+                act.ShouldEnd = a.ShouldEnd;
+                act.ActualEnd = a.ActualEnd;
+                act.ActualStart = a.ActualStart;
+                act.PlannedBudget = a.PlanedBudget;
+                act.ActualBudget = a.ActualBudget;
+                act.ActualWorked = a.ActualWorked;
+                if (a.CommiteeId != null)
+                {
+                    act.comitteeName = a.Commitee.CommiteeName;
 
-        //             act.status = a.Status;
-        //             act.ActivityWeight = a.Weight;
-        //             act.Begining = a.Begining;
-        //             act.Goal = a.Goal;
+                    act.commiteemember = new List<TaskMemberVm>();
 
-        //             if (act.ActualWorked > 0)
-        //             {
-        //                 if (act.ActualWorked == act.Goal)
-        //                 {
-        //                     act.Percentage = 100;
-        //                 }
-        //                 else
-        //                 {
+                    foreach (var comitemem in a.Commitee.Employees)
+                    {
+                        TaskMemberVm cmember = new TaskMemberVm();
+                        cmember.EmployeeId = comitemem.EmployeeId.ToString();
+                        cmember.EmployeeName = comitemem.Employee.Title + " " + comitemem.Employee.FullName;
+                        cmember.ImagePath = comitemem.Employee.Photo;
 
-        //                     float Nominator = (float)act.ActualWorked;
-        //                     float Denominator = (float)act.Goal;
-        //                     act.Percentage = (Nominator / Denominator) * 100;
-        //                 }
-        //             }
-        //             else act.Percentage = 0;
-
-
-
-
-
-
-        //             act.Progress = new List<Actprogress>();
-        //             foreach (var p in a.Progress)
-        //             {
-        //                 Actprogress l = new Actprogress();
-        //                 l.PorgressId = p.Id;
-        //                 l.ActualBudget = p.ActualBudget;
-        //                 l.ActualWorked = p.ActualWorked;
-        //                 l.DocumentPath = p.DocumentPath;
-        //                 l.FinanceDocumentPath = p.financeDocumentPath;
-        //                 l.IsApprovedByCoordinator = p.isApprovedByCoordinator;
-        //                 l.IsApprovedByFinance = p.isApprovedByFinance;
-        //                 l.IsApprovedByDirector = p.isApprovedByDirector;
-        //                 l.Remark = p.Remark;
-        //                 l.SentTime = p.CreatedDateTime;
-        //                 l.FinanceId = p.Activity.ActivityParentId != null ? p.Activity.ActivityParent.Task.Plan.FinanceId.ToString() : a.TaskId != null ? p.Activity.Task.Plan.FinanceId.ToString() : p.Activity.Plan.FinanceId.ToString();
-        //                 l.DirectorId = empheadstruct.Id.ToString();
-        //                 l.ProjectCordinatorId = p.Activity.ActivityParentId != null ? p.Activity.ActivityParent.Task.Plan.ProjectCordinatorId.ToString() : a.TaskId != null ? p.Activity.Task.Plan.ProjectCordinatorId.ToString() : p.Activity.Plan.ProjectCordinatorId.ToString();
+                        act.commiteemember.Add(cmember);
+                    }
 
 
-        //                 l.ProgressAttacment = new List<ActProgressAttachment>();
-        //                 foreach (var q in p.ProgressAttachments)
-        //                 {
-        //                     ActProgressAttachment r = new ActProgressAttachment();
-        //                     r.FilePath = q.FilePath;
-        //                     l.ProgressAttacment.Add(r);
+                }
 
-        //                 }
-        //                 var currentuser = _onContext.Users.Find(p.CreatedById);
-        //                 var emp = _db.Employees.Find(p.EmployeeValueId);
-        //                 l.submittedBy = new TaskMemberVm
-        //                 {
-        //                     EmployeeId = emp.Id.ToString(),
-        //                     EmployeeName = emp.HREmployeeNameTitle.HREmployeeNameTitleName + emp.EmployeeFullName,
-        //                     ImagePath = emp.Image
+                act.status = a.Status;
+                act.ActivityWeight = a.Weight;
+                act.Begining = a.Begining;
+                act.Goal = a.Goal;
 
-        //                 };
+                if (act.ActualWorked > 0)
+                {
+                    if (act.ActualWorked == act.Goal)
+                    {
+                        act.Percentage = 100;
+                    }
+                    else
+                    {
+
+                        float Nominator = (float)act.ActualWorked;
+                        float Denominator = (float)act.Goal;
+                        act.Percentage = (Nominator / Denominator) * 100;
+                    }
+                }
+                else act.Percentage = 0;
 
 
-        //                 act.Progress.Add(l);
-        //             }
-        //             act.AssignedEmployee = new List<TaskMemberVm>();
 
-        //             foreach (var e in a.assignedEmploye)
-        //             {
-        //                 TaskMemberVm h = new TaskMemberVm();
 
-        //                 h.EmployeeId = e.EmployeeId.ToString();
-        //                 h.EmployeeName = e.Employee.HREmployeeNameTitle.HREmployeeNameTitleName + " " + e.Employee.EmployeeFullName;
-        //                 h.ImagePath = e.Employee.Image;
-        //                 act.AssignedEmployee.Add(h);
-        //             }
 
-        //             ActVm.Add(act);
-        //         }
 
-        //         if (ActVm == null)
-        //         {
-        //             return NotFound();
-        //         }
+                act.Progress = new List<Actprogress>();
+                foreach (var p in a.ActProgress)
+                {
+                    Actprogress l = new Actprogress();
+                    l.PorgressId = p.Id;
+                    l.ActualBudget = p.ActualBudget;
+                    l.ActualWorked = p.ActualWorked;
+                    l.DocumentPath = p.FinanceDocumentPath;
+                    l.FinanceDocumentPath = p.FinanceDocumentPath;
+                    l.IsApprovedByCoordinator = p.IsApprovedByDirector;
+                    l.IsApprovedByFinance = p.IsApprovedByFinance;
+                    l.IsApprovedByDirector = p.IsApprovedByDirector;
+                    l.Remark = p.Remark;
+                    l.SentTime = p.CreatedAt;
+                    l.FinanceId = p.Activity.ActivityParentId != null ? p.Activity.ActivityParent.Task.Plan.FinanceId.ToString() : a.TaskId != null ? p.Activity.Task.Plan.FinanceId.ToString() : p.Activity.Plan.FinanceId.ToString();
+                    l.DirectorId = empheadstruct.Id.ToString();
+                    l.ProjectCordinatorId = p.Activity.ActivityParentId != null ? p.Activity.ActivityParent.Task.Plan.ProjectManagerId.ToString() : a.TaskId != null ? p.Activity.Task.Plan.ProjectManagerId.ToString() : p.Activity.Plan.ProjectManagerId.ToString();
 
-        //         return Ok(ActVm);
-        //     }
+
+                    l.ProgressAttacment = new List<ActProgressAttachment>();
+                    foreach (var q in p.ProgressAttachments)
+                    {
+                        ActProgressAttachment r = new ActProgressAttachment();
+                        r.FilePath = q.FilePath;
+                        l.ProgressAttacment.Add(r);
+
+                    }
+                    var currentuser = _onContext.Users.Find(p.CreatedBy);
+                    var emp = _db.Employees.Find(p.EmployeeValueId);
+                    l.submittedBy = new TaskMemberVm
+                    {
+                        EmployeeId = emp.Id.ToString(),
+                        EmployeeName = emp.Title + emp.FullName,
+                        ImagePath = emp.Photo
+
+                    };
+
+
+                    act.Progress.Add(l);
+                }
+                act.AssignedEmployee = new List<TaskMemberVm>();
+
+                foreach (var e in a.AssignedEmploye)
+                {
+                    TaskMemberVm h = new TaskMemberVm();
+
+                    h.EmployeeId = e.EmployeeId.ToString();
+                    h.EmployeeName = e.Employee.Title + " " + e.Employee.FullName;
+                    h.ImagePath = e.Employee.Photo;
+                    act.AssignedEmployee.Add(h);
+                }
+
+                ActVm.Add(act);
+            }
+
+            if (ActVm == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ActVm);
+        }
 
         //     [Route("get-tasks")]
 
@@ -1601,25 +1614,20 @@ namespace PM_Case_Managemnt_API.Controllers.PM
 
         [HttpGet]
         [Route("login")]
-
         public IActionResult GetEmployee(string UserName, string Password, string DeviceId)
         {
-
-           try
+            try
             {
-                var employee = _db.Employees.Where(x => x.MobileUsersMacaddress == DeviceId).FirstOrDefault();
-                string device = "";
+                var employee = _db.Employees
+                    .Include(e => e.OrganizationalStructure)
+                    .Where(e => e.UserName == UserName && e.Password == Password)
+                    .FirstOrDefault();
+
                 if (employee != null)
                 {
-                    device = employee.MobileUsersMacaddress;
-                }
-
-                if (!string.IsNullOrEmpty(device))
-                {
-
-                    if (employee.UserName == UserName && employee.Password == Password)
+                    if (employee.MobileUsersMacaddress == DeviceId)
                     {
-                        employeeViewModel emp = new employeeViewModel
+                        var emp = new employeeViewModel
                         {
                             Id = employee.Id,
                             EmployeeFullName = employee.Title + " " + employee.FullName,
@@ -1631,30 +1639,24 @@ namespace PM_Case_Managemnt_API.Controllers.PM
                             structure = employee.OrganizationalStructure.StructureName
                         };
 
-
-
                         return Ok(emp);
                     }
                     else
                     {
-
-                        return Ok("UserName or Password Incorrect");
+                        return BadRequest("Your Mobile Phone is not Authorized");
                     }
                 }
                 else
                 {
-
-                    return Ok("Your Mobile Phone is not Authorized");
+                    return BadRequest("Username or Password Incorrect");
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                return BadRequest(ex.Message);
-
+                return StatusCode(500, $"An error occurred: {ex.Message}");
             }
-
-
         }
+
         //public class NotFoundWithMessageResult : IActionResult
         //{
         //    private string message;
@@ -1677,14 +1679,14 @@ namespace PM_Case_Managemnt_API.Controllers.PM
         public class employeeViewModel
         {
 
-            public Guid Id { get; set; }
-            public string EmployeeFullName { get; set; }
-            public string EmployeeAmharicFullName { get; set; }
+            public Guid id { get; set; }
+            public string fullName { get; set; }
+            public string amharicFullName { get; set; }
             public string PhoneNumber { get; set; }
-            public string Image { get; set; }
+            public string imagePath { get; set; }
             public string UserName { get; set; }
 
-            public string MemberShipLevel { get; set; }
+            public string memberShipLevel { get; set; }
             public string structure { get; set; }
 
 
