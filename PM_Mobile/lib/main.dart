@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
               ],
               child: MaterialApp(
                 key: GlobalObjectKey(context),
-                title: 'Flutter Demo',
+                title: 'Project Managment',
                 theme: ThemeData(
                   primarySwatch : Colors.blue,
                 ),

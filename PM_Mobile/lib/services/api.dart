@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:daf_project1/models/activity.dart';
 import 'package:daf_project1/models/employee.dart';
@@ -53,8 +54,15 @@ class Api {
   String relativePath =
       "login?UserName=$username&Password=$password&DeviceId=$deviceId";
   try {
+
+
+
     Map<String, dynamic> jsonMap =
         await _apiBaseHelper.get(relativePath) as Map<String, dynamic>;
+
+
+
+
     Employee employee = Employee.fromJson(jsonMap);
     employee.username = username;
     employee.password = password;

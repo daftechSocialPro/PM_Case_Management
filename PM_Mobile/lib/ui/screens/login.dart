@@ -85,7 +85,8 @@ class LoginPage extends StatelessWidget {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Image.asset('assets/logo.png', height: 180,),
+                    Image.asset('assets/logo.png', height: 200,),
+                    SizedBox(height: 20),        
                     CustomInputField(
                       focusOnNext: true,
                       label: "Username",

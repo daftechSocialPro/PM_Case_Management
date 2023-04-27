@@ -51,8 +51,16 @@ class ApiBaseHelper {
           : url; // todo uncomment this line when the server is setup;
       print("Full Url : " + fullUrl);
       final response =
-          await http.get(Uri.parse(fullUrl)).timeout(Duration(seconds: 12));
+          await http.get(Uri.parse(fullUrl));
+               if (response.statusCode == 200) {
+    var data = jsonDecode(response.body);
+    print(data);
+  } else {
+    print('Request failed with status: ${response.statusCode}.');
+  }
       responseJson = _returnResponse(response);
+
+  
     } on TimeoutException catch (e) {
       print("Timeout exception: ${e.toString()}");
       throw TimeOutException("Server took to long to respond.");
